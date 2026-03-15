@@ -4,7 +4,7 @@ import tailwindcss from '@tailwindcss/vite'
 import path from 'path'
 
 export default defineConfig({
-  base: '/claude-code-guide/',
+  base: '/se-ai-toolkit/',
   plugins: [react(), tailwindcss()],
   resolve: {
     alias: {
