@@ -1,7 +1,7 @@
 # The SE AI Toolkit
 
 ## Project Overview
-An interactive guide to AI tools for Salesforce SEs — covering Claude Code, Cursor, and Saleo.
+An interactive guide to AI tools for Salesforce SEs — covering Claude Code, Cursor, MeshMesh, and Saleo.
 Built as a static React site with Vite, Tailwind, and shadcn/ui.
 Designed for live virtual enablement presentations AND as a take-home reference.
 
@@ -30,8 +30,8 @@ Designed for live virtual enablement presentations AND as a take-home reference.
 - Scroll behavior: IntersectionObserver for section fade-in + sidebar active state
 
 ### Section structure (9 sections across 4 tiers)
-1. **The Big Picture** (3 sections, slides-only): What is Vibe Coding?, Why SEs Should Care, The 3 Tools
-2. **The Tools** (3 sections, tabbed): Claude Code, Cursor, Saleo
+1. **The Big Picture** (2 sections, slides-only): The Shift, The Tools
+2. **The Tools** (4 sections, tabbed, each with Getting Started tab): Saleo, MeshMesh, Cursor, Claude Code
 3. **See It in Action** (2 sections): Live Demo, The Full Pipeline
 4. **Keep Going** (1 section): Cheat Sheet
 
@@ -44,7 +44,7 @@ Designed for live virtual enablement presentations AND as a take-home reference.
 - `SpectrumBar` -- interactive AI coding spectrum with always-visible staggered labels
 - `GifShowcase` -- video placeholder with step number, gradient circle, dotted "coming soon" tag
 - `TerminalPanel` -- dark terminal mockup with typed commands and Claude responses
-- `ValueCards` -- 3-col icon cards. `ToolCards` -- 3-col tool cards with logos
+- `ValueCards` -- 3-col icon cards. `ToolCards` -- responsive tool cards (2-col mobile, 4-col desktop) with logos, single role badge, setup level indicator, and SE proof points
 - `Hero` -- main hero with animated gradient divider between subtitle and tool logos
 
 ## Coding Conventions

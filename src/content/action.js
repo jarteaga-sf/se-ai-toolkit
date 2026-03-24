@@ -88,11 +88,11 @@ export const fullPipeline = {
     "Each tool hands off to the next at the point where it has an advantage. Claude Code handles the heavy construction. Cursor handles the precision work. Saleo handles the last mile.",
   ],
   pipeline: [
-    { phase: 'Build', tool: 'Claude Code', logo: 'claude', description: 'Scaffold the integration, write tests, verify they pass. Autonomous multi-step execution.' },
+    { phase: 'Build', tool: 'MeshMesh / Claude Code', logo: 'meshmesh', description: 'Scaffold the integration, write tests, verify they pass. MeshMesh for Salesforce-native builds, Claude Code for everything else.' },
     { phase: 'Refine', tool: 'Cursor', logo: 'cursor', description: 'Cmd+K on specific functions, adjust variable names, clean up code -- all inline.' },
     { phase: 'Present', tool: 'Saleo', logo: 'saleo', description: 'Overlay prospect-specific data so the demo shows their brand, their numbers, their workflow.' },
   ],
-  takeaway: "**Build with Claude Code. Refine with Cursor. Present with Saleo.** The handoffs are fast once you know the flow.",
+  takeaway: "**Build with MeshMesh or Claude Code. Refine with Cursor. Present with Saleo.** The handoffs are fast once you know the flow.",
 }
 
 export const quickReference = {
@@ -101,8 +101,10 @@ export const quickReference = {
   title: 'Cheat Sheet',
   subtitle: 'Everything from this guide, condensed into one reference.',
   toolMatrix: [
+    { scenario: 'Build an Agentforce agent from scratch', tool: 'MeshMesh' },
     { scenario: 'Build a script or automation from scratch', tool: 'Claude Code' },
     { scenario: 'Edit code while staying in your editor', tool: 'Cursor (Cmd+K)' },
+    { scenario: 'Scaffold Salesforce-native metadata with platform awareness', tool: 'MeshMesh' },
     { scenario: 'Restructure a project across many files autonomously', tool: 'Claude Code' },
     { scenario: 'Multi-file change with a side-by-side view of what changed', tool: 'Cursor Composer' },
     { scenario: 'Understand an unfamiliar codebase', tool: 'Claude Code' },

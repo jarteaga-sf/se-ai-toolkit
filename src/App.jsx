@@ -2,17 +2,12 @@ import Layout from '@/components/Layout'
 import Section from '@/components/Section'
 import TerminalPanel from '@/components/TerminalPanel'
 import KeyTakeaway from '@/components/KeyTakeaway'
-import DeepCut from '@/components/DeepCut'
 import QuickReference from '@/components/QuickReference'
-import ToolCards from '@/components/ToolCards'
-import ScenarioTable from '@/components/ScenarioTable'
 import FeatureCards from '@/components/FeatureCards'
 import KeyboardReference from '@/components/KeyboardReference'
 import StepFlow from '@/components/StepFlow'
 import WorkflowPipeline from '@/components/WorkflowPipeline'
 import TabbedToolSection from '@/components/TabbedToolSection'
-import SpectrumBar from '@/components/SpectrumBar'
-import ValueCards from '@/components/ValueCards'
 import GifShowcase from '@/components/GifShowcase'
 import TryItPrompts from '@/components/TryItPrompts'
 import ContestBanner from '@/components/ContestBanner'
@@ -20,12 +15,10 @@ import HabitCards from '@/components/HabitCards'
 import TierDivider from '@/components/TierDivider'
 import PresentationDeck from '@/components/PresentationDeck'
 
-import { Collapsible, CollapsibleTrigger, CollapsibleContent } from '@/components/ui/collapsible'
-import { ChevronDown, CheckCircle2 } from 'lucide-react'
-import { useState } from 'react'
+import { CheckCircle2 } from 'lucide-react'
 
-import { vibeCoding, whySesCare, toolsAtAGlance } from '@/content/big-picture'
-import { claudeCode, cursor, saleo } from '@/content/tools'
+import { vibeCoding, whySesCare } from '@/content/big-picture'
+import { claudeCode, cursor, saleo, meshmesh, useCases } from '@/content/tools'
 import { liveDemo, fullPipeline, quickReference } from '@/content/action'
 
 function RichText({ text }) {
@@ -56,7 +49,6 @@ function TabContent({ content }) {
   return (
     <>
       <Prose paragraphs={content.prose} />
-      {content.habitCards && <HabitCards cards={content.habitCards} />}
       {content.terminal && (
         <TerminalPanel
           title={content.terminal.title}
@@ -65,35 +57,10 @@ function TabContent({ content }) {
         />
       )}
       {content.features && <FeatureCards features={content.features} />}
-      {content.keyboardRef && <KeyboardReference keyboardRef={content.keyboardRef} />}
       {content.stepFlow && <StepFlow stepFlow={content.stepFlow} />}
-      {content.artifactTable && (
-        <div className="my-8 rounded-lg overflow-hidden shadow-[var(--shadow-card)]">
-          <table className="w-full text-[15px]">
-            <thead>
-              <tr className="bg-[var(--color-border-light)]">
-                <th className="text-left px-4 py-2 font-semibold text-[var(--color-text-secondary)]">Category</th>
-                <th className="text-left px-4 py-2 font-semibold text-[var(--color-text-secondary)]">Examples</th>
-                <th className="text-left px-4 py-2 font-semibold text-[var(--color-text-secondary)] hidden sm:table-cell">How Cursor Uses It</th>
-              </tr>
-            </thead>
-            <tbody>
-              {content.artifactTable.map((row, i) => (
-                <tr key={i} className={`border-t border-[var(--color-border)] ${i % 2 === 1 ? 'bg-[var(--color-border-light)]/50' : ''}`}>
-                  <td className="px-4 py-2 font-medium text-[var(--color-text)]">{row.category}</td>
-                  <td className="px-4 py-2 text-[var(--color-text-secondary)]">{row.examples}</td>
-                  <td className="px-4 py-2 text-[var(--color-text-muted)] hidden sm:table-cell">{row.how}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-      )}
-      {content.deepCut && (
-        <DeepCut title={content.deepCut.title}>
-          <p><RichText text={content.deepCut.content} /></p>
-        </DeepCut>
-      )}
+      {content.stepFlowSecondary && <StepFlow stepFlow={content.stepFlowSecondary} />}
+      {content.habitCards && <HabitCards cards={content.habitCards} />}
+      {content.keyboardRef && <KeyboardReference keyboardRef={content.keyboardRef} />}
       {content.takeaway && (
         <KeyTakeaway><RichText text={content.takeaway} /></KeyTakeaway>
       )}
@@ -114,22 +81,8 @@ function ToolSection({ data }) {
   )
 }
 
-function CollapsibleScenarios({ scenarios }) {
-  const [open, setOpen] = useState(false)
-  return (
-    <Collapsible open={open} onOpenChange={setOpen}>
-      <CollapsibleTrigger className="flex items-center gap-2 mt-8 mb-2 text-[15px] font-semibold text-[var(--color-text-secondary)] cursor-pointer hover:text-[var(--color-text)] transition-colors w-full text-left">
-        <ChevronDown size={16} className={`transition-transform duration-200 ${open ? 'rotate-180' : ''}`} />
-        When to Use Which
-      </CollapsibleTrigger>
-      <CollapsibleContent>
-        <ScenarioTable scenarios={scenarios} />
-      </CollapsibleContent>
-    </Collapsible>
-  )
-}
 
-const presentationSections = [vibeCoding, whySesCare, toolsAtAGlance]
+const presentationSections = [vibeCoding, whySesCare]
 
 export default function App() {
   return (
@@ -143,12 +96,16 @@ export default function App() {
             scrollTargetId="tools-tier"
           />
 
+          {/* Big Picture: The Use Cases (scrollable section) */}
+          <ToolSection data={useCases} />
+
           <TierDivider label="The Tools" id="tools-tier" />
 
           {/* Tier 2: The Tools */}
-          <ToolSection data={claudeCode} />
-          <ToolSection data={cursor} />
           <ToolSection data={saleo} />
+          <ToolSection data={meshmesh} />
+          <ToolSection data={cursor} />
+          <ToolSection data={claudeCode} />
 
           <TierDivider label="See It in Action" />
 

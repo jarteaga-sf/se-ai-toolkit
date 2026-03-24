@@ -1,7 +1,5 @@
 import { Zap, Search, MessageSquare, PenLine, Film, Wand2, Bot, Unlock, FileText, Terminal, Download, Shield, Puzzle, LogIn, FolderPlus, CheckCircle, Globe, ArrowRight, ArrowDown, X, Sparkles } from 'lucide-react'
-import SpectrumBar from './SpectrumBar'
 import ToolCards from './ToolCards'
-import ScenarioTable from './ScenarioTable'
 
 export const iconMap = { Zap, Search, MessageSquare, PenLine, Film, Wand2, Bot, Unlock, FileText, Terminal, Download, Shield, Puzzle, LogIn, FolderPlus, CheckCircle, Globe }
 
@@ -294,35 +292,13 @@ export function TakeawaySlide({ text, fullscreen }) {
   )
 }
 
-export function ScenarioSlide({ scenarios, fullscreen }) {
-  return (
-    <div className="flex flex-col items-center justify-center h-full px-2 py-6 w-full">
-      <p className={`font-semibold text-[var(--color-heading)] mb-5 text-center ${
-        fullscreen ? 'text-[24px] md:text-[28px]' : 'text-[19px] md:text-[21px]'
-      }`}>When to Use Which</p>
-      <ScenarioTable scenarios={scenarios} />
-    </div>
-  )
-}
-
 export function createSlideRenderers(fullscreen = false) {
   return {
     quote: (slide) => <QuoteSlide {...slide} fullscreen={fullscreen} />,
     comparison: (slide) => <ComparisonSlide {...slide} fullscreen={fullscreen} />,
     statement: (slide) => <StatementSlide {...slide} fullscreen={fullscreen} />,
     iconBullets: (slide) => <IconBulletsSlide {...slide} fullscreen={fullscreen} />,
-    spectrum: (slide) => (
-      <ComponentSlide>
-        <div className="w-full">
-          <p className={`font-semibold text-[var(--color-heading)] mb-2 text-center ${
-            fullscreen ? 'text-[24px] md:text-[28px]' : 'text-[19px] md:text-[21px]'
-          }`}>{slide.title}</p>
-          <SpectrumBar items={slide.items} />
-        </div>
-      </ComponentSlide>
-    ),
     toolCards: (slide) => <CardsSlide cards={slide.cards} component={ToolCards} />,
-    scenarios: (slide) => <ScenarioSlide scenarios={slide.scenarios} fullscreen={fullscreen} />,
     takeaway: (slide) => <TakeawaySlide text={slide.text} fullscreen={fullscreen} />,
   }
 }

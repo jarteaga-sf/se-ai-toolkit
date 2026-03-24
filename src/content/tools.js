@@ -35,8 +35,7 @@ export const claudeCode = {
       content: {
         prose: [
           "**Install with one command.** Claude Code runs in your terminal. After installation, run `claude` in any project folder and it reads the project to get oriented.",
-          "**The most important setup step** is creating a `CLAUDE.md` file in your project root. Claude reads this at the start of every session -- it tells Claude what the project does, how to run it, and any rules to follow. Run `/init` inside Claude and it generates a solid starting version.",
-          "Keep CLAUDE.md **under 200 lines**. More instructions don't mean better results. Cover the what, the how-to-run, and the key constraints.",
+          "**The most important setup step** is creating a `CLAUDE.md` file in your project root. Run `/init` inside Claude and it generates one automatically.",
         ],
         terminal: {
           title: 'Setup',
@@ -55,42 +54,70 @@ export const claudeCode = {
           ],
           expandable: true,
         },
-        deepCut: {
-          title: 'Three levels of instructions',
-          content: "**CLAUDE.md** is for project-level context (what is this, how does it run). **~/.claude/CLAUDE.md** is for personal preferences that apply across all projects. **Skills** are reference files Claude loads only when relevant. Start with project CLAUDE.md. Add the others if you find yourself repeating the same context across sessions."
-        },
-        takeaway: "Install, run `/init` to generate CLAUDE.md, keep it short. That's the whole setup.",
-      },
-    },
-    {
-      label: 'Workflows',
-      content: {
         habitCards: [
           { icon: 'GitBranch', title: 'Plan First', description: 'Use /plan before any multi-file change. See the full approach before anything gets modified.' },
           { icon: 'Shield', title: 'Manage Permissions', description: 'Use --sandbox to pre-approve safe ops. The real safety net is checkpoints -- Esc+Esc rolls back.' },
           { icon: 'Target', title: 'Stay Focused', description: 'One task per session. Use /compact when memory fills up, /clear for a fresh start.' },
           { icon: 'Crosshair', title: 'Prompt with Precision', description: '"Make it faster" is a question. "Get page load under 1 second" is a task.' },
         ],
+        takeaway: "Install, run `/init` to generate CLAUDE.md, keep it short. **That's the whole setup.**",
+      },
+    },
+  ],
+}
+
+export const meshmesh = {
+  id: 'meshmesh',
+  label: 'The Tools',
+  title: 'MeshMesh',
+  subtitle: 'The Salesforce-native builder. AI agents that know the platform.',
+  tabs: [
+    {
+      label: 'Overview',
+      content: {
+        prose: [
+          "MeshMesh is an **AI-powered agent development environment** built specifically for Salesforce. Unlike general-purpose coding tools, it understands the platform natively -- metadata, governor limits, Agentforce patterns, and deployment workflows are built into its context.",
+          "Think of it as a **Salesforce-fluent contractor.** It doesn't need you to explain what a Flow is or how Named Credentials work. It already knows, and it uses that knowledge to build faster and with fewer mistakes.",
+        ],
         terminal: {
-          title: 'Plan Mode in Action',
+          title: 'MeshMesh in Action',
           steps: [
-            { type: 'output', content: '> /plan' },
-            { type: 'output', content: '[Plan Mode -- read only, no changes]' },
+            { type: 'command', content: 'meshmesh init --org my-demo-org' },
+            { type: 'output', content: 'Connected to my-demo-org (Enterprise Edition)' },
             { type: 'output', content: '' },
-            { type: 'output', content: '> add Salesforce OAuth to this app' },
+            { type: 'output', content: '> build an Agentforce agent for customer onboarding with 4 topics' },
             { type: 'output', content: '' },
-            { type: 'claude-thinking', content: 'Reading auth patterns, existing routes, config files...' },
+            { type: 'claude-thinking', content: 'Analyzing org schema, existing objects, Agentforce config...' },
             { type: 'output', content: '' },
-            { type: 'claude-response', content: "Here's my plan:" },
-            { type: 'output', content: '1. Add OAuth config to .env.example' },
-            { type: 'output', content: '2. Create src/auth/salesforce.js (new)' },
-            { type: 'output', content: '3. Update server.js to add /auth and /callback routes' },
-            { type: 'output', content: '4. Update 2 existing pages to use auth state' },
+            { type: 'claude-response', content: 'Created agent with 4 topics, 12 actions, and prompt templates. Running test suite...' },
             { type: 'output', content: '' },
-            { type: 'output', content: 'New files: 1 | Changed files: 3 | Shall I proceed?' },
+            { type: 'claude-response', content: '500+ tests passing. Ready to deploy.' },
           ],
         },
-        takeaway: "Plan first. Keep sessions focused on one task. Read what changed before approving. **That's 80% of being good at this.**",
+        takeaway: "MeshMesh's Salesforce-native context means **less prompting, fewer hallucinations, and faster time to working code.**",
+      },
+    },
+    {
+      label: 'Getting Started',
+      content: {
+        prose: [
+          "**Access requires procurement approval.** MeshMesh is a third-party tool that goes through the standard vendor approval process. Start the request early -- it can take time.",
+        ],
+        stepFlow: {
+          steps: [
+            'Request access through the Software Catalog (search "MeshMesh")',
+            'Manager and legal approval (allow time for vendor review)',
+            'Install and authenticate against your demo org',
+            'MeshMesh reads your org metadata and is ready to build',
+          ],
+        },
+        habitCards: [
+          { icon: 'Shield', title: 'Start with Agentforce', description: 'MeshMesh shines brightest on agent builds -- topics, actions, and test suites in a single session.' },
+          { icon: 'Target', title: 'Leverage Org Context', description: 'Point it at a real org. The more metadata it reads, the better its output matches your environment.' },
+          { icon: 'GitBranch', title: 'Build, Then Hand Off', description: 'Use MeshMesh for the heavy construction, then switch to Cursor for precision edits and polish.' },
+          { icon: 'Crosshair', title: 'Test Early, Test Often', description: 'MeshMesh generates tests alongside code. Run them before deploying -- catch issues before they reach the org.' },
+        ],
+        takeaway: "Start the procurement process now. **The approval timeline is the only thing between you and 10x faster Agentforce builds.**",
       },
     },
   ],
@@ -119,18 +146,39 @@ export const cursor = {
       },
     },
     {
-      label: 'Workflows & Shortcuts',
+      label: 'Getting Started',
       content: {
         prose: [
-          "**Tab** gets better with context -- add a comment before a new function to steer suggestions.",
-          "**Cmd+K** is highest-leverage for editing. Select code, describe the change, review the inline diff.",
-          "**Composer** bridges Cursor and Claude Code territory -- multi-file changes with visual diffs before applying.",
+          "**Three steps: license, install, connect.** Cursor is built on VS Code, so if you've used VS Code before, you'll feel right at home.",
         ],
         stepFlow: {
-          steps: [
-            'Ask: Use Cmd+L to understand the codebase and plan your approach',
-            'Plan: Describe the full scope of changes to Composer before starting',
-            'Agent: Let Composer execute multi-file changes with visual diffs',
+          phases: [
+            {
+              label: 'Request your license',
+              steps: [
+                'Go to the Software Catalog for DET and search "Cursor AI"',
+                'Select it, click Next, write a short Business Justification, and Submit',
+                'Your manager approves. You get setup instructions via email.',
+              ],
+            },
+            {
+              label: 'Install Cursor',
+              steps: [
+                'Mac: run dx install cursor in your terminal. It handles everything.',
+                'Windows: download from cursor.com and run the installer.',
+                'Select Privacy Mode during setup. Import your VS Code settings if you want.',
+                'The Salesforce Internal DX extension gets installed automatically.',
+              ],
+            },
+            {
+              label: 'Connect to a demo org',
+              steps: [
+                'Open the integrated terminal inside Cursor.',
+                'sf org login web -a my-demo-org -- authenticate via browser.',
+                'sf project generate -n my-demo -- creates an SFDX project.',
+                'Agent mode can now deploy directly to this org.',
+              ],
+            },
           ],
         },
         keyboardRef: {
@@ -147,23 +195,7 @@ export const cursor = {
             { key: '@docs', action: 'Reference linked documentation' },
           ],
         },
-        takeaway: "Cmd+K for edits. Composer for multi-file changes. Chat for questions. **Tab for everything in between.**",
-      },
-    },
-    {
-      label: 'Supercharging POCs',
-      content: {
-        prose: [
-          "The fastest way to build a proof of concept is to **front-load context.** Before you start prompting, give Cursor the artifacts it needs to produce great output on the first try.",
-        ],
-        artifactTable: [
-          { category: 'Visual Assets', examples: 'Screenshots, mockups, Figma exports', how: 'Drag images into Composer for pixel-accurate output' },
-          { category: 'Design Specs', examples: 'SLDS tokens, color palettes, spacing rules', how: 'Reference in .cursorrules or paste into context' },
-          { category: 'Logic & Docs', examples: 'API specs, business rules, flow diagrams', how: 'Use @docs to link external documentation' },
-          { category: 'Data Samples', examples: 'JSON payloads, CSV exports, SOQL results', how: 'Paste sample data so AI generates realistic code' },
-          { category: 'Project Guardrails', examples: '.cursorrules, README, architecture docs', how: 'Cursor reads these automatically for every prompt' },
-        ],
-        takeaway: "The quality of AI output is directly proportional to the **quality of context you provide.** Front-load artifacts, get better code.",
+        takeaway: "License. Install. Connect. **You can be up and running by the end of this call.**",
       },
     },
   ],
@@ -173,7 +205,6 @@ export const saleo = {
   id: 'saleo',
   label: 'The Tools',
   title: 'Saleo',
-  hideDivider: true,
   subtitle: 'Show the right data for every prospect -- without touching real records.',
   tabs: [
     {
@@ -195,12 +226,20 @@ export const saleo = {
       },
     },
     {
-      label: 'Building Better Demos',
+      label: 'Getting Started',
       content: {
         prose: [
-          "The best demo workflows follow a simple pattern: prepare before, adapt during, iterate after.",
+          "**Saleo is a Chrome extension** -- no coding environment, no CLI, no project scaffolding. Install it, connect to your Salesforce org, and start building overlays.",
         ],
         stepFlow: {
+          steps: [
+            'Request access through the Software Catalog (search "Saleo")',
+            'Install the Saleo Chrome extension from the Chrome Web Store',
+            'Log in and connect it to your Salesforce demo org',
+            'Navigate to any Salesforce page -- Saleo detects the fields and lets you overlay custom data',
+          ],
+        },
+        stepFlowSecondary: {
           phases: [
             {
               label: 'Before the call',
@@ -228,6 +267,60 @@ export const saleo = {
           ],
         },
         takeaway: "Build a template library organized by vertical. **The second prospect in an industry costs a fraction of the first.**",
+      },
+    },
+  ],
+}
+
+export const useCases = {
+  id: 'use-cases',
+  label: 'The Big Picture',
+  title: 'Why',
+  hideDivider: true,
+  subtitle: 'Beyond demos -- ways SEs are using these tools today.',
+  tabs: [
+    {
+      label: 'Claude Code',
+      content: {
+        habitCards: [
+          { icon: 'FileText', title: 'RFP Responses', description: 'Give it the RFP. Get technical responses mapped to Salesforce capabilities.' },
+          { icon: 'Database', title: 'Test Data', description: 'Generate realistic demo data for any vertical. Accounts, Contacts, Opps, Cases -- at scale.' },
+          { icon: 'ArrowRightLeft', title: 'Migration Scripts', description: 'Prototype the data move from a prospect\'s legacy system to Salesforce.' },
+          { icon: 'Wrench', title: 'Integration Prototypes', description: 'Scaffold a REST or SOAP integration to prove connectivity with their stack.' },
+        ],
+      },
+    },
+    {
+      label: 'MeshMesh',
+      content: {
+        habitCards: [
+          { icon: 'Bot', title: 'Agentforce Builds', description: 'Build a customer-specific agent in a single session. Onboarding, case routing, FAQ -- pick one and ship it.' },
+          { icon: 'Layers', title: 'Industry Packages', description: 'Reusable Agentforce configs by vertical. Build once for healthcare, reuse for every healthcare prospect.' },
+          { icon: 'Settings', title: 'SDO Customization', description: 'Tailor your SDO with industry-specific flows and automation. Describe it, deploy it.' },
+          { icon: 'Gauge', title: 'Scale Proof Points', description: 'Prove Salesforce handles their volume. Real Apex, real benchmarks.' },
+        ],
+      },
+    },
+    {
+      label: 'Cursor',
+      content: {
+        habitCards: [
+          { icon: 'PenLine', title: 'LWC Tweaks', description: 'Modify a component for a specific customer. Select, describe, review the diff, done.' },
+          { icon: 'Search', title: 'Codebase Ramp-Up', description: 'Inherited a project? Use @codebase to understand it in minutes, not hours.' },
+          { icon: 'Code', title: 'Flow to Apex', description: 'When a prospect hits Flow limits, convert the logic to Apex with Composer.' },
+          { icon: 'Users', title: 'Team Consistency', description: 'Share .cursorrules across the team so everyone gets consistent AI output.' },
+        ],
+      },
+    },
+    {
+      label: 'Saleo',
+      content: {
+        habitCards: [
+          { icon: 'Users', title: 'Multi-Persona Demos', description: 'Switch overlays mid-call. VP sees pipeline, rep sees tasks, admin sees config.' },
+          { icon: 'Repeat', title: 'Vertical Templates', description: 'One template per industry. Every new prospect in that vertical takes minutes, not hours.' },
+          { icon: 'Briefcase', title: 'Competitive Demos', description: 'Mirror what they see in their current tool. Salesforce feels familiar from day one.' },
+          { icon: 'BarChart3', title: 'Exec Briefings', description: 'Show C-level KPIs using their publicly reported numbers. Real and relevant.' },
+        ],
       },
     },
   ],

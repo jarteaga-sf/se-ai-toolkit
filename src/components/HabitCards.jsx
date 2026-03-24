@@ -1,10 +1,26 @@
-import { GitBranch, Shield, Target, Crosshair } from 'lucide-react'
+import { GitBranch, Shield, Target, Crosshair, FileText, Database, ArrowRightLeft, Wrench, Bot, Layers, Settings, Gauge, PenLine, Search, Code, Users, Repeat, BarChart3, Briefcase, Zap } from 'lucide-react'
 
 const iconMap = {
   GitBranch,
   Shield,
   Target,
   Crosshair,
+  FileText,
+  Database,
+  ArrowRightLeft,
+  Wrench,
+  Bot,
+  Layers,
+  Settings,
+  Gauge,
+  PenLine,
+  Search,
+  Code,
+  Users,
+  Repeat,
+  BarChart3,
+  Briefcase,
+  Zap,
 }
 
 export default function HabitCards({ cards }) {

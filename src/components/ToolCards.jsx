@@ -1,9 +1,10 @@
-import { ClaudeLogo, CursorLogo, SaleoLogo } from './ToolLogos'
+import { ClaudeLogo, CursorLogo, SaleoLogo, MeshMeshLogo } from './ToolLogos'
 
 const logos = {
   claude: ClaudeLogo,
   cursor: CursorLogo,
   saleo: SaleoLogo,
+  meshmesh: MeshMeshLogo,
 }
 
 // --- Per-tool mini visuals ---
@@ -145,15 +146,53 @@ function SetupLevel({ level }) {
   )
 }
 
+function AgentBuilderVisual() {
+  return (
+    <div className="w-full rounded-lg overflow-hidden border border-[var(--color-border)] shadow-sm">
+      {/* Header */}
+      <div className="bg-[#0D3B66] px-3 py-1.5 flex items-center gap-2">
+        <div className="flex gap-1">
+          <div className="w-[7px] h-[7px] rounded-full bg-white/30" />
+          <div className="w-[7px] h-[7px] rounded-full bg-white/30" />
+          <div className="w-[7px] h-[7px] rounded-full bg-white/30" />
+        </div>
+        <span className="text-[9px] font-mono text-white/70">MeshMesh</span>
+      </div>
+      {/* Agent config */}
+      <div className="bg-[#F0F4F8] px-3 py-2.5">
+        <div className="flex items-center gap-1.5 mb-2">
+          <div className="w-[8px] h-[8px] rounded-full bg-[#0D3B66]" />
+          <span className="text-[10px] font-semibold text-[#0D3B66]">Agentforce Agent</span>
+        </div>
+        <div className="flex flex-col gap-1">
+          <div className="flex items-center justify-between px-2 py-1 rounded bg-white border border-[#E2E8F0]">
+            <span className="text-[9px] text-[#64748B]">Topics</span>
+            <span className="text-[9px] font-semibold text-[#0D3B66]">4</span>
+          </div>
+          <div className="flex items-center justify-between px-2 py-1 rounded bg-white border border-[#E2E8F0]">
+            <span className="text-[9px] text-[#64748B]">Actions</span>
+            <span className="text-[9px] font-semibold text-[#0D3B66]">12</span>
+          </div>
+          <div className="flex items-center justify-between px-2 py-1 rounded bg-[#ECFDF5] border border-[#A7F3D0]">
+            <span className="text-[9px] text-[#065F46]">Tests passing</span>
+            <span className="text-[9px] font-semibold text-[#065F46]">500+</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  )
+}
+
 const miniVisuals = {
   claude: TerminalVisual,
   cursor: EditorVisual,
   saleo: BrowserVisual,
+  meshmesh: AgentBuilderVisual,
 }
 
 export default function ToolCards({ cards }) {
   return (
-    <div className="grid sm:grid-cols-3 gap-5 my-8 items-stretch">
+    <div className={`grid grid-cols-2 ${cards.length === 4 ? 'lg:grid-cols-4' : 'sm:grid-cols-3'} gap-5 my-8 items-stretch`}>
       {cards.map((card, i) => {
         const Logo = logos[card.logo]
         const Visual = miniVisuals[card.logo]
@@ -162,31 +201,36 @@ export default function ToolCards({ cards }) {
             key={i}
             className="bg-[var(--color-bg-white)] border border-[var(--color-border)] rounded-xl shadow-[var(--shadow-card)] overflow-hidden transition-[transform,box-shadow] duration-200 hover:-translate-y-0.5 hover:shadow-md flex flex-col"
           >
-            {/* Logo + name + tagline */}
-            <div className="pt-5 pb-2 flex flex-col items-center gap-1.5">
+            {/* Logo + name */}
+            <div className="pt-5 pb-1 flex flex-col items-center gap-1.5">
               {Logo && <Logo size={40} />}
               <h4 className="font-[var(--font-heading)] text-[17px] font-semibold text-[var(--color-heading)]">
                 {card.name}
               </h4>
+            </div>
+            {/* Tagline — fixed height for alignment */}
+            <div className="h-[36px] flex items-start justify-center px-4">
               {card.tagline && (
-                <p className="text-[13px] text-[var(--color-text-muted)] italic">{card.tagline}</p>
+                <p className="text-[13px] text-[var(--color-text-muted)] italic text-center">{card.tagline}</p>
               )}
             </div>
-            {/* Role badge */}
-            {card.role && (
-              <div className="flex justify-center px-4 pb-3">
-                <span className="text-[11px] font-semibold uppercase tracking-[0.08em] px-3 py-1 rounded-full bg-[var(--color-accent)]/10 text-[var(--color-accent)] border border-[var(--color-accent)]/20">
+            {/* Role badge — fixed height for alignment */}
+            <div className="h-[32px] flex items-center justify-center px-4">
+              {card.role && (
+                <span className="text-[11px] font-semibold uppercase tracking-[0.08em] px-3 py-1 rounded-full bg-[var(--color-accent)]/10 text-[var(--color-accent)] border border-[var(--color-accent)]/20 whitespace-nowrap">
                   {card.role}
                 </span>
-              </div>
-            )}
-            {/* Mini visual */}
-            <div className="px-4 pb-3 flex-1">
-              {Visual && <Visual />}
+              )}
             </div>
-            {/* Proof point */}
-            <div className="px-4 pb-3">
-              <p className="text-[13px] text-[var(--color-text)] leading-snug text-center">
+            {/* Mini visual — flex-1 with bottom alignment */}
+            <div className="px-4 pb-3 flex-1 flex items-end">
+              <div className="w-full">
+                {Visual && <Visual />}
+              </div>
+            </div>
+            {/* Proof point — min height for alignment */}
+            <div className="px-4 pb-3 min-h-[60px] flex items-center">
+              <p className="text-[13px] text-[var(--color-text)] leading-snug text-center w-full">
                 {card.bestFor}
               </p>
             </div>

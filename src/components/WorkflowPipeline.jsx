@@ -1,10 +1,11 @@
 import { ChevronRight } from 'lucide-react'
-import { ClaudeLogo, CursorLogo, SaleoLogo } from './ToolLogos'
+import { ClaudeLogo, CursorLogo, SaleoLogo, MeshMeshLogo } from './ToolLogos'
 
 const logos = {
   claude: ClaudeLogo,
   cursor: CursorLogo,
   saleo: SaleoLogo,
+  meshmesh: MeshMeshLogo,
 }
 
 export default function WorkflowPipeline({ pipeline }) {

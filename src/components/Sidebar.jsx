@@ -1,22 +1,24 @@
 import { Menu, X, PanelLeftClose, PanelLeft } from 'lucide-react'
 import { useState, useEffect, useRef } from 'react'
 import { useActiveSection } from '@/hooks/useIntersectionObserver'
+import { SaleoLogo, MeshMeshLogo, CursorLogo, ClaudeLogo } from '@/components/ToolLogos'
 
 const tiers = [
   {
     label: 'The Big Picture',
     sections: [
-      { id: 'vibe-coding', title: 'The Shift' },
-      { id: 'why-ses-care', title: 'The Tools' },
-      { id: 'tools-at-a-glance', title: 'Get Set Up' },
+      { id: 'vibe-coding', title: 'What' },
+      { id: 'why-ses-care', title: 'How' },
+      { id: 'use-cases', title: 'Why' },
     ],
   },
   {
     label: 'The Tools',
     sections: [
-      { id: 'claude-code', title: 'Claude Code' },
-      { id: 'cursor', title: 'Cursor' },
       { id: 'saleo', title: 'Saleo' },
+      { id: 'meshmesh', title: 'MeshMesh' },
+      { id: 'cursor', title: 'Cursor' },
+      { id: 'claude-code', title: 'Claude Code' },
     ],
   },
   {
@@ -34,8 +36,16 @@ const tiers = [
   },
 ]
 
-const bigPictureIds = new Set(tiers[0].sections.map((s) => s.id))
-const scrollSectionIds = tiers.slice(1).flatMap((t) => t.sections.map((s) => s.id))
+const sidebarLogos = {
+  saleo: SaleoLogo,
+  meshmesh: MeshMeshLogo,
+  cursor: CursorLogo,
+  'claude-code': ClaudeLogo,
+}
+
+const slideSectionIds = new Set(['vibe-coding', 'why-ses-care'])
+const bigPictureIds = slideSectionIds
+const scrollSectionIds = tiers.flatMap((t) => t.sections.map((s) => s.id)).filter((id) => !slideSectionIds.has(id))
 const allSectionIds = tiers.flatMap((t) => t.sections.map((s) => s.id))
 
 export { tiers, allSectionIds }
@@ -101,20 +111,24 @@ export default function Sidebar({ collapsed = false, onToggle, presentationSlide
             {tier.label}
           </p>
           <ul className="space-y-0.5">
-            {tier.sections.map((section) => (
-              <li key={section.id}>
-                <button
-                  onClick={() => handleClick(section.id)}
-                  className={`w-full text-left text-[13px] px-2 py-1.5 rounded transition-colors cursor-pointer ${
-                    activeId === section.id
-                      ? 'text-[var(--color-accent)] bg-[var(--color-accent)]/8 border-l-2 border-[var(--color-accent)] pl-3 font-medium'
-                      : 'text-[var(--color-text-secondary)] hover:text-[var(--color-heading)] hover:bg-[var(--color-border-light)]'
-                  }`}
-                >
-                  {section.title}
-                </button>
-              </li>
-            ))}
+            {tier.sections.map((section) => {
+              const Logo = sidebarLogos[section.id]
+              return (
+                <li key={section.id}>
+                  <button
+                    onClick={() => handleClick(section.id)}
+                    className={`w-full text-left text-[13px] px-2 py-1.5 rounded transition-colors cursor-pointer flex items-center gap-2 ${
+                      activeId === section.id
+                        ? 'text-[var(--color-accent)] bg-[var(--color-accent)]/8 border-l-2 border-[var(--color-accent)] pl-3 font-medium'
+                        : 'text-[var(--color-text-secondary)] hover:text-[var(--color-heading)] hover:bg-[var(--color-border-light)]'
+                    }`}
+                  >
+                    {Logo && <Logo size={14} />}
+                    {section.title}
+                  </button>
+                </li>
+              )
+            })}
           </ul>
         </div>
       ))}

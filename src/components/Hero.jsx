@@ -1,14 +1,15 @@
 import { useState, useEffect } from 'react'
-import { ClaudeLogo, CursorLogo, SaleoLogo } from './ToolLogos'
+import { ClaudeLogo, CursorLogo, SaleoLogo, MeshMeshLogo } from './ToolLogos'
 
 const tools = [
-  { Logo: ClaudeLogo, name: 'Claude Code', delay: 200 },
-  { Logo: CursorLogo, name: 'Cursor', delay: 400 },
-  { Logo: SaleoLogo, name: 'Saleo', delay: 600 },
+  { Logo: SaleoLogo, name: 'Saleo', delay: 200 },
+  { Logo: MeshMeshLogo, name: 'MeshMesh', delay: 400 },
+  { Logo: CursorLogo, name: 'Cursor', delay: 600 },
+  { Logo: ClaudeLogo, name: 'Claude Code', delay: 800 },
 ]
 
 export default function Hero() {
-  const [visible, setVisible] = useState([false, false, false])
+  const [visible, setVisible] = useState([false, false, false, false])
 
   useEffect(() => {
     tools.forEach((tool, i) => {
