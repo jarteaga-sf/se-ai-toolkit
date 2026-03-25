@@ -1,4 +1,4 @@
-import { GitBranch, Shield, Target, Crosshair, FileText, Database, ArrowRightLeft, Wrench, Bot, Layers, Settings, Gauge, PenLine, Search, Code, Users, Repeat, BarChart3, Briefcase, Zap } from 'lucide-react'
+import { GitBranch, Shield, Target, Crosshair, FileText, Database, ArrowRightLeft, Wrench, Bot, Layers, Settings, Gauge, PenLine, Search, Code, Users, Repeat, BarChart3, Briefcase, Zap, TrendingUp, Terminal } from 'lucide-react'
 
 const iconMap = {
   GitBranch,
@@ -21,6 +21,8 @@ const iconMap = {
   BarChart3,
   Briefcase,
   Zap,
+  TrendingUp,
+  Terminal,
 }
 
 export default function HabitCards({ cards }) {
@@ -31,17 +33,24 @@ export default function HabitCards({ cards }) {
         return (
           <div
             key={i}
-            className="bg-[var(--color-bg-white)] border border-[var(--color-border)] rounded-lg shadow-[var(--shadow-card)] p-5 transition-[transform,box-shadow] duration-200 hover:-translate-y-0.5 hover:shadow-md"
+            className="bg-[var(--color-bg-white)] border border-[var(--color-border)] rounded-lg p-5"
           >
             {Icon && (
               <div className="w-9 h-9 rounded-full bg-[var(--color-border-light)] flex items-center justify-center mb-3">
                 <Icon size={18} className="text-[var(--color-accent)]" />
               </div>
             )}
-            <h4 className="font-[var(--font-heading)] text-[16px] font-semibold text-[var(--color-text)] mb-1.5">
-              {card.title}
-            </h4>
-            <p className="text-[14px] text-[var(--color-text-secondary)] leading-relaxed">
+            <div className="flex items-center gap-2 mb-1.5">
+              <h4 className="font-[var(--font-heading)] text-[16px] font-semibold text-[var(--color-text)]">
+                {card.title}
+              </h4>
+              {card.emerging && (
+                <span className="text-[11px] font-medium text-[var(--color-accent)] border border-dashed border-[var(--color-accent)] rounded-full px-2 py-0.5 leading-none">
+                  Emerging
+                </span>
+              )}
+            </div>
+            <p className="text-[15px] text-[var(--color-text-secondary)] leading-relaxed">
               {card.description}
             </p>
           </div>

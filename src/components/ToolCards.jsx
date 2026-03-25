@@ -11,13 +11,13 @@ const logos = {
 
 function TerminalVisual() {
   return (
-    <div className="w-full rounded-lg overflow-hidden border border-[var(--color-border)] shadow-sm">
+    <div className="w-full h-[148px] rounded-lg overflow-hidden border border-[var(--color-border)] shadow-sm flex flex-col">
       <div className="bg-[#1E1E1E] px-3 py-1.5 flex items-center gap-1.5">
         <div className="w-[7px] h-[7px] rounded-full bg-red-400/70" />
         <div className="w-[7px] h-[7px] rounded-full bg-yellow-400/70" />
         <div className="w-[7px] h-[7px] rounded-full bg-green-400/70" />
       </div>
-      <div className="bg-[#1E1E1E] px-3 pb-3 pt-1 flex flex-col gap-1.5">
+      <div className="bg-[#1E1E1E] px-3 pb-3 pt-1 flex flex-col gap-1.5 flex-1">
         <p className="text-[10px] font-mono text-[#E5E7EB]">
           <span className="text-[#6EE7B7]">&gt;</span> Build a lead scoring flow
         </p>
@@ -42,7 +42,7 @@ function TerminalVisual() {
 
 function EditorVisual() {
   return (
-    <div className="w-full rounded-lg overflow-hidden border border-[var(--color-border)] shadow-sm">
+    <div className="w-full h-[148px] rounded-lg overflow-hidden border border-[var(--color-border)] shadow-sm flex flex-col">
       {/* Tab bar */}
       <div className="bg-[#252526] px-2 py-1 flex items-center gap-0.5">
         <div className="px-2.5 py-1 rounded-t text-[10px] font-mono text-[#E5E7EB] bg-[#1E1E1E]">
@@ -54,7 +54,7 @@ function EditorVisual() {
         </div>
       </div>
       {/* Split: code + chat */}
-      <div className="flex">
+      <div className="flex flex-1">
         {/* Code pane */}
         <div className="bg-[#1E1E1E] px-2.5 py-2 flex-1 border-r border-[#333]">
           <p className="text-[9px] font-mono">
@@ -71,12 +71,12 @@ function EditorVisual() {
           </div>
         </div>
         {/* Chat pane */}
-        <div className="bg-[#181818] px-2 py-2 w-[45%] flex flex-col gap-1.5">
-          <p className="text-[8px] font-mono text-[#9CA3AF]">
-            Add a threshold check
+        <div className="bg-[#181818] px-2 py-2 w-[40%] flex flex-col gap-1 overflow-hidden">
+          <p className="text-[7px] font-mono text-[#9CA3AF] truncate">
+            Add a threshold
           </p>
-          <p className="text-[8px] font-mono text-[#7C9FE0] leading-snug">
-            Added if (score &gt; 80) block with rep notification.
+          <p className="text-[7px] font-mono text-[#7C9FE0] leading-snug">
+            Added threshold check.
           </p>
         </div>
       </div>
@@ -86,7 +86,7 @@ function EditorVisual() {
 
 function BrowserVisual() {
   return (
-    <div className="w-full rounded-lg overflow-hidden border border-[var(--color-border)] shadow-sm">
+    <div className="w-full h-[148px] rounded-lg overflow-hidden border border-[var(--color-border)] shadow-sm flex flex-col">
       {/* Browser chrome */}
       <div className="bg-[#F1F1F1] px-3 py-1.5 flex items-center gap-2">
         <div className="flex gap-1">
@@ -99,12 +99,12 @@ function BrowserVisual() {
         </div>
       </div>
       {/* SF record mockup */}
-      <div className="bg-white px-3 py-2.5">
+      <div className="bg-white px-3 py-2.5 flex-1">
         <div className="flex items-center justify-between mb-2">
           <span className="text-[11px] font-semibold text-[#032D60]">Acme Corp</span>
           <span className="text-[9px] text-[#999]">Account</span>
         </div>
-        <div className="flex flex-col gap-1">
+        <div className="flex flex-col gap-1.5">
           <div className="flex items-center justify-between">
             <span className="text-[9px] text-[#666]">Revenue</span>
             <span className="text-[10px] font-semibold text-[#7C3AED] bg-[#7C3AED]/10 px-1.5 py-0.5 rounded">$4.2M</span>
@@ -112,6 +112,10 @@ function BrowserVisual() {
           <div className="flex items-center justify-between">
             <span className="text-[9px] text-[#666]">Industry</span>
             <span className="text-[10px] font-semibold text-[#7C3AED] bg-[#7C3AED]/10 px-1.5 py-0.5 rounded">Healthcare</span>
+          </div>
+          <div className="flex items-center justify-between">
+            <span className="text-[9px] text-[#666]">Open Opps</span>
+            <span className="text-[10px] font-semibold text-[#7C3AED] bg-[#7C3AED]/10 px-1.5 py-0.5 rounded">12</span>
           </div>
         </div>
       </div>
@@ -148,7 +152,7 @@ function SetupLevel({ level }) {
 
 function AgentBuilderVisual() {
   return (
-    <div className="w-full rounded-lg overflow-hidden border border-[var(--color-border)] shadow-sm">
+    <div className="w-full h-[148px] rounded-lg overflow-hidden border border-[var(--color-border)] shadow-sm flex flex-col">
       {/* Header */}
       <div className="bg-[#0D3B66] px-3 py-1.5 flex items-center gap-2">
         <div className="flex gap-1">
@@ -159,7 +163,7 @@ function AgentBuilderVisual() {
         <span className="text-[9px] font-mono text-white/70">MeshMesh</span>
       </div>
       {/* Agent config */}
-      <div className="bg-[#F0F4F8] px-3 py-2.5">
+      <div className="bg-[#F0F4F8] px-3 py-2.5 flex-1">
         <div className="flex items-center gap-1.5 mb-2">
           <div className="w-[8px] h-[8px] rounded-full bg-[#0D3B66]" />
           <span className="text-[10px] font-semibold text-[#0D3B66]">Agentforce Agent</span>
@@ -209,7 +213,7 @@ export default function ToolCards({ cards }) {
               </h4>
             </div>
             {/* Tagline — fixed height for alignment */}
-            <div className="h-[36px] flex items-start justify-center px-4">
+            <div className="h-[44px] flex items-start justify-center px-4">
               {card.tagline && (
                 <p className="text-[13px] text-[var(--color-text-muted)] italic text-center">{card.tagline}</p>
               )}
@@ -222,14 +226,14 @@ export default function ToolCards({ cards }) {
                 </span>
               )}
             </div>
-            {/* Mini visual — flex-1 with bottom alignment */}
-            <div className="px-4 pb-3 flex-1 flex items-end">
-              <div className="w-full">
+            {/* Mini visual — fixed height for cross-card alignment */}
+            <div className="px-4 pt-3 pb-4 h-[180px] flex items-center overflow-hidden">
+              <div className="w-full overflow-hidden rounded-lg">
                 {Visual && <Visual />}
               </div>
             </div>
-            {/* Proof point — min height for alignment */}
-            <div className="px-4 pb-3 min-h-[60px] flex items-center">
+            {/* Proof point — fixed height for alignment */}
+            <div className="px-4 pb-4 h-[80px] flex items-center">
               <p className="text-[13px] text-[var(--color-text)] leading-snug text-center w-full">
                 {card.bestFor}
               </p>

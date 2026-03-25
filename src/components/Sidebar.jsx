@@ -22,15 +22,9 @@ const tiers = [
     ],
   },
   {
-    label: 'See It in Action',
-    sections: [
-      { id: 'live-demo', title: 'Live Demo' },
-      { id: 'full-pipeline', title: 'The Full Pipeline' },
-    ],
-  },
-  {
     label: 'Keep Going',
     sections: [
+      { id: 'level-up', title: 'Level Up' },
       { id: 'quick-reference', title: 'Cheat Sheet' },
     ],
   },
@@ -101,7 +95,7 @@ export default function Sidebar({ collapsed = false, onToggle, presentationSlide
     }
   }
 
-  const sidebarOpacity = scrollFaded && !hovered && !collapsed ? 'opacity-10' : 'opacity-100'
+  const sidebarOpacity = scrollFaded && !hovered && !collapsed ? 'opacity-20' : 'opacity-100'
 
   const nav = (
     <nav className="py-4 px-3">

@@ -47,7 +47,7 @@ export default function Section({ id, label, title, subtitle, first = false, hid
           visible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6 will-change-[opacity,transform]'
         }`}
       >
-        <div className="w-full max-w-[780px]">
+        <div className="w-full max-w-[960px]">
           <div
             ref={cardRef}
             className="bg-[var(--color-bg-white)] rounded-xl border border-[var(--color-border)]/40 shadow-[0_1px_3px_rgba(0,0,0,0.04),0_6px_24px_rgba(0,0,0,0.03)] p-8 md:p-10 transition-opacity duration-500 ease-out"
@@ -63,7 +63,7 @@ export default function Section({ id, label, title, subtitle, first = false, hid
             ) : (
               <>
                 {label && (
-                  <p className="text-[12px] font-semibold uppercase tracking-[0.1em] text-[var(--color-accent)] mb-2">
+                  <p className="text-[11px] font-semibold uppercase tracking-[0.12em] text-[var(--color-accent)] mb-2">
                     {label}
                   </p>
                 )}

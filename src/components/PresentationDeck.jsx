@@ -105,6 +105,20 @@ export default function PresentationDeck({ sections, onSlideChange, scrollTarget
     }
   }, [scrollLocked])
 
+  // Unlock deck when programmatic scroll (e.g. sidebar click) moves past it
+  useEffect(() => {
+    if (!scrollLocked) return
+
+    const handler = () => {
+      if (window.scrollY > window.innerHeight * 0.5) {
+        setScrollLocked(false)
+      }
+    }
+
+    window.addEventListener('scroll', handler, { passive: true })
+    return () => window.removeEventListener('scroll', handler)
+  }, [scrollLocked])
+
   // Re-engage scroll lock when user scrolls back to top
   useEffect(() => {
     if (scrollLocked) return

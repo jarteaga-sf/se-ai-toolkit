@@ -1,7 +1,7 @@
-import { Zap, Search, MessageSquare, PenLine, Film, Wand2, Bot, Unlock, FileText, Terminal, Download, Shield, Puzzle, LogIn, FolderPlus, CheckCircle, Globe, ArrowRight, ArrowDown, X, Sparkles } from 'lucide-react'
+import { Zap, Search, MessageSquare, PenLine, Film, Wand2, Bot, Unlock, FileText, Terminal, Download, Shield, Puzzle, LogIn, FolderPlus, CheckCircle, Globe, ArrowRight, ArrowDown, X, Sparkles, TrendingUp } from 'lucide-react'
 import ToolCards from './ToolCards'
 
-export const iconMap = { Zap, Search, MessageSquare, PenLine, Film, Wand2, Bot, Unlock, FileText, Terminal, Download, Shield, Puzzle, LogIn, FolderPlus, CheckCircle, Globe }
+export const iconMap = { Zap, Search, MessageSquare, PenLine, Film, Wand2, Bot, Unlock, FileText, Terminal, Download, Shield, Puzzle, LogIn, FolderPlus, CheckCircle, Globe, TrendingUp }
 
 // --- Mini UI visuals for the "What this unlocks" slide ---
 
@@ -80,43 +80,37 @@ function CredibilityVisual() {
 
 function IndependenceVisual() {
   return (
-    <div className="flex items-center gap-3">
+    <div className="flex flex-col items-center gap-3">
       {/* Old way: manual SDO customization */}
-      <div className="flex flex-col items-center gap-1.5">
-        <div className="relative w-[90px] rounded-lg border border-[var(--color-border)] bg-[var(--color-border-light)] p-2 opacity-45">
-          <span className="text-[8px] font-semibold text-[var(--color-text-muted)] mb-1 block">SDO Setup</span>
-          <div className="flex flex-col gap-1">
-            <div className="flex items-center gap-1">
-              <div className="w-[6px] h-[6px] rounded-full border border-[var(--color-text-muted)]/40" />
-              <span className="text-[8px] text-[var(--color-text-muted)]">Connect SFDX</span>
-            </div>
-            <div className="flex items-center gap-1">
-              <div className="w-[6px] h-[6px] rounded-full border border-[var(--color-text-muted)]/40" />
-              <span className="text-[8px] text-[var(--color-text-muted)]">Install Brix</span>
-            </div>
-            <div className="flex items-center gap-1">
-              <div className="w-[6px] h-[6px] rounded-full border border-[var(--color-text-muted)]/40" />
-              <span className="text-[8px] text-[var(--color-text-muted)]">Wire flows</span>
-            </div>
-          </div>
-          <X size={32} className="absolute inset-0 m-auto text-red-400/70" strokeWidth={2.5} />
-        </div>
-        <span className="text-[9px] font-semibold text-[var(--color-text-muted)]">Days of config</span>
-      </div>
-      <ArrowRight size={16} className="text-[var(--color-accent)]" />
-      {/* New way: prompt it */}
-      <div className="flex flex-col items-center gap-1.5">
-        <div className="rounded-lg border border-[var(--color-accent)]/30 bg-[var(--color-accent)]/5 p-2.5">
-          <span className="text-[8px] font-semibold text-[var(--color-accent)] mb-1.5 block">Cursor</span>
-          <div className="px-2 py-1.5 rounded bg-[var(--color-bg-white)] border border-[var(--color-border)] mb-2">
-            <span className="text-[9px] text-[var(--color-text)] whitespace-nowrap">"Add healthcare flow to my SDO"</span>
+      <div className="relative w-[160px] rounded-lg border border-[var(--color-border)] bg-[var(--color-border-light)] p-2.5 opacity-45">
+        <span className="text-[9px] font-semibold text-[var(--color-text-muted)] mb-1.5 block">SDO Setup</span>
+        <div className="flex flex-col gap-1">
+          <div className="flex items-center gap-1">
+            <div className="w-[6px] h-[6px] rounded-full border border-[var(--color-text-muted)]/40" />
+            <span className="text-[8px] text-[var(--color-text-muted)]">Connect SFDX</span>
           </div>
           <div className="flex items-center gap-1">
-            <CheckCircle size={9} className="text-green-500" />
-            <span className="text-[9px] font-semibold text-green-600">Deployed</span>
+            <div className="w-[6px] h-[6px] rounded-full border border-[var(--color-text-muted)]/40" />
+            <span className="text-[8px] text-[var(--color-text-muted)]">Install Brix</span>
+          </div>
+          <div className="flex items-center gap-1">
+            <div className="w-[6px] h-[6px] rounded-full border border-[var(--color-text-muted)]/40" />
+            <span className="text-[8px] text-[var(--color-text-muted)]">Wire flows</span>
           </div>
         </div>
-        <span className="text-[9px] font-semibold text-[var(--color-accent)]">One prompt</span>
+        <X size={32} className="absolute inset-0 m-auto text-red-400/70" strokeWidth={2.5} />
+      </div>
+      <ArrowDown size={14} className="text-[var(--color-accent)]" />
+      {/* New way: prompt it */}
+      <div className="w-[160px] rounded-lg border border-[var(--color-accent)]/30 bg-[var(--color-accent)]/5 p-2.5">
+        <span className="text-[9px] font-semibold text-[var(--color-accent)] mb-1.5 block">Cursor</span>
+        <div className="px-2 py-1.5 rounded bg-[var(--color-bg-white)] border border-[var(--color-border)] mb-2">
+          <span className="text-[9px] text-[var(--color-text)]">"Add healthcare flow to my SDO"</span>
+        </div>
+        <div className="flex items-center gap-1">
+          <CheckCircle size={9} className="text-green-500" />
+          <span className="text-[9px] font-semibold text-green-600">Deployed</span>
+        </div>
       </div>
     </div>
   )
@@ -229,9 +223,9 @@ export function IconBulletsSlide({ title, bullets, fullscreen }) {
           const Icon = iconMap[b.icon]
           const Visual = b.visual ? visualMap[b.visual] : null
           return (
-            <div key={i} className={`flex flex-col items-center text-center ${fullscreen && hasVisuals ? 'px-2' : ''}`}>
+            <div key={i} className={`flex flex-col items-center text-center overflow-hidden ${fullscreen && hasVisuals ? 'px-2' : ''}`}>
               {Visual ? (
-                <div className={`flex items-end justify-center ${fullscreen ? 'mb-5 min-h-[180px]' : 'mb-3 min-h-[140px]'}`}>
+                <div className={`flex items-end justify-center ${fullscreen ? 'mb-5 h-[200px]' : 'mb-3 h-[160px]'}`}>
                   <Visual fullscreen={fullscreen} />
                 </div>
               ) : Icon ? (

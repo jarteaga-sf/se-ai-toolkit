@@ -4,19 +4,39 @@ const tabs = [
   { id: 'when', label: 'When to Use Which' },
   { id: 'claude', label: 'Claude Code' },
   { id: 'cursor', label: 'Cursor' },
+  { id: 'meshmesh', label: 'MeshMesh' },
+  { id: 'saleo', label: 'Saleo' },
 ]
+
+function ShortcutRow({ shortcut }) {
+  return (
+    <div className="flex items-center gap-2 px-3 py-2 bg-[var(--color-bg-white)] rounded-lg border border-[var(--color-border)]">
+      <kbd className="px-2 py-0.5 bg-[var(--color-border)] rounded text-[13px] font-[var(--font-mono)] font-semibold text-[var(--color-text)] whitespace-nowrap">{shortcut.key}</kbd>
+      <span className="text-[15px] text-[var(--color-text-secondary)]">{shortcut.action}</span>
+    </div>
+  )
+}
+
+function TipRow({ tip }) {
+  return (
+    <div className="flex items-start gap-3 px-4 py-3 bg-[var(--color-bg-white)] rounded-lg border border-[var(--color-border)]">
+      <span className="font-semibold text-[15px] text-[var(--color-text)] whitespace-nowrap">{tip.label}</span>
+      <span className="text-[15px] text-[var(--color-text-secondary)]">{tip.description}</span>
+    </div>
+  )
+}
 
 export default function QuickReference({ data }) {
   const [activeTab, setActiveTab] = useState('when')
 
   return (
     <div>
-      <div className="flex bg-[var(--color-border-light)] rounded-lg p-1 mb-6">
+      <div className="flex bg-[var(--color-border-light)] rounded-lg p-1 mb-6 flex-wrap gap-0.5">
         {tabs.map((tab) => (
           <button
             key={tab.id}
             onClick={() => setActiveTab(tab.id)}
-            className={`flex-1 text-[14px] px-3 py-2 rounded-md font-medium transition-all cursor-pointer ${
+            className={`flex-1 text-[15px] px-3 py-2 rounded-md font-medium transition-all cursor-pointer ${
               activeTab === tab.id
                 ? 'bg-[var(--color-bg-white)] text-[var(--color-text)] shadow-[var(--shadow-card)]'
                 : 'text-[var(--color-text-muted)] hover:text-[var(--color-text-secondary)]'
@@ -28,7 +48,7 @@ export default function QuickReference({ data }) {
       </div>
 
       {activeTab === 'when' && (
-        <div className="rounded-lg overflow-hidden shadow-[var(--shadow-card)]">
+        <div className="rounded-lg overflow-hidden border border-[var(--color-border)]">
           <table className="w-full text-[15px]">
             <thead>
               <tr className="bg-[var(--color-border-light)]">
@@ -52,7 +72,7 @@ export default function QuickReference({ data }) {
         <div className="space-y-8">
           <div>
             <h3 className="font-[var(--font-heading)] text-[20px] tracking-[-0.015em] mb-3">Commands</h3>
-            <div className="rounded-lg overflow-hidden shadow-[var(--shadow-card)]">
+            <div className="rounded-lg overflow-hidden border border-[var(--color-border)]">
               <table className="w-full text-[15px]">
                 <thead>
                   <tr className="bg-[var(--color-border-light)]">
@@ -77,12 +97,7 @@ export default function QuickReference({ data }) {
           <div>
             <h3 className="font-[var(--font-heading)] text-[20px] tracking-[-0.015em] mb-3">Shortcuts</h3>
             <div className="space-y-2">
-              {data.shortcuts.map((s, i) => (
-                <div key={i} className="flex items-center gap-2 px-3 py-2 bg-[var(--color-bg-white)] rounded-lg shadow-[var(--shadow-card)]">
-                  <kbd className="px-2 py-0.5 bg-[var(--color-border-light)] rounded text-[13px] font-[var(--font-mono)] font-semibold text-[var(--color-text)] whitespace-nowrap">{s.key}</kbd>
-                  <span className="text-[15px] text-[var(--color-text-secondary)]">{s.action}</span>
-                </div>
-              ))}
+              {data.shortcuts.map((s, i) => <ShortcutRow key={i} shortcut={s} />)}
             </div>
           </div>
 
@@ -90,11 +105,18 @@ export default function QuickReference({ data }) {
             <h3 className="font-[var(--font-heading)] text-[20px] tracking-[-0.015em] mb-3">Model Selection</h3>
             <div className="space-y-2">
               {data.models.map((m, i) => (
-                <div key={i} className="flex items-start gap-3 px-4 py-3 bg-[var(--color-bg-white)] rounded-lg shadow-[var(--shadow-card)]">
+                <div key={i} className="flex items-start gap-3 px-4 py-3 bg-[var(--color-bg-white)] rounded-lg border border-[var(--color-border)]">
                   <span className="font-[var(--font-mono)] text-[15px] font-semibold text-[var(--color-text)] whitespace-nowrap">{m.model}</span>
                   <span className="text-[15px] text-[var(--color-text-secondary)]">{m.use}</span>
                 </div>
               ))}
+            </div>
+          </div>
+
+          <div>
+            <h3 className="font-[var(--font-heading)] text-[20px] tracking-[-0.015em] mb-3">Tips</h3>
+            <div className="space-y-2">
+              {data.claudeCodeTips.map((tip, i) => <TipRow key={i} tip={tip} />)}
             </div>
           </div>
 
@@ -113,15 +135,37 @@ export default function QuickReference({ data }) {
       )}
 
       {activeTab === 'cursor' && (
+        <div className="space-y-8">
+          <div>
+            <h3 className="font-[var(--font-heading)] text-[20px] tracking-[-0.015em] mb-3">Shortcuts</h3>
+            <div className="space-y-2">
+              {data.cursorShortcuts.map((s, i) => <ShortcutRow key={i} shortcut={s} />)}
+            </div>
+          </div>
+
+          <div>
+            <h3 className="font-[var(--font-heading)] text-[20px] tracking-[-0.015em] mb-3">Tips</h3>
+            <div className="space-y-2">
+              {data.cursorTips.map((tip, i) => <TipRow key={i} tip={tip} />)}
+            </div>
+          </div>
+        </div>
+      )}
+
+      {activeTab === 'meshmesh' && (
         <div>
-          <h3 className="font-[var(--font-heading)] text-[20px] tracking-[-0.015em] mb-3">Shortcuts</h3>
+          <h3 className="font-[var(--font-heading)] text-[20px] tracking-[-0.015em] mb-3">Tips</h3>
           <div className="space-y-2">
-            {data.cursorShortcuts.map((s, i) => (
-              <div key={i} className="flex items-center gap-2 px-3 py-2 bg-[var(--color-bg-white)] rounded-lg shadow-[var(--shadow-card)]">
-                <kbd className="px-2 py-0.5 bg-[var(--color-border-light)] rounded text-[13px] font-[var(--font-mono)] font-semibold text-[var(--color-text)] whitespace-nowrap">{s.key}</kbd>
-                <span className="text-[15px] text-[var(--color-text-secondary)]">{s.action}</span>
-              </div>
-            ))}
+            {data.meshmeshTips.map((tip, i) => <TipRow key={i} tip={tip} />)}
+          </div>
+        </div>
+      )}
+
+      {activeTab === 'saleo' && (
+        <div>
+          <h3 className="font-[var(--font-heading)] text-[20px] tracking-[-0.015em] mb-3">Tips</h3>
+          <div className="space-y-2">
+            {data.saleoTips.map((tip, i) => <TipRow key={i} tip={tip} />)}
           </div>
         </div>
       )}
