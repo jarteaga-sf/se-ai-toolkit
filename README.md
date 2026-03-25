@@ -16,6 +16,10 @@ Hosted at **[https://jarteaga-sf.github.io/se-ai-toolkit/](https://jarteaga-sf.g
 | **The Tools** | Saleo, MeshMesh, Cursor, Claude Code | Tabbed deep-dives (reference) |
 | **Keep Going** | Level Up, Cheat Sheet | Advanced concepts + quick reference |
 
+## Related
+
+- **[Salesforce Skills Library](https://jarteaga-sf.github.io/sf-skills-site/)** — Pre-built skills to install in Claude Code or Cursor for Salesforce development
+
 ## Tech Stack
 
 - Vite + React
