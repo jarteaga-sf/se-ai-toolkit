@@ -15,7 +15,7 @@ export const levelUp = {
           { icon: 'Layers', title: 'Salesforce Development', description: 'Covers Apex patterns, LWC structure, deployment commands, and platform best practices. The AI writes platform-aware code from the start.' },
           { icon: 'Bot', title: 'Agentforce Building', description: 'Topics, actions, prompt templates, and test suites. The AI knows the agent architecture so you don\'t have to spell it out.' },
           { icon: 'Shield', title: 'Security & Sharing', description: 'Permission sets, field-level security, sharing rules, and org-wide defaults. The AI flags security gaps before they become problems.' },
-          { icon: 'Search', title: 'Finding & Installing', description: 'Browse the skill library, install with one command, and the AI uses the right skill automatically when the topic comes up.' },
+          { icon: 'Search', title: 'Finding & Installing', description: 'Browse the skill library, install with one command, and the AI uses the right skill automatically when the topic comes up.', link: { label: 'Browse the Skill Library', url: 'https://jarteaga-sf.github.io/sf-skills-site/' } },
         ],
         takeaway: "Skills turn a general-purpose AI into a **Salesforce specialist.** Install once, benefit every session.",
       },

@@ -1,4 +1,4 @@
-import { GitBranch, Shield, Target, Crosshair, FileText, Database, ArrowRightLeft, Wrench, Bot, Layers, Settings, Gauge, PenLine, Search, Code, Users, Repeat, BarChart3, Briefcase, Zap, TrendingUp, Terminal } from 'lucide-react'
+import { GitBranch, Shield, Target, Crosshair, FileText, Database, ArrowRightLeft, Wrench, Bot, Layers, Settings, Gauge, PenLine, Search, Code, Users, Repeat, BarChart3, Briefcase, Zap, TrendingUp, Terminal, ExternalLink } from 'lucide-react'
 
 const iconMap = {
   GitBranch,
@@ -53,6 +53,17 @@ export default function HabitCards({ cards }) {
             <p className="text-[15px] text-[var(--color-text-secondary)] leading-relaxed">
               {card.description}
             </p>
+            {card.link && (
+              <a
+                href={card.link.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1.5 mt-3 text-[14px] font-medium text-[var(--color-accent)] hover:underline"
+              >
+                {card.link.label}
+                <ExternalLink size={13} />
+              </a>
+            )}
           </div>
         )
       })}
