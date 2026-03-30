@@ -168,13 +168,15 @@ export default function PresentationDeck({ sections, onSlideChange, onNavReady }
         <div
           ref={contentRef}
           key={current}
-          className="pointer-events-auto slide-enter"
+          className="pointer-events-auto"
           style={{
             transformOrigin: 'center center',
             padding: '12px 20px',
           }}
         >
-          {fullscreenRenderers[currentItem.slide.layout]?.(currentItem.slide, { isDarkBg })}
+          <div className="slide-enter">
+            {fullscreenRenderers[currentItem.slide.layout]?.(currentItem.slide, { isDarkBg })}
+          </div>
         </div>
       </div>
     </div>
