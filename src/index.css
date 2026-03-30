@@ -1,25 +1,26 @@
 @import "tailwindcss";
 
 @theme {
-  /* Fonts -- Salesforce Sans */
+  /* Fonts -- Salesforce Brand Kit */
+  --font-display: 'ITC Avant Garde Demi', 'Salesforce Sans', system-ui, sans-serif;
   --font-heading: 'Salesforce Sans', system-ui, sans-serif;
   --font-body: 'Salesforce Sans', system-ui, sans-serif;
   --font-mono: 'IBM Plex Mono', ui-monospace, Consolas, monospace;
 
-  /* Core Salesforce palette */
-  --color-bg: #E8F4FD;
+  /* Core Salesforce Brand Kit palette */
+  --color-bg: #CFE9FE;
   --color-bg-white: #FFFFFF;
-  --color-bg-sidebar: #F0F7FF;
+  --color-bg-sidebar: #EEF4FF;
   --color-text: #181818;
   --color-text-prose: #3E3E3C;
   --color-text-secondary: #444444;
   --color-text-muted: #747474;
   --color-accent: #0176D3;
   --color-accent-hover: #014486;
-  --color-heading: #032D60;
+  --color-heading: #001E5B;
   --color-border: #D4E5F7;
   --color-border-light: #EAF5FE;
-  --color-header-bg: #032D60;
+  --color-header-bg: #001E5B;
 
   /* Extended Salesforce accents */
   --color-electric: #066AFE;
@@ -27,6 +28,7 @@
   --color-cloud-light: #90D0FE;
   --color-cloud-90: #CFE9FE;
   --color-surface: #EAF5FE;
+  --color-surface-alt: #EEF4FF;
   --color-success: #06A59A;
   --color-teal: #04E1CB;
   --color-violet: #8402AD;
@@ -36,7 +38,7 @@
   --color-error: #B60554;
 
   /* Glass effects */
-  --color-glass: rgba(3, 45, 96, 0.75);
+  --color-glass: rgba(0, 30, 91, 0.75);
   --color-glass-light: rgba(255, 255, 255, 0.1);
 
   /* Terminal (stays dark) */
@@ -51,14 +53,14 @@
 
   /* Semantic */
   --color-takeaway-bg: #EAF5FE;
-  --color-deepcut-bg: #F0F7FF;
+  --color-deepcut-bg: #EEF4FF;
   --color-diff-add: #2EA04340;
   --color-diff-remove: #F4474740;
 
-  /* Shadows -- Salesforce style */
-  --shadow-soft: 0 4px 20px rgba(3, 45, 96, 0.08);
-  --shadow-card: 0 1px 4px rgba(3, 45, 96, 0.04), 0 4px 16px rgba(3, 45, 96, 0.04);
-  --shadow-card-hover: 0 12px 40px rgba(3, 45, 96, 0.1);
+  /* Shadows -- Salesforce brand style */
+  --shadow-soft: 0 4px 20px rgba(0, 30, 91, 0.08);
+  --shadow-card: 0 1px 4px rgba(0, 30, 91, 0.04), 0 4px 16px rgba(0, 30, 91, 0.04);
+  --shadow-card-hover: 0 12px 40px rgba(0, 30, 91, 0.1);
 }
 
 @layer base {
@@ -82,7 +84,7 @@
   }
 
   h1, h2 {
-    font-family: var(--font-heading);
+    font-family: var(--font-display);
     font-weight: 700;
     line-height: 1.15;
     letter-spacing: -0.025em;

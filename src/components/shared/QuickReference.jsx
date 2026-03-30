@@ -179,7 +179,7 @@ export default function QuickReference({ data }) {
 
       {/* Contest CTA */}
       {data.contest && (
-        <div className="mt-10 rounded-2xl bg-gradient-to-br from-[var(--color-heading)] to-[#032D60] p-6 md:p-8 text-center">
+        <div className="mt-10 rounded-2xl bg-gradient-to-br from-[#001E5B] via-[#022AC0] to-[#066AFE] p-6 md:p-8 text-center">
           <div className="flex items-center justify-center gap-2 mb-3">
             <Sparkles size={20} className="text-[var(--color-yellow)]" />
             <h3 className="text-[22px] md:text-[24px] font-bold text-white">{data.contest.title}</h3>

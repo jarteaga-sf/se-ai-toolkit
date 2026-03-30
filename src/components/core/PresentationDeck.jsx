@@ -129,15 +129,15 @@ export default function PresentationDeck({ sections, onSlideChange, onNavReady }
   const getSlideBackground = () => {
     const layout = currentItem.slide.layout
     if (layout === 'quote') return 'bg-[var(--color-surface)]'
-    if (layout === 'statement') return 'bg-gradient-to-br from-[var(--color-heading)] to-[#032D60]'
-    if (layout === 'cinematic') return 'bg-gradient-to-br from-[#001440] to-[var(--color-heading)]'
+    if (layout === 'statement') return 'bg-gradient-to-br from-[#001E5B] via-[#022AC0] to-[#066AFE]'
+    if (layout === 'cinematic') return 'bg-gradient-to-br from-[#001E5B] via-[#022AC0] to-[#066AFE]'
     if (layout === 'takeaway') return 'bg-[var(--color-takeaway-bg)]'
     if (layout === 'bigStat') return 'bg-[var(--color-bg-white)]'
     if (layout === 'videoDemoSlide') return 'bg-[var(--color-bg-white)]'
     if (layout === 'illustratedConcept' || layout === 'statCallout') return 'bg-[var(--color-bg-white)]'
     if (layout === 'spectrumSplit') return 'bg-[var(--color-bg-white)]'
     // New layouts
-    if (layout === 'tierTransition') return 'bg-gradient-to-br from-[var(--color-heading)] to-[#032D60]'
+    if (layout === 'tierTransition') return 'bg-gradient-to-br from-[#001E5B] via-[#022AC0] to-[#066AFE]'
     if (layout === 'toolIntro') return 'bg-[var(--color-bg-white)]'
     if (layout === 'toolContent') return 'bg-[var(--color-bg)]'
     if (layout === 'toolGettingStarted') return 'bg-[var(--color-bg)]'
@@ -156,16 +156,26 @@ export default function PresentationDeck({ sections, onSlideChange, onNavReady }
     <div
       className={`relative w-full h-full flex flex-col transition-colors duration-500 pointer-events-none ${getSlideBackground()}`}
     >
-      {/* Section label - top left */}
-      {currentItem.sectionLabel && (
-        <div className="absolute top-5 left-6 z-10 pointer-events-auto">
-          <span className={`text-[11px] font-bold uppercase tracking-[0.12em] ${
-            isDarkBg ? 'text-[var(--color-cloud-light)]' : 'text-[var(--color-accent)]'
-          }`}>
-            {currentItem.sectionLabel}
-          </span>
-        </div>
-      )}
+      {/* Salesforce logo + section label - top left */}
+      <div className="absolute top-5 left-6 z-10 pointer-events-auto flex items-center gap-3">
+        <img
+          src="https://assets.meshmesh.io/system/salesforce-with-type-logo.svg"
+          alt="Salesforce"
+          className={`h-6 w-auto transition-all duration-300 ${
+            isDarkBg ? 'brightness-0 invert' : ''
+          }`}
+        />
+        {currentItem.sectionLabel && (
+          <>
+            <span className={`text-[11px] ${isDarkBg ? 'text-white/20' : 'text-[var(--color-border)]'}`}>|</span>
+            <span className={`text-[11px] font-bold uppercase tracking-[0.12em] ${
+              isDarkBg ? 'text-[var(--color-cloud-light)]' : 'text-[var(--color-accent)]'
+            }`}>
+              {currentItem.sectionLabel}
+            </span>
+          </>
+        )}
+      </div>
 
       {/* Slide content -- scaled to fit */}
       <div ref={stageRef} className="flex-1 flex items-center justify-center pointer-events-none">
