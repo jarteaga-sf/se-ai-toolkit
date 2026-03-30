@@ -1,4 +1,6 @@
+import { useEffect, useRef } from 'react'
 import { GitBranch, Shield, Target, Crosshair, FileText, Database, ArrowRightLeft, Wrench, Bot, Layers, Settings, Gauge, PenLine, Search, Code, Users, Repeat, BarChart3, Briefcase, Zap, TrendingUp, Terminal, ExternalLink } from 'lucide-react'
+import gsap from 'gsap'
 
 const iconMap = {
   GitBranch,
@@ -26,14 +28,31 @@ const iconMap = {
 }
 
 export default function HabitCards({ cards, fullscreen = false }) {
+  const gridRef = useRef(null)
+
+  useEffect(() => {
+    const el = gridRef.current
+    if (!el) return
+    const items = el.querySelectorAll('.habit-card')
+    gsap.set(items, { y: 24, opacity: 0 })
+    gsap.to(items, {
+      y: 0,
+      opacity: 1,
+      duration: 0.5,
+      stagger: 0.08,
+      ease: 'power2.out',
+      delay: 0.15,
+    })
+  }, [cards])
+
   return (
-    <div className={`grid sm:grid-cols-2 gap-4 ${fullscreen ? '' : 'my-8'}`}>
+    <div ref={gridRef} className={`grid sm:grid-cols-2 gap-4 ${fullscreen ? '' : 'my-8'}`}>
       {cards.map((card, i) => {
         const Icon = iconMap[card.icon]
         return (
           <div
             key={i}
-            className="bg-[var(--color-bg-white)] border border-[var(--color-border)]/60 rounded-xl p-5 transition-all duration-200 hover:-translate-y-0.5 hover:shadow-[var(--shadow-soft)]"
+            className="habit-card bg-[var(--color-bg-white)] border border-[var(--color-border)]/60 rounded-xl p-5 transition-all duration-200 hover:-translate-y-0.5 hover:shadow-[var(--shadow-soft)]"
           >
             {Icon && (
               <div className="w-9 h-9 rounded-lg bg-[var(--color-surface)] flex items-center justify-center mb-3">

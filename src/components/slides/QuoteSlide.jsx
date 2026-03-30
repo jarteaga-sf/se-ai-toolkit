@@ -1,4 +1,45 @@
+import { useState, useEffect } from 'react'
+
+function TypewriterQuote({ text, onDone }) {
+  const [displayed, setDisplayed] = useState('')
+  const [done, setDone] = useState(false)
+
+  useEffect(() => {
+    setDisplayed('')
+    setDone(false)
+    const delay = setTimeout(() => {
+      let i = 0
+      const interval = setInterval(() => {
+        i++
+        setDisplayed(text.slice(0, i))
+        if (i >= text.length) {
+          clearInterval(interval)
+          setDone(true)
+          if (onDone) onDone()
+        }
+      }, 22)
+      return () => clearInterval(interval)
+    }, 300)
+    return () => clearTimeout(delay)
+  }, [text])
+
+  return (
+    <>
+      {displayed}
+      {!done && (
+        <span className="inline-block w-[8px] h-[0.85em] bg-[var(--color-accent)] ml-0.5 align-middle animate-pulse" />
+      )}
+    </>
+  )
+}
+
 export default function QuoteSlide({ quote, attribution, context, fullscreen }) {
+  const [attributionVisible, setAttributionVisible] = useState(false)
+
+  useEffect(() => {
+    setAttributionVisible(false)
+  }, [quote])
+
   return (
     <div className="flex flex-col items-center justify-center text-center max-w-[900px] mx-auto px-8">
       {context && (
@@ -11,11 +52,15 @@ export default function QuoteSlide({ quote, attribution, context, fullscreen }) 
           &ldquo;
         </span>
         <p className="text-[38px] leading-[1.35] font-bold text-[var(--color-heading)] tracking-[-0.02em]">
-          {quote}
+          <TypewriterQuote text={quote} onDone={() => setAttributionVisible(true)} />
         </p>
       </blockquote>
       {attribution && (
-        <p className="mt-8 text-[17px] text-[var(--color-accent)] font-bold">
+        <p
+          className={`mt-8 text-[17px] text-[var(--color-accent)] font-bold transition-opacity duration-700 ${
+            attributionVisible ? 'opacity-100' : 'opacity-0'
+          }`}
+        >
           &mdash; {attribution}
         </p>
       )}
