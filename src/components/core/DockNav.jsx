@@ -12,6 +12,7 @@ const toolLogos = {
 const tierDisplayNames = {
   'big-picture': 'Big Picture',
   'explore': 'Explore',
+  'go-deeper': 'Go Deeper',
   'deep-dives': 'Deep Dives',
   'keep-going': 'Keep Going',
 }

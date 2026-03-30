@@ -1,25 +1,22 @@
 /**
  * Unified slide manifest for fullscreen presentation mode.
  *
- * Live presentation (~20 min of slides):
- *   Big Picture — The Why        (5 slides)
- *   Big Picture — The Tools      (7 slides)  ← no toolCards, it lives in Explore
- *   Big Picture — Go Deeper      (5 slides, take-home)
- *   Explore Each Tool            (5 slides: 4 overviews + toolCards summary)
- *   Getting Started with Cursor  (3 slides → bridge to live demo)
+ * Live presentation (~25 min of slides):
+ *   The Why           (8 slides)  — stage setting, hooks, vibe coding, bridge
+ *   The Toolkit      (10 slides)  — one pass through all 4 tools + urgency
+ *   Cursor →          (5 slides)  — best practices, getting started, demo, close
  *
  * Take-home (audience navigates via the link):
- *   Deep Dives — Saleo, MeshMesh, Claude Code
- *   Keep Going — Level Up, Cheat Sheet
+ *   Go Deeper         (4 slides)  — additional proof points and stats
+ *   Deep Dives        — Saleo, MeshMesh, Claude Code full walkthroughs
+ *   Keep Going        — Level Up, Cheat Sheet
  */
 
-import { theWhy, theTools, goDeeper } from './big-picture'
+import { theWhy, goDeeper } from './big-picture'
 import { claudeCode, cursor, saleo, meshmesh } from './tools'
 import { levelUp, quickReference } from './action'
 
 // ── Shared tool cards data ────────────────────────────────────────────────
-// Defined once. Used in the Explore Each Tool summary slide only.
-// toolCards was removed from Big Picture — this is its first and only appearance.
 
 const toolCardsData = [
   {
@@ -57,8 +54,6 @@ const toolCardsData = [
 ]
 
 // ── Tool overview slides ──────────────────────────────────────────────────
-// One slide per tool, easiest → hardest. Concise, SE-relatable examples.
-// toolCards summary follows as the closing slide.
 
 const toolOverviewSlides = [
   {
@@ -109,27 +104,19 @@ const toolOverviewSlides = [
       'Generate realistic demo data for any vertical at scale: accounts, contacts, opportunities, all connected.',
     ],
   },
-  {
-    layout: 'toolCards',
-    cards: toolCardsData,
-  },
 ]
 
 // ── Cursor getting started slides ─────────────────────────────────────────
-// Sets the stage for the live demo. Pulls from cursor.tabs[1] (Getting Started).
 
 const cursorGS = cursor.tabs[1].content
 
 const cursorGettingStartedSlides = [
-  // 1. Habits first — set the mindset before the steps
   {
     layout: 'habitCardsSlide',
     toolId: 'cursor',
     title: 'Four habits that make the difference',
     cards: cursorGS.habitCards,
   },
-
-  // 2. The three steps — license, install, connect
   {
     layout: 'toolGettingStarted',
     toolId: 'cursor',
@@ -137,17 +124,12 @@ const cursorGettingStartedSlides = [
     prose: [],
     stepFlow: cursorGS.stepFlow,
   },
-
-  // 3. Cursor in action — Screen Studio recording
-  // Drop the MP4 in /public/ as cursor-demo.mp4 when ready.
   {
     layout: 'videoDemoSlide',
     title: 'Cursor in Action',
     videoSrc: null,
     caption: 'Tab → Cmd+K → Cmd+L → Agent Mode — narrate along as it plays',
   },
-
-  // 4. Solutions Enablement Plan — what's coming per tool
   {
     layout: 'iconBullets',
     title: "What's coming next",
@@ -158,8 +140,6 @@ const cursorGettingStartedSlides = [
       { logo: 'claude', title: 'Claude Code', description: 'Advanced session.' },
     ],
   },
-
-  // 5. Thank You — with the link. Deep Dives follow for self-serve.
   {
     layout: 'statement',
     statement: 'Thank you.',
@@ -249,62 +229,114 @@ function convertQuickRefToSlides(data) {
 
 export const slideManifest = [
 
-  // ── LIVE: Big Picture (3 nav dots) ────────────────────────────────────
+  // ── LIVE: The Why (8 slides) ─────────────────────────────────────────
+  // Stage setting: hooks, vibe coding, the SE angle, bridge to tools.
   {
     id: 'the-why',
     tier: 'big-picture',
     tierLabel: 'The Big Picture',
     title: 'The Why',
     icon: 'Lightbulb',
-    slides: theWhy.slides,
+    slides: [
+      ...theWhy.slides,
+      // Bridge: pull the comparison slide from goDeeper to transition into tools
+      goDeeper.slides[0], // Describing the Product → Proving the Product
+    ],
     exploreContent: null,
   },
+
+  // ── LIVE: The Toolkit (10 slides) ────────────────────────────────────
+  // ONE pass through all 4 tools. No thin intro first — straight to detail.
+  // Ends with urgency stats and call to action.
   {
-    id: 'the-tools',
+    id: 'the-toolkit',
     tier: 'big-picture',
     tierLabel: 'The Big Picture',
-    title: 'The Tools',
+    title: 'The Toolkit',
     icon: 'Layers',
-    slides: theTools.slides,
+    slides: [
+      // Opening frame
+      {
+        layout: 'statement',
+        statement: 'One changes how fast you demo. The others change what you can build.',
+      },
+      // Tool overviews — one slide per tool
+      ...toolOverviewSlides,
+      // Side-by-side comparison
+      { layout: 'toolCards', cards: toolCardsData },
+      // Urgency — strongest proof points kept in live flow
+      {
+        layout: 'bigStat',
+        value: '2.4\u00d7',
+        label: 'More likely to buy from sellers who build live',
+        source: 'Harvard Business Review',
+      },
+      {
+        layout: 'bigStat',
+        value: '12\u201318 months',
+        label: 'Window to build AI fluency before it is expected',
+        source: 'Gartner, 2025',
+      },
+      // Close the section
+      {
+        layout: 'statement',
+        statement: 'The SE who built it speaks differently.',
+        supporting: 'Buyers feel it before the call ends.',
+      },
+      {
+        layout: 'takeaway',
+        text: '**Start with one.** Build something real. Show a customer.',
+      },
+    ],
+    exploreContent: null,
+  },
+
+  // ── LIVE: Cursor → (5 slides) ───────────────────────────────────────
+  // Best practices, getting started, demo, what's next, close.
+  {
+    id: 'cursor-getting-started',
+    tier: 'big-picture',
+    tierLabel: 'The Big Picture',
+    title: 'Cursor \u2192',
+    icon: 'cursor',
+    slides: cursorGettingStartedSlides,
+    exploreContent: { type: 'tool', data: cursor },
+  },
+
+  // ── TAKE-HOME: Go Deeper (4 slides) ─────────────────────────────────
+  // Additional proof points for those who want the full argument.
+  {
+    id: 'go-deeper-transition',
+    tier: 'transition',
+    tierLabel: null,
+    title: 'Go Deeper',
+    icon: null,
+    slides: [{ layout: 'tierTransition', label: 'Go Deeper', supporting: 'Additional proof points — the data behind the tools.' }],
     exploreContent: null,
   },
   {
     id: 'go-deeper',
-    tier: 'big-picture',
-    tierLabel: 'The Big Picture',
-    title: 'Go Deeper',
+    tier: 'go-deeper',
+    tierLabel: 'Go Deeper',
+    title: 'Proof Points',
     icon: 'ChevronRight',
-    slides: goDeeper.slides,
+    slides: [
+      goDeeper.slides[1], // "What this unlocks" iconBullets
+      {
+        layout: 'bigStat',
+        value: '90 minutes',
+        label: 'To build what used to take six weeks',
+        source: 'SE field report',
+      },
+      {
+        layout: 'bigStat',
+        value: '98.95%',
+        label: 'Less time spent on demo guide prep',
+        source: 'MeshMesh case study',
+      },
+      goDeeper.slides[3], // Agentforce activation cinematic
+    ],
     exploreContent: null,
-  },
-
-  // ── LIVE: Explore (2 nav dots) ────────────────────────────────────────
-  {
-    id: 'explore-transition',
-    tier: 'transition',
-    tierLabel: null,
-    title: 'Explore Each Tool',
-    icon: null,
-    slides: [{ layout: 'tierTransition', label: 'Explore Each Tool', supporting: 'A closer look at all four — what they do, how they differ, and what you can build.' }],
-    exploreContent: null,
-  },
-  {
-    id: 'tool-overview',
-    tier: 'explore',
-    tierLabel: 'Explore',
-    title: 'All Four Tools',
-    icon: 'Layers',
-    slides: toolOverviewSlides,
-    exploreContent: null,
-  },
-  {
-    id: 'cursor-getting-started',
-    tier: 'explore',
-    tierLabel: 'Explore',
-    title: 'Cursor →',
-    icon: 'cursor',
-    slides: cursorGettingStartedSlides,
-    exploreContent: { type: 'tool', data: cursor },
   },
 
   // ── TAKE-HOME: Deep Dives (3 nav dots) ────────────────────────────────
