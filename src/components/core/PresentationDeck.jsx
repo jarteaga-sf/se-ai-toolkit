@@ -108,9 +108,9 @@ export default function PresentationDeck({ sections, onSlideChange, onNavReady }
       const contentW = content.scrollWidth
       const contentH = content.scrollHeight
       const { width: stageW, height: stageH } = stage.getBoundingClientRect()
-      const availW = stageW - 80
-      const availH = stageH - 40
-      const s = Math.min(availW / contentW, availH / contentH, 1.2)
+      const availW = stageW - 48
+      const availH = stageH - 24
+      const s = Math.min(availW / contentW, availH / contentH, 1.5)
       const clamped = Math.max(0.4, s)
       content.style.transform = `scale(${clamped})`
       setScale(clamped)
@@ -157,18 +157,18 @@ export default function PresentationDeck({ sections, onSlideChange, onNavReady }
       className={`relative w-full h-full flex flex-col transition-colors duration-500 pointer-events-none ${getSlideBackground()}`}
     >
       {/* Salesforce logo + section label - top left */}
-      <div className="absolute top-5 left-6 z-10 pointer-events-auto flex items-center gap-3">
+      <div className="absolute top-6 left-8 z-10 pointer-events-auto flex items-center gap-4">
         <img
           src="https://assets.meshmesh.io/system/salesforce-with-type-logo.svg"
           alt="Salesforce"
-          className={`h-6 w-auto transition-all duration-300 ${
+          className={`h-8 w-auto transition-all duration-300 ${
             isDarkBg ? 'brightness-0 invert' : ''
           }`}
         />
         {currentItem.sectionLabel && (
           <>
-            <span className={`text-[11px] ${isDarkBg ? 'text-white/20' : 'text-[var(--color-border)]'}`}>|</span>
-            <span className={`text-[11px] font-bold uppercase tracking-[0.12em] ${
+            <span className={`text-[14px] ${isDarkBg ? 'text-white/20' : 'text-[var(--color-border)]'}`}>|</span>
+            <span className={`text-[14px] font-bold uppercase tracking-[0.12em] ${
               isDarkBg ? 'text-[var(--color-cloud-light)]' : 'text-[var(--color-accent)]'
             }`}>
               {currentItem.sectionLabel}
@@ -185,7 +185,7 @@ export default function PresentationDeck({ sections, onSlideChange, onNavReady }
           className="animate-in fade-in duration-300 pointer-events-auto"
           style={{
             transformOrigin: 'center center',
-            padding: '24px 48px',
+            padding: '16px 32px',
           }}
         >
           {fullscreenRenderers[currentItem.slide.layout]?.(currentItem.slide, { isDarkBg })}
