@@ -23,21 +23,21 @@ export default function TierTransitionSlide({ label, supporting, fullscreen }) {
   }, [label])
 
   return (
-    <div className="flex flex-col items-center justify-center text-center max-w-[700px] mx-auto px-8">
+    <div className="flex flex-col items-center justify-center text-center max-w-[900px] mx-auto px-8">
       <p
         ref={labelRef}
-        className="text-[13px] font-bold uppercase tracking-[0.15em] text-[var(--color-cloud-light)] mb-4"
+        className="text-[15px] font-bold uppercase tracking-[0.15em] text-[var(--color-cloud-light)] mb-5"
       >
         Next Section
       </p>
       <h2
         ref={labelRef}
-        className="text-[54px] font-bold text-white tracking-[-0.03em] mb-4"
+        className="text-[64px] font-bold text-white tracking-[-0.03em] mb-5"
       >
         {label}
       </h2>
       {supporting && (
-        <p ref={supportRef} className="text-[20px] text-white/60 leading-relaxed">
+        <p ref={supportRef} className="text-[24px] text-white/60 leading-relaxed">
           {supporting}
         </p>
       )}

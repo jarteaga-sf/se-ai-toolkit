@@ -19,8 +19,8 @@ export default function IconBulletsSlide({ title, bullets, fullscreen }) {
   const cols = bullets.length === 4 ? 'grid-cols-2 sm:grid-cols-4' : 'grid-cols-3'
 
   return (
-    <div className="max-w-[900px] mx-auto px-8">
-      <h2 className="text-[32px] font-bold text-[var(--color-heading)] tracking-[-0.02em] text-center mb-8">
+    <div className="max-w-[1060px] mx-auto px-8">
+      <h2 className="text-[38px] font-bold text-[var(--color-heading)] tracking-[-0.02em] text-center mb-10">
         {title}
       </h2>
       <div className={`grid ${cols} gap-6 items-stretch`}>
@@ -51,10 +51,10 @@ export default function IconBulletsSlide({ title, bullets, fullscreen }) {
                 </div>
               ) : null}
 
-              <h3 className="text-[16px] font-bold text-[var(--color-heading)] mb-2">
+              <h3 className="text-[18px] font-bold text-[var(--color-heading)] mb-2">
                 {bullet.title}
               </h3>
-              <p className="text-[14px] text-[var(--color-text-secondary)] leading-relaxed">
+              <p className="text-[16px] text-[var(--color-text-secondary)] leading-relaxed">
                 {bullet.description}
               </p>
             </div>
