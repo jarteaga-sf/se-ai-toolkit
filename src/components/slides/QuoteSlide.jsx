@@ -29,7 +29,7 @@ export default function QuoteSlide({ quote, attribution, context, fullscreen }) 
         </p>
       )}
       <blockquote ref={quoteRef} className="relative">
-        <span className="absolute -top-8 -left-5 text-[88px] leading-none text-[var(--color-accent)]/15 font-serif select-none">
+        <span className="absolute -top-6 -left-4 text-[64px] leading-none text-[var(--color-accent)]/15 font-serif select-none">
           &ldquo;
         </span>
         <p className="text-[38px] leading-[1.35] font-bold text-[var(--color-heading)] tracking-[-0.02em]">

@@ -76,10 +76,10 @@ export default function BigStatSlide({ value, label, source, fullscreen }) {
 
   return (
     <div ref={containerRef} className="flex flex-col items-center justify-center text-center max-w-[900px] mx-auto px-8">
-      <p className="stat-value text-[120px] font-bold text-[var(--color-accent)] leading-[1] tracking-[-0.04em] mb-8">
+      <p className="stat-value text-[80px] font-bold text-[var(--color-accent)] leading-[1] tracking-[-0.04em] mb-6">
         {displayValue}
       </p>
-      <p className="stat-label text-[28px] text-[var(--color-text-secondary)] leading-snug max-w-[640px] mb-6">
+      <p className="stat-label text-[24px] text-[var(--color-text-secondary)] leading-snug max-w-[640px] mb-5">
         {label}
       </p>
       {source && (
