@@ -94,8 +94,8 @@ export default function PresentationDeck({ sections, onSlideChange, onNavReady }
     if (!stage || !content) return
 
     const recalc = () => {
-      // Measure at scale(1) without causing a visible flash
-      content.style.visibility = 'hidden'
+      // Measure at scale(1) — use opacity:0 so child CSS animations aren't skipped
+      content.style.opacity = '0'
       content.style.transform = 'scale(1)'
       const contentW = content.scrollWidth
       const contentH = content.scrollHeight
@@ -105,7 +105,7 @@ export default function PresentationDeck({ sections, onSlideChange, onNavReady }
       const s = Math.min(availW / contentW, availH / contentH, 2.0)
       const clamped = Math.max(0.4, s)
       content.style.transform = `scale(${clamped})`
-      content.style.visibility = ''
+      content.style.opacity = ''
       setScale(clamped)
     }
 
