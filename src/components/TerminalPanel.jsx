@@ -102,7 +102,7 @@ function TerminalLine({ step, visible }) {
   return <div className="leading-relaxed">{renderContent()}</div>
 }
 
-export default function TerminalPanel({ title, steps, expandable = false }) {
+export default function TerminalPanel({ title, steps, expandable = false, fullscreen = false }) {
   const { ref, hasIntersected } = useIntersectionObserver()
   const [visibleLines, setVisibleLines] = useState(0)
   const [expanded, setExpanded] = useState(false)
@@ -138,7 +138,7 @@ export default function TerminalPanel({ title, steps, expandable = false }) {
   }
 
   return (
-    <div ref={ref} className="rounded-xl bg-[var(--color-terminal-bg)] border border-[#2D2D2D] overflow-hidden my-8 shadow-lg">
+    <div ref={ref} className={`rounded-xl bg-[var(--color-terminal-bg)] border border-[#2D2D2D] overflow-hidden shadow-lg ${fullscreen ? '' : 'my-8'}`}>
       <div className="flex items-center justify-between px-4 py-2.5 bg-[#181818] border-b border-[#2D2D2D]">
         <div className="flex items-center gap-2">
           <div className="flex gap-1.5">

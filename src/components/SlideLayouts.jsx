@@ -2,9 +2,31 @@ import { useEffect, useRef } from 'react'
 import { Zap, Search, MessageSquare, PenLine, Film, Wand2, Bot, Unlock, FileText, Terminal, Download, Shield, Puzzle, LogIn, FolderPlus, CheckCircle, Globe, ArrowRight, ArrowDown, X, Sparkles, TrendingUp, BookOpen, Users, Layers } from 'lucide-react'
 import gsap from 'gsap'
 import ToolCards from './ToolCards'
+import HabitCards from './HabitCards'
+import StepFlow from './StepFlow'
+import TerminalPanel from './TerminalPanel'
+import FeatureCards from './FeatureCards'
+import DecisionFlow from './DecisionFlow'
+import QuickReference from './QuickReference'
+import { ClaudeLogo, CursorLogo, SaleoLogo, MeshMeshLogo } from './ToolLogos'
 import { VibeCodingIllustration, AgentIllustration, FunnelIllustration } from './ConceptIllustrations'
 
 export const iconMap = { Zap, Search, MessageSquare, PenLine, Film, Wand2, Bot, Unlock, FileText, Terminal, Download, Shield, Puzzle, LogIn, FolderPlus, CheckCircle, Globe, TrendingUp }
+
+// ── Tool accent colors & logo map ─────────────────────────────────────────
+const toolAccents = {
+  saleo: '#8402AD',
+  meshmesh: '#0176D3',
+  cursor: '#06A59A',
+  'claude-code': '#066AFE',
+}
+
+const toolLogoMap = {
+  saleo: SaleoLogo,
+  meshmesh: MeshMeshLogo,
+  cursor: CursorLogo,
+  'claude-code': ClaudeLogo,
+}
 
 // --- Mini UI visuals for the "What this unlocks" slide ---
 
@@ -417,8 +439,331 @@ export function SpectrumSplitSlide({ title, message, fullscreen }) {
   )
 }
 
+// ── NEW LAYOUTS: Tool Slides ──────────────────────────────────────────────
+
+/**
+ * Tool Intro — hero slide for each tool with logo, title, subtitle, lead paragraph.
+ */
+export function ToolIntroSlide({ toolId, title, subtitle, leadParagraph, fullscreen }) {
+  const accent = toolAccents[toolId] || 'var(--color-accent)'
+  const Logo = toolLogoMap[toolId]
+  const containerRef = useRef(null)
+
+  useEffect(() => {
+    const el = containerRef.current
+    if (!el) return
+    const children = el.querySelectorAll('.tool-intro-anim')
+    gsap.fromTo(children,
+      { opacity: 0, y: 20 },
+      { opacity: 1, y: 0, duration: 0.5, stagger: 0.12, ease: 'power2.out', delay: 0.1 }
+    )
+  }, [toolId])
+
+  return (
+    <div ref={containerRef} className="flex flex-col items-center justify-center text-center px-6 py-6 h-full">
+      {Logo && (
+        <div className="tool-intro-anim mb-6">
+          <Logo size={fullscreen ? 72 : 56} />
+        </div>
+      )}
+      <h2 className={`tool-intro-anim font-bold text-[var(--color-heading)] leading-tight tracking-tight ${
+        fullscreen ? 'text-[44px] md:text-[56px]' : 'text-[32px] md:text-[40px]'
+      }`}>{title}</h2>
+      {subtitle && (
+        <p className={`tool-intro-anim mt-3 font-medium ${
+          fullscreen ? 'text-[22px] md:text-[26px] max-w-[640px]' : 'text-[18px] md:text-[20px] max-w-[480px]'
+        }`} style={{ color: accent }}>{subtitle}</p>
+      )}
+      {leadParagraph && (
+        <p className={`tool-intro-anim mt-6 text-[var(--color-text-secondary)] leading-relaxed max-w-[560px] ${
+          fullscreen ? 'text-[19px] md:text-[21px] max-w-[680px]' : 'text-[16px] md:text-[17px]'
+        }`}>{leadParagraph}</p>
+      )}
+      <div className="tool-intro-anim mt-8 rounded-full h-1" style={{ width: 64, backgroundColor: accent }} />
+    </div>
+  )
+}
+
+/**
+ * Tool Content — prose paragraphs + optional quote + terminal/features.
+ */
+function RichText({ text }) {
+  const parts = text.split(/(\*\*.*?\*\*|`[^`]+`)/g)
+  return parts.map((part, i) => {
+    if (part.startsWith('**') && part.endsWith('**')) {
+      return <strong key={i} className="font-semibold text-[var(--color-text)]">{part.slice(2, -2)}</strong>
+    }
+    if (part.startsWith('`') && part.endsWith('`')) {
+      return <code key={i} className="font-[var(--font-mono)] text-[0.9em] bg-[var(--color-border-light)] px-1.5 py-0.5 rounded">{part.slice(1, -1)}</code>
+    }
+    return part
+  })
+}
+
+export function ToolContentSlide({ toolId, title, prose, quote, terminal, features, stepFlow, fullscreen }) {
+  return (
+    <div className="flex flex-col items-center justify-center h-full px-6 py-4 overflow-hidden">
+      <div className={`w-full ${fullscreen ? 'max-w-[860px]' : 'max-w-[640px]'}`}>
+        {/* Prose */}
+        {prose && prose.length > 0 && (
+          <div className={`space-y-4 mb-6 ${fullscreen ? 'text-[18px]' : 'text-[15px]'} text-[var(--color-text-prose)] leading-[1.7]`}>
+            {prose.slice(0, 2).map((p, i) => (
+              <p key={i}><RichText text={p} /></p>
+            ))}
+          </div>
+        )}
+        {/* Quote */}
+        {quote && (
+          <div className="border-l-3 border-[var(--color-accent)] bg-[var(--color-surface)] rounded-r-xl px-5 py-4 mb-6">
+            <p className={`italic text-[var(--color-text-secondary)] leading-relaxed ${
+              fullscreen ? 'text-[17px]' : 'text-[14px]'
+            }`}>"{quote}"</p>
+          </div>
+        )}
+        {/* Terminal */}
+        {terminal && (
+          <div className="max-h-[280px] overflow-hidden">
+            <TerminalPanel title={terminal.title} steps={terminal.steps.slice(0, 6)} />
+          </div>
+        )}
+        {/* Features */}
+        {features && (
+          <div className="max-h-[260px] overflow-hidden">
+            <FeatureCards features={features.slice(0, 3)} />
+          </div>
+        )}
+      </div>
+    </div>
+  )
+}
+
+/**
+ * Tool Getting Started — step flow + optional secondary flow.
+ */
+export function ToolGettingStartedSlide({ toolId, title, prose, stepFlow, terminal, stepFlowSecondary, fullscreen }) {
+  const accent = toolAccents[toolId] || 'var(--color-accent)'
+  return (
+    <div className="flex flex-col items-center justify-center h-full px-6 py-4 overflow-hidden">
+      <p className={`font-bold text-center mb-2 ${
+        fullscreen ? 'text-[14px]' : 'text-[12px]'
+      }`} style={{ color: accent }}>GETTING STARTED</p>
+      <h3 className={`font-bold text-[var(--color-heading)] text-center mb-6 ${
+        fullscreen ? 'text-[28px] md:text-[34px]' : 'text-[22px] md:text-[26px]'
+      }`}>{title}</h3>
+      <div className={`w-full ${fullscreen ? 'max-w-[760px]' : 'max-w-[560px]'}`}>
+        {prose && prose.length > 0 && (
+          <p className={`text-[var(--color-text-secondary)] leading-relaxed mb-5 text-center ${
+            fullscreen ? 'text-[17px]' : 'text-[15px]'
+          }`}><RichText text={prose[0]} /></p>
+        )}
+        {stepFlow && <StepFlow stepFlow={stepFlow} />}
+        {terminal && (
+          <div className="max-h-[200px] overflow-hidden mt-4">
+            <TerminalPanel title={terminal.title} steps={terminal.steps.slice(0, 5)} />
+          </div>
+        )}
+      </div>
+    </div>
+  )
+}
+
+/**
+ * Habit Cards slide — fullscreen grid of best practice cards.
+ */
+export function HabitCardsSlide({ toolId, title, cards, fullscreen }) {
+  return (
+    <div className="flex flex-col items-center justify-center h-full px-6 py-4 overflow-hidden">
+      {title && (
+        <h3 className={`font-bold text-[var(--color-heading)] text-center mb-6 ${
+          fullscreen ? 'text-[26px] md:text-[32px]' : 'text-[20px] md:text-[24px]'
+        }`}>{title}</h3>
+      )}
+      <div className={`w-full ${fullscreen ? 'max-w-[900px]' : 'max-w-[640px]'}`}>
+        <HabitCards cards={cards} fullscreen />
+      </div>
+    </div>
+  )
+}
+
+// ── NEW LAYOUTS: Use Cases ────────────────────────────────────────────────
+
+/**
+ * Use Case Cards — tool name header + habit cards grid.
+ */
+export function UseCaseCardsSlide({ toolName, cards, fullscreen }) {
+  return (
+    <div className="flex flex-col items-center justify-center h-full px-6 py-4 overflow-hidden">
+      <p className={`uppercase tracking-[0.12em] font-bold text-[var(--color-accent)] mb-2 ${
+        fullscreen ? 'text-[14px]' : 'text-[12px]'
+      }`}>Use Cases</p>
+      <h3 className={`font-bold text-[var(--color-heading)] text-center mb-6 ${
+        fullscreen ? 'text-[28px] md:text-[34px]' : 'text-[22px] md:text-[26px]'
+      }`}>{toolName}</h3>
+      <div className={`w-full ${fullscreen ? 'max-w-[900px]' : 'max-w-[640px]'}`}>
+        <HabitCards cards={cards} fullscreen />
+      </div>
+    </div>
+  )
+}
+
+// ── NEW LAYOUTS: Level Up ─────────────────────────────────────────────────
+
+/**
+ * Level Up Topic — title + condensed prose + habit cards.
+ */
+export function LevelUpTopicSlide({ title, prose, cards, takeaway, fullscreen }) {
+  return (
+    <div className="flex flex-col items-center justify-center h-full px-6 py-4 overflow-hidden">
+      <p className={`uppercase tracking-[0.12em] font-bold text-[var(--color-accent)] mb-2 ${
+        fullscreen ? 'text-[14px]' : 'text-[12px]'
+      }`}>Level Up</p>
+      <h3 className={`font-bold text-[var(--color-heading)] text-center mb-4 ${
+        fullscreen ? 'text-[28px] md:text-[34px]' : 'text-[22px] md:text-[26px]'
+      }`}>{title}</h3>
+      {prose && prose.length > 0 && (
+        <p className={`text-[var(--color-text-secondary)] leading-relaxed text-center mb-5 ${
+          fullscreen ? 'text-[17px] max-w-[640px]' : 'text-[15px] max-w-[480px]'
+        }`}><RichText text={prose[0]} /></p>
+      )}
+      {cards && cards.length > 0 && (
+        <div className={`w-full ${fullscreen ? 'max-w-[900px]' : 'max-w-[640px]'}`}>
+          <HabitCards cards={cards} fullscreen />
+        </div>
+      )}
+    </div>
+  )
+}
+
+// ── NEW LAYOUTS: Tier Transition ──────────────────────────────────────────
+
+/**
+ * Tier Transition — big centered tier name with gradient accent.
+ */
+export function TierTransitionSlide({ label, supporting, fullscreen }) {
+  const containerRef = useRef(null)
+
+  useEffect(() => {
+    const el = containerRef.current
+    if (!el) return
+    gsap.fromTo(el.querySelector('.tier-label'),
+      { opacity: 0, y: 30, scale: 0.95 },
+      { opacity: 1, y: 0, scale: 1, duration: 0.7, ease: 'power3.out', delay: 0.1 }
+    )
+    gsap.fromTo(el.querySelector('.tier-line'),
+      { scaleX: 0 },
+      { scaleX: 1, duration: 0.5, ease: 'power2.out', delay: 0.4 }
+    )
+    if (el.querySelector('.tier-supporting')) {
+      gsap.fromTo(el.querySelector('.tier-supporting'),
+        { opacity: 0 },
+        { opacity: 1, duration: 0.5, delay: 0.6, ease: 'power2.out' }
+      )
+    }
+  }, [label])
+
+  return (
+    <div ref={containerRef} className="flex flex-col items-center justify-center text-center px-6 py-6 h-full">
+      <div className="tier-line w-20 h-1 rounded-full bg-gradient-to-r from-[var(--color-accent)] to-[var(--color-cloud)] mb-8" />
+      <h2 className={`tier-label font-bold text-white leading-tight tracking-tight ${
+        fullscreen ? 'text-[48px] md:text-[64px]' : 'text-[36px] md:text-[48px]'
+      }`}>{label}</h2>
+      {supporting && (
+        <p className={`tier-supporting mt-6 text-[var(--color-cloud-light)] leading-relaxed max-w-[480px] ${
+          fullscreen ? 'text-[20px] md:text-[22px] max-w-[600px]' : 'text-[16px] md:text-[18px]'
+        }`}>{supporting}</p>
+      )}
+    </div>
+  )
+}
+
+// ── NEW LAYOUTS: Quick Reference ──────────────────────────────────────────
+
+/**
+ * Cheat Sheet Matrix — scenario/tool table.
+ */
+export function CheatSheetMatrixSlide({ toolMatrix, title, fullscreen }) {
+  return (
+    <div className="flex flex-col items-center justify-center h-full px-6 py-4 overflow-hidden">
+      <p className={`uppercase tracking-[0.12em] font-bold text-[var(--color-accent)] mb-2 ${
+        fullscreen ? 'text-[14px]' : 'text-[12px]'
+      }`}>Cheat Sheet</p>
+      <h3 className={`font-bold text-[var(--color-heading)] text-center mb-6 ${
+        fullscreen ? 'text-[28px] md:text-[34px]' : 'text-[22px] md:text-[26px]'
+      }`}>{title}</h3>
+      <div className={`w-full rounded-xl overflow-hidden border border-[var(--color-border)]/60 ${
+        fullscreen ? 'max-w-[720px]' : 'max-w-[540px]'
+      }`}>
+        <table className={`w-full ${fullscreen ? 'text-[16px]' : 'text-[14px]'}`}>
+          <thead>
+            <tr className="bg-[var(--color-surface)]">
+              <th className="text-left px-4 py-2.5 font-bold text-[var(--color-heading)]">Scenario</th>
+              <th className="text-left px-4 py-2.5 font-bold text-[var(--color-heading)] whitespace-nowrap">Reach for</th>
+            </tr>
+          </thead>
+          <tbody>
+            {toolMatrix.map((row, i) => (
+              <tr key={i} className={`border-t border-[var(--color-border)]/40 ${i % 2 === 1 ? 'bg-[var(--color-surface)]/50' : ''}`}>
+                <td className="px-4 py-2.5 text-[var(--color-text-secondary)]">{row.scenario}</td>
+                <td className="px-4 py-2.5 font-bold text-[var(--color-accent)] whitespace-nowrap">{row.tool}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  )
+}
+
+/**
+ * Decision Flow slide — interactive tool selector.
+ */
+export function DecisionFlowSlide({ title, fullscreen }) {
+  return (
+    <div className="flex flex-col items-center justify-center h-full px-6 py-4 overflow-hidden">
+      <div className={`w-full ${fullscreen ? 'max-w-[560px]' : 'max-w-[480px]'}`}>
+        <DecisionFlow />
+      </div>
+    </div>
+  )
+}
+
+/**
+ * Contest CTA slide — gradient background call-to-action.
+ */
+export function ContestCtaSlide({ contest, takeaway, fullscreen }) {
+  return (
+    <div className="flex flex-col items-center justify-center text-center px-6 py-6 h-full">
+      {contest && (
+        <div className="rounded-2xl bg-gradient-to-br from-[var(--color-heading)] to-[#032D60] p-8 md:p-10 max-w-[600px] w-full">
+          <div className="flex items-center justify-center gap-2 mb-4">
+            <Sparkles size={22} className="text-[var(--color-yellow)]" />
+            <h3 className={`font-bold text-white ${
+              fullscreen ? 'text-[26px] md:text-[30px]' : 'text-[22px] md:text-[24px]'
+            }`}>{contest.title}</h3>
+            <Sparkles size={22} className="text-[var(--color-yellow)]" />
+          </div>
+          <p className={`text-[var(--color-cloud-light)] leading-relaxed mb-6 max-w-[440px] mx-auto ${
+            fullscreen ? 'text-[18px]' : 'text-[16px]'
+          }`}>{contest.description}</p>
+          <button className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-[var(--color-accent)] text-white font-bold text-[15px] hover:bg-[var(--color-electric)] transition-colors cursor-pointer shadow-lg shadow-[var(--color-accent)]/25">
+            {contest.cta}
+          </button>
+        </div>
+      )}
+      {takeaway && (
+        <p className={`mt-8 text-[var(--color-text-muted)] font-medium italic max-w-[480px] ${
+          fullscreen ? 'text-[17px]' : 'text-[15px]'
+        }`}>{takeaway}</p>
+      )}
+    </div>
+  )
+}
+
+// ── Slide renderer factory ────────────────────────────────────────────────
+
 export function createSlideRenderers(fullscreen = false) {
   return {
+    // Existing Big Picture layouts
     quote: (slide, opts) => <QuoteSlide {...slide} fullscreen={fullscreen} />,
     comparison: (slide, opts) => <ComparisonSlide {...slide} fullscreen={fullscreen} />,
     statement: (slide, opts) => <StatementSlide {...slide} fullscreen={fullscreen} isDarkBg={opts?.isDarkBg} />,
@@ -428,5 +773,25 @@ export function createSlideRenderers(fullscreen = false) {
     statCallout: (slide, opts) => <StatCalloutSlide {...slide} fullscreen={fullscreen} />,
     illustratedConcept: (slide, opts) => <IllustratedConceptSlide {...slide} fullscreen={fullscreen} />,
     spectrumSplit: (slide, opts) => <SpectrumSplitSlide {...slide} fullscreen={fullscreen} />,
+
+    // New Tool layouts
+    toolIntro: (slide, opts) => <ToolIntroSlide {...slide} fullscreen={fullscreen} />,
+    toolContent: (slide, opts) => <ToolContentSlide {...slide} fullscreen={fullscreen} />,
+    toolGettingStarted: (slide, opts) => <ToolGettingStartedSlide {...slide} fullscreen={fullscreen} />,
+    habitCardsSlide: (slide, opts) => <HabitCardsSlide {...slide} fullscreen={fullscreen} />,
+
+    // Use Cases
+    useCaseCards: (slide, opts) => <UseCaseCardsSlide {...slide} fullscreen={fullscreen} />,
+
+    // Level Up
+    levelUpTopic: (slide, opts) => <LevelUpTopicSlide {...slide} fullscreen={fullscreen} />,
+
+    // Tier transitions
+    tierTransition: (slide, opts) => <TierTransitionSlide {...slide} fullscreen={fullscreen} />,
+
+    // Quick Reference
+    cheatSheetMatrix: (slide, opts) => <CheatSheetMatrixSlide {...slide} fullscreen={fullscreen} />,
+    decisionFlowSlide: (slide, opts) => <DecisionFlowSlide {...slide} fullscreen={fullscreen} />,
+    contestCta: (slide, opts) => <ContestCtaSlide {...slide} fullscreen={fullscreen} />,
   }
 }

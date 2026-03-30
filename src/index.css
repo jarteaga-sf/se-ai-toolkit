@@ -61,6 +61,8 @@
   html {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    height: 100vh;
+    overflow: hidden;
   }
 
   body {
@@ -71,6 +73,8 @@
     color: var(--color-text);
     margin: 0;
     line-height: 1.65;
+    height: 100vh;
+    overflow: hidden;
   }
 
   h1, h2 {

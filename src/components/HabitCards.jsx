@@ -30,7 +30,7 @@ const iconMap = {
   Terminal,
 }
 
-export default function HabitCards({ cards }) {
+export default function HabitCards({ cards, fullscreen = false }) {
   const containerRef = useRef(null)
 
   useEffect(() => {
@@ -41,6 +41,19 @@ export default function HabitCards({ cards }) {
     if (!items.length) return
 
     gsap.set(items, { y: 24, opacity: 0 })
+
+    if (fullscreen) {
+      // In fullscreen/slide mode, animate immediately on mount
+      gsap.to(items, {
+        y: 0,
+        opacity: 1,
+        duration: 0.5,
+        stagger: 0.08,
+        ease: 'power2.out',
+        delay: 0.15,
+      })
+      return
+    }
 
     const trigger = ScrollTrigger.create({
       trigger: container,
@@ -58,10 +71,10 @@ export default function HabitCards({ cards }) {
     })
 
     return () => trigger.kill()
-  }, [cards])
+  }, [cards, fullscreen])
 
   return (
-    <div ref={containerRef} className="grid sm:grid-cols-2 gap-4 my-8">
+    <div ref={containerRef} className={`grid sm:grid-cols-2 gap-4 ${fullscreen ? '' : 'my-8'}`}>
       {cards.map((card, i) => {
         const Icon = iconMap[card.icon]
         return (

@@ -1,6 +1,6 @@
-export default function FeatureCards({ features }) {
+export default function FeatureCards({ features, fullscreen = false }) {
   return (
-    <div className="space-y-3 my-8">
+    <div className={`space-y-3 ${fullscreen ? '' : 'my-8'}`}>
       {features.map((feature, i) => (
         <div
           key={i}
