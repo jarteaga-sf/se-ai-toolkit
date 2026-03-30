@@ -7,7 +7,7 @@
   --font-mono: 'IBM Plex Mono', ui-monospace, Consolas, monospace;
 
   /* Core Salesforce palette */
-  --color-bg: #CFE9FE;
+  --color-bg: #E8F4FD;
   --color-bg-white: #FFFFFF;
   --color-bg-sidebar: #F0F7FF;
   --color-text: #181818;
@@ -16,10 +16,10 @@
   --color-text-muted: #747474;
   --color-accent: #0176D3;
   --color-accent-hover: #014486;
-  --color-heading: #001E5B;
+  --color-heading: #032D60;
   --color-border: #D4E5F7;
   --color-border-light: #EAF5FE;
-  --color-header-bg: #001E5B;
+  --color-header-bg: #032D60;
 
   /* Extended Salesforce accents */
   --color-electric: #066AFE;
@@ -34,6 +34,10 @@
   --color-pink: #FF538A;
   --color-yellow: #FCC003;
   --color-error: #B60554;
+
+  /* Glass effects */
+  --color-glass: rgba(3, 45, 96, 0.75);
+  --color-glass-light: rgba(255, 255, 255, 0.1);
 
   /* Terminal (stays dark) */
   --color-terminal-bg: #1E1E1E;
@@ -52,9 +56,9 @@
   --color-diff-remove: #F4474740;
 
   /* Shadows -- Salesforce style */
-  --shadow-soft: 0 4px 20px rgba(0, 30, 91, 0.08);
-  --shadow-card: 0 1px 4px rgba(0, 30, 91, 0.04), 0 4px 16px rgba(0, 30, 91, 0.04);
-  --shadow-card-hover: 0 12px 40px rgba(0, 30, 91, 0.1);
+  --shadow-soft: 0 4px 20px rgba(3, 45, 96, 0.08);
+  --shadow-card: 0 1px 4px rgba(3, 45, 96, 0.04), 0 4px 16px rgba(3, 45, 96, 0.04);
+  --shadow-card-hover: 0 12px 40px rgba(3, 45, 96, 0.1);
 }
 
 @layer base {

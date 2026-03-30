@@ -1,123 +1,192 @@
-export const vibeCoding = {
-  id: 'vibe-coding',
-  label: 'The Big Picture',
-  title: 'What',
-  subtitle: 'The industry is changing. SEs need to be part of it.',
+// ── Section 1: The Why — live presentation (5 slides) ────────────────────
+// Establishes context, names the phenomenon, makes it personal.
+// Presenter spends ~5 minutes here before transitioning to the tools.
+
+export const theWhy = {
+  id: 'the-why',
+  tier: 'big-picture',
+  tierLabel: 'The Big Picture',
+  title: 'The Why',
   slides: [
-    {
-      layout: 'illustratedConcept',
-      title: 'What is Vibe Coding?',
-      subtitle: 'You describe what you want in plain English. AI writes the code. It\'s not about coding skill -- it\'s about communication skill.',
-      message: 'If you can describe what a customer needs, you can build it.',
-      illustration: 'vibeCoding',
-    },
-    {
-      layout: 'illustratedConcept',
-      title: 'What Are Agents?',
-      subtitle: 'A digital worker that follows instructions, uses tools, and handles tasks end-to-end. Agentforce agents are Salesforce-native -- grounded in your data.',
-      message: 'Digital teammates. Not chatbots.',
-      illustration: 'agent',
-    },
+    // Agenda — orient the audience before the hook.
     {
       layout: 'iconBullets',
-      title: 'Skills, Sub-Agents & Context',
+      title: "Today's agenda",
       bullets: [
-        { icon: 'Zap', title: 'Skills', description: 'Pre-loaded expertise. Like hiring someone already trained for the job.' },
-        { icon: 'Bot', title: 'Sub-Agents', description: 'Agents that delegate to other agents. A team lead assigning tasks to specialists.' },
-        { icon: 'FileText', title: 'Context', description: 'The more the tool knows about your project, the better it performs. A short setup doc goes a long way.' },
+        { icon: 'TrendingUp', title: 'Why it matters', description: 'What AI is changing for buyers and SEs.' },
+        { icon: 'Layers', title: 'The four tools', description: 'What each does and when to reach for it.' },
+        { icon: 'Play', title: 'Cursor in action', description: 'Live walkthrough — getting started today.' },
+        { icon: 'Calendar', title: "What's coming", description: 'Upcoming deep-dive sessions for each tool.' },
       ],
     },
+
+    // Hook. No supporting text on screen. Presenter speaks the 57% stat.
+    {
+      layout: 'cinematic',
+      statement: 'Your buyers did their homework.',
+    },
+
+    // The number that proves it. One stat. Let it land.
+    {
+      layout: 'bigStat',
+      value: '57%',
+      label: 'Through their decision before the first call',
+      source: 'CEB / Gartner',
+    },
+
+    // The origin story. Karpathy names the thing.
     {
       layout: 'quote',
-      quote: 'Customers expect tailored demos, fast POCs, and solutions that fit their business. AI tools let any SE deliver that.',
-      attribution: 'You don\'t need to be a developer. You need to know what your customer needs.',
+      context: 'OpenAI co-founder. Former head of AI at Tesla.',
+      quote: 'You fully give in to the vibes, embrace exponentials, and forget that the code even exists.',
+      attribution: 'Andrej Karpathy, coining "vibe coding" — February 2025',
     },
+
+    // Define the concept. Covers thinking, designing, and building — not just building.
     {
-      layout: 'comparison',
-      left: { icon: 'PenLine', label: 'Manual Everything', description: 'Every demo, every tweak, every build -- done by hand, one at a time.' },
-      right: { icon: 'Wand2', label: 'Directing Outcomes', description: 'You describe what the customer needs. The tool builds it.' },
-      connector: '\u2192',
+      layout: 'illustratedConcept',
+      title: 'Vibe Coding',
+      subtitle: 'You describe the outcome. AI handles the implementation.',
+      message: 'Describe the problem. Think through the solution. Build the proof.',
+      illustration: 'vibeCoding',
     },
+
+    // Make it personal. Thinking-first. Building is the third bullet, not the only angle.
+    // Presenter tells the 60-second deck story verbally on bullet 3.
     {
       layout: 'iconBullets',
-      title: 'What this unlocks for SEs',
+      title: 'Most of the value is in the thinking',
       bullets: [
-        { visual: 'speed', title: 'Speed', description: 'Deliver a tailored POC before the next call -- not next quarter.' },
-        { visual: 'credibility', title: 'Credibility', description: "Walk into a prospect's world with a demo built for their business." },
-        { visual: 'independence', title: 'Independence', description: 'If you can describe what the customer needs, you can make it real.' },
+        { icon: 'Search', title: "New to a customer's world", description: "30 minutes of context. Sound like you've been there." },
+        { icon: 'MessageSquare', title: 'Prepping for a hard call', description: "Walk through the questions before they're asked." },
+        { icon: 'Zap', title: "When it's time to build", description: 'Describe it. It handles the rest.' },
       ],
-    },
-    {
-      layout: 'statCallout',
-      stats: [
-        { value: '73%', label: 'of SEs say AI tools save 5+ hrs/week', source: 'Salesforce Internal Survey, 2025' },
-        { value: '4x', label: 'faster POC delivery with AI-assisted building', source: 'SE Productivity Report' },
-        { value: '60%', label: 'of top performers already use AI daily', source: 'Gartner, 2025' },
-      ],
-    },
-    {
-      layout: 'statement',
-      statement: 'Agentforce is the biggest bet we have. SEs who can build and demo agents drive customer activation.',
-      supporting: 'These tools turn every SE into someone who can stand up a working agent -- not in weeks, but in a single session.',
-    },
-    {
-      layout: 'takeaway',
-      text: "You don't need to write code. You need to **describe what your customer needs clearly enough** that the tool can build it.",
     },
   ],
 }
 
-export const whySesCare = {
-  id: 'why-ses-care',
-  label: 'The Big Picture',
-  title: 'How',
-  subtitle: 'Four tools. Different strengths. All worth knowing.',
+// ── Section 2: The Tools — live presentation (8 slides) ──────────────────
+// Concrete, immediate, tactical. Tools appear early so every subsequent
+// stat and proof point connects to something the audience has already seen.
+// Last slide (takeaway) is the explicit bridge to the live Cursor demo.
+
+export const theTools = {
+  id: 'the-tools',
+  tier: 'big-picture',
+  tierLabel: 'The Big Picture',
+  title: 'The Tools',
   slides: [
+    // Frame the difference upfront. No supporting text — presenter speaks it.
     {
       layout: 'statement',
-      statement: 'Three rockets. One running shoe.',
-      supporting: 'Some tools give you 10-100x productivity. One gives you 20-30%. All are worth knowing.',
+      statement: 'One changes how fast you demo. The others change what you can build.',
     },
-    {
-      layout: 'toolCards',
-      cards: [
-        { name: 'Saleo', tagline: 'Their data. Your demo. No code.', bestFor: 'Personalize any demo to any prospect\'s industry in minutes. Your org stays clean.', role: 'Customer Demo Layer', setup: 'easy', logo: 'saleo' },
-        { name: 'MeshMesh', tagline: 'Built for Salesforce. Knows the platform.', bestFor: 'Built a six-week POC in 1.5 hours. Cut demo guide prep by 98.95% -- from 2 days to 30 minutes.', role: 'Salesforce-Native Builder', setup: 'moderate', logo: 'meshmesh' },
-        { name: 'Cursor', tagline: 'Your editor, supercharged with AI.', bestFor: 'Cut custom demo prep from hours to minutes with built-in AI assistance.', role: 'Smart Editor', setup: 'moderate', logo: 'cursor' },
-        { name: 'Claude Code', tagline: 'You describe. It builds.', bestFor: 'One SE built a full Agentforce agent -- 4 conversation topics, 500+ tests -- in about an hour.', role: 'Autonomous Builder', setup: 'advanced', logo: 'claude' },
-      ],
-    },
-    {
-      layout: 'spectrumSplit',
-      title: 'Which Tool Is for You?',
-      message: 'Start with Saleo for every opportunity. Reach for MeshMesh when it\'s time to build. Use Cursor and Claude Code to push further.',
-    },
-    {
-      layout: 'statement',
-      statement: 'The best AI tools for Salesforce are built for Salesforce.',
-      supporting: 'MeshMesh connects directly to Salesforce metadata. It understands objects, flows, and Agentforce patterns natively. The LLM is just the engine -- Salesforce is the brain.',
-    },
-    {
-      layout: 'statCallout',
-      stats: [
-        { value: '98.95%', label: 'reduction in demo guide prep time', source: 'MeshMesh case study' },
-        { value: '6 wks → 1.5 hrs', label: 'POC build time with AI tools', source: 'SE field report' },
-        { value: '10-100x', label: 'productivity multiplier for Salesforce-native tools', source: 'Internal benchmarking' },
-      ],
-    },
+
+    // Which tool for what. Each named and differentiated.
+    // Cursor vs Claude Code is intentionally distinct.
     {
       layout: 'iconBullets',
-      title: 'What makes these tools click',
+      title: 'Which one do you reach for?',
       bullets: [
-        { icon: 'Bot', title: 'Describe, Don\'t Build', description: 'Tell the tool what you want. It figures out the steps, does the work, and checks itself.' },
-        { icon: 'FileText', title: 'Context is Everything', description: 'The more the tool knows about your project, the better the output. A short setup doc goes a long way.' },
-        { icon: 'Search', title: 'Your SE Knowledge Is the Edge', description: 'These tools are fast, but they don\'t know your customer. Your domain expertise is what makes the output great.' },
-        { icon: 'TrendingUp', title: 'Customer Impact', description: 'The faster you build, the faster they activate. Tailored demos, POCs, and hands-on proof drive real adoption.' },
+        { logo: 'saleo', title: 'Saleo', description: 'Every demo. Personalize without touching the org.' },
+        { logo: 'meshmesh', title: 'MeshMesh', description: 'Building on Salesforce. Agents, flows, custom orgs.' },
+        { logo: 'cursor', title: 'Cursor', description: 'Editing existing code. AI inside your editor.' },
+        { logo: 'claude', title: 'Claude Code', description: 'Starting from nothing. Describe it, it builds it.' },
       ],
     },
+
+    // Field proof — validates the tools the audience just saw.
+    {
+      layout: 'bigStat',
+      value: '90 minutes',
+      label: 'To build what used to take six weeks',
+      source: 'SE field report',
+    },
+
+    {
+      layout: 'bigStat',
+      value: '98.95%',
+      label: 'Less time spent on demo guide prep',
+      source: 'MeshMesh case study',
+    },
+
+    // Credibility moment. 77% Gartner stat spoken by presenter, not shown.
+    {
+      layout: 'statement',
+      statement: 'The SE who built it speaks differently.',
+      supporting: 'Buyers feel it before the call ends.',
+    },
+
+    // Practical — how to actually get value from these tools.
+    {
+      layout: 'iconBullets',
+      title: 'What makes these tools work',
+      bullets: [
+        { icon: 'FileText', title: 'Context beats generic', description: 'Tell it who the customer is.' },
+        { icon: 'User', title: 'You know the deal', description: 'AI is fast. You know the room.' },
+        { icon: 'TrendingUp', title: 'Build in the room', description: 'The demo that adapts wins.' },
+      ],
+    },
+
+    // The bridge. Presenter says: "Let me show you what that looks like."
+    // → live Cursor demo begins.
     {
       layout: 'takeaway',
-      text: "All four tools are worth exploring. **This session gives you the playbook to start using them today.**",
+      text: '**Start with one.** Build something real. Show a customer.',
+    },
+  ],
+}
+
+// ── Section 3: Go Deeper — take-home (5 slides) ───────────────────────────
+// Audience navigates these on their own after the session.
+// The stakes, the data, the Agentforce urgency — for those who want the
+// full argument. Also a natural starting point when revisiting the link.
+
+export const goDeeper = {
+  id: 'go-deeper',
+  tier: 'big-picture',
+  tierLabel: 'The Big Picture',
+  title: 'Go Deeper',
+  slides: [
+    // The shift. Now that the audience has seen the tools, this lands concretely.
+    {
+      layout: 'comparison',
+      left: { icon: 'PenLine', label: 'Describing the Product', description: 'Slide decks. Canned demos.' },
+      right: { icon: 'Wand2', label: 'Proving the Product', description: 'Built for them. In the room.' },
+      connector: '\u2192',
+    },
+
+    // What it unlocks. Mini UIs reinforce the tools already seen.
+    {
+      layout: 'iconBullets',
+      title: 'What this unlocks',
+      bullets: [
+        { visual: 'speed', title: 'Speed to Proof', description: 'POC before the next meeting.' },
+        { visual: 'credibility', title: "The Builder's Edge", description: 'The SE who built it speaks differently.' },
+        { visual: 'independence', title: 'Own the Build', description: 'No waiting. No dependencies.' },
+      ],
+    },
+
+    // The buyer behavior data — lands harder now they can picture which tool creates it.
+    {
+      layout: 'bigStat',
+      value: '2.4\u00d7',
+      label: 'More likely to buy from sellers who build live',
+      source: 'Harvard Business Review',
+    },
+
+    // Agentforce urgency. Dark. No supporting text on screen.
+    {
+      layout: 'cinematic',
+      statement: 'Customers who see Agentforce built live are the ones who activate.',
+    },
+
+    // The closing window. Urgency for those who want the full argument.
+    {
+      layout: 'bigStat',
+      value: '12\u201318 months',
+      label: 'Window to build AI fluency before it is expected',
+      source: 'Gartner, 2025',
     },
   ],
 }

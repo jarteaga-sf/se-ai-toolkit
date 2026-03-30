@@ -1,6 +1,6 @@
 import { useState, useEffect, useCallback, useRef } from 'react'
 import gsap from 'gsap'
-import { createSlideRenderers } from './SlideLayouts'
+import { createSlideRenderers } from '../slides'
 
 const fullscreenRenderers = createSlideRenderers(true)
 
@@ -30,6 +30,7 @@ export default function PresentationDeck({ sections, onSlideChange, onNavReady }
   const [scale, setScale] = useState(1)
   const stageRef = useRef(null)
   const contentRef = useRef(null)
+  const prevSlide = useRef(0)
 
   const next = useCallback(() => {
     setCurrent((c) => Math.min(c + 1, allSlides.length - 1))
@@ -82,14 +83,17 @@ export default function PresentationDeck({ sections, onSlideChange, onNavReady }
     return () => window.removeEventListener('keydown', handler)
   }, [next, prev])
 
-  // GSAP entrance animation for new slides
+  // Direction-aware GSAP entrance animation
   useEffect(() => {
     const content = contentRef.current
     if (!content) return
 
+    const direction = current >= prevSlide.current ? 1 : -1
+    prevSlide.current = current
+
     gsap.fromTo(content,
-      { opacity: 0, y: 20 },
-      { opacity: 1, y: 0, duration: 0.5, ease: 'power2.out' }
+      { opacity: 0, x: direction * 48 },
+      { opacity: 1, x: 0, duration: 0.38, ease: 'power2.out' }
     )
   }, [current])
 
@@ -126,7 +130,10 @@ export default function PresentationDeck({ sections, onSlideChange, onNavReady }
     const layout = currentItem.slide.layout
     if (layout === 'quote') return 'bg-[var(--color-surface)]'
     if (layout === 'statement') return 'bg-gradient-to-br from-[var(--color-heading)] to-[#032D60]'
+    if (layout === 'cinematic') return 'bg-gradient-to-br from-[#001440] to-[var(--color-heading)]'
     if (layout === 'takeaway') return 'bg-[var(--color-takeaway-bg)]'
+    if (layout === 'bigStat') return 'bg-[var(--color-bg-white)]'
+    if (layout === 'videoDemoSlide') return 'bg-[var(--color-bg-white)]'
     if (layout === 'illustratedConcept' || layout === 'statCallout') return 'bg-[var(--color-bg-white)]'
     if (layout === 'spectrumSplit') return 'bg-[var(--color-bg-white)]'
     // New layouts
@@ -143,7 +150,7 @@ export default function PresentationDeck({ sections, onSlideChange, onNavReady }
     return 'bg-[var(--color-bg)]'
   }
 
-  const isDarkBg = currentItem.slide.layout === 'statement' || currentItem.slide.layout === 'tierTransition'
+  const isDarkBg = ['statement', 'tierTransition', 'cinematic'].includes(currentItem.slide.layout)
 
   return (
     <div

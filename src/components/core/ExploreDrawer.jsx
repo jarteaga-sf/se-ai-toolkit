@@ -1,12 +1,11 @@
 import { useState, useEffect, useRef } from 'react'
 import { X } from 'lucide-react'
 import gsap from 'gsap'
-import TerminalPanel from './TerminalPanel'
-import FeatureCards from './FeatureCards'
-import StepFlow from './StepFlow'
-import HabitCards from './HabitCards'
-import QuoteCallout from './QuoteCallout'
-import DecisionFlow from './DecisionFlow'
+import TerminalPanel from '../shared/TerminalPanel'
+import FeatureCards from '../shared/FeatureCards'
+import StepFlow from '../shared/StepFlow'
+import HabitCards from '../shared/HabitCards'
+import DecisionFlow from '../shared/DecisionFlow'
 
 function RichText({ text }) {
   const parts = text.split(/(\*\*.*?\*\*|`[^`]+`)/g)
@@ -36,7 +35,11 @@ function TabContent({ content }) {
   return (
     <>
       <Prose paragraphs={content.prose} />
-      {content.quote && <QuoteCallout quote={content.quote} />}
+      {content.quote && (
+        <blockquote className="border-l-3 border-[var(--color-accent)] pl-5 my-6">
+          <p className="text-[17px] text-[var(--color-text-secondary)] italic leading-relaxed">"{content.quote}"</p>
+        </blockquote>
+      )}
       {content.terminal && (
         <TerminalPanel
           title={content.terminal.title}

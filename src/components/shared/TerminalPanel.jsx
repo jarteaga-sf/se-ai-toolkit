@@ -1,6 +1,5 @@
-import { useState, useEffect, useRef } from 'react'
+import { useState, useEffect, useRef, useCallback } from 'react'
 import { Copy, Check, ChevronDown } from 'lucide-react'
-import { useIntersectionObserver } from '@/hooks/useIntersectionObserver'
 
 function TypewriterText({ text, active }) {
   const [displayed, setDisplayed] = useState('')
@@ -103,7 +102,8 @@ function TerminalLine({ step, visible }) {
 }
 
 export default function TerminalPanel({ title, steps, expandable = false, fullscreen = false }) {
-  const { ref, hasIntersected } = useIntersectionObserver()
+  const ref = useRef(null)
+  const [hasIntersected, setHasIntersected] = useState(false)
   const [visibleLines, setVisibleLines] = useState(0)
   const [expanded, setExpanded] = useState(false)
   const [copied, setCopied] = useState(false)
@@ -111,6 +111,22 @@ export default function TerminalPanel({ title, steps, expandable = false, fullsc
 
   const displaySteps = expandable && !expanded ? steps.slice(0, 8) : steps
   const hasMore = expandable && steps.length > 8
+
+  // Inline intersection observer
+  useEffect(() => {
+    if (fullscreen) {
+      setHasIntersected(true)
+      return
+    }
+    const el = ref.current
+    if (!el) return
+    const observer = new IntersectionObserver(
+      ([entry]) => { if (entry.isIntersecting) setHasIntersected(true) },
+      { threshold: 0.1 }
+    )
+    observer.observe(el)
+    return () => observer.disconnect()
+  }, [fullscreen])
 
   useEffect(() => {
     if (hasIntersected && !animatedRef.current) {

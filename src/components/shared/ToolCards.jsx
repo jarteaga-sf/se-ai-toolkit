@@ -1,9 +1,6 @@
 import { useEffect, useRef } from 'react'
 import gsap from 'gsap'
-import { ScrollTrigger } from 'gsap/ScrollTrigger'
-import { ClaudeLogo, CursorLogo, SaleoLogo, MeshMeshLogo } from './ToolLogos'
-
-gsap.registerPlugin(ScrollTrigger)
+import { ClaudeLogo, CursorLogo, SaleoLogo, MeshMeshLogo } from '../illustrations/ToolLogos'
 
 const logos = {
   claude: ClaudeLogo,
@@ -210,23 +207,14 @@ export default function ToolCards({ cards }) {
     if (!items.length) return
 
     gsap.set(items, { y: 30, opacity: 0 })
-
-    const trigger = ScrollTrigger.create({
-      trigger: container,
-      start: 'top 85%',
-      once: true,
-      onEnter: () => {
-        gsap.to(items, {
-          y: 0,
-          opacity: 1,
-          duration: 0.7,
-          stagger: 0.12,
-          ease: 'power2.out',
-        })
-      },
+    gsap.to(items, {
+      y: 0,
+      opacity: 1,
+      duration: 0.7,
+      stagger: 0.12,
+      ease: 'power2.out',
+      delay: 0.15,
     })
-
-    return () => trigger.kill()
   }, [cards])
 
   return (

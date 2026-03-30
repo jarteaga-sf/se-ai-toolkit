@@ -1,11 +1,7 @@
 import { useEffect, useRef } from 'react'
 import gsap from 'gsap'
 
-/**
- * Subtle floating gradient orbs + sparkle stars for page background.
- * GPU-composited, purely decorative.
- */
-export default function AnimatedBackground() {
+export default function AnimatedBackground({ isDark = false }) {
   const containerRef = useRef(null)
 
   useEffect(() => {
@@ -15,7 +11,7 @@ export default function AnimatedBackground() {
     const orbs = container.querySelectorAll('.bg-orb')
     const sparkles = container.querySelectorAll('.bg-sparkle')
 
-    // Float orbs with slow, looping animations
+    // Float orbs — slow, looping, GPU-composited
     orbs.forEach((orb, i) => {
       gsap.to(orb, {
         y: `+=${20 + i * 10}`,
@@ -27,10 +23,10 @@ export default function AnimatedBackground() {
       })
     })
 
-    // Gentle sparkle pulse
+    // Sparkles pulse gently
     sparkles.forEach((sparkle, i) => {
       gsap.to(sparkle, {
-        opacity: 0.15,
+        opacity: 0.12,
         scale: 0.8,
         duration: 2 + i * 0.5,
         ease: 'sine.inOut',
@@ -46,15 +42,27 @@ export default function AnimatedBackground() {
     }
   }, [])
 
+  // Fade sparkles out on dark slides — they compete with white text
+  useEffect(() => {
+    const container = containerRef.current
+    if (!container) return
+    const sparkles = container.querySelectorAll('.bg-sparkle')
+    gsap.to(sparkles, {
+      opacity: isDark ? 0 : 0.25,
+      duration: 0.4,
+      ease: 'power1.out',
+    })
+  }, [isDark])
+
   return (
     <div
       ref={containerRef}
       className="fixed inset-0 pointer-events-none z-0 overflow-hidden"
       aria-hidden="true"
     >
-      {/* Gradient orbs */}
+      {/* Gradient orbs — always visible, opacity kept very low */}
       <div
-        className="bg-orb absolute w-[400px] h-[400px] rounded-full opacity-[0.08] will-change-transform"
+        className="bg-orb absolute w-[400px] h-[400px] rounded-full opacity-[0.07] will-change-transform"
         style={{
           background: 'radial-gradient(circle, var(--color-cloud) 0%, transparent 70%)',
           top: '10%',
@@ -62,7 +70,7 @@ export default function AnimatedBackground() {
         }}
       />
       <div
-        className="bg-orb absolute w-[300px] h-[300px] rounded-full opacity-[0.06] will-change-transform"
+        className="bg-orb absolute w-[300px] h-[300px] rounded-full opacity-[0.05] will-change-transform"
         style={{
           background: 'radial-gradient(circle, var(--color-violet-light) 0%, transparent 70%)',
           top: '50%',
@@ -70,7 +78,7 @@ export default function AnimatedBackground() {
         }}
       />
       <div
-        className="bg-orb absolute w-[350px] h-[350px] rounded-full opacity-[0.05] will-change-transform"
+        className="bg-orb absolute w-[350px] h-[350px] rounded-full opacity-[0.04] will-change-transform"
         style={{
           background: 'radial-gradient(circle, var(--color-electric) 0%, transparent 70%)',
           bottom: '15%',
@@ -78,21 +86,21 @@ export default function AnimatedBackground() {
         }}
       />
 
-      {/* Sparkle stars */}
+      {/* Sparkle stars — dimmed on dark slides */}
       <div
-        className="bg-sparkle absolute text-[var(--color-yellow)] opacity-30 text-[18px] will-change-transform"
+        className="bg-sparkle absolute text-[var(--color-yellow)] opacity-25 text-[18px] will-change-transform"
         style={{ top: '20%', left: '15%' }}
       >
         {'\u2726'}
       </div>
       <div
-        className="bg-sparkle absolute text-[var(--color-yellow)] opacity-25 text-[14px] will-change-transform"
+        className="bg-sparkle absolute text-[var(--color-yellow)] opacity-20 text-[14px] will-change-transform"
         style={{ top: '35%', right: '20%' }}
       >
         {'\u2726'}
       </div>
       <div
-        className="bg-sparkle absolute text-[var(--color-yellow)] opacity-20 text-[12px] will-change-transform"
+        className="bg-sparkle absolute text-[var(--color-yellow)] opacity-15 text-[12px] will-change-transform"
         style={{ bottom: '30%', left: '25%' }}
       >
         {'\u2726'}

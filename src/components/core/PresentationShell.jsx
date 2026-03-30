@@ -55,7 +55,7 @@ export default function PresentationShell({ sections }) {
     <>
       {/* Full-viewport background + deck */}
       <div className="fixed inset-0 z-0 w-screen h-screen overflow-hidden bg-[var(--color-bg)] pointer-events-none">
-        <AnimatedBackground />
+        <AnimatedBackground isDark={isDarkBg} />
 
         {/* Main deck */}
         <div className="relative w-full h-full pointer-events-none">

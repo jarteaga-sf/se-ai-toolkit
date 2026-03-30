@@ -1,9 +1,6 @@
 import { useEffect, useRef } from 'react'
 import { GitBranch, Shield, Target, Crosshair, FileText, Database, ArrowRightLeft, Wrench, Bot, Layers, Settings, Gauge, PenLine, Search, Code, Users, Repeat, BarChart3, Briefcase, Zap, TrendingUp, Terminal, ExternalLink } from 'lucide-react'
 import gsap from 'gsap'
-import { ScrollTrigger } from 'gsap/ScrollTrigger'
-
-gsap.registerPlugin(ScrollTrigger)
 
 const iconMap = {
   GitBranch,
@@ -42,35 +39,14 @@ export default function HabitCards({ cards, fullscreen = false }) {
 
     gsap.set(items, { y: 24, opacity: 0 })
 
-    if (fullscreen) {
-      // In fullscreen/slide mode, animate immediately on mount
-      gsap.to(items, {
-        y: 0,
-        opacity: 1,
-        duration: 0.5,
-        stagger: 0.08,
-        ease: 'power2.out',
-        delay: 0.15,
-      })
-      return
-    }
-
-    const trigger = ScrollTrigger.create({
-      trigger: container,
-      start: 'top 85%',
-      once: true,
-      onEnter: () => {
-        gsap.to(items, {
-          y: 0,
-          opacity: 1,
-          duration: 0.6,
-          stagger: 0.1,
-          ease: 'power2.out',
-        })
-      },
+    gsap.to(items, {
+      y: 0,
+      opacity: 1,
+      duration: 0.5,
+      stagger: 0.08,
+      ease: 'power2.out',
+      delay: 0.15,
     })
-
-    return () => trigger.kill()
   }, [cards, fullscreen])
 
   return (
