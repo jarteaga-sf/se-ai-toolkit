@@ -10,7 +10,7 @@ export default function TitleSlide({ title, accent, subtitle, badges, fullscreen
         />
         <div className="w-px h-8 bg-white/25" />
         <span className="text-[18px] font-bold text-white/80 tracking-wide">
-          Solutions Engineering
+          Solutions Center of Excellence
         </span>
       </div>
 

@@ -14,7 +14,7 @@ export const theWhy = {
       title: 'The SE',
       accent: 'AI Toolkit',
       subtitle: 'Four tools. One mission. Better demos, faster.',
-      badges: ['How I AI', 'Solutions Engineering', '2025'],
+      badges: ['How I AI', 'Solutions Engineering', '2026'],
     },
 
     // Agenda — orient the audience before the hook.
