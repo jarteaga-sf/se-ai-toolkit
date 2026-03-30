@@ -1,5 +1,3 @@
-import { useEffect, useRef } from 'react'
-import gsap from 'gsap'
 import { ClaudeLogo, CursorLogo, SaleoLogo, MeshMeshLogo } from '../illustrations/ToolLogos'
 
 const logos = {
@@ -197,28 +195,8 @@ const miniVisuals = {
 }
 
 export default function ToolCards({ cards }) {
-  const containerRef = useRef(null)
-
-  useEffect(() => {
-    const container = containerRef.current
-    if (!container) return
-
-    const items = container.querySelectorAll('.tool-card')
-    if (!items.length) return
-
-    gsap.set(items, { y: 30, opacity: 0 })
-    gsap.to(items, {
-      y: 0,
-      opacity: 1,
-      duration: 0.7,
-      stagger: 0.12,
-      ease: 'power2.out',
-      delay: 0.15,
-    })
-  }, [cards])
-
   return (
-    <div ref={containerRef} className={`grid grid-cols-2 ${cards.length === 4 ? 'lg:grid-cols-4' : 'sm:grid-cols-3'} gap-5 my-8 items-stretch`}>
+    <div className={`grid grid-cols-2 ${cards.length === 4 ? 'lg:grid-cols-4' : 'sm:grid-cols-3'} gap-5 my-8 items-stretch`}>
       {cards.map((card, i) => {
         const Logo = logos[card.logo]
         const Visual = miniVisuals[card.logo]
@@ -226,7 +204,7 @@ export default function ToolCards({ cards }) {
         return (
           <div
             key={i}
-            className="tool-card bg-[var(--color-bg-white)] border border-[var(--color-border)]/40 rounded-2xl shadow-[var(--shadow-card)] overflow-hidden transition-all duration-200 hover:-translate-y-1 hover:shadow-[var(--shadow-card-hover)] flex flex-col"
+            className="bg-[var(--color-bg-white)] border border-[var(--color-border)]/40 rounded-2xl shadow-[var(--shadow-card)] overflow-hidden transition-all duration-200 hover:-translate-y-1 hover:shadow-[var(--shadow-card-hover)] flex flex-col"
             style={{ borderTop: `3px solid ${accent}` }}
           >
             {/* Logo + name */}

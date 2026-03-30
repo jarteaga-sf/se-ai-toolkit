@@ -1,26 +1,4 @@
-import { useEffect, useRef } from 'react'
-import gsap from 'gsap'
-
 export default function QuoteSlide({ quote, attribution, context, fullscreen }) {
-  const quoteRef = useRef(null)
-
-  useEffect(() => {
-    const el = quoteRef.current
-    if (!el) return
-
-    const words = el.querySelectorAll('.quote-word')
-    gsap.set(words, { opacity: 0.15 })
-    gsap.to(words, {
-      opacity: 1,
-      duration: 0.4,
-      stagger: 0.06,
-      ease: 'power2.out',
-      delay: 0.3,
-    })
-  }, [quote])
-
-  const quoteWords = quote.split(' ')
-
   return (
     <div className="flex flex-col items-center justify-center text-center max-w-[900px] mx-auto px-8">
       {context && (
@@ -28,16 +6,12 @@ export default function QuoteSlide({ quote, attribution, context, fullscreen }) 
           {context}
         </p>
       )}
-      <blockquote ref={quoteRef} className="relative">
+      <blockquote className="relative">
         <span className="absolute -top-6 -left-4 text-[64px] leading-none text-[var(--color-accent)]/15 font-serif select-none">
           &ldquo;
         </span>
         <p className="text-[38px] leading-[1.35] font-bold text-[var(--color-heading)] tracking-[-0.02em]">
-          {quoteWords.map((word, i) => (
-            <span key={i} className="quote-word inline-block mr-[0.3em]">
-              {word}
-            </span>
-          ))}
+          {quote}
         </p>
       </blockquote>
       {attribution && (

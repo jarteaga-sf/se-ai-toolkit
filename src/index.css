@@ -70,7 +70,7 @@
 }
 
 .slide-enter {
-  animation: slide-fade-in 0.3s ease-out both;
+  animation: slide-fade-in 0.2s ease-out both;
 }
 
 @layer base {

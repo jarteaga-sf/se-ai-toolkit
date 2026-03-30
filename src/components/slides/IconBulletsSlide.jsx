@@ -20,33 +20,11 @@ const logoMap = {
 export default function IconBulletsSlide({ title, bullets, fullscreen }) {
   const cols = bullets.length === 4 ? 'grid-cols-2 sm:grid-cols-4' : 'grid-cols-3'
   const gridRef = useRef(null)
-  const titleRef = useRef(null)
 
   useEffect(() => {
-    if (!gridRef.current || !titleRef.current) return
+    if (!gridRef.current) return
 
-    // Pre-hide immediately to prevent flash
-    gsap.set(titleRef.current, { opacity: 0, y: -20 })
-    const cards = gridRef.current.querySelectorAll('.bullet-card')
-    gsap.set(cards, { opacity: 0, y: 30, scale: 0.92 })
-
-    // Animate title
-    gsap.to(titleRef.current,
-      { opacity: 1, y: 0, duration: 0.6, ease: 'power2.out' }
-    )
-
-    // Staggered card entrance
-    gsap.to(cards,
-      {
-        opacity: 1, y: 0, scale: 1,
-        duration: 0.5,
-        stagger: 0.12,
-        ease: 'back.out(1.4)',
-        delay: 0.25,
-      }
-    )
-
-    // Subtle floating animation on icon containers
+    // Subtle floating animation on icon containers (looping — keep)
     const icons = gridRef.current.querySelectorAll('.icon-float')
     icons.forEach((icon, i) => {
       gsap.to(icon, {
@@ -59,7 +37,7 @@ export default function IconBulletsSlide({ title, bullets, fullscreen }) {
       })
     })
 
-    // Subtle glow pulse on icon backgrounds
+    // Subtle glow pulse on icon backgrounds (looping — keep)
     const iconBgs = gridRef.current.querySelectorAll('.icon-bg-pulse')
     iconBgs.forEach((bg, i) => {
       gsap.to(bg, {
@@ -75,7 +53,7 @@ export default function IconBulletsSlide({ title, bullets, fullscreen }) {
 
   return (
     <div className="max-w-[1060px] mx-auto px-8">
-      <h2 ref={titleRef} className="text-[38px] font-bold text-[var(--color-heading)] tracking-[-0.02em] text-center mb-10">
+      <h2 className="text-[38px] font-bold text-[var(--color-heading)] tracking-[-0.02em] text-center mb-10">
         {title}
       </h2>
       <div ref={gridRef} className={`grid ${cols} gap-6 items-stretch`}>
@@ -87,7 +65,7 @@ export default function IconBulletsSlide({ title, bullets, fullscreen }) {
           return (
             <div
               key={i}
-              className="bullet-card flex flex-col items-center text-center rounded-2xl border border-[var(--color-border)]/60 bg-[var(--color-bg-white)] p-5 shadow-sm hover:shadow-md hover:border-[var(--color-accent)]/30 transition-all duration-300"
+              className="flex flex-col items-center text-center rounded-2xl border border-[var(--color-border)]/60 bg-[var(--color-bg-white)] p-5 shadow-sm hover:shadow-md hover:border-[var(--color-accent)]/30 transition-all duration-300"
             >
               {/* Visual slot — fixed height ensures all cards align */}
               {Visual ? (

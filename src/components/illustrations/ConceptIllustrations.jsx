@@ -86,7 +86,7 @@ function TypingTerminal() {
 }
 
 /**
- * Rotating prompts that fade in/out
+ * Rotating prompts that fade in/out (looping animation — keep)
  */
 const prompts = [
   "Build a lead scoring system that ranks leads by engagement, company size, and industry fit",
@@ -159,62 +159,45 @@ export function VibeCodingIllustration() {
 
 /**
  * Agent Flow: User -> Agent -> Salesforce Tools -> Outcome
- * Now with animated flow arrows
+ * All visible immediately — no entrance animations
  */
 export function AgentIllustration() {
-  const flowRef = useRef(null)
-
-  useEffect(() => {
-    if (!flowRef.current) return
-    const nodes = flowRef.current.querySelectorAll('.flow-node')
-    const arrows = flowRef.current.querySelectorAll('.flow-arrow')
-
-    gsap.set(nodes, { opacity: 0, scale: 0.8 })
-    gsap.set(arrows, { opacity: 0, x: -8 })
-    gsap.to(nodes, {
-      opacity: 1, scale: 1, duration: 0.4, stagger: 0.15, ease: 'back.out(1.5)'
-    })
-    gsap.to(arrows, {
-      opacity: 1, x: 0, duration: 0.3, stagger: 0.15, delay: 0.2
-    })
-  }, [])
-
   return (
     <div className="flex flex-col items-center gap-3 w-[320px]">
       {/* Flow diagram */}
-      <div ref={flowRef} className="flex items-center gap-3 w-full">
+      <div className="flex items-center gap-3 w-full">
         {/* You */}
-        <div className="flow-node flex flex-col items-center gap-1 flex-shrink-0">
+        <div className="flex flex-col items-center gap-1 flex-shrink-0">
           <div className="w-10 h-10 rounded-full bg-[var(--color-surface)] border border-[var(--color-border)] flex items-center justify-center">
             <MessageSquare size={18} className="text-[var(--color-heading)]" />
           </div>
           <span className="text-[10px] font-bold text-[var(--color-heading)]">You</span>
         </div>
 
-        <ArrowRight size={14} className="flow-arrow text-[var(--color-accent)] flex-shrink-0" />
+        <ArrowRight size={14} className="text-[var(--color-accent)] flex-shrink-0" />
 
         {/* Agent */}
-        <div className="flow-node flex flex-col items-center gap-1 flex-shrink-0">
+        <div className="flex flex-col items-center gap-1 flex-shrink-0">
           <div className="w-10 h-10 rounded-full bg-[var(--color-accent)]/10 border-2 border-[var(--color-accent)]/30 flex items-center justify-center animate-pulse">
             <Bot size={18} className="text-[var(--color-accent)]" />
           </div>
           <span className="text-[10px] font-bold text-[var(--color-accent)]">Agent</span>
         </div>
 
-        <ArrowRight size={14} className="flow-arrow text-[var(--color-accent)] flex-shrink-0" />
+        <ArrowRight size={14} className="text-[var(--color-accent)] flex-shrink-0" />
 
         {/* Tools */}
-        <div className="flow-node flex flex-col items-center gap-1 flex-shrink-0">
+        <div className="flex flex-col items-center gap-1 flex-shrink-0">
           <div className="w-10 h-10 rounded-full bg-[var(--color-electric)]/10 border border-[var(--color-electric)]/30 flex items-center justify-center">
             <Wrench size={18} className="text-[var(--color-electric)]" />
           </div>
           <span className="text-[10px] font-bold text-[var(--color-electric)]">Tools</span>
         </div>
 
-        <ArrowRight size={14} className="flow-arrow text-[var(--color-success)] flex-shrink-0" />
+        <ArrowRight size={14} className="text-[var(--color-success)] flex-shrink-0" />
 
         {/* Result */}
-        <div className="flow-node flex flex-col items-center gap-1 flex-shrink-0">
+        <div className="flex flex-col items-center gap-1 flex-shrink-0">
           <div className="w-10 h-10 rounded-full bg-[var(--color-success)]/10 border border-[var(--color-success)]/30 flex items-center justify-center">
             <CheckCircle size={18} className="text-[var(--color-success)]" />
           </div>
