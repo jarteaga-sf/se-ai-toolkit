@@ -2,6 +2,40 @@ import { useState, useEffect, useRef } from 'react'
 import { Copy, Check, ChevronDown } from 'lucide-react'
 import { useIntersectionObserver } from '@/hooks/useIntersectionObserver'
 
+function TypewriterText({ text, active }) {
+  const [displayed, setDisplayed] = useState('')
+  const [done, setDone] = useState(false)
+
+  useEffect(() => {
+    if (!active) {
+      setDisplayed('')
+      setDone(false)
+      return
+    }
+    let i = 0
+    setDisplayed('')
+    setDone(false)
+    const interval = setInterval(() => {
+      i++
+      setDisplayed(text.slice(0, i))
+      if (i >= text.length) {
+        clearInterval(interval)
+        setDone(true)
+      }
+    }, 22)
+    return () => clearInterval(interval)
+  }, [active, text])
+
+  return (
+    <>
+      {displayed}
+      {active && !done && (
+        <span className="inline-block w-[7px] h-[14px] bg-[var(--color-terminal-green)]/70 ml-0.5 align-middle animate-pulse" />
+      )}
+    </>
+  )
+}
+
 function TerminalLine({ step, visible }) {
   const baseClasses = 'transition-all duration-300'
   const visibilityClasses = visible
@@ -14,7 +48,9 @@ function TerminalLine({ step, visible }) {
         return (
           <div className={`${baseClasses} ${visibilityClasses}`}>
             <span className="text-[var(--color-terminal-green)]">~/project $ </span>
-            <span className="text-[var(--color-terminal-text)]">{step.content}</span>
+            <span className="text-[var(--color-terminal-text)]">
+              <TypewriterText text={step.content} active={visible} />
+            </span>
           </div>
         )
       case 'output':
@@ -51,7 +87,7 @@ function TerminalLine({ step, visible }) {
       case 'divider':
         return (
           <div className={`${baseClasses} ${visibilityClasses} text-[var(--color-terminal-dim)] my-1`}>
-            {'─'.repeat(40)}
+            {'\u2500'.repeat(40)}
           </div>
         )
       default:
@@ -102,7 +138,7 @@ export default function TerminalPanel({ title, steps, expandable = false }) {
   }
 
   return (
-    <div ref={ref} className="rounded-lg bg-[var(--color-terminal-bg)] border border-[#2D2D2D] overflow-hidden my-8 shadow-lg">
+    <div ref={ref} className="rounded-xl bg-[var(--color-terminal-bg)] border border-[#2D2D2D] overflow-hidden my-8 shadow-lg">
       <div className="flex items-center justify-between px-4 py-2.5 bg-[#181818] border-b border-[#2D2D2D]">
         <div className="flex items-center gap-2">
           <div className="flex gap-1.5">

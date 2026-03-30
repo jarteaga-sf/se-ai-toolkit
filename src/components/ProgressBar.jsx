@@ -16,9 +16,9 @@ export default function ProgressBar() {
   }, [])
 
   return (
-    <div className="fixed top-[56px] left-0 right-0 z-50 h-[3px]">
+    <div className="fixed top-[56px] left-0 right-0 z-50 h-[3px] bg-[var(--color-cloud-90)]">
       <div
-        className="h-full bg-[var(--color-accent)] transition-[width] duration-150"
+        className="h-full bg-gradient-to-r from-[var(--color-accent)] to-[var(--color-electric)] transition-[width] duration-150"
         style={{ width: `${progress}%` }}
       />
     </div>

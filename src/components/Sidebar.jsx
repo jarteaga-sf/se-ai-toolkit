@@ -55,13 +55,10 @@ export default function Sidebar({ collapsed = false, onToggle, presentationSlide
   const deckSectionId = presentationSlide?.sectionId ?? null
   const goToSection = presentationSlide?.goToSection
 
-  // Determine active ID
   let activeId = ''
   if (deckActive) {
-    // Deck is visible -- highlight based on current slide's section (null for hero = no highlight)
     activeId = deckSectionId || ''
   } else {
-    // Scrolling through content below the deck
     activeId = scrollActiveId
   }
 
@@ -80,14 +77,12 @@ export default function Sidebar({ collapsed = false, onToggle, presentationSlide
   }, [])
 
   const handleClick = (id) => {
-    // Big Picture sections: navigate within the presentation deck
     if (bigPictureIds.has(id) && goToSection) {
       goToSection(id)
       setOpen(false)
       return
     }
 
-    // Other sections: normal scroll
     const el = document.getElementById(id)
     if (el) {
       el.scrollIntoView({ behavior: 'smooth' })
@@ -101,7 +96,7 @@ export default function Sidebar({ collapsed = false, onToggle, presentationSlide
     <nav className="py-4 px-3">
       {tiers.map((tier) => (
         <div key={tier.label} className="mb-5">
-          <p className="text-[10px] font-semibold uppercase tracking-[0.1em] text-[var(--color-text-muted)] px-2 mb-1.5">
+          <p className="text-[10px] font-bold uppercase tracking-[0.1em] text-[var(--color-heading)] px-2 mb-1.5">
             {tier.label}
           </p>
           <ul className="space-y-0.5">
@@ -111,10 +106,10 @@ export default function Sidebar({ collapsed = false, onToggle, presentationSlide
                 <li key={section.id}>
                   <button
                     onClick={() => handleClick(section.id)}
-                    className={`w-full text-left text-[13px] px-2 py-1.5 rounded transition-colors cursor-pointer flex items-center gap-2 ${
+                    className={`w-full text-left text-[13px] px-2 py-1.5 rounded-lg transition-colors cursor-pointer flex items-center gap-2 ${
                       activeId === section.id
-                        ? 'text-[var(--color-accent)] bg-[var(--color-accent)]/8 border-l-2 border-[var(--color-accent)] pl-3 font-medium'
-                        : 'text-[var(--color-text-secondary)] hover:text-[var(--color-heading)] hover:bg-[var(--color-border-light)]'
+                        ? 'text-[var(--color-accent)] bg-[var(--color-accent)]/8 border-l-2 border-[var(--color-accent)] pl-3 font-bold'
+                        : 'text-[var(--color-text-secondary)] hover:text-[var(--color-heading)] hover:bg-[var(--color-surface)]'
                     }`}
                   >
                     {Logo && <Logo size={14} />}
@@ -135,14 +130,14 @@ export default function Sidebar({ collapsed = false, onToggle, presentationSlide
       <aside
         onMouseEnter={() => setHovered(true)}
         onMouseLeave={() => setHovered(false)}
-        className={`hidden md:flex fixed left-0 top-[56px] h-[calc(100vh-56px)] bg-[var(--color-bg-sidebar)] border-r border-[var(--color-border)] overflow-y-auto z-40 transition-all duration-500 ease-out flex-col ${
+        className={`hidden md:flex fixed left-0 top-[56px] h-[calc(100vh-56px)] bg-[var(--color-bg-sidebar)] border-r border-[var(--color-border)]/50 overflow-y-auto z-40 transition-all duration-500 ease-out flex-col ${
           collapsed ? 'w-[52px]' : 'w-[200px]'
         } ${sidebarOpacity}`}
       >
         {!collapsed && nav}
         <button
           onClick={onToggle}
-          className={`p-2 rounded-md hover:bg-[var(--color-border-light)] transition-colors cursor-pointer text-[var(--color-text-muted)] hover:text-[var(--color-text-secondary)] ${
+          className={`p-2 rounded-lg hover:bg-[var(--color-surface)] transition-colors cursor-pointer text-[var(--color-text-muted)] hover:text-[var(--color-heading)] ${
             collapsed ? 'mx-auto mt-3' : 'mx-3 mb-4 mt-auto self-start'
           }`}
           title={collapsed ? 'Expand sidebar' : 'Collapse sidebar'}
@@ -154,7 +149,7 @@ export default function Sidebar({ collapsed = false, onToggle, presentationSlide
       {/* Mobile hamburger */}
       <button
         onClick={() => setOpen(!open)}
-        className="md:hidden fixed top-[68px] left-3 z-50 p-2 rounded-lg bg-[var(--color-bg-white)] border border-[var(--color-border)] shadow-sm cursor-pointer"
+        className="md:hidden fixed top-[68px] left-3 z-50 p-2 rounded-lg bg-[var(--color-bg-white)] border border-[var(--color-border)] shadow-[var(--shadow-card)] cursor-pointer"
       >
         {open ? <X size={18} /> : <Menu size={18} />}
       </button>
@@ -163,7 +158,7 @@ export default function Sidebar({ collapsed = false, onToggle, presentationSlide
       {open && (
         <>
           <div
-            className="md:hidden fixed inset-0 bg-black/20 z-40"
+            className="md:hidden fixed inset-0 bg-black/20 z-40 backdrop-blur-sm"
             onClick={() => setOpen(false)}
           />
           <aside className="md:hidden fixed left-0 top-0 w-[280px] h-full bg-[var(--color-bg-white)] border-r border-[var(--color-border)] overflow-y-auto z-50 shadow-xl">

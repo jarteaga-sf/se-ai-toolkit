@@ -1,11 +1,11 @@
 import { useState, useEffect, useCallback, useRef } from 'react'
 import { ChevronLeft, ChevronRight, ChevronDown } from 'lucide-react'
+import gsap from 'gsap'
 import { createSlideRenderers } from './SlideLayouts'
 
 const fullscreenRenderers = createSlideRenderers(true)
 
 export default function PresentationDeck({ sections, onSlideChange, scrollTargetId }) {
-  // Flatten all section slides (no hero)
   const allSlides = sections.flatMap((section, sIdx) =>
     section.slides.map((slide) => ({
       slide,
@@ -15,7 +15,6 @@ export default function PresentationDeck({ sections, onSlideChange, scrollTarget
     }))
   )
 
-  // Build a map of sectionId -> first slide index for that section
   const sectionStartMap = useRef({})
   if (Object.keys(sectionStartMap.current).length === 0) {
     let idx = 0
@@ -28,10 +27,22 @@ export default function PresentationDeck({ sections, onSlideChange, scrollTarget
   const [current, setCurrent] = useState(0)
   const [scrollLocked, setScrollLocked] = useState(true)
   const [scale, setScale] = useState(1)
+  const [showHint, setShowHint] = useState(true)
   const deckRef = useRef(null)
   const stageRef = useRef(null)
   const contentRef = useRef(null)
+  const hintRef = useRef(null)
   const isLastSlide = current === allSlides.length - 1
+
+  // Hide keyboard hint after first navigation or 4 seconds
+  useEffect(() => {
+    if (current > 0) {
+      setShowHint(false)
+      return
+    }
+    const timer = setTimeout(() => setShowHint(false), 4000)
+    return () => clearTimeout(timer)
+  }, [current])
 
   const next = useCallback(() => {
     if (isLastSlide) {
@@ -58,7 +69,6 @@ export default function PresentationDeck({ sections, onSlideChange, scrollTarget
     }
   }, [])
 
-  // Report current slide to parent for sidebar highlighting
   useEffect(() => {
     if (onSlideChange) {
       const item = allSlides[current]
@@ -72,7 +82,6 @@ export default function PresentationDeck({ sections, onSlideChange, scrollTarget
     }
   }, [current, scrollLocked, goToSection])
 
-  // Global keyboard navigation
   useEffect(() => {
     const handler = (e) => {
       if (e.key === 'ArrowRight' || e.key === 'ArrowDown') {
@@ -88,7 +97,6 @@ export default function PresentationDeck({ sections, onSlideChange, scrollTarget
     return () => window.removeEventListener('keydown', handler)
   }, [next, prev])
 
-  // Scroll lock
   useEffect(() => {
     if (!scrollLocked) return
 
@@ -105,7 +113,6 @@ export default function PresentationDeck({ sections, onSlideChange, scrollTarget
     }
   }, [scrollLocked])
 
-  // Unlock deck when programmatic scroll (e.g. sidebar click) moves past it
   useEffect(() => {
     if (!scrollLocked) return
 
@@ -119,7 +126,6 @@ export default function PresentationDeck({ sections, onSlideChange, scrollTarget
     return () => window.removeEventListener('scroll', handler)
   }, [scrollLocked])
 
-  // Re-engage scroll lock when user scrolls back to top
   useEffect(() => {
     if (scrollLocked) return
 
@@ -133,19 +139,27 @@ export default function PresentationDeck({ sections, onSlideChange, scrollTarget
     return () => window.removeEventListener('scroll', handler)
   }, [scrollLocked])
 
-  // Scale slide content to fit available space
+  // GSAP entrance animation for new slides
+  useEffect(() => {
+    const content = contentRef.current
+    if (!content) return
+
+    gsap.fromTo(content,
+      { opacity: 0, y: 20 },
+      { opacity: 1, y: 0, duration: 0.5, ease: 'power2.out' }
+    )
+  }, [current])
+
   useEffect(() => {
     const stage = stageRef.current
     const content = contentRef.current
     if (!stage || !content) return
 
     const recalc = () => {
-      // Temporarily remove scale to measure natural content size
       content.style.transform = 'scale(1)'
       const contentW = content.scrollWidth
       const contentH = content.scrollHeight
       const { width: stageW, height: stageH } = stage.getBoundingClientRect()
-      // Generous margins: 120px for arrows + padding on sides, 60px vertical
       const availW = stageW - 140
       const availH = stageH - 60
       const s = Math.min(availW / contentW, availH / contentH, 1.2)
@@ -154,17 +168,13 @@ export default function PresentationDeck({ sections, onSlideChange, scrollTarget
       setScale(clamped)
     }
 
-    // Recalc on stage resize
     const observer = new ResizeObserver(recalc)
     observer.observe(stage)
-
-    // Also recalc when slide changes (content size may differ)
     recalc()
 
     return () => observer.disconnect()
   }, [current])
 
-  // Compute section boundaries for dot grouping
   const sectionGroups = []
   let slideIdx = 0
   sections.forEach((section) => {
@@ -178,16 +188,41 @@ export default function PresentationDeck({ sections, onSlideChange, scrollTarget
 
   const currentItem = allSlides[current]
 
+  // Determine background style based on slide layout
+  const getSlideBackground = () => {
+    const layout = currentItem.slide.layout
+    if (layout === 'quote') {
+      return 'bg-[var(--color-surface)]'
+    }
+    if (layout === 'statement') {
+      return 'bg-gradient-to-br from-[var(--color-heading)] to-[#032D60]'
+    }
+    if (layout === 'takeaway') {
+      return 'bg-[var(--color-takeaway-bg)]'
+    }
+    if (layout === 'illustratedConcept' || layout === 'statCallout') {
+      return 'bg-[var(--color-bg-white)]'
+    }
+    if (layout === 'spectrumSplit') {
+      return 'bg-[var(--color-bg-white)]'
+    }
+    return 'bg-[var(--color-bg)]'
+  }
+
+  const isDarkBg = currentItem.slide.layout === 'statement'
+
   return (
     <div
       ref={deckRef}
-      className="relative w-full bg-[var(--color-bg)] flex flex-col"
+      className={`relative w-full flex flex-col transition-colors duration-500 ${getSlideBackground()}`}
       style={{ minHeight: 'calc(100vh - 56px)' }}
     >
       {/* Section label - top left */}
       {currentItem.sectionLabel && (
         <div className="absolute top-5 left-6 z-10">
-          <span className="text-[11px] font-semibold uppercase tracking-[0.12em] text-[var(--color-accent)]">
+          <span className={`text-[11px] font-bold uppercase tracking-[0.12em] ${
+            isDarkBg ? 'text-[var(--color-cloud-light)]' : 'text-[var(--color-accent)]'
+          }`}>
             {currentItem.sectionLabel}
           </span>
         </div>
@@ -204,7 +239,7 @@ export default function PresentationDeck({ sections, onSlideChange, scrollTarget
             padding: '24px 48px',
           }}
         >
-          {fullscreenRenderers[currentItem.slide.layout]?.(currentItem.slide)}
+          {fullscreenRenderers[currentItem.slide.layout]?.(currentItem.slide, { isDarkBg })}
         </div>
       </div>
 
@@ -212,10 +247,14 @@ export default function PresentationDeck({ sections, onSlideChange, scrollTarget
       <button
         onClick={prev}
         disabled={current === 0}
-        className="absolute left-3 md:left-6 top-1/2 -translate-y-1/2 w-11 h-11 rounded-full bg-[var(--color-bg-white)]/80 border border-[var(--color-border)] shadow-sm flex items-center justify-center transition-opacity duration-200 cursor-pointer disabled:opacity-15 disabled:cursor-default hover:shadow-md hover:bg-[var(--color-bg-white)] z-10"
+        className={`absolute left-3 md:left-6 top-1/2 -translate-y-1/2 w-11 h-11 rounded-full border shadow-sm flex items-center justify-center transition-all duration-200 cursor-pointer disabled:opacity-15 disabled:cursor-default hover:shadow-md z-10 ${
+          isDarkBg
+            ? 'bg-white/10 border-white/20 hover:bg-white/20'
+            : 'bg-[var(--color-bg-white)]/80 border-[var(--color-border)] hover:bg-[var(--color-bg-white)]'
+        }`}
         aria-label="Previous slide"
       >
-        <ChevronLeft size={22} className="text-[var(--color-text-secondary)]" />
+        <ChevronLeft size={22} className={isDarkBg ? 'text-white/70' : 'text-[var(--color-text-secondary)]'} />
       </button>
 
       {isLastSlide ? (
@@ -229,11 +268,27 @@ export default function PresentationDeck({ sections, onSlideChange, scrollTarget
       ) : (
         <button
           onClick={next}
-          className="absolute right-3 md:right-6 top-1/2 -translate-y-1/2 w-11 h-11 rounded-full bg-[var(--color-bg-white)]/80 border border-[var(--color-border)] shadow-sm flex items-center justify-center transition-opacity duration-200 cursor-pointer hover:shadow-md hover:bg-[var(--color-bg-white)] z-10"
+          className={`absolute right-3 md:right-6 top-1/2 -translate-y-1/2 w-11 h-11 rounded-full border shadow-sm flex items-center justify-center transition-all duration-200 cursor-pointer hover:shadow-md z-10 ${
+            isDarkBg
+              ? 'bg-white/10 border-white/20 hover:bg-white/20'
+              : 'bg-[var(--color-bg-white)]/80 border-[var(--color-border)] hover:bg-[var(--color-bg-white)]'
+          }`}
           aria-label="Next slide"
         >
-          <ChevronRight size={22} className="text-[var(--color-text-secondary)]" />
+          <ChevronRight size={22} className={isDarkBg ? 'text-white/70' : 'text-[var(--color-text-secondary)]'} />
         </button>
+      )}
+
+      {/* Keyboard navigation hint */}
+      {showHint && current === 0 && (
+        <div
+          ref={hintRef}
+          className="absolute bottom-16 left-1/2 -translate-x-1/2 z-10 flex items-center gap-2 px-4 py-2 rounded-full bg-[var(--color-heading)]/80 backdrop-blur-sm shadow-lg transition-opacity duration-500"
+        >
+          <kbd className="px-1.5 py-0.5 rounded bg-white/20 text-[11px] font-mono text-white/90 font-bold">←</kbd>
+          <kbd className="px-1.5 py-0.5 rounded bg-white/20 text-[11px] font-mono text-white/90 font-bold">→</kbd>
+          <span className="text-[12px] text-white/80 font-medium">to navigate</span>
+        </div>
       )}
 
       {/* Bottom bar: grouped dots + counter */}
@@ -242,7 +297,7 @@ export default function PresentationDeck({ sections, onSlideChange, scrollTarget
           {sectionGroups.map((group, gIdx) => (
             <div key={gIdx} className="flex items-center gap-1">
               {gIdx > 0 && (
-                <div className="w-px h-3 bg-[var(--color-border)] mx-1.5" />
+                <div className={`w-px h-3 mx-1.5 ${isDarkBg ? 'bg-white/20' : 'bg-[var(--color-border)]'}`} />
               )}
               {Array.from({ length: group.count }).map((_, i) => {
                 const slideIndex = group.startIdx + i
@@ -252,8 +307,12 @@ export default function PresentationDeck({ sections, onSlideChange, scrollTarget
                     onClick={() => goTo(slideIndex)}
                     className={`rounded-full transition-all duration-200 cursor-pointer ${
                       slideIndex === current
-                        ? 'w-6 h-2 bg-[var(--color-accent)]'
-                        : 'w-2 h-2 bg-[var(--color-border)] hover:bg-[var(--color-text-muted)]'
+                        ? isDarkBg
+                          ? 'w-6 h-2 bg-[var(--color-cloud)]'
+                          : 'w-6 h-2 bg-[var(--color-accent)]'
+                        : isDarkBg
+                          ? 'w-2 h-2 bg-white/30 hover:bg-white/50'
+                          : 'w-2 h-2 bg-[var(--color-border)] hover:bg-[var(--color-text-muted)]'
                     }`}
                     aria-label={`Go to slide ${slideIndex + 1}`}
                   />
@@ -262,7 +321,7 @@ export default function PresentationDeck({ sections, onSlideChange, scrollTarget
             </div>
           ))}
         </div>
-        <span className="text-[12px] text-[var(--color-text-muted)] font-medium ml-3">
+        <span className={`text-[12px] font-bold ml-3 ${isDarkBg ? 'text-white/50' : 'text-[var(--color-text-muted)]'}`}>
           {current + 1} / {allSlides.length}
         </span>
       </div>

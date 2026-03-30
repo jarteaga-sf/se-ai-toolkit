@@ -1,5 +1,8 @@
-import { Zap, Search, MessageSquare, PenLine, Film, Wand2, Bot, Unlock, FileText, Terminal, Download, Shield, Puzzle, LogIn, FolderPlus, CheckCircle, Globe, ArrowRight, ArrowDown, X, Sparkles, TrendingUp } from 'lucide-react'
+import { useEffect, useRef } from 'react'
+import { Zap, Search, MessageSquare, PenLine, Film, Wand2, Bot, Unlock, FileText, Terminal, Download, Shield, Puzzle, LogIn, FolderPlus, CheckCircle, Globe, ArrowRight, ArrowDown, X, Sparkles, TrendingUp, BookOpen, Users, Layers } from 'lucide-react'
+import gsap from 'gsap'
 import ToolCards from './ToolCards'
+import { VibeCodingIllustration, AgentIllustration, FunnelIllustration } from './ConceptIllustrations'
 
 export const iconMap = { Zap, Search, MessageSquare, PenLine, Film, Wand2, Bot, Unlock, FileText, Terminal, Download, Shield, Puzzle, LogIn, FolderPlus, CheckCircle, Globe, TrendingUp }
 
@@ -123,6 +126,34 @@ export const visualMap = {
 }
 
 export function QuoteSlide({ quote, attribution, context, fullscreen }) {
+  const quoteRef = useRef(null)
+  const attrRef = useRef(null)
+
+  useEffect(() => {
+    const el = quoteRef.current
+    if (!el) return
+
+    const words = el.querySelectorAll('.quote-word')
+    gsap.set(words, { opacity: 0, y: 8 })
+    gsap.to(words, {
+      opacity: 1,
+      y: 0,
+      duration: 0.35,
+      stagger: 0.04,
+      ease: 'power2.out',
+      delay: 0.15,
+    })
+
+    if (attrRef.current) {
+      gsap.fromTo(attrRef.current,
+        { opacity: 0 },
+        { opacity: 1, duration: 0.5, delay: 0.15 + words.length * 0.04 + 0.2, ease: 'power2.out' }
+      )
+    }
+  }, [quote])
+
+  const quoteWords = quote.split(' ')
+
   return (
     <div className="flex flex-col items-center justify-center text-center px-6 py-6 h-full">
       {context && (
@@ -130,15 +161,25 @@ export function QuoteSlide({ quote, attribution, context, fullscreen }) {
           fullscreen ? 'text-[20px] md:text-[22px] max-w-[700px]' : 'text-[16px] md:text-[17px]'
         }`}>{context}</p>
       )}
-      <blockquote className={`leading-[1.15] tracking-[-0.02em] text-[var(--color-heading)] font-semibold ${
-        fullscreen ? 'text-[42px] md:text-[56px] max-w-[800px]' : 'text-[32px] md:text-[42px] max-w-[620px]'
-      }`}>
-        "{quote}"
+      <blockquote
+        ref={quoteRef}
+        className={`leading-[1.15] tracking-[-0.02em] text-[var(--color-heading)] font-semibold ${
+          fullscreen ? 'text-[42px] md:text-[56px] max-w-[800px]' : 'text-[32px] md:text-[42px] max-w-[620px]'
+        }`}
+      >
+        "{quoteWords.map((word, i) => (
+          <span key={i} className="quote-word inline-block mr-[0.3em]">{word}</span>
+        ))}"
       </blockquote>
       {attribution && (
-        <p className={`mt-6 text-[var(--color-text-muted)] font-medium max-w-[480px] ${
-          fullscreen ? 'text-[18px] md:text-[20px] max-w-[600px]' : 'text-[15px] md:text-[16px]'
-        }`}>{attribution}</p>
+        <p
+          ref={attrRef}
+          className={`mt-6 text-[var(--color-text-muted)] font-medium max-w-[480px] ${
+            fullscreen ? 'text-[18px] md:text-[20px] max-w-[600px]' : 'text-[15px] md:text-[16px]'
+          }`}
+        >
+          {attribution}
+        </p>
       )}
     </div>
   )
@@ -186,16 +227,20 @@ export function ComparisonSlide({ left, right, connector, fullscreen }) {
   )
 }
 
-export function StatementSlide({ statement, supporting, fullscreen }) {
+export function StatementSlide({ statement, supporting, fullscreen, isDarkBg }) {
   return (
     <div className="flex flex-col items-center justify-center text-center px-6 py-6 h-full">
-      <p className={`leading-[1.2] tracking-[-0.015em] text-[var(--color-heading)] font-semibold ${
+      <p className={`leading-[1.2] tracking-[-0.015em] font-bold ${
+        isDarkBg ? 'text-white' : 'text-[var(--color-heading)]'
+      } ${
         fullscreen ? 'text-[38px] md:text-[50px] max-w-[720px]' : 'text-[28px] md:text-[38px] max-w-[580px]'
       }`}>
         {statement}
       </p>
       {supporting && (
-        <p className={`mt-6 text-[var(--color-text-secondary)] leading-relaxed ${
+        <p className={`mt-6 leading-relaxed ${
+          isDarkBg ? 'text-[var(--color-cloud-light)]' : 'text-[var(--color-text-secondary)]'
+        } ${
           fullscreen ? 'text-[20px] md:text-[24px] max-w-[640px]' : 'text-[17px] md:text-[19px] max-w-[500px]'
         }`}>
           {supporting}
@@ -286,13 +331,102 @@ export function TakeawaySlide({ text, fullscreen }) {
   )
 }
 
+/**
+ * Stat callout slide — 3 big numbers with supporting text.
+ */
+export function StatCalloutSlide({ stats, fullscreen }) {
+  return (
+    <div className="flex flex-col items-center justify-center h-full px-6 py-6">
+      <div className={`grid grid-cols-3 w-full ${
+        fullscreen ? 'gap-8 max-w-[900px]' : 'gap-6 max-w-[680px]'
+      }`}>
+        {stats.map((stat, i) => (
+          <div key={i} className="flex flex-col items-center text-center">
+            <span className={`font-bold text-[var(--color-accent)] leading-none tracking-tight ${
+              fullscreen ? 'text-[56px] md:text-[72px]' : 'text-[40px] md:text-[52px]'
+            }`}>{stat.value}</span>
+            <p className={`mt-3 text-[var(--color-heading)] font-semibold leading-snug ${
+              fullscreen ? 'text-[18px] md:text-[20px] max-w-[260px]' : 'text-[15px] md:text-[17px] max-w-[200px]'
+            }`}>{stat.label}</p>
+            {stat.source && (
+              <p className={`mt-1.5 text-[var(--color-text-muted)] italic ${
+                fullscreen ? 'text-[13px]' : 'text-[11px]'
+              }`}>{stat.source}</p>
+            )}
+          </div>
+        ))}
+      </div>
+    </div>
+  )
+}
+
+/**
+ * Illustrated concept: text on left, animated illustration on right.
+ */
+export function IllustratedConceptSlide({ title, subtitle, message, illustration, fullscreen }) {
+  const illustrations = {
+    vibeCoding: VibeCodingIllustration,
+    agent: AgentIllustration,
+  }
+  const Illustration = illustrations[illustration]
+
+  return (
+    <div className="flex flex-col lg:flex-row items-center justify-center gap-10 lg:gap-16 h-full px-6 py-6">
+      {/* Text side */}
+      <div className={`flex flex-col max-w-[400px] ${fullscreen ? '' : 'max-w-[320px]'}`}>
+        <h3 className={`font-bold text-[var(--color-heading)] leading-tight tracking-tight ${
+          fullscreen ? 'text-[32px] md:text-[40px]' : 'text-[24px] md:text-[28px]'
+        }`}>{title}</h3>
+        {subtitle && (
+          <p className={`mt-3 text-[var(--color-text-secondary)] leading-relaxed ${
+            fullscreen ? 'text-[19px]' : 'text-[16px]'
+          }`}>{subtitle}</p>
+        )}
+        {message && (
+          <p className={`mt-4 text-[var(--color-accent)] font-bold ${
+            fullscreen ? 'text-[17px]' : 'text-[15px]'
+          }`}>{message}</p>
+        )}
+      </div>
+      {/* Illustration side */}
+      <div className="flex items-center justify-center">
+        {Illustration && <Illustration />}
+      </div>
+    </div>
+  )
+}
+
+/**
+ * Spectrum/Funnel split: opportunity tiers mapped to tools.
+ */
+export function SpectrumSplitSlide({ title, message, fullscreen }) {
+  return (
+    <div className="flex flex-col items-center justify-center h-full px-6 py-6">
+      {title && (
+        <p className={`font-bold text-[var(--color-heading)] text-center mb-8 ${
+          fullscreen ? 'text-[24px] md:text-[28px]' : 'text-[19px] md:text-[21px]'
+        }`}>{title}</p>
+      )}
+      <FunnelIllustration />
+      {message && (
+        <p className={`mt-8 text-center text-[var(--color-text-secondary)] max-w-[560px] ${
+          fullscreen ? 'text-[17px]' : 'text-[15px]'
+        }`}>{message}</p>
+      )}
+    </div>
+  )
+}
+
 export function createSlideRenderers(fullscreen = false) {
   return {
-    quote: (slide) => <QuoteSlide {...slide} fullscreen={fullscreen} />,
-    comparison: (slide) => <ComparisonSlide {...slide} fullscreen={fullscreen} />,
-    statement: (slide) => <StatementSlide {...slide} fullscreen={fullscreen} />,
-    iconBullets: (slide) => <IconBulletsSlide {...slide} fullscreen={fullscreen} />,
-    toolCards: (slide) => <CardsSlide cards={slide.cards} component={ToolCards} />,
-    takeaway: (slide) => <TakeawaySlide text={slide.text} fullscreen={fullscreen} />,
+    quote: (slide, opts) => <QuoteSlide {...slide} fullscreen={fullscreen} />,
+    comparison: (slide, opts) => <ComparisonSlide {...slide} fullscreen={fullscreen} />,
+    statement: (slide, opts) => <StatementSlide {...slide} fullscreen={fullscreen} isDarkBg={opts?.isDarkBg} />,
+    iconBullets: (slide, opts) => <IconBulletsSlide {...slide} fullscreen={fullscreen} />,
+    toolCards: (slide, opts) => <CardsSlide cards={slide.cards} component={ToolCards} />,
+    takeaway: (slide, opts) => <TakeawaySlide text={slide.text} fullscreen={fullscreen} />,
+    statCallout: (slide, opts) => <StatCalloutSlide {...slide} fullscreen={fullscreen} />,
+    illustratedConcept: (slide, opts) => <IllustratedConceptSlide {...slide} fullscreen={fullscreen} />,
+    spectrumSplit: (slide, opts) => <SpectrumSplitSlide {...slide} fullscreen={fullscreen} />,
   }
 }

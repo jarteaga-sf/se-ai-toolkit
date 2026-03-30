@@ -2,6 +2,7 @@ import { useState, useCallback } from 'react'
 import Header from './Header'
 import Sidebar from './Sidebar'
 import ProgressBar from './ProgressBar'
+import AnimatedBackground from './AnimatedBackground'
 
 export default function Layout({ children }) {
   const [collapsed, setCollapsed] = useState(false)
@@ -13,6 +14,7 @@ export default function Layout({ children }) {
 
   return (
     <>
+      <AnimatedBackground />
       <Header />
       <ProgressBar />
       <Sidebar
@@ -27,13 +29,6 @@ export default function Layout({ children }) {
       >
         {typeof children === 'function' ? children({ onSlideChange: handleSlideChange }) : children}
       </main>
-      {/* Vignette overlay */}
-      <div
-        className="fixed inset-0 pointer-events-none z-30"
-        style={{
-          background: 'radial-gradient(ellipse 70% 60% at 55% 50%, transparent 0%, rgba(0,0,0,0.06) 100%)',
-        }}
-      />
     </>
   )
 }

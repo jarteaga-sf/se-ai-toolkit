@@ -1,61 +1,74 @@
 import { useEffect, useRef, useCallback } from 'react'
-import { useIntersectionObserver } from '@/hooks/useIntersectionObserver'
+import gsap from 'gsap'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
+
+gsap.registerPlugin(ScrollTrigger)
 
 export default function Section({ id, label, title, subtitle, first = false, hideDivider = false, compact = false, children }) {
-  const { ref, hasIntersected } = useIntersectionObserver({
-    threshold: 0,
-    rootMargin: '0px 0px -35% 0px',
-  })
-
-  const visible = first || hasIntersected
+  const sectionRef = useRef(null)
   const cardRef = useRef(null)
+  const hasAnimated = useRef(false)
 
   useEffect(() => {
-    const el = ref.current
-    if (!visible || !el) return
+    const section = sectionRef.current
+    const card = cardRef.current
+    if (!section || !card) return
 
-    const thresholds = Array.from({ length: 21 }, (_, i) => i / 20)
+    // Initial state
+    gsap.set(section, { y: first ? 0 : 40, opacity: first ? 1 : 0 })
 
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (!cardRef.current) return
-        const ratio = entry.intersectionRatio
-        // More aggressive fade: 0.12 at edges, need ~60% visible to reach full opacity
-        const opacity = Math.max(0.12, Math.min(1, ratio * 1.8))
-        cardRef.current.style.opacity = opacity
+    const trigger = ScrollTrigger.create({
+      trigger: section,
+      start: 'top 85%',
+      once: true,
+      onEnter: () => {
+        if (hasAnimated.current) return
+        hasAnimated.current = true
+        gsap.to(section, {
+          y: 0,
+          opacity: 1,
+          duration: 0.8,
+          ease: 'power2.out',
+        })
       },
-      { threshold: thresholds }
-    )
+    })
 
-    observer.observe(el)
-    return () => observer.disconnect()
-  }, [visible])
+    // Progressive opacity based on scroll position
+    const opacityTrigger = ScrollTrigger.create({
+      trigger: section,
+      start: 'top bottom',
+      end: 'bottom top',
+      onUpdate: (self) => {
+        const progress = self.progress
+        // Peak opacity at center of viewport
+        const centerDist = Math.abs(progress - 0.5) * 2
+        const opacity = Math.max(0.3, 1 - centerDist * 0.6)
+        card.style.opacity = opacity
+      },
+    })
 
-  const setRefs = useCallback(
-    (node) => {
-      ref.current = node
-    },
-    [ref]
-  )
+    return () => {
+      trigger.kill()
+      opacityTrigger.kill()
+    }
+  }, [first])
 
   return (
     <>
       <section
         id={id}
-        ref={setRefs}
-        className={`${first ? 'pt-14 md:pt-16' : 'pt-16 md:pt-20'} pb-16 md:pb-20 px-6 md:px-10 flex items-start justify-center transition-[opacity,transform] duration-700 ease-out ${
-          visible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6 will-change-[opacity,transform]'
-        }`}
+        ref={sectionRef}
+        className={`${first ? 'pt-14 md:pt-16' : 'pt-16 md:pt-20'} pb-16 md:pb-20 px-6 md:px-10 flex items-start justify-center`}
       >
         <div className="w-full max-w-[960px]">
           <div
             ref={cardRef}
-            className="bg-[var(--color-bg-white)] rounded-xl border border-[var(--color-border)]/40 shadow-[0_1px_3px_rgba(0,0,0,0.04),0_6px_24px_rgba(0,0,0,0.03)] p-8 md:p-10 transition-opacity duration-500 ease-out"
+            className="bg-[var(--color-bg-white)] rounded-2xl border border-[var(--color-border)]/40 shadow-[var(--shadow-card)] p-8 md:p-10 transition-shadow duration-500 ease-out hover:shadow-[var(--shadow-soft)]"
           >
             {compact ? (
               <div className="mb-2">
                 {label && (
-                  <span className="text-[11px] font-semibold uppercase tracking-[0.12em] text-[var(--color-accent)]">
+                  <span className="text-[11px] font-bold uppercase tracking-[0.12em] text-[var(--color-accent)]">
                     {label}
                   </span>
                 )}
@@ -63,7 +76,7 @@ export default function Section({ id, label, title, subtitle, first = false, hid
             ) : (
               <>
                 {label && (
-                  <p className="text-[11px] font-semibold uppercase tracking-[0.12em] text-[var(--color-accent)] mb-2">
+                  <p className="text-[11px] font-bold uppercase tracking-[0.12em] text-[var(--color-accent)] mb-2">
                     {label}
                   </p>
                 )}

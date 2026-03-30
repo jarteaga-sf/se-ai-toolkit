@@ -1,4 +1,9 @@
+import { useEffect, useRef } from 'react'
+import gsap from 'gsap'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { ClaudeLogo, CursorLogo, SaleoLogo, MeshMeshLogo } from './ToolLogos'
+
+gsap.registerPlugin(ScrollTrigger)
 
 const logos = {
   claude: ClaudeLogo,
@@ -7,11 +12,19 @@ const logos = {
   meshmesh: MeshMeshLogo,
 }
 
+// --- Per-tool accent colors (top border) ---
+const toolAccents = {
+  saleo: '#8402AD',
+  meshmesh: '#0176D3',
+  cursor: '#06A59A',
+  claude: '#066AFE',
+}
+
 // --- Per-tool mini visuals ---
 
 function TerminalVisual() {
   return (
-    <div className="w-full h-[148px] rounded-lg overflow-hidden border border-[var(--color-border)] shadow-sm flex flex-col">
+    <div className="w-full h-[148px] rounded-lg overflow-hidden border border-[var(--color-border)]/50 shadow-sm flex flex-col">
       <div className="bg-[#1E1E1E] px-3 py-1.5 flex items-center gap-1.5">
         <div className="w-[7px] h-[7px] rounded-full bg-red-400/70" />
         <div className="w-[7px] h-[7px] rounded-full bg-yellow-400/70" />
@@ -42,8 +55,7 @@ function TerminalVisual() {
 
 function EditorVisual() {
   return (
-    <div className="w-full h-[148px] rounded-lg overflow-hidden border border-[var(--color-border)] shadow-sm flex flex-col">
-      {/* Tab bar */}
+    <div className="w-full h-[148px] rounded-lg overflow-hidden border border-[var(--color-border)]/50 shadow-sm flex flex-col">
       <div className="bg-[#252526] px-2 py-1 flex items-center gap-0.5">
         <div className="px-2.5 py-1 rounded-t text-[10px] font-mono text-[#E5E7EB] bg-[#1E1E1E]">
           scoreCard.js
@@ -53,9 +65,7 @@ function EditorVisual() {
           Agent
         </div>
       </div>
-      {/* Split: code + chat */}
       <div className="flex flex-1">
-        {/* Code pane */}
         <div className="bg-[#1E1E1E] px-2.5 py-2 flex-1 border-r border-[#333]">
           <p className="text-[9px] font-mono">
             <span className="text-[#C586C0]">const</span>{' '}
@@ -70,7 +80,6 @@ function EditorVisual() {
             </p>
           </div>
         </div>
-        {/* Chat pane */}
         <div className="bg-[#181818] px-2 py-2 w-[40%] flex flex-col gap-1 overflow-hidden">
           <p className="text-[7px] font-mono text-[#9CA3AF] truncate">
             Add a threshold
@@ -86,8 +95,7 @@ function EditorVisual() {
 
 function BrowserVisual() {
   return (
-    <div className="w-full h-[148px] rounded-lg overflow-hidden border border-[var(--color-border)] shadow-sm flex flex-col">
-      {/* Browser chrome */}
+    <div className="w-full h-[148px] rounded-lg overflow-hidden border border-[var(--color-border)]/50 shadow-sm flex flex-col">
       <div className="bg-[#F1F1F1] px-3 py-1.5 flex items-center gap-2">
         <div className="flex gap-1">
           <div className="w-[7px] h-[7px] rounded-full bg-[#ccc]" />
@@ -98,24 +106,58 @@ function BrowserVisual() {
           <span className="text-[9px] text-[#999]">salesforce.com/lightning/...</span>
         </div>
       </div>
-      {/* SF record mockup */}
       <div className="bg-white px-3 py-2.5 flex-1">
         <div className="flex items-center justify-between mb-2">
-          <span className="text-[11px] font-semibold text-[#032D60]">Acme Corp</span>
+          <span className="text-[11px] font-bold text-[var(--color-heading)]">Acme Corp</span>
           <span className="text-[9px] text-[#999]">Account</span>
         </div>
         <div className="flex flex-col gap-1.5">
           <div className="flex items-center justify-between">
             <span className="text-[9px] text-[#666]">Revenue</span>
-            <span className="text-[10px] font-semibold text-[#7C3AED] bg-[#7C3AED]/10 px-1.5 py-0.5 rounded">$4.2M</span>
+            <span className="text-[10px] font-bold text-[var(--color-violet)] bg-[var(--color-violet)]/10 px-1.5 py-0.5 rounded">$4.2M</span>
           </div>
           <div className="flex items-center justify-between">
             <span className="text-[9px] text-[#666]">Industry</span>
-            <span className="text-[10px] font-semibold text-[#7C3AED] bg-[#7C3AED]/10 px-1.5 py-0.5 rounded">Healthcare</span>
+            <span className="text-[10px] font-bold text-[var(--color-violet)] bg-[var(--color-violet)]/10 px-1.5 py-0.5 rounded">Healthcare</span>
           </div>
           <div className="flex items-center justify-between">
             <span className="text-[9px] text-[#666]">Open Opps</span>
-            <span className="text-[10px] font-semibold text-[#7C3AED] bg-[#7C3AED]/10 px-1.5 py-0.5 rounded">12</span>
+            <span className="text-[10px] font-bold text-[var(--color-violet)] bg-[var(--color-violet)]/10 px-1.5 py-0.5 rounded">12</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  )
+}
+
+function AgentBuilderVisual() {
+  return (
+    <div className="w-full h-[148px] rounded-lg overflow-hidden border border-[var(--color-border)]/50 shadow-sm flex flex-col">
+      <div className="bg-[var(--color-heading)] px-3 py-1.5 flex items-center gap-2">
+        <div className="flex gap-1">
+          <div className="w-[7px] h-[7px] rounded-full bg-white/30" />
+          <div className="w-[7px] h-[7px] rounded-full bg-white/30" />
+          <div className="w-[7px] h-[7px] rounded-full bg-white/30" />
+        </div>
+        <span className="text-[9px] font-mono text-white/70">MeshMesh</span>
+      </div>
+      <div className="bg-[var(--color-surface)] px-3 py-2.5 flex-1">
+        <div className="flex items-center gap-1.5 mb-2">
+          <div className="w-[8px] h-[8px] rounded-full bg-[var(--color-accent)]" />
+          <span className="text-[10px] font-bold text-[var(--color-heading)]">Agentforce Agent</span>
+        </div>
+        <div className="flex flex-col gap-1">
+          <div className="flex items-center justify-between px-2 py-1 rounded-lg bg-white border border-[var(--color-border)]/50">
+            <span className="text-[9px] text-[var(--color-text-muted)]">Topics</span>
+            <span className="text-[9px] font-bold text-[var(--color-heading)]">4</span>
+          </div>
+          <div className="flex items-center justify-between px-2 py-1 rounded-lg bg-white border border-[var(--color-border)]/50">
+            <span className="text-[9px] text-[var(--color-text-muted)]">Actions</span>
+            <span className="text-[9px] font-bold text-[var(--color-heading)]">12</span>
+          </div>
+          <div className="flex items-center justify-between px-2 py-1 rounded-lg bg-[#ECFDF5] border border-[#A7F3D0]">
+            <span className="text-[9px] text-[#065F46]">Tests passing</span>
+            <span className="text-[9px] font-bold text-[#065F46]">500+</span>
           </div>
         </div>
       </div>
@@ -124,15 +166,15 @@ function BrowserVisual() {
 }
 
 const setupLevels = {
-  easy: { label: 'Easy setup', dots: 1, color: '#16a34a' },
-  moderate: { label: 'Moderate setup', dots: 2, color: '#d97706' },
-  advanced: { label: 'Advanced setup', dots: 3, color: '#64748b' },
+  easy: { label: 'Easy setup', dots: 1, color: '#06A59A' },
+  moderate: { label: 'Moderate setup', dots: 2, color: '#FCC003' },
+  advanced: { label: 'Advanced setup', dots: 3, color: '#747474' },
 }
 
 function SetupLevel({ level }) {
   const { label, dots, color } = setupLevels[level]
   return (
-    <div className="px-4 pb-4 pt-1 mt-auto border-t border-[var(--color-border)] mx-4 flex items-center justify-center gap-2">
+    <div className="px-4 pb-4 pt-1 mt-auto border-t border-[var(--color-border)]/40 mx-4 flex items-center justify-center gap-2">
       <div className="flex gap-1">
         {[1, 2, 3].map((n) => (
           <div
@@ -150,43 +192,6 @@ function SetupLevel({ level }) {
   )
 }
 
-function AgentBuilderVisual() {
-  return (
-    <div className="w-full h-[148px] rounded-lg overflow-hidden border border-[var(--color-border)] shadow-sm flex flex-col">
-      {/* Header */}
-      <div className="bg-[#0D3B66] px-3 py-1.5 flex items-center gap-2">
-        <div className="flex gap-1">
-          <div className="w-[7px] h-[7px] rounded-full bg-white/30" />
-          <div className="w-[7px] h-[7px] rounded-full bg-white/30" />
-          <div className="w-[7px] h-[7px] rounded-full bg-white/30" />
-        </div>
-        <span className="text-[9px] font-mono text-white/70">MeshMesh</span>
-      </div>
-      {/* Agent config */}
-      <div className="bg-[#F0F4F8] px-3 py-2.5 flex-1">
-        <div className="flex items-center gap-1.5 mb-2">
-          <div className="w-[8px] h-[8px] rounded-full bg-[#0D3B66]" />
-          <span className="text-[10px] font-semibold text-[#0D3B66]">Agentforce Agent</span>
-        </div>
-        <div className="flex flex-col gap-1">
-          <div className="flex items-center justify-between px-2 py-1 rounded bg-white border border-[#E2E8F0]">
-            <span className="text-[9px] text-[#64748B]">Topics</span>
-            <span className="text-[9px] font-semibold text-[#0D3B66]">4</span>
-          </div>
-          <div className="flex items-center justify-between px-2 py-1 rounded bg-white border border-[#E2E8F0]">
-            <span className="text-[9px] text-[#64748B]">Actions</span>
-            <span className="text-[9px] font-semibold text-[#0D3B66]">12</span>
-          </div>
-          <div className="flex items-center justify-between px-2 py-1 rounded bg-[#ECFDF5] border border-[#A7F3D0]">
-            <span className="text-[9px] text-[#065F46]">Tests passing</span>
-            <span className="text-[9px] font-semibold text-[#065F46]">500+</span>
-          </div>
-        </div>
-      </div>
-    </div>
-  )
-}
-
 const miniVisuals = {
   claude: TerminalVisual,
   cursor: EditorVisual,
@@ -195,44 +200,82 @@ const miniVisuals = {
 }
 
 export default function ToolCards({ cards }) {
+  const containerRef = useRef(null)
+
+  useEffect(() => {
+    const container = containerRef.current
+    if (!container) return
+
+    const items = container.querySelectorAll('.tool-card')
+    if (!items.length) return
+
+    gsap.set(items, { y: 30, opacity: 0 })
+
+    const trigger = ScrollTrigger.create({
+      trigger: container,
+      start: 'top 85%',
+      once: true,
+      onEnter: () => {
+        gsap.to(items, {
+          y: 0,
+          opacity: 1,
+          duration: 0.7,
+          stagger: 0.12,
+          ease: 'power2.out',
+        })
+      },
+    })
+
+    return () => trigger.kill()
+  }, [cards])
+
   return (
-    <div className={`grid grid-cols-2 ${cards.length === 4 ? 'lg:grid-cols-4' : 'sm:grid-cols-3'} gap-5 my-8 items-stretch`}>
+    <div ref={containerRef} className={`grid grid-cols-2 ${cards.length === 4 ? 'lg:grid-cols-4' : 'sm:grid-cols-3'} gap-5 my-8 items-stretch`}>
       {cards.map((card, i) => {
         const Logo = logos[card.logo]
         const Visual = miniVisuals[card.logo]
+        const accent = toolAccents[card.logo] || 'var(--color-accent)'
         return (
           <div
             key={i}
-            className="bg-[var(--color-bg-white)] border border-[var(--color-border)] rounded-xl shadow-[var(--shadow-card)] overflow-hidden transition-[transform,box-shadow] duration-200 hover:-translate-y-0.5 hover:shadow-md flex flex-col"
+            className="tool-card bg-[var(--color-bg-white)] border border-[var(--color-border)]/40 rounded-2xl shadow-[var(--shadow-card)] overflow-hidden transition-all duration-200 hover:-translate-y-1 hover:shadow-[var(--shadow-card-hover)] flex flex-col"
+            style={{ borderTop: `3px solid ${accent}` }}
           >
             {/* Logo + name */}
             <div className="pt-5 pb-1 flex flex-col items-center gap-1.5">
               {Logo && <Logo size={40} />}
-              <h4 className="font-[var(--font-heading)] text-[17px] font-semibold text-[var(--color-heading)]">
+              <h4 className="font-[var(--font-heading)] text-[17px] font-bold text-[var(--color-heading)]">
                 {card.name}
               </h4>
             </div>
-            {/* Tagline — fixed height for alignment */}
+            {/* Tagline */}
             <div className="h-[44px] flex items-start justify-center px-4">
               {card.tagline && (
                 <p className="text-[13px] text-[var(--color-text-muted)] italic text-center">{card.tagline}</p>
               )}
             </div>
-            {/* Role badge — fixed height for alignment */}
+            {/* Role badge */}
             <div className="h-[32px] flex items-center justify-center px-4">
               {card.role && (
-                <span className="text-[11px] font-semibold uppercase tracking-[0.08em] px-3 py-1 rounded-full bg-[var(--color-accent)]/10 text-[var(--color-accent)] border border-[var(--color-accent)]/20 whitespace-nowrap">
+                <span
+                  className="text-[11px] font-bold uppercase tracking-[0.08em] px-3 py-1 rounded-full whitespace-nowrap"
+                  style={{
+                    backgroundColor: `${accent}15`,
+                    color: accent,
+                    border: `1px solid ${accent}30`,
+                  }}
+                >
                   {card.role}
                 </span>
               )}
             </div>
-            {/* Mini visual — fixed height for cross-card alignment */}
+            {/* Mini visual */}
             <div className="px-4 pt-3 pb-4 h-[180px] flex items-center overflow-hidden">
               <div className="w-full overflow-hidden rounded-lg">
                 {Visual && <Visual />}
               </div>
             </div>
-            {/* Proof point — fixed height for alignment */}
+            {/* Proof point */}
             <div className="px-4 pb-4 h-[80px] flex items-center">
               <p className="text-[13px] text-[var(--color-text)] leading-snug text-center w-full">
                 {card.bestFor}

@@ -5,15 +5,15 @@ export default function TabbedToolSection({ tabs }) {
 
   return (
     <div className="mt-8">
-      <div className="flex bg-[var(--color-border-light)] rounded-lg p-1 mb-6">
+      <div className="flex bg-[var(--color-surface)] rounded-xl p-1 mb-6">
         {tabs.map((tab, i) => (
           <button
             key={tab.label}
             onClick={() => setActiveTab(i)}
-            className={`flex-1 text-[15px] px-3 py-2 rounded-md font-medium transition-all cursor-pointer ${
+            className={`flex-1 text-[15px] px-3 py-2 rounded-lg font-bold transition-all cursor-pointer ${
               activeTab === i
-                ? 'bg-[var(--color-bg-white)] text-[var(--color-text)] shadow-[var(--shadow-card)]'
-                : 'text-[var(--color-text-muted)] hover:text-[var(--color-text-secondary)]'
+                ? 'bg-[var(--color-bg-white)] text-[var(--color-heading)] shadow-[var(--shadow-card)]'
+                : 'text-[var(--color-text-muted)] hover:text-[var(--color-heading)]'
             }`}
           >
             {tab.label}

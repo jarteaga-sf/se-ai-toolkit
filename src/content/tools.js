@@ -8,6 +8,7 @@ export const claudeCode = {
       label: 'Overview',
       content: {
         prose: [
+          "**Who it's for: Technical SEs who want maximum autonomy.** You describe a goal, it handles everything -- reads your project, writes code, runs it, checks its own work. The most powerful tool when you need to build from scratch.",
           "Claude Code is the tool you reach for when you need to **build something from scratch.** An Agentforce agent. A batch of demo data. An RFP response mapped to Salesforce capabilities. You describe what you need in plain English, and it builds it -- start to finish, on its own.",
           "**SEs are using it to:** build working Agentforce agents in under an hour, generate realistic demo data for any vertical, prototype integrations during discovery calls, and draft technical RFP responses overnight.",
           "You don't manage the steps. You describe the outcome and review what it produces. **The POC starts during the call, not after it.**",
@@ -76,22 +77,21 @@ export const meshmesh = {
       label: 'Overview',
       content: {
         prose: [
-          "MeshMesh is the tool you reach for when you need to **build something on Salesforce, fast.** It already understands the platform -- objects, rules, Agentforce patterns -- so you skip the explaining and go straight to building.",
-          "**SEs are using it to:** stand up Agentforce agents in a single session, customize demo orgs for specific industries, build reusable demo packages by vertical, and create test suites that prove things work at scale.",
+          "**Who it's for: Any SE who builds on Salesforce -- technical or not.** MeshMesh already understands the platform -- objects, rules, Agentforce patterns -- so you skip the explaining and go straight to building. It's the Salesforce-native way to build, and it's where custom work starts.",
+          "MeshMesh is the tool you reach for when you need to **build something on Salesforce, fast.** Stand up Agentforce agents in a single session, customize demo orgs for specific industries, build reusable demo packages by vertical, and create test suites that prove things work at scale.",
           "One SE cut demo guide prep from 2 full days to 30 minutes. Another built a six-week POC in 90 minutes. **Customers activate instead of waiting weeks for a follow-up.**",
         ],
         quote: "What took back and forth with Cursor took 3 prompts... it built me multiple components and inserted seed data correctly. It even tested the seed data itself.",
         terminal: {
           title: 'What a Session Looks Like',
           steps: [
-            { type: 'command', content: 'meshmesh init --org my-demo-org' },
-            { type: 'output', content: 'Connected to my-demo-org' },
+            { type: 'claude-response', content: 'Connected to my-demo-org. I can see Sales Cloud, Service Cloud, and 3 custom objects.' },
             { type: 'output', content: '' },
-            { type: 'output', content: '> build an Agentforce agent for customer onboarding with 4 topics' },
+            { type: 'output', content: '> Build an Agentforce agent for customer onboarding with 4 topics' },
             { type: 'output', content: '' },
             { type: 'claude-thinking', content: 'Reading your org structure and existing setup...' },
             { type: 'output', content: '' },
-            { type: 'claude-response', content: 'Done. Agent with 4 topics, 12 actions, and templates. 500+ tests passing. Ready to deploy.' },
+            { type: 'claude-response', content: 'Done. Agent with 4 topics, 12 actions, and templates. 500+ tests passing. Deploying now.' },
           ],
         },
         takeaway: "Reach for MeshMesh when the build is **Salesforce-native and you want it done in one sitting.**",
@@ -133,6 +133,7 @@ export const cursor = {
       label: 'Overview',
       content: {
         prose: [
+          "**Who it's for: SEs with some code comfort who want to move faster.** If you've ever tweaked a Lightning component, adjusted Apex, or just want to iterate on existing code -- Cursor gives you an AI co-pilot inside your editor.",
           "Cursor is the tool you reach for when you need to **edit, tweak, or understand existing code.** It's a smart editor -- you work inside your files like normal, but AI is there to help at every step.",
           "**SEs are using it to:** customize demo components for specific prospects, understand code they inherited in minutes instead of hours, iterate on a customer's ask live during a call, and turn point-and-click automation into code when prospects hit limits.",
           "Four shortcuts cover almost everything. **Customer confidence goes up when you can iterate in real time.**",
@@ -205,6 +206,7 @@ export const saleo = {
       label: 'Overview',
       content: {
         prose: [
+          "**Who it's for: Every SE. Zero technical skill required.** If you run demos, Saleo makes them better. It's the fastest path to a personalized, customer-ready demo -- no code, no complexity, no risk to your org. Start here.",
           "Saleo is the tool you reach for when you need your **demo to look like the prospect's business.** Their company name, their industry metrics, their pipeline stages -- all shown on screen without changing a single real record.",
           "**SEs are using it to:** personalize demos in minutes instead of hours, switch between prospect views mid-call, build reusable templates by industry, and show exec-level dashboards with publicly reported numbers.",
           "No coding. No complexity. **Demos land harder when the prospect sees their own world.**",
