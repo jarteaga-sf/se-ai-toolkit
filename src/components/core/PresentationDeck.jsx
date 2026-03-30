@@ -182,7 +182,7 @@ export default function PresentationDeck({ sections, onSlideChange, onNavReady }
         <div
           ref={contentRef}
           key={current}
-          className="animate-in fade-in duration-300 pointer-events-auto"
+          className="pointer-events-auto"
           style={{
             transformOrigin: 'center center',
             padding: '12px 20px',
