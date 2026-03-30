@@ -8,6 +8,15 @@ export const theWhy = {
   tierLabel: 'The Big Picture',
   title: 'The Why',
   slides: [
+    // Title — opening hook while waiting for everyone to join.
+    {
+      layout: 'title',
+      title: 'The SE',
+      accent: 'AI Toolkit',
+      subtitle: 'Four tools. One mission. Better demos, faster.',
+      badges: ['How I AI', 'Solutions Engineering', '2025'],
+    },
+
     // Agenda — orient the audience before the hook.
     {
       layout: 'iconBullets',

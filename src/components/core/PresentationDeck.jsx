@@ -121,6 +121,7 @@ export default function PresentationDeck({ sections, onSlideChange, onNavReady }
   // Determine background style based on slide layout
   const getSlideBackground = () => {
     const layout = currentItem.slide.layout
+    if (layout === 'title') return 'bg-gradient-to-br from-[#001E5B] via-[#022AC0] to-[#066AFE]'
     if (layout === 'quote') return 'bg-[var(--color-surface)]'
     if (layout === 'statement') return 'bg-gradient-to-br from-[#001E5B] via-[#022AC0] to-[#066AFE]'
     if (layout === 'cinematic') return 'bg-gradient-to-br from-[#001E5B] via-[#022AC0] to-[#066AFE]'
@@ -143,22 +144,24 @@ export default function PresentationDeck({ sections, onSlideChange, onNavReady }
     return 'bg-[var(--color-bg)]'
   }
 
-  const isDarkBg = ['statement', 'tierTransition', 'cinematic'].includes(currentItem.slide.layout)
+  const isDarkBg = ['title', 'statement', 'tierTransition', 'cinematic'].includes(currentItem.slide.layout)
 
   return (
     <div
       className={`relative w-full h-full flex flex-col pointer-events-none ${getSlideBackground()}`}
     >
-      {/* Salesforce logo - top left */}
-      <div className="absolute top-7 left-10 z-10 pointer-events-auto flex items-center gap-4">
-        <img
-          src="https://assets.meshmesh.io/system/salesforce-with-type-logo.svg"
-          alt="Salesforce"
-          className={`h-10 w-auto ${
-            isDarkBg ? 'brightness-0 invert' : ''
-          }`}
-        />
-      </div>
+      {/* Salesforce logo - top left (hidden on title slide which has its own) */}
+      {currentItem.slide.layout !== 'title' && (
+        <div className="absolute top-7 left-10 z-10 pointer-events-auto flex items-center gap-4">
+          <img
+            src="https://assets.meshmesh.io/system/salesforce-with-type-logo.svg"
+            alt="Salesforce"
+            className={`h-10 w-auto ${
+              isDarkBg ? 'brightness-0 invert' : ''
+            }`}
+          />
+        </div>
+      )}
 
       {/* Slide content -- scaled to fit */}
       <div ref={stageRef} className="flex-1 flex items-center justify-center pointer-events-none">

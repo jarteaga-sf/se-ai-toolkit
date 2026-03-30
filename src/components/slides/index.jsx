@@ -1,3 +1,4 @@
+import TitleSlide from './TitleSlide'
 import StatementSlide from './StatementSlide'
 import BigStatSlide from './BigStatSlide'
 import CinematicSlide from './CinematicSlide'
@@ -23,6 +24,7 @@ import ContestCtaSlide from './ContestCtaSlide'
 import ToolCardsSlide from './ToolCardsSlide'
 
 const layoutComponents = {
+  title: TitleSlide,
   statement: StatementSlide,
   bigStat: BigStatSlide,
   cinematic: CinematicSlide,
