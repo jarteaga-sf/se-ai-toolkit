@@ -99,6 +99,8 @@ export default function PresentationDeck({ sections, onSlideChange, onNavReady }
     if (!stage || !content) return
 
     const recalc = () => {
+      // Measure at scale(1) without causing a visible flash — hide during measurement
+      content.style.visibility = 'hidden'
       content.style.transform = 'scale(1)'
       const contentW = content.scrollWidth
       const contentH = content.scrollHeight
@@ -108,6 +110,7 @@ export default function PresentationDeck({ sections, onSlideChange, onNavReady }
       const s = Math.min(availW / contentW, availH / contentH, 2.0)
       const clamped = Math.max(0.4, s)
       content.style.transform = `scale(${clamped})`
+      content.style.visibility = ''
       setScale(clamped)
     }
 
@@ -149,14 +152,14 @@ export default function PresentationDeck({ sections, onSlideChange, onNavReady }
 
   return (
     <div
-      className={`relative w-full h-full flex flex-col transition-colors duration-500 pointer-events-none ${getSlideBackground()}`}
+      className={`relative w-full h-full flex flex-col pointer-events-none ${getSlideBackground()}`}
     >
       {/* Salesforce logo + section label - top left */}
       <div className="absolute top-7 left-10 z-10 pointer-events-auto flex items-center gap-4">
         <img
           src="https://assets.meshmesh.io/system/salesforce-with-type-logo.svg"
           alt="Salesforce"
-          className={`h-10 w-auto transition-all duration-300 ${
+          className={`h-10 w-auto ${
             isDarkBg ? 'brightness-0 invert' : ''
           }`}
         />
