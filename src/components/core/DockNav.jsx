@@ -239,13 +239,6 @@ export default function DockNav({
           )}
         </div>
 
-        <div className="w-px h-6 bg-white/15 mx-0.5" />
-
-        {/* Slide counter */}
-        <span className="text-[13px] font-bold text-white/45 tabular-nums min-w-[42px] text-center">
-          {current + 1}/{total}
-        </span>
-
         {/* Explore drawer button */}
         {hasExploreContent && (
           <>

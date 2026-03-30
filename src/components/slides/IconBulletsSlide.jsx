@@ -1,6 +1,8 @@
+import { useEffect, useRef } from 'react'
 import * as LucideIcons from 'lucide-react'
 import { ClaudeLogo, CursorLogo, SaleoLogo, MeshMeshLogo } from '../illustrations/ToolLogos'
 import { SpeedVisual, CredibilityVisual, IndependenceVisual } from '../illustrations/SlideVisuals'
+import gsap from 'gsap'
 
 const visualMap = {
   speed: SpeedVisual,
@@ -17,13 +19,64 @@ const logoMap = {
 
 export default function IconBulletsSlide({ title, bullets, fullscreen }) {
   const cols = bullets.length === 4 ? 'grid-cols-2 sm:grid-cols-4' : 'grid-cols-3'
+  const gridRef = useRef(null)
+  const titleRef = useRef(null)
+
+  useEffect(() => {
+    if (!gridRef.current || !titleRef.current) return
+
+    // Animate title
+    gsap.fromTo(titleRef.current,
+      { opacity: 0, y: -20 },
+      { opacity: 1, y: 0, duration: 0.6, ease: 'power2.out' }
+    )
+
+    // Staggered card entrance
+    const cards = gridRef.current.querySelectorAll('.bullet-card')
+    gsap.fromTo(cards,
+      { opacity: 0, y: 30, scale: 0.92 },
+      {
+        opacity: 1, y: 0, scale: 1,
+        duration: 0.5,
+        stagger: 0.12,
+        ease: 'back.out(1.4)',
+        delay: 0.25,
+      }
+    )
+
+    // Subtle floating animation on icon containers
+    const icons = gridRef.current.querySelectorAll('.icon-float')
+    icons.forEach((icon, i) => {
+      gsap.to(icon, {
+        y: -4,
+        duration: 1.8 + i * 0.3,
+        ease: 'sine.inOut',
+        yoyo: true,
+        repeat: -1,
+        delay: i * 0.2,
+      })
+    })
+
+    // Subtle glow pulse on icon backgrounds
+    const iconBgs = gridRef.current.querySelectorAll('.icon-bg-pulse')
+    iconBgs.forEach((bg, i) => {
+      gsap.to(bg, {
+        boxShadow: '0 0 16px rgba(0,176,255,0.15)',
+        duration: 2,
+        ease: 'sine.inOut',
+        yoyo: true,
+        repeat: -1,
+        delay: i * 0.4,
+      })
+    })
+  }, [])
 
   return (
     <div className="max-w-[1060px] mx-auto px-8">
-      <h2 className="text-[38px] font-bold text-[var(--color-heading)] tracking-[-0.02em] text-center mb-10">
+      <h2 ref={titleRef} className="text-[38px] font-bold text-[var(--color-heading)] tracking-[-0.02em] text-center mb-10">
         {title}
       </h2>
-      <div className={`grid ${cols} gap-6 items-stretch`}>
+      <div ref={gridRef} className={`grid ${cols} gap-6 items-stretch`}>
         {bullets.map((bullet, i) => {
           const Icon = bullet.icon ? LucideIcons[bullet.icon] : null
           const Visual = bullet.visual ? visualMap[bullet.visual] : null
@@ -32,20 +85,20 @@ export default function IconBulletsSlide({ title, bullets, fullscreen }) {
           return (
             <div
               key={i}
-              className="flex flex-col items-center text-center rounded-2xl border border-[var(--color-border)]/60 bg-[var(--color-bg-white)] p-5 shadow-sm"
+              className="bullet-card flex flex-col items-center text-center rounded-2xl border border-[var(--color-border)]/60 bg-[var(--color-bg-white)] p-5 shadow-sm hover:shadow-md hover:border-[var(--color-accent)]/30 transition-all duration-300"
             >
               {/* Visual slot — fixed height ensures all cards align */}
               {Visual ? (
-                <div className="h-[168px] w-full flex items-center justify-center overflow-hidden mb-4">
+                <div className="icon-float h-[168px] w-full flex items-center justify-center overflow-hidden mb-4">
                   <Visual />
                 </div>
               ) : LogoComp ? (
-                <div className="h-[56px] flex items-center justify-center mb-4">
+                <div className="icon-float h-[56px] flex items-center justify-center mb-4">
                   <LogoComp size={44} />
                 </div>
               ) : Icon ? (
-                <div className="h-[56px] flex items-center justify-center mb-4">
-                  <div className="w-11 h-11 rounded-xl bg-[var(--color-accent)]/10 flex items-center justify-center">
+                <div className="icon-float h-[56px] flex items-center justify-center mb-4">
+                  <div className="icon-bg-pulse w-11 h-11 rounded-xl bg-[var(--color-accent)]/10 flex items-center justify-center">
                     <Icon size={22} className="text-[var(--color-accent)]" />
                   </div>
                 </div>
