@@ -83,19 +83,13 @@ export default function PresentationDeck({ sections, onSlideChange, onNavReady }
     return () => window.removeEventListener('keydown', handler)
   }, [next, prev])
 
-  // Direction-aware GSAP entrance animation
+  // Make content visible instantly on slide change — individual components handle their own entrance animations
   useEffect(() => {
     const content = contentRef.current
     if (!content) return
-
-    const direction = current >= prevSlide.current ? 1 : -1
     prevSlide.current = current
-
-    // Immediately hide before animating in — prevents flash of visible content
-    gsap.set(content, { opacity: 0, x: direction * 48 })
-    gsap.to(content,
-      { opacity: 1, x: 0, duration: 0.38, ease: 'power2.out' }
-    )
+    // Show wrapper immediately — no wrapper-level fade to avoid double-animation with component animations
+    gsap.set(content, { opacity: 1, x: 0 })
   }, [current])
 
   // Auto-scale content to fit viewport
@@ -177,7 +171,6 @@ export default function PresentationDeck({ sections, onSlideChange, onNavReady }
           style={{
             transformOrigin: 'center center',
             padding: '12px 20px',
-            opacity: 0,
           }}
         >
           {fullscreenRenderers[currentItem.slide.layout]?.(currentItem.slide, { isDarkBg })}
