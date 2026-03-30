@@ -63,6 +63,16 @@
   --shadow-card-hover: 0 12px 40px rgba(0, 30, 91, 0.1);
 }
 
+/* Slide entrance — CSS animation starts at opacity:0 BEFORE first paint (no flash) */
+@keyframes slide-fade-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+.slide-enter {
+  animation: slide-fade-in 0.3s ease-out both;
+}
+
 @layer base {
   html {
     -webkit-font-smoothing: antialiased;

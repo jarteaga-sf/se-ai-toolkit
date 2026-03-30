@@ -1,5 +1,4 @@
 import { useState, useEffect, useCallback, useRef } from 'react'
-import gsap from 'gsap'
 import { createSlideRenderers } from '../slides'
 
 const fullscreenRenderers = createSlideRenderers(true)
@@ -83,13 +82,9 @@ export default function PresentationDeck({ sections, onSlideChange, onNavReady }
     return () => window.removeEventListener('keydown', handler)
   }, [next, prev])
 
-  // Make content visible instantly on slide change — individual components handle their own entrance animations
+  // Track previous slide for direction
   useEffect(() => {
-    const content = contentRef.current
-    if (!content) return
     prevSlide.current = current
-    // Show wrapper immediately — no wrapper-level fade to avoid double-animation with component animations
-    gsap.set(content, { opacity: 1, x: 0 })
   }, [current])
 
   // Auto-scale content to fit viewport
@@ -99,7 +94,7 @@ export default function PresentationDeck({ sections, onSlideChange, onNavReady }
     if (!stage || !content) return
 
     const recalc = () => {
-      // Measure at scale(1) without causing a visible flash — hide during measurement
+      // Measure at scale(1) without causing a visible flash
       content.style.visibility = 'hidden'
       content.style.transform = 'scale(1)'
       const contentW = content.scrollWidth
@@ -154,7 +149,7 @@ export default function PresentationDeck({ sections, onSlideChange, onNavReady }
     <div
       className={`relative w-full h-full flex flex-col pointer-events-none ${getSlideBackground()}`}
     >
-      {/* Salesforce logo + section label - top left */}
+      {/* Salesforce logo - top left */}
       <div className="absolute top-7 left-10 z-10 pointer-events-auto flex items-center gap-4">
         <img
           src="https://assets.meshmesh.io/system/salesforce-with-type-logo.svg"
@@ -170,7 +165,7 @@ export default function PresentationDeck({ sections, onSlideChange, onNavReady }
         <div
           ref={contentRef}
           key={current}
-          className="pointer-events-auto"
+          className="pointer-events-auto slide-enter"
           style={{
             transformOrigin: 'center center',
             padding: '12px 20px',
