@@ -166,16 +166,6 @@ export default function PresentationDeck({ sections, onSlideChange, onNavReady }
             isDarkBg ? 'brightness-0 invert' : ''
           }`}
         />
-        {currentItem.sectionLabel && (
-          <>
-            <span className={`text-[16px] ${isDarkBg ? 'text-white/20' : 'text-[var(--color-border)]'}`}>|</span>
-            <span className={`text-[16px] font-bold uppercase tracking-[0.12em] ${
-              isDarkBg ? 'text-[var(--color-cloud-light)]' : 'text-[var(--color-accent)]'
-            }`}>
-              {currentItem.sectionLabel}
-            </span>
-          </>
-        )}
       </div>
 
       {/* Slide content -- scaled to fit */}
