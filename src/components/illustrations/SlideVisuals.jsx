@@ -13,25 +13,27 @@ export function SpeedVisual() {
     const result = ref.current.querySelector('.speed-result')
     const bars = ref.current.querySelectorAll('.speed-bar')
 
+    // Pre-hide all elements immediately
+    gsap.set(terminal, { opacity: 0, y: -15 })
+    gsap.set(arrow, { opacity: 0, scale: 0 })
+    gsap.set(result, { opacity: 0, y: 15 })
+    gsap.set(bars, { height: 0 })
+
     // Sequential entrance: terminal → arrow → result
-    gsap.fromTo(terminal,
-      { opacity: 0, y: -15 },
+    gsap.to(terminal,
       { opacity: 1, y: 0, duration: 0.4, ease: 'power2.out', delay: 0.2 }
     )
-    gsap.fromTo(arrow,
-      { opacity: 0, scale: 0 },
+    gsap.to(arrow,
       { opacity: 1, scale: 1, duration: 0.3, ease: 'back.out(2)', delay: 0.5 }
     )
-    gsap.fromTo(result,
-      { opacity: 0, y: 15 },
+    gsap.to(result,
       { opacity: 1, y: 0, duration: 0.4, ease: 'power2.out', delay: 0.7 }
     )
 
     // Animate chart bars growing
     bars.forEach((bar, i) => {
       const targetH = bar.dataset.h
-      gsap.fromTo(bar,
-        { height: 0 },
+      gsap.to(bar,
         { height: targetH, duration: 0.5, ease: 'power2.out', delay: 0.9 + i * 0.1 }
       )
     })
@@ -86,22 +88,24 @@ export function CredibilityVisual() {
     const result = ref.current.querySelector('.cred-result')
     const rows = ref.current.querySelectorAll('.cred-row')
 
-    gsap.fromTo(search,
-      { opacity: 0, y: -15 },
+    // Pre-hide all elements immediately
+    gsap.set(search, { opacity: 0, y: -15 })
+    gsap.set(arrow, { opacity: 0, scale: 0 })
+    gsap.set(result, { opacity: 0, y: 15 })
+    gsap.set(rows, { opacity: 0, x: -10 })
+
+    gsap.to(search,
       { opacity: 1, y: 0, duration: 0.4, ease: 'power2.out', delay: 0.2 }
     )
-    gsap.fromTo(arrow,
-      { opacity: 0, scale: 0 },
+    gsap.to(arrow,
       { opacity: 1, scale: 1, duration: 0.3, ease: 'back.out(2)', delay: 0.5 }
     )
-    gsap.fromTo(result,
-      { opacity: 0, y: 15 },
+    gsap.to(result,
       { opacity: 1, y: 0, duration: 0.4, ease: 'power2.out', delay: 0.7 }
     )
 
     // Data rows stagger in
-    gsap.fromTo(rows,
-      { opacity: 0, x: -10 },
+    gsap.to(rows,
       { opacity: 1, x: 0, duration: 0.3, stagger: 0.1, ease: 'power2.out', delay: 1.0 }
     )
   }, [])
@@ -151,31 +155,33 @@ export function IndependenceVisual() {
     const newWay = ref.current.querySelector('.indep-new')
     const deployed = ref.current.querySelector('.indep-deployed')
 
-    // Old way fades in with slight shake
-    gsap.fromTo(oldWay,
-      { opacity: 0 },
+    // Pre-hide all elements immediately
+    gsap.set(oldWay, { opacity: 0 })
+    gsap.set(xMark, { opacity: 0, scale: 0, rotation: -90 })
+    gsap.set(arrow, { opacity: 0, scale: 0 })
+    gsap.set(newWay, { opacity: 0, y: 15 })
+    gsap.set(deployed, { opacity: 0, scale: 0.5 })
+
+    // Old way fades in
+    gsap.to(oldWay,
       { opacity: 0.45, duration: 0.4, delay: 0.2 }
     )
 
     // X mark slashes in
-    gsap.fromTo(xMark,
-      { opacity: 0, scale: 0, rotation: -90 },
+    gsap.to(xMark,
       { opacity: 1, scale: 1, rotation: 0, duration: 0.4, ease: 'back.out(2)', delay: 0.6 }
     )
 
-    gsap.fromTo(arrow,
-      { opacity: 0, scale: 0 },
+    gsap.to(arrow,
       { opacity: 1, scale: 1, duration: 0.3, ease: 'back.out(2)', delay: 0.9 }
     )
 
-    gsap.fromTo(newWay,
-      { opacity: 0, y: 15 },
+    gsap.to(newWay,
       { opacity: 1, y: 0, duration: 0.4, ease: 'power2.out', delay: 1.1 }
     )
 
     // Deployed badge pops in
-    gsap.fromTo(deployed,
-      { opacity: 0, scale: 0.5 },
+    gsap.to(deployed,
       { opacity: 1, scale: 1, duration: 0.3, ease: 'back.out(2)', delay: 1.5 }
     )
   }, [])

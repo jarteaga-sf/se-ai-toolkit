@@ -24,15 +24,17 @@ export default function TakeawaySlide({ text, fullscreen }) {
     const bar = containerRef.current.querySelector('.accent-bar')
     const content = containerRef.current.querySelector('.takeaway-text')
 
+    // Pre-hide immediately
+    gsap.set(bar, { scaleY: 0, transformOrigin: 'top' })
+    gsap.set(content, { opacity: 0, x: -20 })
+
     // Accent bar grows in from top
-    gsap.fromTo(bar,
-      { scaleY: 0, transformOrigin: 'top' },
+    gsap.to(bar,
       { scaleY: 1, duration: 0.5, ease: 'power2.out', delay: 0.1 }
     )
 
     // Text slides in from the left
-    gsap.fromTo(content,
-      { opacity: 0, x: -20 },
+    gsap.to(content,
       { opacity: 1, x: 0, duration: 0.6, ease: 'power2.out', delay: 0.3 }
     )
   }, [text])

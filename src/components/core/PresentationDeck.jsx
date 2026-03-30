@@ -91,8 +91,9 @@ export default function PresentationDeck({ sections, onSlideChange, onNavReady }
     const direction = current >= prevSlide.current ? 1 : -1
     prevSlide.current = current
 
-    gsap.fromTo(content,
-      { opacity: 0, x: direction * 48 },
+    // Immediately hide before animating in — prevents flash of visible content
+    gsap.set(content, { opacity: 0, x: direction * 48 })
+    gsap.to(content,
       { opacity: 1, x: 0, duration: 0.38, ease: 'power2.out' }
     )
   }, [current])
@@ -186,6 +187,7 @@ export default function PresentationDeck({ sections, onSlideChange, onNavReady }
           style={{
             transformOrigin: 'center center',
             padding: '12px 20px',
+            opacity: 0,
           }}
         >
           {fullscreenRenderers[currentItem.slide.layout]?.(currentItem.slide, { isDarkBg })}

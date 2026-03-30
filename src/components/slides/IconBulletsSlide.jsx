@@ -25,16 +25,18 @@ export default function IconBulletsSlide({ title, bullets, fullscreen }) {
   useEffect(() => {
     if (!gridRef.current || !titleRef.current) return
 
+    // Pre-hide immediately to prevent flash
+    gsap.set(titleRef.current, { opacity: 0, y: -20 })
+    const cards = gridRef.current.querySelectorAll('.bullet-card')
+    gsap.set(cards, { opacity: 0, y: 30, scale: 0.92 })
+
     // Animate title
-    gsap.fromTo(titleRef.current,
-      { opacity: 0, y: -20 },
+    gsap.to(titleRef.current,
       { opacity: 1, y: 0, duration: 0.6, ease: 'power2.out' }
     )
 
     // Staggered card entrance
-    const cards = gridRef.current.querySelectorAll('.bullet-card')
-    gsap.fromTo(cards,
-      { opacity: 0, y: 30, scale: 0.92 },
+    gsap.to(cards,
       {
         opacity: 1, y: 0, scale: 1,
         duration: 0.5,

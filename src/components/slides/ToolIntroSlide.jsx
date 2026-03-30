@@ -31,8 +31,8 @@ export default function ToolIntroSlide({ toolId, title, subtitle, leadParagraph,
     const el = containerRef.current
     if (!el) return
     const children = el.querySelectorAll('.tool-intro-item')
-    gsap.fromTo(children,
-      { opacity: 0, y: 20 },
+    gsap.set(children, { opacity: 0, y: 20 })
+    gsap.to(children,
       { opacity: 1, y: 0, duration: 0.5, stagger: 0.12, ease: 'power2.out', delay: 0.15 }
     )
   }, [toolId])

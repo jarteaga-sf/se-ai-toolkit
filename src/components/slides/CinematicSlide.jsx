@@ -9,9 +9,11 @@ export default function CinematicSlide({ statement, fullscreen }) {
 
     const words = containerRef.current.querySelectorAll('.cine-word')
 
+    // Pre-hide immediately to prevent flash
+    gsap.set(words, { opacity: 0, y: 20, scale: 0.95 })
+
     // Dramatic word-by-word reveal with scale
-    gsap.fromTo(words,
-      { opacity: 0, y: 20, scale: 0.95 },
+    gsap.to(words,
       {
         opacity: 1,
         y: 0,

@@ -10,9 +10,12 @@ export default function StatementSlide({ statement, supporting, fullscreen, isDa
     const words = containerRef.current.querySelectorAll('.stmt-word')
     const supportEl = containerRef.current.querySelector('.stmt-supporting')
 
+    // Pre-hide immediately to prevent flash
+    gsap.set(words, { opacity: 0, y: 12 })
+    if (supportEl) gsap.set(supportEl, { opacity: 0, y: 10 })
+
     // Typewriter-style word reveal with stagger
-    gsap.fromTo(words,
-      { opacity: 0, y: 12 },
+    gsap.to(words,
       {
         opacity: 1,
         y: 0,
@@ -25,8 +28,7 @@ export default function StatementSlide({ statement, supporting, fullscreen, isDa
 
     // Supporting text fades in after the statement
     if (supportEl) {
-      gsap.fromTo(supportEl,
-        { opacity: 0, y: 10 },
+      gsap.to(supportEl,
         {
           opacity: 1,
           y: 0,

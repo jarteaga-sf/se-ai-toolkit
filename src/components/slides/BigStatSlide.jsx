@@ -48,8 +48,8 @@ export default function BigStatSlide({ value, label, source, fullscreen }) {
       })
 
       // Scale pop on the value
-      gsap.fromTo(valueEl,
-        { scale: 0.85 },
+      gsap.set(valueEl, { scale: 0.85 })
+      gsap.to(valueEl,
         { scale: 1, duration: 0.6, ease: 'back.out(1.5)', delay: 0.1 }
       )
     } else {
@@ -57,16 +57,18 @@ export default function BigStatSlide({ value, label, source, fullscreen }) {
       setDisplayValue(value)
     }
 
+    // Pre-hide label and source immediately
+    gsap.set(labelEl, { opacity: 0, y: 15 })
+    if (sourceEl) gsap.set(sourceEl, { opacity: 0 })
+
     // Label fades in
-    gsap.fromTo(labelEl,
-      { opacity: 0, y: 15 },
+    gsap.to(labelEl,
       { opacity: 1, y: 0, duration: 0.5, ease: 'power2.out', delay: 0.8 }
     )
 
     // Source fades in
     if (sourceEl) {
-      gsap.fromTo(sourceEl,
-        { opacity: 0 },
+      gsap.to(sourceEl,
         { opacity: 1, duration: 0.4, delay: 1.2 }
       )
     }

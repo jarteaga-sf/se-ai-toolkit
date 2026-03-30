@@ -169,10 +169,12 @@ export function AgentIllustration() {
     const nodes = flowRef.current.querySelectorAll('.flow-node')
     const arrows = flowRef.current.querySelectorAll('.flow-arrow')
 
-    gsap.fromTo(nodes, { opacity: 0, scale: 0.8 }, {
+    gsap.set(nodes, { opacity: 0, scale: 0.8 })
+    gsap.set(arrows, { opacity: 0, x: -8 })
+    gsap.to(nodes, {
       opacity: 1, scale: 1, duration: 0.4, stagger: 0.15, ease: 'back.out(1.5)'
     })
-    gsap.fromTo(arrows, { opacity: 0, x: -8 }, {
+    gsap.to(arrows, {
       opacity: 1, x: 0, duration: 0.3, stagger: 0.15, delay: 0.2
     })
   }, [])

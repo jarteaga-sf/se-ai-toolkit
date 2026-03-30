@@ -132,16 +132,16 @@ export default function ExploreDrawer({ content, onClose }) {
   const backdropRef = useRef(null)
 
   useEffect(() => {
-    // Animate in
+    // Pre-hide and animate in
     if (backdropRef.current) {
-      gsap.fromTo(backdropRef.current,
-        { opacity: 0 },
+      gsap.set(backdropRef.current, { opacity: 0 })
+      gsap.to(backdropRef.current,
         { opacity: 1, duration: 0.3, ease: 'power2.out' }
       )
     }
     if (drawerRef.current) {
-      gsap.fromTo(drawerRef.current,
-        { x: '100%' },
+      gsap.set(drawerRef.current, { x: '100%' })
+      gsap.to(drawerRef.current,
         { x: '0%', duration: 0.4, ease: 'power3.out' }
       )
     }
