@@ -41,23 +41,23 @@ export default function QuoteSlide({ quote, attribution, context, fullscreen }) 
   }, [quote])
 
   return (
-    <div className="flex flex-col items-center justify-center text-center max-w-[900px] mx-auto px-8">
+    <div className="flex flex-col items-center justify-center text-center max-w-[min(900px,80vw)] mx-auto px-8">
       {context && (
-        <p className="text-[18px] text-[var(--color-text-muted)] leading-relaxed mb-8 max-w-[720px]">
+        <p className="text-[clamp(14px,1.6vw,18px)] text-[var(--color-text-muted)] leading-relaxed mb-8 max-w-[min(720px,70vw)]">
           {context}
         </p>
       )}
       <blockquote className="relative">
-        <span className="absolute -top-6 -left-4 text-[64px] leading-none text-[var(--color-accent)]/15 font-serif select-none">
+        <span className="absolute -top-6 -left-4 text-[clamp(40px,5vw,64px)] leading-none text-[var(--color-accent)]/15 font-serif select-none">
           &ldquo;
         </span>
-        <p className="text-[38px] leading-[1.35] font-bold text-[var(--color-heading)] tracking-[-0.02em]">
+        <p className="text-[clamp(22px,3.5vw,38px)] leading-[1.35] font-bold text-[var(--color-heading)] tracking-[-0.02em]">
           <TypewriterQuote text={quote} onDone={() => setAttributionVisible(true)} />
         </p>
       </blockquote>
       {attribution && (
         <p
-          className={`mt-8 text-[17px] text-[var(--color-accent)] font-bold transition-opacity duration-700 ${
+          className={`mt-8 text-[clamp(13px,1.5vw,17px)] text-[var(--color-accent)] font-bold transition-opacity duration-700 ${
             attributionVisible ? 'opacity-100' : 'opacity-0'
           }`}
         >

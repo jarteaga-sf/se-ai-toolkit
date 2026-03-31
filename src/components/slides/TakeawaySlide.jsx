@@ -31,10 +31,10 @@ export default function TakeawaySlide({ text, fullscreen }) {
   }, [text])
 
   return (
-    <div className="flex items-center justify-center max-w-[880px] mx-auto px-8">
+    <div className="flex items-center justify-center max-w-[min(880px,80vw)] mx-auto px-8">
       <div className="relative">
         <div ref={barRef} className="absolute left-0 top-0 bottom-0 w-1.5 rounded-full bg-[var(--color-accent)]" />
-        <p ref={textRef} className="text-[32px] leading-[1.45] text-[var(--color-text-prose)] font-medium pl-10">
+        <p ref={textRef} className="text-[clamp(20px,3vw,32px)] leading-[1.45] text-[var(--color-text-prose)] font-medium pl-10">
           {parseBold(text)}
         </p>
       </div>

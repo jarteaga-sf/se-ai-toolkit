@@ -33,10 +33,10 @@ export default function StatementSlide({ statement, supporting, fullscreen, isDa
   return (
     <div
       ref={containerRef}
-      className="flex flex-col items-center justify-center text-center max-w-[960px] mx-auto px-8"
+      className="flex flex-col items-center justify-center text-center max-w-[min(960px,85vw)] mx-auto px-8"
     >
       <h2
-        className={`text-[56px] leading-[1.1] font-bold tracking-[-0.03em] mb-6 ${
+        className={`text-[clamp(28px,5vw,56px)] leading-[1.1] font-bold tracking-[-0.03em] mb-6 ${
           isDarkBg ? 'text-white' : 'text-[var(--color-heading)]'
         }`}
       >
@@ -48,7 +48,7 @@ export default function StatementSlide({ statement, supporting, fullscreen, isDa
       </h2>
       {supporting && (
         <p
-          className={`stmt-supporting text-[20px] leading-relaxed max-w-[640px] ${
+          className={`stmt-supporting text-[clamp(14px,1.8vw,20px)] leading-relaxed max-w-[min(640px,70vw)] ${
             isDarkBg ? 'text-white/40' : 'text-[var(--color-text-muted)]'
           }`}
         >

@@ -52,8 +52,8 @@ export default function IconBulletsSlide({ title, bullets, fullscreen }) {
   }, [])
 
   return (
-    <div className="max-w-[1060px] mx-auto px-8">
-      <h2 className="text-[38px] font-bold text-[var(--color-heading)] tracking-[-0.02em] text-center mb-10">
+    <div className="max-w-[min(1060px,90vw)] mx-auto px-8">
+      <h2 className="text-[clamp(22px,3.5vw,38px)] font-bold text-[var(--color-heading)] tracking-[-0.02em] text-center mb-10">
         {title}
       </h2>
       <div ref={gridRef} className={`grid ${cols} gap-6 items-stretch`}>

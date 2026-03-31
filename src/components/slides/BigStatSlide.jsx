@@ -42,15 +42,15 @@ export default function BigStatSlide({ value, label, source, fullscreen }) {
   }, [value])
 
   return (
-    <div className="flex flex-col items-center justify-center text-center max-w-[900px] mx-auto px-8">
-      <p className="text-[80px] font-bold text-[var(--color-accent)] leading-[1] tracking-[-0.04em] mb-6">
+    <div className="flex flex-col items-center justify-center text-center max-w-[min(900px,80vw)] mx-auto px-8">
+      <p className="text-[clamp(40px,7vw,80px)] font-bold text-[var(--color-accent)] leading-[1] tracking-[-0.04em] mb-6">
         {displayValue}
       </p>
-      <p className="text-[24px] text-[var(--color-text-secondary)] leading-snug max-w-[640px] mb-5">
+      <p className="text-[clamp(16px,2.2vw,24px)] text-[var(--color-text-secondary)] leading-snug max-w-[min(640px,70vw)] mb-5">
         {label}
       </p>
       {source && (
-        <p className="text-[16px] text-[var(--color-text-muted)] italic tracking-wide">
+        <p className="text-[clamp(13px,1.4vw,16px)] text-[var(--color-text-muted)] italic tracking-wide">
           {source}
         </p>
       )}

@@ -25,9 +25,9 @@ export default function CinematicSlide({ statement, fullscreen }) {
   return (
     <div
       ref={containerRef}
-      className="flex flex-col items-center justify-center text-center max-w-[960px] mx-auto px-8"
+      className="flex flex-col items-center justify-center text-center max-w-[min(960px,85vw)] mx-auto px-8"
     >
-      <h2 className="text-[56px] leading-[1.12] font-bold tracking-[-0.03em] text-white">
+      <h2 className="text-[clamp(28px,5vw,56px)] leading-[1.12] font-bold tracking-[-0.03em] text-white">
         {statementWords.map((word, i) => (
           <span key={i} className="cinematic-word inline-block mr-[0.3em]">
             {word}
