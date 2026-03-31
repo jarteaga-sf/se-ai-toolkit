@@ -55,7 +55,6 @@ export const theWhy = {
     {
       layout: 'illustratedConcept',
       title: 'Vibe Coding',
-      subtitle: 'You describe the outcome. AI handles the implementation.',
       message: 'Describe the problem. Think through the solution. Build the proof.',
       illustration: 'vibeCoding',
     },
