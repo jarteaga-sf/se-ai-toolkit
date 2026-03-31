@@ -1,19 +1,19 @@
 /**
  * Unified slide manifest for fullscreen presentation mode.
  *
- * Live presentation (~25 min of slides):
- *   The Why           (8 slides)  — stage setting, hooks, vibe coding, bridge
- *   The Toolkit      (10 slides)  — one pass through all 4 tools + urgency
- *   Cursor →          (5 slides)  — best practices, getting started, demo, close
+ * Live presentation (~20 min of slides):
+ *   The Why           (6 slides)  — hook fast, prove thesis early, earn the tools section
+ *   The Toolkit       (9 slides)  — one pass through all 4 tools + how to use them
+ *   Cursor →          (9 slides)  — scenario, setup, habits, 4 demos, close
  *
  * Take-home (audience navigates via the link):
- *   Go Deeper         (4 slides)  — additional proof points and stats
- *   Deep Dives        — Saleo, MeshMesh, Claude Code full walkthroughs
+ *   Go Deeper         (6 slides)  — Karpathy/Vibe Coding + proof points + stats
+ *   Deep Dives        — Use Cases, Saleo, MeshMesh, Claude Code full walkthroughs
  *   Keep Going        — Level Up, Cheat Sheet
  */
 
-import { theWhy, goDeeper } from './big-picture'
-import { claudeCode, cursor, saleo, meshmesh } from './tools'
+import { theWhy, theTools, goDeeper } from './big-picture'
+import { claudeCode, cursor, saleo, meshmesh, useCases } from './tools'
 import { levelUp, quickReference } from './action'
 
 // ── Shared tool cards data ────────────────────────────────────────────────
@@ -111,12 +111,12 @@ const toolOverviewSlides = [
 const cursorGS = cursor.tabs[1].content
 
 const cursorGettingStartedSlides = [
+  // Set the scene before showing the tool
   {
-    layout: 'habitCardsSlide',
-    toolId: 'cursor',
-    title: 'Four habits that make the difference',
-    cards: cursorGS.habitCards,
+    layout: 'cinematic',
+    statement: 'You just got off a call. The prospect wants a custom component. The org belongs to someone who left. You have two days.',
   },
+  // Setup first — answer "how do I get this?" before "how do I use it well?"
   {
     layout: 'toolGettingStarted',
     toolId: 'cursor',
@@ -125,10 +125,38 @@ const cursorGettingStartedSlides = [
     stepFlow: cursorGS.stepFlow,
   },
   {
+    layout: 'habitCardsSlide',
+    toolId: 'cursor',
+    title: 'Four habits that make the difference',
+    cards: cursorGS.habitCards,
+  },
+  {
     layout: 'videoDemoSlide',
-    title: 'Cursor in Action',
+    stepLabel: 'Part 1 of 4',
+    title: 'You walk into the room.',
+    videoSrc: '/se-ai-toolkit/gifs/CursorBigPicture.gif',
+    caption: 'Open the inherited project. Explore before you build. Cursor reads everything inside.',
+  },
+  {
+    layout: 'videoDemoSlide',
+    stepLabel: 'Part 2 of 4',
+    title: 'You figure out what you have — then build what you need.',
     videoSrc: null,
-    caption: 'Tab → Cmd+K → Cmd+L → Agent Mode — narrate along as it plays',
+    caption: 'Ask mode to understand. Plan mode to design. Agent mode to build. @ to give it the right context.',
+  },
+  {
+    layout: 'videoDemoSlide',
+    stepLabel: 'Part 3 of 4',
+    title: 'You make it Salesforce-ready.',
+    videoSrc: null,
+    caption: 'Org Browser, inline edits with Cmd+K, codebase search. No tab-switching.',
+  },
+  {
+    layout: 'videoDemoSlide',
+    stepLabel: 'Part 4 of 4',
+    title: 'You set it up so next time is even faster.',
+    videoSrc: null,
+    caption: 'Rules lock in your standards. The browser keeps docs in one window. Memory picks up where you left off.',
   },
   {
     layout: 'iconBullets',
@@ -143,7 +171,7 @@ const cursorGettingStartedSlides = [
   {
     layout: 'statement',
     statement: 'Thank you.',
-    supporting: 'jarteaga-sf.github.io/se-ai-toolkit',
+    supporting: 'Bookmark the site and use it before your next demo. Request your license in the SE Enablement Slack channel.',
   },
 ]
 
@@ -229,8 +257,9 @@ function convertQuickRefToSlides(data) {
 
 export const slideManifest = [
 
-  // ── LIVE: The Why (8 slides) ─────────────────────────────────────────
-  // Stage setting: hooks, vibe coding, the SE angle, bridge to tools.
+  // ── LIVE: The Why (6 slides) ─────────────────────────────────────────
+  // Hook immediately, prove the thesis early, earn the tools section.
+  // Agenda spoken verbally. Karpathy/Vibe Coding moved to take-home.
   {
     id: 'the-why',
     tier: 'big-picture',
@@ -238,16 +267,25 @@ export const slideManifest = [
     title: 'The Why',
     icon: 'Lightbulb',
     slides: [
-      ...theWhy.slides,
-      // Bridge: pull the comparison slide from goDeeper to transition into tools
-      goDeeper.slides[0], // Describing the Product → Proving the Product
+      theWhy.slides[0], // Title
+      theWhy.slides[2], // Cinematic hook — moved up, no agenda detour
+      theWhy.slides[3], // 57% stat
+      goDeeper.slides[0], // Comparison: Describing → Proving (thesis, moved up)
+      theWhy.slides[6], // Most of the value is in the thinking
+      {
+        layout: 'bigStat',
+        value: '2.4\u00d7',
+        label: 'More likely to buy from sellers who build live',
+        source: 'Harvard Business Review',
+      },
     ],
     exploreContent: null,
   },
 
-  // ── LIVE: The Toolkit (10 slides) ────────────────────────────────────
-  // ONE pass through all 4 tools. No thin intro first — straight to detail.
-  // Ends with urgency stats and call to action.
+  // ── LIVE: The Toolkit (9 slides) ─────────────────────────────────────
+  // ONE pass through all 4 tools. "What makes tools work" restored from
+  // dead code as bridge between tool cards and urgency. 2.4x moved to
+  // The Why. "SE built it" kept as a spoken line, not its own slide.
   {
     id: 'the-toolkit',
     tier: 'big-picture',
@@ -255,33 +293,23 @@ export const slideManifest = [
     title: 'The Toolkit',
     icon: 'Layers',
     slides: [
-      // Opening frame
+      // Opening frame — briefly addresses "why not ChatGPT/Copilot?"
       {
         layout: 'statement',
         statement: 'One changes how fast you demo. The others change what you can build.',
       },
       // Tool overviews — one slide per tool
       ...toolOverviewSlides,
-      // Side-by-side comparison
+      // Side-by-side decision anchor
       { layout: 'toolCards', cards: toolCardsData },
-      // Urgency — strongest proof points kept in live flow
-      {
-        layout: 'bigStat',
-        value: '2.4\u00d7',
-        label: 'More likely to buy from sellers who build live',
-        source: 'Harvard Business Review',
-      },
+      // HOW to get value — restored from theTools (previously dead code)
+      theTools.slides[5],
+      // Urgency window
       {
         layout: 'bigStat',
         value: '12\u201318 months',
         label: 'Window to build AI fluency before it is expected',
         source: 'Gartner, 2025',
-      },
-      // Close the section
-      {
-        layout: 'statement',
-        statement: 'The SE who built it speaks differently.',
-        supporting: 'Buyers feel it before the call ends.',
       },
       {
         layout: 'takeaway',
@@ -291,8 +319,8 @@ export const slideManifest = [
     exploreContent: null,
   },
 
-  // ── LIVE: Cursor → (5 slides) ───────────────────────────────────────
-  // Best practices, getting started, demo, what's next, close.
+  // ── LIVE: Cursor → (9 slides) ───────────────────────────────────────
+  // Scenario → setup → habits → 4 demos → what's next → close.
   {
     id: 'cursor-getting-started',
     tier: 'big-picture',
@@ -303,8 +331,8 @@ export const slideManifest = [
     exploreContent: { type: 'tool', data: cursor },
   },
 
-  // ── TAKE-HOME: Go Deeper (4 slides) ─────────────────────────────────
-  // Additional proof points for those who want the full argument.
+  // ── TAKE-HOME: Go Deeper (6 slides) ─────────────────────────────────
+  // Karpathy/Vibe Coding mental model + proof points for those who want the full argument.
   {
     id: 'go-deeper-transition',
     tier: 'transition',
@@ -322,6 +350,10 @@ export const slideManifest = [
     icon: 'ChevronRight',
     slides: [
       goDeeper.slides[1], // "What this unlocks" iconBullets
+      // Karpathy + Vibe Coding moved here from live flow — better fit for
+      // technically curious audience who want the mental model
+      theWhy.slides[4], // Karpathy quote
+      theWhy.slides[5], // Vibe Coding illustrated concept
       {
         layout: 'bigStat',
         value: '90 minutes',
@@ -339,15 +371,26 @@ export const slideManifest = [
     exploreContent: null,
   },
 
-  // ── TAKE-HOME: Deep Dives (3 nav dots) ────────────────────────────────
+  // ── TAKE-HOME: Deep Dives (4 nav dots) ────────────────────────────────
   {
     id: 'deep-dives-transition',
     tier: 'transition',
     tierLabel: null,
     title: 'Deep Dives',
     icon: null,
-    slides: [{ layout: 'tierTransition', label: 'Deep Dives', supporting: 'Full walkthroughs for Saleo, MeshMesh, and Claude Code — at your own pace.' }],
+    slides: [{ layout: 'tierTransition', label: 'Deep Dives', supporting: 'Full walkthroughs for each tool — plus real SE use cases across all four.' }],
     exploreContent: null,
+  },
+  // Use cases surfaced here — previously dead code, now the opening section
+  // of Deep Dives. Answers "what would I actually use this for?" for skeptics.
+  {
+    id: 'use-cases',
+    tier: 'deep-dives',
+    tierLabel: 'Deep Dives',
+    title: 'Use Cases',
+    icon: 'Zap',
+    slides: convertLevelUpToSlides(useCases),
+    exploreContent: { type: 'tool', data: useCases },
   },
   {
     id: 'saleo',

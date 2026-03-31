@@ -1,51 +1,88 @@
+import { useRef, useState } from 'react'
+import { Pause, Play } from 'lucide-react'
 import { CursorLogo } from '../illustrations/ToolLogos'
 
-export default function VideoDemoSlide({ title, videoSrc, caption, fullscreen }) {
+function isGif(src) {
+  return src && src.toLowerCase().endsWith('.gif')
+}
+
+export default function VideoDemoSlide({ title, stepLabel, videoSrc, caption, fullscreen }) {
+  const videoRef = useRef(null)
+  const [isPaused, setIsPaused] = useState(false)
+
+  function togglePlayback() {
+    const player = videoRef.current
+    if (!player) return
+
+    if (player.paused) {
+      player.play()
+      setIsPaused(false)
+    } else {
+      player.pause()
+      setIsPaused(true)
+    }
+  }
+
   return (
     <div className="flex flex-col items-center justify-center max-w-[860px] mx-auto px-8 w-full">
-      {title && (
-        <h2 className="text-[26px] font-bold text-[var(--color-heading)] tracking-[-0.02em] mb-5 text-center">
-          {title}
-        </h2>
+      {(stepLabel || title) && (
+        <div className="mb-4 text-center">
+          {stepLabel && (
+            <p className="text-[11px] font-semibold uppercase tracking-[0.12em] text-[var(--color-accent)] mb-1.5">
+              {stepLabel}
+            </p>
+          )}
+          {title && (
+            <h2 className="text-[22px] font-bold text-[var(--color-heading)] tracking-[-0.02em] leading-snug">
+              {title}
+            </h2>
+          )}
+        </div>
       )}
 
-      {/* Mac screen chrome */}
-      <div className="w-full rounded-xl overflow-hidden border border-[#2D2D2D] shadow-2xl">
-        {/* Titlebar */}
-        <div className="bg-[#1E1E1E] px-4 py-2.5 flex items-center gap-2">
-          <div className="flex gap-1.5">
-            <div className="w-3 h-3 rounded-full bg-[#FF5F57]" />
-            <div className="w-3 h-3 rounded-full bg-[#FFBD2E]" />
-            <div className="w-3 h-3 rounded-full bg-[#28C840]" />
-          </div>
-          <div className="flex-1 flex justify-center">
-            <span className="text-[12px] text-[#9CA3AF] font-[var(--font-mono)]">Cursor</span>
-          </div>
-        </div>
-
-        {/* Video / placeholder area */}
-        <div className="bg-[#141414] aspect-video flex items-center justify-center">
-          {videoSrc ? (
+      {/* Floating card — no border, diffuse shadow */}
+      <div
+        className="w-full rounded-2xl overflow-hidden aspect-video flex items-center justify-center relative group"
+        style={{ boxShadow: '0 32px 80px rgba(0,0,0,0.22), 0 8px 24px rgba(0,0,0,0.14)' }}
+      >
+        {videoSrc && isGif(videoSrc) ? (
+          <img
+            src={videoSrc}
+            alt={title || 'Cursor demo'}
+            className="w-full h-full object-cover"
+          />
+        ) : videoSrc ? (
+          <>
             <video
+              ref={videoRef}
               src={videoSrc}
               autoPlay
               loop
               muted
               playsInline
-              className="w-full h-full object-cover"
+              onClick={togglePlayback}
+              className="w-full h-full object-cover cursor-pointer"
             />
-          ) : (
-            <div className="flex flex-col items-center gap-4 opacity-35">
-              <CursorLogo size={52} />
-              <p className="text-[var(--color-terminal-text)] text-[14px] font-[var(--font-mono)]">
-                cursor-demo.mp4
-              </p>
-              <p className="text-[var(--color-terminal-dim)] text-[12px] font-[var(--font-mono)]">
-                Drop Screen Studio recording here when ready
-              </p>
-            </div>
-          )}
-        </div>
+            <button
+              type="button"
+              onClick={togglePlayback}
+              className="absolute right-3 bottom-3 rounded-md border border-white/30 bg-black/60 px-2.5 py-1.5 text-white opacity-0 transition-opacity group-hover:opacity-100"
+              aria-label={isPaused ? 'Play video' : 'Pause video'}
+            >
+              {isPaused ? <Play size={14} /> : <Pause size={14} />}
+            </button>
+          </>
+        ) : (
+          <div className="w-full h-full bg-[#141414] flex flex-col items-center justify-center gap-4 opacity-40">
+            <CursorLogo size={52} />
+            <p className="text-[var(--color-terminal-text)] text-[14px] font-[var(--font-mono)]">
+              recording coming soon
+            </p>
+            <p className="text-[var(--color-terminal-dim)] text-[12px] font-[var(--font-mono)]">
+              Drop GIF here when ready
+            </p>
+          </div>
+        )}
       </div>
 
       {caption && (
