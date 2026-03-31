@@ -39,16 +39,16 @@ export const theWhy = {
     {
       layout: 'bigStat',
       value: '57%',
-      label: 'Through their decision before the first call',
+      label: 'of the buying decision is done before the first call',
       source: 'CEB / Gartner',
     },
 
     // The origin story. Karpathy names the thing.
     {
       layout: 'quote',
-      context: 'OpenAI co-founder. Former head of AI at Tesla.',
       quote: 'You fully give in to the vibes, embrace exponentials, and forget that the code even exists.',
-      attribution: 'Andrej Karpathy, coining "vibe coding" — February 2025',
+      attribution: 'Andrej Karpathy',
+      context: 'OpenAI co-founder. Former head of AI at Tesla.',
     },
 
     // Define the concept. Covers thinking, designing, and building — not just building.

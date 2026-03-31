@@ -41,7 +41,7 @@ export default function TierTransitionSlide({ label, supporting, fullscreen }) {
       </p>
       <h2
         ref={titleRef}
-        className="text-[56px] font-bold text-white tracking-[-0.03em] mb-5"
+        className="text-[clamp(28px,4.5vw,56px)] font-bold text-white tracking-[-0.03em] mb-5"
       >
         {label}
       </h2>

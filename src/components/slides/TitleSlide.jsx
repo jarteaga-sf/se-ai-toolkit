@@ -15,7 +15,7 @@ export default function TitleSlide({ title, accent, subtitle, badges, fullscreen
       </div>
 
       {/* Main headline */}
-      <h1 className="text-[64px] leading-[1.08] font-bold tracking-[-0.03em] text-white mb-5">
+      <h1 className="text-[clamp(36px,5.5vw,64px)] leading-[1.08] font-bold tracking-[-0.03em] text-white mb-5">
         {title}{' '}
         {accent && (
           <span className="text-[var(--color-yellow)]">{accent}</span>

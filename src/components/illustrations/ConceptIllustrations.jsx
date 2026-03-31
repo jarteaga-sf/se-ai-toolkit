@@ -137,22 +137,24 @@ function RotatingPrompts() {
 }
 
 /**
- * Vibe Coding: Before/After — Endless typing terminal + rotating prompts
+ * Vibe Coding: Before/After — Horizontal layout with terminal left, prompt right
  */
 export function VibeCodingIllustration() {
   return (
-    <div className="flex flex-col items-center gap-6 w-[340px]">
-      {/* Before: Animated typing terminal */}
-      <TypingTerminal />
-
-      <div className="flex items-center gap-2">
-        <div className="h-px w-8 bg-[var(--color-border)]" />
-        <span className="text-[11px] font-bold text-[var(--color-accent)] uppercase tracking-wider">becomes</span>
-        <div className="h-px w-8 bg-[var(--color-border)]" />
+    <div className="flex items-center gap-5 w-full max-w-[760px]">
+      <div className="flex-1 min-w-0">
+        <p className="text-[11px] font-bold text-[var(--color-text-muted)] uppercase tracking-wider mb-2 text-center">Before</p>
+        <TypingTerminal />
       </div>
 
-      {/* After: Rotating natural language prompts */}
-      <RotatingPrompts />
+      <div className="flex flex-col items-center gap-1 flex-shrink-0 px-1">
+        <ArrowRight size={20} className="text-[var(--color-accent)]" />
+      </div>
+
+      <div className="flex-1 min-w-0">
+        <p className="text-[11px] font-bold text-[var(--color-accent)] uppercase tracking-wider mb-2 text-center">After</p>
+        <RotatingPrompts />
+      </div>
     </div>
   )
 }

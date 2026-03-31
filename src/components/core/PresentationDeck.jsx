@@ -150,20 +150,21 @@ export default function PresentationDeck({ sections, onSlideChange, onNavReady }
     <div
       className={`relative w-full h-full flex flex-col pointer-events-none ${getSlideBackground()}`}
     >
-      {/* Salesforce logo - top left (hidden on title slide which has its own) */}
-      {currentItem.slide.layout !== 'title' && (
-        <div className="absolute top-7 left-10 z-10 pointer-events-auto flex items-center gap-4">
+      {/* Salesforce logo — part of flex flow so stageRef height is always correct.
+          Hidden on title slide which renders its own branding. */}
+      {currentItem.slide.layout !== 'title' ? (
+        <div className="flex-shrink-0 h-16 px-10 flex items-center pointer-events-auto z-10">
           <img
             src="https://assets.meshmesh.io/system/salesforce-with-type-logo.svg"
             alt="Salesforce"
-            className={`h-10 w-auto ${
-              isDarkBg ? 'brightness-0 invert' : ''
-            }`}
+            className={`h-10 w-auto ${isDarkBg ? 'brightness-0 invert' : ''}`}
           />
         </div>
+      ) : (
+        <div className="flex-shrink-0 h-16" />
       )}
 
-      {/* Slide content -- scaled to fit */}
+      {/* Slide content — scaled to fit the remaining space below the logo */}
       <div ref={stageRef} className="flex-1 flex items-center justify-center pointer-events-none">
         <div
           ref={contentRef}

@@ -52,7 +52,7 @@ export default function ToolIntroSlide({ toolId, title, subtitle, leadParagraph,
           <Logo size={64} />
         </div>
       )}
-      <h2 className="tool-intro-item text-[42px] font-bold text-[var(--color-heading)] tracking-[-0.02em] mb-3">
+      <h2 className="tool-intro-item text-[clamp(24px,3.8vw,42px)] font-bold text-[var(--color-heading)] tracking-[-0.02em] mb-3">
         {title}
       </h2>
       {subtitle && (
