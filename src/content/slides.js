@@ -1,19 +1,20 @@
 /**
  * Unified slide manifest for fullscreen presentation mode.
  *
- * Live presentation (~20 min of slides):
- *   The Why           (6 slides)  — hook fast, prove thesis early, earn the tools section
- *   The Toolkit       (9 slides)  — one pass through all 4 tools + how to use them
- *   Cursor →          (9 slides)  — scenario, setup, habits, 4 demos, close
+ * Live presentation (~12 min of slides + live Cursor demo):
+ *   The Why           (5 slides)  — SE pain hook, 80% stat, thesis, non-dev reassurance
+ *   The Toolkit       (8 slides)  — landscape, 4 tools (Cursor last), SE proof, principles, CTA
+ *   Cursor →          (6 slides)  — scenario, setup, observation framework → HANDOFF → habits, close
  *
  * Take-home (audience navigates via the link):
- *   Go Deeper         (6 slides)  — Karpathy/Vibe Coding + proof points + stats
- *   Deep Dives        — Use Cases, Saleo, MeshMesh, Claude Code full walkthroughs
- *   Keep Going        — Level Up, Cheat Sheet
+ *   Start Here        (4 slides)  — Pick your starting point, prompting skills, setup habits
+ *   Playbooks         (6 slides)  — Task-based guides: demo, POC, RFP, code, data, call prep
+ *   Tool Guides       — Saleo, Cursor workflows, MeshMesh, Claude Code deep dives
+ *   Keep Going        — Level Up (Skills, MCP, Commands, Context Files), Cheat Sheet
  */
 
-import { theWhy, theTools, goDeeper } from './big-picture'
-import { claudeCode, cursor, saleo, meshmesh, useCases } from './tools'
+import { theWhy, theTools, startHere } from './big-picture'
+import { claudeCode, cursor, saleo, meshmesh, playbooks } from './tools'
 import { levelUp, quickReference } from './action'
 
 // ── Shared tool cards data ────────────────────────────────────────────────
@@ -22,31 +23,31 @@ const toolCardsData = [
   {
     name: 'Saleo',
     tagline: 'Their data. Your demo. No code.',
-    bestFor: 'Personalize any demo for any prospect in minutes. Your org stays clean.',
-    role: 'Customer Demo Layer',
+    bestFor: 'Personalize any demo in minutes. Zero code. Your org stays clean.',
+    role: 'Demo Personalization',
     setup: 'easy',
     logo: 'saleo',
   },
   {
     name: 'MeshMesh',
     tagline: 'Salesforce-native. No translation required.',
-    bestFor: 'A six-week POC in 90 minutes. Demo guide prep down 98.95% — from 2 days to 30 minutes.',
-    role: 'Native Builder — In Pilot',
+    bestFor: 'Configure Salesforce-native solutions — Agentforce, flows, custom objects — without writing code. In pilot.',
+    role: 'Native Configurator — In Pilot',
     setup: 'moderate',
     logo: 'meshmesh',
   },
   {
     name: 'Cursor',
-    tagline: 'AI built into the editor you already use.',
-    bestFor: 'Cut custom demo prep from hours to minutes. Edit, iterate, and answer prospect asks live.',
-    role: 'Smart Editor',
+    tagline: 'One editor for the whole deal cycle.',
+    bestFor: 'Discovery notes, RFx responses, solution design, demo builds — one AI editor for the entire deal.',
+    role: 'AI Editor',
     setup: 'moderate',
     logo: 'cursor',
   },
   {
     name: 'Claude Code',
     tagline: 'You describe. It builds.',
-    bestFor: 'One SE built a full Agentforce agent — 4 topics, 500+ tests — in about an hour. From scratch.',
+    bestFor: 'Builds from scratch: architecture docs, presentation decks, full agent deployments. Describe the goal, it handles the steps.',
     role: 'Autonomous Builder',
     setup: 'advanced',
     logo: 'claude',
@@ -55,6 +56,7 @@ const toolCardsData = [
 
 // ── Tool overview slides ──────────────────────────────────────────────────
 
+// Reordered: Saleo → MeshMesh → Claude Code → Cursor (last, bridges to demo)
 const toolOverviewSlides = [
   {
     layout: 'toolOverview',
@@ -67,30 +69,26 @@ const toolOverviewSlides = [
       'Build one healthcare template. Reuse it for every healthcare prospect this quarter.',
       "Switch from the VP's pipeline view to the rep's task list without leaving the demo.",
     ],
+    seVoice: {
+      quote: 'Now baked into all Golden Demos. ~1,000 SEs worldwide have it out of the box.',
+      attribution: 'Distinguished SE',
+    },
   },
   {
     layout: 'toolOverview',
     toolId: 'meshmesh',
     title: 'MeshMesh',
     tagline: 'Salesforce-native. No translation required. (In Pilot)',
-    differentiator: 'AI tool currently in pilot — already understands Salesforce objects, flows, and Agentforce patterns. You describe, it builds.',
+    differentiator: 'Configures Salesforce directly — metadata, Flows, Agentforce, Permission Sets. No code. No translation layer. It already knows the platform.',
     examples: [
-      'Build a full Agentforce onboarding agent — 4 topics, 12 actions — in a single 90-minute session.',
-      'Customize a demo org for a specific industry by describing the workflow, not configuring it field by field.',
-      'Generate 500+ tests alongside your build so you can prove it works before the customer sees it.',
+      'Configure a demo org for a specific industry — describe the workflow, it builds the objects, flows, and automation.',
+      'Wire Agentforce topics and actions into your existing org structure — without writing Apex.',
+      'Generate test suites alongside every build so you can prove it works before the customer sees it.',
     ],
-  },
-  {
-    layout: 'toolOverview',
-    toolId: 'cursor',
-    title: 'Cursor',
-    tagline: 'AI built into the editor you already use.',
-    differentiator: 'Edit, ask questions, and iterate on existing code — with AI helping at every step.',
-    examples: [
-      "Select a Lightning component, describe the change in plain English, see the diff before accepting.",
-      "Inherited a project you didn't write? Ask what it does — understand it in seconds.",
-      'Prospect asks for a live tweak mid-call. Make it in Cursor without breaking anything.',
-    ],
+    seVoice: {
+      quote: 'The Salesforce-native specialist. You don\'t waste time explaining what metadata or Permission Sets are to a general-purpose AI.',
+      attribution: 'Distinguished SE',
+    },
   },
   {
     layout: 'toolOverview',
@@ -99,9 +97,25 @@ const toolOverviewSlides = [
     tagline: 'You describe. It builds.',
     differentiator: 'Reads your project, plans the approach, writes the code, runs it, and checks its own work.',
     examples: [
-      'Describe an Agentforce agent end-to-end. Claude Code builds it, tests it, and deploys it.',
-      'Paste in an RFP. Get technical responses mapped to Salesforce capabilities — ready to send.',
-      'Generate realistic demo data for any vertical at scale: accounts, contacts, opportunities, all connected.',
+      'Give it an RFP. Get technical responses mapped to Salesforce capabilities — ready to send.',
+      'Describe an Agentforce agent end-to-end. It builds it, tests it, and deploys it.',
+      'Generate a customer-ready presentation deck in 2 minutes instead of 2 hours.',
+    ],
+    seVoice: {
+      quote: 'I don\'t vibe code anything I can\'t explain to customers.',
+      attribution: 'Senior Account SE',
+    },
+  },
+  {
+    layout: 'toolOverview',
+    toolId: 'cursor',
+    title: 'Cursor',
+    tagline: 'One editor for the whole deal cycle.',
+    differentiator: 'Reads your whole project, understands the context, and gives you three modes: ask questions, plan changes, or let it build. You stay in control.',
+    examples: [
+      'One SE runs the entire deal cycle in Cursor — discovery notes, RFx responses, solution design docs. 70% docs, 30% builds.',
+      'After discovery, synthesize findings into a phased architecture readback — output transitions directly into Salesforce-branded decks.',
+      'Prospect asks for a live change mid-call. Describe it, review the diff, accept. Done.',
     ],
   },
 ]
@@ -110,13 +124,12 @@ const toolOverviewSlides = [
 
 const cursorGS = cursor.tabs[1].content
 
-const cursorGettingStartedSlides = [
-  // Set the scene before showing the tool
+// Pre-handoff: scenario → setup → observation framework for the live demo
+const cursorPreHandoffSlides = [
   {
     layout: 'cinematic',
-    statement: 'You just got off a call. The prospect wants a custom component. The org belongs to someone who left. You have two days.',
+    statement: 'You just got your Cursor license. You open it for the first time. Now what?',
   },
-  // Setup first — answer "how do I get this?" before "how do I use it well?"
   {
     layout: 'toolGettingStarted',
     toolId: 'cursor',
@@ -127,36 +140,23 @@ const cursorGettingStartedSlides = [
   {
     layout: 'habitCardsSlide',
     toolId: 'cursor',
+    title: 'What to watch for',
+    cards: [
+      { icon: 'Eye', title: 'Watch it autocomplete', description: 'It suggests code before you type it. Just press Tab.' },
+      { icon: 'Layers', title: 'Watch the three modes', description: 'Ask to understand. Plan to design. Agent to build.' },
+      { icon: 'AtSign', title: 'Watch the @ trick', description: 'It pulls in files and docs without copy-pasting. That\'s what separates this from ChatGPT.' },
+      { icon: 'Shield', title: 'Watch the review step', description: 'Every change is shown before it\'s committed. Nothing happens without your approval.' },
+    ],
+  },
+]
+
+// Post-demo: habits (now they land), what's next, close/CTA
+const cursorPostDemoSlides = [
+  {
+    layout: 'habitCardsSlide',
+    toolId: 'cursor',
     title: 'Four habits that make the difference',
     cards: cursorGS.habitCards,
-  },
-  {
-    layout: 'videoDemoSlide',
-    stepLabel: 'Part 1 of 4',
-    title: 'You walk into the room.',
-    videoSrc: '/se-ai-toolkit/gifs/CursorBigPicture.gif',
-    caption: 'Open the inherited project. Explore before you build. Cursor reads everything inside.',
-  },
-  {
-    layout: 'videoDemoSlide',
-    stepLabel: 'Part 2 of 4',
-    title: 'You figure out what you have — then build what you need.',
-    videoSrc: null,
-    caption: 'Ask mode to understand. Plan mode to design. Agent mode to build. @ to give it the right context.',
-  },
-  {
-    layout: 'videoDemoSlide',
-    stepLabel: 'Part 3 of 4',
-    title: 'You make it Salesforce-ready.',
-    videoSrc: null,
-    caption: 'Org Browser, inline edits with Cmd+K, codebase search. No tab-switching.',
-  },
-  {
-    layout: 'videoDemoSlide',
-    stepLabel: 'Part 4 of 4',
-    title: 'You set it up so next time is even faster.',
-    videoSrc: null,
-    caption: 'Rules lock in your standards. The browser keeps docs in one window. Memory picks up where you left off.',
   },
   {
     layout: 'iconBullets',
@@ -169,9 +169,79 @@ const cursorGettingStartedSlides = [
     ],
   },
   {
-    layout: 'statement',
-    statement: 'Thank you.',
-    supporting: 'Bookmark the site and use it before your next demo. Request your license in the SE Enablement Slack channel.',
+    layout: 'takeaway',
+    text: 'The next time you open Cursor — **you\'ll know the first move.**',
+  },
+]
+
+// Cursor workflow walkthroughs — replace the incomplete video demo slides.
+// Three scenarios: Ask mode → Plan+Agent mode → rules file setup.
+const cursorWorkflowSlides = [
+  {
+    layout: 'toolContent',
+    toolId: 'cursor',
+    title: 'Workflow 1 — Understand what you have',
+    prose: [
+      'You inherit a project. Or you open something you built months ago and can\'t remember how it works. **Ask mode is your starting point — never start editing code you haven\'t understood.**',
+      'The prompt is always the same: "I just inherited this project. Give me a one-page summary: what it does, how it\'s structured, which files matter most, and what I\'d change to [your goal]."',
+    ],
+    terminal: {
+      title: 'Ask Mode in Action',
+      steps: [
+        { type: 'output', content: '// Open Cursor → Cmd+L → switch to Ask mode' },
+        { type: 'output', content: '' },
+        { type: 'output', content: '> I just inherited this Salesforce demo project. Give me a one-page summary: what it does, how it\'s structured, which files matter most, and what I\'d need to change to add a healthcare vertical.' },
+        { type: 'output', content: '' },
+        { type: 'claude-thinking', content: 'Reading AccountDashboard.jsx, CaseList.jsx, AgentflowPanel.jsx...' },
+        { type: 'claude-response', content: 'This is an LWC project connected to a Salesforce demo org. 3 main components: AccountDashboard (pipeline overview), CaseList (open cases by priority), AgentflowPanel (Agentforce agent UI).' },
+        { type: 'output', content: '' },
+        { type: 'claude-response', content: 'For a healthcare vertical: update industry labels in AccountDashboard.js, add healthcare case types to CaseList, adjust agent topic descriptions in AgentflowPanel. No structural changes needed.' },
+      ],
+    },
+    quote: 'Ten minutes in Ask mode. I knew the whole project — files, dependencies, what to change. That used to take me half a day.',
+  },
+  {
+    layout: 'toolContent',
+    toolId: 'cursor',
+    title: 'Workflow 2 — Build what you need',
+    prose: [
+      'Once you understand the project, you build. **Plan mode shows you the full approach before anything changes. Agent mode executes it.** Together, they mean no surprises.',
+      'The sequence is always: Plan → review → Agent → review the diff → accept. Skip any step and you\'re flying blind.',
+    ],
+    terminal: {
+      title: 'Plan Then Build',
+      steps: [
+        { type: 'output', content: '> [Plan mode] I need to add a "Contract Value" field to AccountDashboard. Show me the full approach before touching anything.' },
+        { type: 'output', content: '' },
+        { type: 'claude-response', content: 'Plan: (1) Add contractValue to AccountDashboard.js data fetch, (2) Update template to display it, (3) Add label to metadata. No existing tests affected. 3 files total.' },
+        { type: 'output', content: '' },
+        { type: 'output', content: '> [Agent mode] Execute the plan.' },
+        { type: 'output', content: '' },
+        { type: 'claude-thinking', content: 'Updating AccountDashboard.js, AccountDashboard.html, AccountDashboard.js-meta.xml...' },
+        { type: 'claude-response', content: 'Done. 3 files changed. Contract Value now displays in the header. Review the diff below — run npm test to confirm no regressions.' },
+      ],
+    },
+    quote: 'Prospect asked for a live change mid-call. Described it in Agent mode. Reviewed the diff. Accepted. Done before they finished the sentence.',
+  },
+  {
+    layout: 'toolContent',
+    toolId: 'cursor',
+    title: 'Workflow 3 — Set it up so next time is faster',
+    prose: [
+      'The compounding habit: after every project, spend five minutes making the next session better. A rules file means you never re-explain your conventions.',
+      '**Write it once. Every future session in that project inherits it automatically.**',
+    ],
+    terminal: {
+      title: 'Lock In Your Standards',
+      steps: [
+        { type: 'command', content: 'touch .cursorrules' },
+        { type: 'output', content: '' },
+        { type: 'file-change', content: '+ # Salesforce Demo Project\n+ \n+ ## Stack\n+ - LWC + Apex + Salesforce CLI\n+ - Connected to: my-demo-org.salesforce.com\n+ \n+ ## Conventions\n+ - Components use PascalCase\n+ - Never modify .force-app/main/classes directly\n+ - Deploy with: sf project deploy start\n+ \n+ ## Do not touch\n+ - CustomerDataPackage/ (managed, read-only)' },
+        { type: 'output', content: '' },
+        { type: 'claude-response', content: 'Rules loaded. These conventions apply automatically to every session in this project — no need to repeat them.' },
+      ],
+    },
+    quote: 'I wrote the rules file once. Three months later every project in Cursor just works — consistent code, consistent deployments, no re-explaining.',
   },
 ]
 
@@ -228,6 +298,21 @@ function convertToolToSlides(tool) {
     }
   }
 
+  // tabs[2+] — optional extra tabs (e.g. "Prompting Tips", "Tips & Patterns")
+  // Each generates a levelUpTopic slide if it has prose or habitCards.
+  const extraTabs = tool.tabs.slice(2)
+  for (const tab of extraTabs) {
+    if (tab.content.prose?.length || tab.content.habitCards?.length) {
+      slides.push({
+        layout: 'levelUpTopic',
+        title: tab.label,
+        prose: tab.content.prose || [],
+        cards: tab.content.habitCards || [],
+        takeaway: tab.content.takeaway,
+      })
+    }
+  }
+
   return slides
 }
 
@@ -257,9 +342,8 @@ function convertQuickRefToSlides(data) {
 
 export const slideManifest = [
 
-  // ── LIVE: The Why (6 slides) ─────────────────────────────────────────
-  // Hook immediately, prove the thesis early, earn the tools section.
-  // Agenda spoken verbally. Karpathy/Vibe Coding moved to take-home.
+  // ── LIVE: The Why (5 slides) ──────────────────────────────────────────
+  // SE pain first, then customer behavior, then thesis, then non-dev reassurance.
   {
     id: 'the-why',
     tier: 'big-picture',
@@ -267,25 +351,28 @@ export const slideManifest = [
     title: 'The Why',
     icon: 'Lightbulb',
     slides: [
-      theWhy.slides[0], // Title
-      theWhy.slides[2], // Cinematic hook — moved up, no agenda detour
-      theWhy.slides[3], // 57% stat
-      goDeeper.slides[0], // Comparison: Describing → Proving (thesis, moved up)
-      theWhy.slides[6], // Most of the value is in the thinking
+      theWhy.slides[0], // Title (updated subtitle: "From prep to proof — faster.")
+      theWhy.slides[2], // Cinematic: "You prepped for three hours..."
+      theWhy.slides[3], // BigStat: 80% (Gartner, 2024)
+      // Describing → Proving — the core thesis slide (inlined from former goDeeper)
+      {
+        layout: 'comparison',
+        left: { icon: 'PenLine', label: 'Describing the Product', description: 'Slide decks. Canned demos. Two days of prep.' },
+        right: { icon: 'Wand2', label: 'Proving the Product', description: 'Built for them. Before the call. Ready when they are.' },
+        connector: '\u2192',
+      },
       {
         layout: 'bigStat',
-        value: '2.4\u00d7',
-        label: 'More likely to buy from sellers who build live',
-        source: 'Harvard Business Review',
+        value: '63%',
+        label: 'of people using AI coding tools today are not developers',
+        source: 'State of Vibe Coding, 2026',
       },
     ],
     exploreContent: null,
   },
 
-  // ── LIVE: The Toolkit (9 slides) ─────────────────────────────────────
-  // ONE pass through all 4 tools. "What makes tools work" restored from
-  // dead code as bridge between tool cards and urgency. 2.4x moved to
-  // The Why. "SE built it" kept as a spoken line, not its own slide.
+  // ── LIVE: The Toolkit (8 slides) ────────────────────────────────────
+  // ToolCards opens → 4 tools (Cursor last) → SE proof → principles → CTA
   {
     id: 'the-toolkit',
     tier: 'big-picture',
@@ -293,23 +380,29 @@ export const slideManifest = [
     title: 'The Toolkit',
     icon: 'Layers',
     slides: [
-      // Opening frame — briefly addresses "why not ChatGPT/Copilot?"
-      {
-        layout: 'statement',
-        statement: 'One changes how fast you demo. The others change what you can build.',
-      },
-      // Tool overviews — one slide per tool
-      ...toolOverviewSlides,
-      // Side-by-side decision anchor
+      // Landscape orientation — all 4 at once before diving in
       { layout: 'toolCards', cards: toolCardsData },
-      // HOW to get value — restored from theTools (previously dead code)
-      theTools.slides[5],
-      // Urgency window
+      // Tool overviews — Saleo, MeshMesh, Claude Code, Cursor (last = bridge to demo)
+      ...toolOverviewSlides,
+      // SE proof points — real stories replace generic stats
       {
-        layout: 'bigStat',
-        value: '12\u201318 months',
-        label: 'Window to build AI fluency before it is expected',
-        source: 'Gartner, 2025',
+        layout: 'iconBullets',
+        title: 'SEs are already using these',
+        bullets: [
+          { icon: 'Zap', title: 'New SE, two months in', description: 'Reskinned an entire SDO in one session. 53 products. 709 opportunities. Full Agentforce agent.' },
+          { icon: 'FileText', title: 'Full deal cycle in one editor', description: 'A Principal SE anchors every deal in one Cursor project — discovery, RFx, solution design. 70% docs, 30% builds.' },
+          { icon: 'Layers', title: 'The recommended stack', description: 'Claude Code writes it. MeshMesh configures it. Saleo personalizes it.' },
+        ],
+      },
+      // Principles — grounded with examples. Bullet 1 includes data guardrail.
+      {
+        layout: 'iconBullets',
+        title: 'What makes these tools work',
+        bullets: [
+          { icon: 'FileText', title: 'Start with context', description: 'The more specific you are about the industry, the business model, and the deal — the better. Use what\u2019s publicly available.' },
+          { icon: 'User', title: 'You know the deal', description: 'AI is fast. You know the room. Your judgment is the thing AI can\u2019t replace — it just runs faster now.' },
+          { icon: 'TrendingUp', title: 'Make it yours', description: 'Review everything. Adapt the output. The tool gives you a first draft in minutes — you make it customer-ready.' },
+        ],
       },
       {
         layout: 'takeaway',
@@ -319,92 +412,109 @@ export const slideManifest = [
     exploreContent: null,
   },
 
-  // ── LIVE: Cursor → (9 slides) ───────────────────────────────────────
-  // Scenario → setup → habits → 4 demos → what's next → close.
+  // ── LIVE: Cursor → Pre-handoff (3 slides) ───────────────────────────
+  // Scenario → setup → observation framework → HANDOFF to demoing SE
   {
     id: 'cursor-getting-started',
     tier: 'big-picture',
     tierLabel: 'The Big Picture',
     title: 'Cursor \u2192',
     icon: 'cursor',
-    slides: cursorGettingStartedSlides,
+    slides: cursorPreHandoffSlides,
     exploreContent: { type: 'tool', data: cursor },
   },
 
-  // ── TAKE-HOME: Go Deeper (6 slides) ─────────────────────────────────
-  // Karpathy/Vibe Coding mental model + proof points for those who want the full argument.
+  // ── LIVE: Cursor → Post-demo (3 slides) ─────────────────────────────
+  // Presenter returns after live demo: habits, what's next, close/CTA
   {
-    id: 'go-deeper-transition',
-    tier: 'transition',
-    tierLabel: null,
-    title: 'Go Deeper',
-    icon: null,
-    slides: [{ layout: 'tierTransition', label: 'Go Deeper', supporting: 'Additional proof points — the data behind the tools.' }],
-    exploreContent: null,
-  },
-  {
-    id: 'go-deeper',
-    tier: 'go-deeper',
-    tierLabel: 'Go Deeper',
-    title: 'Proof Points',
-    icon: 'ChevronRight',
-    slides: [
-      goDeeper.slides[1], // "What this unlocks" iconBullets
-      // Karpathy + Vibe Coding moved here from live flow — better fit for
-      // technically curious audience who want the mental model
-      theWhy.slides[4], // Karpathy quote
-      theWhy.slides[5], // Vibe Coding illustrated concept
-      {
-        layout: 'bigStat',
-        value: '90 minutes',
-        label: 'To build what used to take six weeks',
-        source: 'SE field report',
-      },
-      {
-        layout: 'bigStat',
-        value: '98.95%',
-        label: 'Less time spent on demo guide prep',
-        source: 'MeshMesh case study',
-      },
-      goDeeper.slides[3], // Agentforce activation cinematic
-    ],
+    id: 'cursor-close',
+    tier: 'big-picture',
+    tierLabel: 'The Big Picture',
+    title: 'Close',
+    icon: 'CheckCircle',
+    slides: cursorPostDemoSlides,
     exploreContent: null,
   },
 
-  // ── TAKE-HOME: Deep Dives (4 nav dots) ────────────────────────────────
+  // ── TAKE-HOME: Start Here (4 slides) ─────────────────────────────────
+  // First stop after the live session. Purpose: bridge from "interested"
+  // to "doing it." Pick a starting point + learn to prompt well.
   {
-    id: 'deep-dives-transition',
+    id: 'start-here-transition',
     tier: 'transition',
     tierLabel: null,
-    title: 'Deep Dives',
+    title: 'Start Here',
     icon: null,
-    slides: [{ layout: 'tierTransition', label: 'Deep Dives', supporting: 'Full walkthroughs for each tool — plus real SE use cases across all four.' }],
+    slides: [{ layout: 'tierTransition', label: 'Start Here', supporting: 'Pick your tool, learn to prompt well, and get your first win.' }],
     exploreContent: null,
   },
-  // Use cases surfaced here — previously dead code, now the opening section
-  // of Deep Dives. Answers "what would I actually use this for?" for skeptics.
   {
-    id: 'use-cases',
-    tier: 'deep-dives',
-    tierLabel: 'Deep Dives',
-    title: 'Use Cases',
+    id: 'start-here',
+    tier: 'start-here',
+    tierLabel: 'Start Here',
+    title: 'Start Here',
     icon: 'Zap',
-    slides: convertLevelUpToSlides(useCases),
-    exploreContent: { type: 'tool', data: useCases },
+    slides: startHere.slides,
+    exploreContent: null,
+  },
+
+  // ── TAKE-HOME: Playbooks (6 slides) ──────────────────────────────────
+  // Task-based guides organized by what the SE is actually trying to do.
+  // One slide per playbook, each with prose + step cards + real prompts.
+  {
+    id: 'playbooks-transition',
+    tier: 'transition',
+    tierLabel: null,
+    title: 'Playbooks',
+    icon: null,
+    slides: [{ layout: 'tierTransition', label: 'Playbooks', supporting: 'Step-by-step guides for the six things SEs do most.' }],
+    exploreContent: null,
+  },
+  {
+    id: 'playbooks',
+    tier: 'playbooks',
+    tierLabel: 'Playbooks',
+    title: 'Playbooks',
+    icon: 'BookOpen',
+    slides: convertLevelUpToSlides(playbooks),
+    exploreContent: { type: 'tool', data: playbooks },
+  },
+
+  // ── TAKE-HOME: Tool Guides (4 nav dots) ──────────────────────────────
+  // Full deep dives per tool, ordered by accessibility gradient:
+  // Saleo (easiest) → Cursor → MeshMesh → Claude Code (most advanced).
+  // Each now includes Overview + Getting Started + Prompting Tips/Patterns.
+  {
+    id: 'tool-guides-transition',
+    tier: 'transition',
+    tierLabel: null,
+    title: 'Tool Guides',
+    icon: null,
+    slides: [{ layout: 'tierTransition', label: 'Tool Guides', supporting: 'Full deep dives — from setup to advanced patterns.' }],
+    exploreContent: null,
   },
   {
     id: 'saleo',
-    tier: 'deep-dives',
-    tierLabel: 'Deep Dives',
+    tier: 'tool-guides',
+    tierLabel: 'Tool Guides',
     title: 'Saleo',
     icon: 'saleo',
     slides: convertToolToSlides(saleo),
     exploreContent: { type: 'tool', data: saleo },
   },
   {
+    id: 'cursor-workflows',
+    tier: 'tool-guides',
+    tierLabel: 'Tool Guides',
+    title: 'Cursor',
+    icon: 'cursor',
+    slides: cursorWorkflowSlides,
+    exploreContent: { type: 'tool', data: cursor },
+  },
+  {
     id: 'meshmesh',
-    tier: 'deep-dives',
-    tierLabel: 'Deep Dives',
+    tier: 'tool-guides',
+    tierLabel: 'Tool Guides',
     title: 'MeshMesh',
     icon: 'meshmesh',
     slides: convertToolToSlides(meshmesh),
@@ -412,8 +522,8 @@ export const slideManifest = [
   },
   {
     id: 'claude-code',
-    tier: 'deep-dives',
-    tierLabel: 'Deep Dives',
+    tier: 'tool-guides',
+    tierLabel: 'Tool Guides',
     title: 'Claude Code',
     icon: 'claude',
     slides: convertToolToSlides(claudeCode),

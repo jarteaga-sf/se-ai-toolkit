@@ -8,12 +8,12 @@ export const theWhy = {
   tierLabel: 'The Big Picture',
   title: 'The Why',
   slides: [
-    // Title — opening hook while waiting for everyone to join.
+    // Title — holding slide while waiting for everyone to join.
     {
       layout: 'title',
       title: 'The SE',
       accent: 'AI Toolkit',
-      subtitle: 'Four tools. One mission. Better demos, faster.',
+      subtitle: 'From prep to proof — faster.',
       badges: ['How I AI', 'Solutions Engineering', '2026'],
     },
 
@@ -29,18 +29,18 @@ export const theWhy = {
       ],
     },
 
-    // Hook. No supporting text on screen. Presenter speaks the 57% stat.
+    // SE pain + customer pain in one line. Let it sit.
     {
       layout: 'cinematic',
-      statement: 'Your buyers did their homework.',
+      statement: 'You prepped for three hours. They showed up with their minds nearly made.',
     },
 
-    // The number that proves it. One stat. Let it land.
+    // The number that proves the hook.
     {
       layout: 'bigStat',
-      value: '57%',
-      label: 'of the buying decision is done before the first call',
-      source: 'CEB / Gartner',
+      value: '80%',
+      label: 'of the buying journey happens before they talk to you',
+      source: 'Gartner, 2024',
     },
 
     // The origin story. Karpathy names the thing.
@@ -48,7 +48,7 @@ export const theWhy = {
       layout: 'quote',
       quote: 'You fully give in to the vibes, embrace exponentials, and forget that the code even exists.',
       attribution: 'Andrej Karpathy',
-      context: 'OpenAI co-founder. Former head of AI at Tesla.',
+      context: 'Founding member of OpenAI. Former head of AI at Tesla.',
     },
 
     // Define the concept. Covers thinking, designing, and building — not just building.
@@ -145,56 +145,93 @@ export const theTools = {
   ],
 }
 
-// ── Section 3: Go Deeper — take-home (5 slides) ───────────────────────────
-// Audience navigates these on their own after the session.
-// The stakes, the data, the Agentforce urgency — for those who want the
-// full argument. Also a natural starting point when revisiting the link.
+// ── Section 3: Start Here — take-home (4 slides) ──────────────────────────
+// First thing SEs see when they return to the link after the session.
+// Purpose: bridge from "I'm interested" to "I'm doing it."
+// No more stats or proof points — they're already convinced.
+// Give them a starting point and teach them to prompt well.
 
-export const goDeeper = {
-  id: 'go-deeper',
-  tier: 'big-picture',
-  tierLabel: 'The Big Picture',
-  title: 'Go Deeper',
+export const startHere = {
+  id: 'start-here',
+  tier: 'start-here',
+  tierLabel: 'Start Here',
+  title: 'Start Here',
   slides: [
-    // The shift. Now that the audience has seen the tools, this lands concretely.
-    {
-      layout: 'comparison',
-      left: { icon: 'PenLine', label: 'Describing the Product', description: 'Slide decks. Canned demos.' },
-      right: { icon: 'Wand2', label: 'Proving the Product', description: 'Built for them. In the room.' },
-      connector: '\u2192',
-    },
-
-    // What it unlocks. Mini UIs reinforce the tools already seen.
+    // Four personas → four starting points. Removes decision paralysis.
     {
       layout: 'iconBullets',
-      title: 'What this unlocks',
+      title: 'Pick your starting point',
       bullets: [
-        { visual: 'speed', title: 'Speed to Proof', description: 'POC before the next meeting.' },
-        { visual: 'credibility', title: "The Builder's Edge", description: 'The SE who built it speaks differently.' },
-        { visual: 'independence', title: 'Own the Build', description: 'No waiting. No dependencies.' },
+        {
+          logo: 'saleo',
+          title: 'You run demos every week',
+          description: 'Start with Saleo. Install the Chrome extension, duplicate a vertical template, and personalize one demo before your next call. Done in 20 minutes.',
+        },
+        {
+          logo: 'meshmesh',
+          title: 'You build on Salesforce',
+          description: 'Start with MeshMesh. Request access, connect your demo org, and describe one Agentforce use case. Built in a single session.',
+        },
+        {
+          logo: 'claude',
+          title: 'You want to build from scratch',
+          description: 'Start with Claude Code. One install command, then ask it to generate demo data for your next vertical. From zero to usable in under an hour.',
+        },
+        {
+          logo: 'cursor',
+          title: 'You already work in code',
+          description: 'Start with Cursor. Open any existing project in Ask mode and describe what you want to understand. You\'ll know the codebase in minutes.',
+        },
       ],
     },
 
-    // The buyer behavior data — lands harder now they can picture which tool creates it.
+    // The highest-leverage skill: prompting. Four elements every SE needs.
     {
-      layout: 'bigStat',
-      value: '2.4\u00d7',
-      label: 'More likely to buy from sellers who build live',
-      source: 'Harvard Business Review',
+      layout: 'levelUpTopic',
+      title: 'How to prompt well',
+      prose: [
+        'The biggest gap between SEs who get real value from AI tools and those who don\'t isn\'t the tool — **it\'s the prompt.** A vague ask gets a generic answer. A specific ask with the right context gets something you can actually use.',
+        'Every effective prompt has four elements. You don\'t need all four every time, but knowing which one is missing explains why the output isn\'t landing.',
+      ],
+      cards: [
+        { icon: 'Users', title: 'Context', description: 'Who is the customer? What industry? What deal stage? "Write demo data" vs "Write demo data for a mid-market healthcare insurer with $20M ARR" returns completely different output.' },
+        { icon: 'Target', title: 'Task', description: '"Summarize this RFP" is a request. "Summarize this RFP in 5 bullet points focused on integration requirements and any mention of Salesforce competitors" is a task.' },
+        { icon: 'FileText', title: 'Output Format', description: 'Tell it what you want back — bullet list, table, code, JSON, plain prose. If you don\'t specify, the AI picks. It won\'t always pick what you need.' },
+        { icon: 'Shield', title: 'Constraints', description: 'What should it avoid? "Don\'t mention competitors. Keep it under 200 words. Use language a VP of Sales would understand." Constraints cut the noise.' },
+      ],
+      takeaway: 'You already know the deal and the customer. **That\'s the context the AI can\'t get on its own.** Put it in the prompt.',
     },
 
-    // Agentforce urgency. Dark. No supporting text on screen.
+    // What those four elements look like in real SE scenarios.
     {
-      layout: 'cinematic',
-      statement: 'Customers who see Agentforce built live are the ones who activate.',
+      layout: 'levelUpTopic',
+      title: 'Prompting in practice',
+      prose: [
+        'The same four elements look different depending on what you\'re doing. Here\'s what a weak prompt and a strong one look like across the most common SE scenarios.',
+      ],
+      cards: [
+        { icon: 'FileText', title: 'Demo prep', description: 'Weak: "Build me a demo." Strong: "Build a demo for a mid-market healthcare insurer. They care about case routing and agent handoffs. Show a patient calling in and getting fully resolved without a transfer."' },
+        { icon: 'Database', title: 'Demo data', description: 'Weak: "Generate demo data." Strong: "Generate 15 healthcare insurance accounts: realistic names, $10M–$200M ARR, 2–4 open opps each, a mix of healthy and at-risk account health scores."' },
+        { icon: 'Wrench', title: 'RFP response', description: 'Weak: "Write an RFP response." Strong: "Here\'s the RFP. Map each technical requirement to a specific Salesforce product. Flag anything we can\'t do natively. Output as a table."' },
+        { icon: 'Search', title: 'Code understanding', description: 'Weak: "Explain this code." Strong: "I\'m an SE who inherited this project. What does this component do, what data does it read, and where would I change it to add a filter by account type?"' },
+      ],
+      takeaway: 'Notice what\'s constant in every strong prompt: **who you are, who the customer is, and what the output needs to look like.** That\'s the formula.',
     },
 
-    // The closing window. Urgency for those who want the full argument.
+    // Three universal setup habits before any first session.
     {
-      layout: 'bigStat',
-      value: '12\u201318 months',
-      label: 'Window to build AI fluency before it is expected',
-      source: 'Gartner, 2025',
+      layout: 'levelUpTopic',
+      title: 'Three things to do before your first session',
+      prose: [
+        'Before you start building with any of these tools, three setup habits will save you hours later. None of them take more than 15 minutes. All of them make every session that follows better.',
+      ],
+      cards: [
+        { icon: 'FileText', title: 'Write a context file', description: 'For Claude Code: create a CLAUDE.md in your project folder. For Cursor: create a .cursorrules file. Tell it your tech stack, your conventions, and what not to touch. Ten minutes, permanent improvement.' },
+        { icon: 'Target', title: 'Define the goal first', description: 'Finish this sentence before you type anything: "I want a _____ that does _____ for _____." Vague starting points produce vague outputs. Specific ones produce usable ones.' },
+        { icon: 'Eye', title: 'Read before you accept', description: 'Every AI output is a first draft. Read it. Adapt it. The tool is fast — your judgment is what makes it customer-ready. Never approve anything blindly.' },
+        { icon: 'Zap', title: 'Start small, ship fast', description: 'Build one thing first. One demo template. One Agentforce agent. One set of demo data. Get one win, then the next. Don\'t try to rebuild your whole workflow in a single session.' },
+      ],
+      takeaway: 'Context file. Clear goal. Review habit. **Get these three right and every session after this one runs better.**',
     },
   ],
 }

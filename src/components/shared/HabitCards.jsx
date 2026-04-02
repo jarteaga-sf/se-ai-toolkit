@@ -1,5 +1,5 @@
 import { useEffect, useRef } from 'react'
-import { GitBranch, Shield, Target, Crosshair, FileText, Database, ArrowRightLeft, Wrench, Bot, Layers, Settings, Gauge, PenLine, Search, Code, Users, Repeat, BarChart3, Briefcase, Zap, TrendingUp, Terminal, ExternalLink } from 'lucide-react'
+import { GitBranch, Shield, Target, Crosshair, FileText, Database, ArrowRightLeft, Wrench, Bot, Layers, Settings, Gauge, PenLine, Search, Code, Users, Repeat, BarChart3, Briefcase, Zap, TrendingUp, Terminal, ExternalLink, Eye, AtSign, BookOpen, Globe } from 'lucide-react'
 import gsap from 'gsap'
 
 const iconMap = {
@@ -25,6 +25,10 @@ const iconMap = {
   Zap,
   TrendingUp,
   Terminal,
+  Eye,
+  AtSign,
+  BookOpen,
+  Globe,
 }
 
 export default function HabitCards({ cards, fullscreen = false }) {

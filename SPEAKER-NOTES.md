@@ -10,281 +10,313 @@ Presenting URL: `https://jarteaga-sf.github.io/se-ai-toolkit/`
 
 Session format: 45 minutes total
 - 3-4 min: opening context (before slide progression)
-- 8-10 min: Section 1 - The Why
-- 10-12 min: Section 2 - The Toolkit
-- 10-12 min: Section 3 - Cursor Getting Started
-- 4-6 min: Q&A and close
+- 10-12 min: Slides — The Why + The Toolkit + Cursor bridge
+- 15-18 min: Live Cursor demo (other SE presents)
+- 10-15 min: Close slides + Q&A
 
 Audience profile
 - Sharp, busy professionals running too many deals at once.
 - Curious but protective of their time. They want to know if this is worth it.
-- Some are already tinkering. Most haven't started yet. A few are skeptical and will watch your credibility closely.
+- Mixed technical depth — some are already building, most haven't started, a few are skeptical.
 - All of them care about what actually helps in a customer room.
+- They spend 60-70% of their time on repetitive documentation tasks. That's the pain.
 
 Tone and delivery
-- Talk like someone who has done this — not like someone presenting a roadmap.
+- Professionally casual. This is a cross-functional audience — stay around 5-6/10 formality. Not a keynote, not a Slack DM.
+- Brief context-setting first, then straight in. Read the room in the opening (Beat 2), then drop the preamble for the rest of the session.
+- Short punchy fragments > long polished sentences. Break up anything that reads like a script.
 - Use SE language: deal, room, call, org, build, prospect. Not "workflow" or "leveraging AI."
+- Em-dashes for asides. Concrete examples over analogies. Numbers over adjectives.
 - Silence is a tool. Say the important thing, then stop. Let it land.
-- Believe in the content. If you hedge, they'll hedge.
+- Lead with the ROI angle, then social proof. Time saved, real SE examples, then the principle.
+- If you hedge, they'll hedge. Believe in the content.
 - The SE's judgment is the thing AI cannot replace. Say that like you mean it.
 
 Room setup checklist
 - Deck loaded in presentation mode.
-- Cursor opened with a demo Salesforce project.
-- Demo videos tested and ready.
-- Notifications muted.
-- Backup: if a video fails, use the Appendix A narration guide to describe it verbally.
+- Other SE ready with Cursor open and a demo project loaded.
+- Notifications muted. Chat monitored for questions.
+- Backup: if the live demo fails, use Appendix A narration guide to walk through the video demos verbally.
 
 Opening frame (before Slide 1)
-> "Something changed in how enterprise buyers evaluate technology. They don't show up to calls to be informed anymore. By the time they're in the room with you, they've done their research, compared the options, and formed opinions."
->
-> "The question they're asking isn't 'what does Salesforce do?' It's 'prove it works for us.' Right now. In this room."
->
-> "The SE who walks in with a slide deck is losing to the SE who walks in and builds. That's not a prediction. That's what's already happening."
->
-> "Today is about closing that gap — with four specific tools built for exactly what we do."
+Four beats. ~45 seconds total before you hit the first slide.
 
-Verbal agenda (say this before Slide 1, do NOT read from a slide)
-> "Here's how this goes: we start with what's actually changing for buyers right now. Then we map the four tools and where each one fits. Then I'm going to show you Cursor working on a real SE scenario — the kind of situation that happens to all of us. We close with what's coming next so you know where to go from here."
+**Beat 1 — Self-ID + credibility**
+> "I'm Jonathan — Lead SE in CBS Mid-Market. I've been using these tools for about a year now, and I actually built the site you're going to see today with them. So this is coming from someone who's in it, not just presenting about it."
+
+**Beat 2 — Read the room**
+> "Quick level-set before we get into it. Some of you are already tinkering with AI tools — maybe you've been in Cursor, maybe you've seen the Slack posts. Some of you haven't touched any of this yet. Both are totally fine. This session is designed for all of it."
+
+**Beat 3 — Set expectations**
+> "Here's how this goes. About 10 minutes of context — what's changing and the four tools. Then Amelia is going to show you Cursor live and how to get started. And we'll leave some time for Q&A at the end."
+
+**Beat 4 — Into the hook**
+> "So — the reason this matters. By the time the prospect is in the room with you — they've already decided. Or close to it. They've done the research. They've compared the options. They're not there to learn what Salesforce does. They're there for you to prove it works for them."
+>
+> "And you're running — what — 12 deals? Three demos this week. An RFP due Friday. A discovery call you haven't prepped for. The volume is the real problem."
+>
+> "That's what this is. Four tools that help with all of it. And one of them you can start using today."
 
 ---
 
 ## TIER 1: Big Picture (live presentation)
 
-### Section 1 - The Why (`the-why`) — 6 slides
+### Section 1 - The Why (`the-why`) — 5 slides
 
 #### Slide 1 (`title`) - The SE AI Toolkit
-Goal: Land the mission in one sentence. No fanfare.
+Goal: Land the mission. No fanfare. Let the slide breathe — they're reading it.
+
+*(advance to Slide 1, pause 2 seconds)*
+> "Let's get into it."
+
+#### Slide 2 (`cinematic`) - You prepped for three hours. They showed up with their minds nearly made.
+Pause 3-4 seconds before speaking. Let the statement sit. Don't re-list the tasks — you already named them in the opening.
 
 Say:
-> "Four tools. One mission. Better customer proof, faster. Let's get into it."
+> "That's not a one-off. That's Tuesday. We've all been there. The part that wears on you isn't any single deal — it's that they all need something different and they all need it now."
 
-#### Slide 2 (`cinematic`) - Your buyers did their homework.
-Pause 3-4 seconds before speaking. No context needed. Let the statement sit.
-
-Say:
-> "By the time they're in the room with you, they've already formed a view. You're not informing them. You're confirming or disrupting what they already believe."
-
-#### Slide 3 (`bigStat`) - 57%
-Pause after the number loads. Do not rush to explain it.
+#### Slide 3 (`bigStat`) - 80%
+Pause after the number loads. The label explains itself — don't repeat it.
 
 Say:
-> "More than half the buying decision is already made before intros kick off. That's not a reason to panic. It's a reason to change what you walk in with."
+> "Eighty percent." *(pause)* "They're not coming to you for information. They're coming to see if you can prove it."
 
-#### Slide 4 (`comparison`) - Describing the Product -> Proving the Product
-This is the thesis. Deliver it like a decision, not an observation.
+> Transition: "So — what do you show up with?"
 
-Say:
-> "The old model was describing what Salesforce can do. The new model is showing it working for this customer. Those are two completely different conversations — and buyers know the difference immediately."
-
-#### Slide 5 (`iconBullets`) - Most of the value is in the thinking
-Slow down here. Walk the bullets left to right.
+#### Slide 4 (`comparison`) - Describing the Product → Proving the Product
+Point at the left, then speak only the right. Don't read both sides.
 
 Say:
-> "Here's what AI actually gives us back. You run multiple demos a week. Each one takes two to three hours of prep. Roughly a third of those deals were never going to close."
->
-> "AI doesn't fix the pipeline problem. But it does give you back the hours those deals cost you. And it makes the hours you do invest go a lot further."
+> "You can see the old model on the left — we've all lived it. The new model is on the right. Proof built for this customer — before the call even starts. That's the gap we're closing."
 
-Walk the three bullets:
-- "Getting smart on a new customer fast — instead of two hours of research, thirty minutes."
-- "Prepping for the hard questions before you're in the room, not after."
-- "And when it's time to build — you describe it, it handles the rest."
+> Transition: "And you don't have to be a developer to make it."
 
-#### Slide 6 (`bigStat`) - 2.4x
-Let the number land. Then close the section.
+#### Slide 5 (`bigStat`) - 63%
 
 Say:
-> "Buyers who see something built specifically for them are more than twice as likely to move forward. That number is the whole reason these tools matter to us."
+> "Sixty-three percent. Product managers. Founders. Consultants. SEs. Most people building with AI right now aren't writing code — they're describing what they need. That's what we're going to show you."
 
-Transition:
-> "So. Four tools. Let me show you what each one does and when to reach for it."
+> Transition: "Four tools make this possible. Let me show you the landscape."
 
 ---
 
-### Section 2 - The Toolkit (`the-toolkit`) — 9 slides
+### Section 2 - The Toolkit (`the-toolkit`) — 8 slides
 
-#### Slide 1 (`statement`) - One changes demo speed. Others change what you can build.
+#### Slide 1 (`toolCards`) - Four tools side by side
+Use this as landscape orientation. Point to each column briefly. Then fire the chat pulse — it's the only engagement moment in this section and it resets attention before the 4 individual tool slides.
+
 Say:
-> "These aren't four versions of the same thing. Each one has a clear job. And we're going to leverage them for SE workflows."
+> "None of them are just for demos. SEs are using them for RFPs, discovery prep, architecture docs, presentation decks — everything on your plate."
+>
+> *(chat pulse — ~8 seconds)* "Quick pulse — drop in the chat if you've used any of these. Even if it's just Saleo. I'm curious where this group is."
+>
+> *(glance at chat, acknowledge one or two if they come, move on regardless)* "Starting with the fastest win."
 
 #### Slide 2 (`toolOverview`) - Saleo
+The seVoice quote on screen already says it's in Golden Demos — reference it, don't restate it.
+
 Say:
-> "Saleo is your fastest win. Real prospect data showing up in the demo, no org risk. If you're prepping for a call tomorrow, this is where you start."
+> "Saleo is the fastest win. Prospect's data in the demo, no org risk. If you're prepping for a call tomorrow — this is where you start. The quote at the bottom says it all."
+
+> Transition: "Next — building on Salesforce natively."
 
 #### Slide 3 (`toolOverview`) - MeshMesh
-Say:
-> "MeshMesh builds natively on Salesforce. Agentforce, platform solutions, custom proof — built fast, in one sitting. It's in pilot right now. Worth knowing the access path."
-
-#### Slide 4 (`toolOverview`) - Cursor
-Say:
-> "Cursor is where most of you will start. AI built directly into the code editor. Open a project, describe what you need, review what it builds. We're going to spend the second half of this session here."
-
-#### Slide 5 (`toolOverview`) - Claude Code
-Say:
-> "Claude Code is for building from nothing. You describe the goal. It plans the approach, writes the files, executes across the whole project. One SE rebuilt a patient support agent demo from zero in a couple of hours."
-
-#### Slide 6 (`toolCards`) - Four tools side by side
-Use this as a decision anchor. Point to each column.
 
 Say:
-> "Four tools, four clear lanes. You don't need all of them this week. Just know which one matches your next customer moment — and start there."
+> "MeshMesh configures Salesforce directly. It already understands metadata, Flows, Agentforce, Permission Sets — you don't waste time explaining what those are. You describe what you need, it builds it. It's in pilot right now — worth knowing the access path so you're ready."
+
+> Transition: "And when you need to build something from scratch..."
+
+NOTE on MeshMesh vs Claude Code: If someone asks, the clean separation is:
+- MeshMesh **configures** Salesforce natively. No code. Thinks in metadata.
+- Claude Code **writes code** from your machine. Full autonomy. Builds and deploys.
+- They're complementary layers, not competitors. One configures, the other codes.
+
+#### Slide 4 (`toolOverview`) - Claude Code
+
+Say:
+> "Claude Code is for the builders. RFP responses, architecture docs, full agent builds, presentation decks — describe the goal, it handles everything. It's the most powerful tool here — and the most advanced. We'll go deeper in a future session."
+>
+> "One SE's rule: 'I don't vibe code anything I can't explain to customers.' Good guardrail for all of us."
+
+> Transition: "And the one you can start using today."
+
+#### Slide 5 (`toolOverview`) - Cursor
+Last tool before the demo — bridge to the live show. Save the 70/30 deal-cycle story for the proof slide where it has its own card.
+
+Say:
+> "Cursor. This is the one you can request today. Three modes — ask, plan, build. It reads your whole project and gives you context-aware output. We'll show you what that actually looks like live in a few minutes."
+
+> Transition: "And here's the proof."
+
+#### Slide 6 (`iconBullets`) - SEs are already using these
+Pick ONE story to expand on — they'll read the other two. In a virtual setting, going deep on one beats going shallow on three.
+
+Say:
+> "I want to land on the first one. A brand-new SE — two months into the job — reskinned an entire SDO in one session. 53 products. 709 opportunities. Full Agentforce agent. That's not a senior builder. That's someone who just started."
+>
+> *(gesture)* "The other two are worth reading — a Principal SE using Cursor for the entire deal cycle, and a Distinguished SE's recommended stack across all three building tools."
+
+> Transition: "How do you get results like that?"
 
 #### Slide 7 (`iconBullets`) - What makes these tools work
-Slow down. This is the HOW, not just the WHAT.
 
 Say:
-> "Three things separate useful output from noise. Context — the more specific you are about the customer and the deal, the better the result. Your judgment — you know what this customer actually cares about, and the AI doesn't. And building in the room when you can — that's the moment buyer confidence shifts."
-
-#### Slide 8 (`bigStat`) - 12-18 months
-Keep this motivating. Not urgent. Not a threat.
-
-Say:
-> "This is the window when it's still easy. Early movers are building fluency right now, at low stakes. That gap closes. Get your reps in while it's still optional."
-
-#### Slide 9 (`takeaway`) - Start with one. Build something real. Show a customer.
-Say:
-> "That's the whole operating model. One tool. One real output. One customer interaction. Then repeat."
-
-Transition:
-> "Let me show you what 'one tool, one real output' actually looks like. This is a scenario that will happen to you — or already has."
-
----
-
-### Section 3 - Cursor Getting Started (`cursor-getting-started`) — 9 slides
-
-#### Slide 1 (`cinematic`) - The scenario
-Read it slowly. Pause after the last line. Let it breathe.
-
-Say:
-> "You just got off a call. The prospect wants a custom component. The org belongs to someone who left the team. You've never seen it before. You have two days."
+> "Three things. One — context. The more specific you are about the industry, the business model, the deal — the better the output. Use what's publicly available: their website, 10-K filings, industry trends, your own discovery notes."
 >
-> "This is real. This happens. Here's how you handle it."
+> "Two — your judgment. AI is fast. You know the room. That combination is what makes these tools actually useful."
+>
+> "Three — make it yours. Review everything. Adapt it. The tool gives you a first draft in minutes — you make it customer-ready."
 
-#### Slide 2 (`toolGettingStarted`) - License -> Install -> Connect
+> Transition: "So that's how you get there. Now — where do you start?"
+
+#### Slide 8 (`takeaway`) - Start with one.
+The slide says it. The mantra hits once — here, where it belongs.
+
 Say:
-> "Three steps, same day. Request your license in SE Enablement Slack, install Cursor, connect it to a demo org. You can be working in this thing by tonight."
+> "That's the whole thing. One tool. One real output. One customer interaction. Then repeat."
 
-#### Slide 3 (`habitCardsSlide`) - Four habits that make the difference
-Say:
-> "Four habits. They sound small. They're not."
-
-Walk them quickly:
-- "Tab — let the autocomplete lead. Accept it and keep moving."
-- "Agent mode — describe what you need, review what comes back."
-- "Give it context — point it at the right files. Better input, better output."
-- "Review before accepting — this is still your name on it."
-
-#### Slide 4 (`videoDemoSlide`) - You walk into the room.
-Narrate while the video plays:
-> "You open a project you've never seen. Left side: your files. Middle: your code. Right side: your AI. When you open the folder, Cursor reads everything inside. It knows the project. Now you can ask it anything."
-
-#### Slide 5 (`videoDemoSlide`) - You figure out what you have — then build what you need.
-Narrate while the video plays:
-> "Ask mode: you understand what you inherited in about thirty seconds. Agent mode: you describe the component the prospect needs. Cursor builds it. Every change shows up in a diff before you accept anything. You stay in control the whole time."
-
-#### Slide 6 (`videoDemoSlide`) - You make it Salesforce-ready.
-Narrate while the video plays:
-> "The Org Browser puts your objects, classes, and metadata right in the sidebar. No Setup tab. Cmd+K lets you describe a change in plain English and see it inline. And @Codebase answers questions about a project you didn't write — instantly."
-
-#### Slide 7 (`videoDemoSlide`) - You set it up so next time is even faster.
-Narrate while the video plays:
-> "The rules file tells Cursor how to behave on this project. Apex best practices, SLDS standards — you set it once and every response follows those guardrails automatically. And your conversations carry across sessions. Yesterday's context is still there."
-
-#### Slide 8 (`iconBullets`) - What's coming next
-Say:
-> "Today is orientation. Each tool gets its own deep-dive session where you actually build something. Watch the SE Enablement Slack channel for dates."
-
-#### Slide 9 (`statement`) - Thank you.
-Say:
-> "Two asks before you go. Bookmark this site — use it before your next demo as your reference. And request your Cursor license this week. Don't wait for the perfect moment. The first real session is where it starts to click."
-
-Close to Q&A:
-> "Let's use the time we have left. Real questions, real scenarios — let's go."
+> Transition: "Let's start right now."
 
 ---
 
-## TIER 2: Go Deeper (take-home, optional live skim)
+### Section 3 - Cursor Getting Started (`cursor-getting-started`) — 3 slides (pre-handoff)
 
-### Section 4 - Proof Points (`go-deeper`)
+#### Slide 1 (`cinematic`) - Now what?
+
+Say:
+> "You got the license. You open Cursor. And a lot of people stall right here. Not because it's hard — because nobody showed them the first move. So that's what we're doing."
+
+#### Slide 2 (`toolGettingStarted`) - License → Install → Connect
+
+Say:
+> "Three steps. Request the license in SE Enablement Slack, install Cursor, connect to a demo org. You can be working in this by end of day."
+
+> Transition: "Before [other SE name] takes over — here's what to watch for."
+
+#### Slide 3 (`habitCardsSlide`) - What to watch for
+Walk the four cards. This is the observation framework for the live demo.
+
+Say:
+> "Four things. Watch it autocomplete — it suggests code before you type it. Watch the three modes — ask, plan, and agent. Watch the @ trick — that's how it pulls in files and docs. And watch the review step — every change is shown before it's committed."
+
+**Handoff script:**
+> "Even if you've never opened a code editor — watch these four things. You don't need to understand the code. You need to see what the AI does with it. This is the part that makes it click. [Name], take it away."
+
+---
+
+## LIVE CURSOR DEMO (15-18 min) — Other SE presents
+
+The other SE takes over the screen entirely. This is a talk track guide, not slides.
+
+**Part 1: Orient (2-3 min)**
+- Open a project in Cursor.
+- "Your folder is your workspace. Everything the AI does happens in context of these files."
+- Quick tour: file tree (left), editor (center), chat panel (right).
+- Open a file and start using it. Don't explain every panel.
+
+**Part 2: Chat Modes — the centerpiece (6-8 min)**
+- Ask Mode: highlight code, ask "What does this do?" — instant explanation.
+- Plan Mode: "I want to add X" — shows the plan without building.
+- Agent Mode: "Build it" — creates files, writes code, runs commands.
+- Key line: "Three modes. Ask when you're learning. Plan when you're designing. Build when you're ready."
+
+**Part 3: The @ Context (4-5 min)**
+- @Files — reference a specific file.
+- @Codebase — "Where do we handle routing?" across the whole project.
+- @Docs — pull in external documentation. Stops hallucination.
+- @Web — get the latest CLI command without switching tabs.
+- Key line: "This is the difference between ChatGPT and Cursor — Cursor knows your project."
+
+**Part 4: Quick Tips (2-3 min)**
+- Extensions: show Salesforce Extension Pack.
+- Rules: show .cursorrules — "You can tell the AI about your project permanently."
+- Keep brief: "this exists" not "let me teach you."
+
+**Attention reset at ~10 min:** Pause — "Questions so far before I show you the next part?"
+
+---
+
+### Section 4 - Cursor Close (`cursor-close`) — 3 slides (post-demo)
+
+Presenter returns to the slide deck.
+
+#### Slide 1 (`habitCardsSlide`) - Four habits that make the difference
+
+Say:
+> "You just saw all of these. Four habits. They sound small — they're not."
+>
+> Walk them quick:
+> - "Tab — let the autocomplete lead. Accept and keep moving."
+> - "Agent mode — describe what you need, review what comes back."
+> - "Context — point it at the right files. Better input, better output."
+> - "Review before accepting — this is still your name on it."
+>
+> "And one guardrail from an SE who builds with these every day: 'Keep it simple, powerful, and not too flashy — because if you build 5 custom LWCs and the customer wants them all, the partner has to actually deliver them.'"
+
+> Transition: "This is where it starts. Here's where it goes."
+
+#### Slide 2 (`iconBullets`) - What's coming next
+
+Say:
+> "Each tool gets its own deep-dive — you'll actually build something. Dates are in the SE Enablement Slack. And the site you're looking at right now has the full walkthroughs, use cases, cheat sheet, decision flow — all of it. Bookmark it."
+
+> Transition: "One thing before questions."
+
+#### Slide 3 (`takeaway`) - The next time you open Cursor — you'll know the first move.
+
+Say:
+> "If you run demos — request Saleo access this week. It's already in Golden Demos. If you're curious about Cursor — request the license today. Open a project. Ask it one question. That's it. If you want to go deeper — there's a session for that, we'll share the dates."
+>
+> "The next time you open Cursor — you'll know the first move."
+
+Q&A transition:
+> "Real questions, real scenarios — let's go."
+
+---
+
+## TIER 2: Go Deeper (take-home)
+
+### Section 5 - Proof Points (`go-deeper`)
 
 If skimming live (2 minutes max):
-> "This is the evidence layer. If you need to make the case internally — or just want to understand why this works — the numbers are here."
-> "The Karpathy quote is worth reading on your own. The 90-minute field example and the 98.95% prep reduction — those are from SEs using these tools on real deals."
-> "The last slide in this section is about Agentforce activation. Customers who see it built live are the ones who actually move forward. That's the thread that ties all of this together."
-
-Presenter note:
-- Skip this section entirely if time is tight. It rewards the curious without slowing the skeptical.
-- Point people here as follow-up evidence when someone asks "how do you know this works?"
-
----
-
-## TIER 3: Deep Dives (take-home, optional live skim)
-
-### Section 5 - Use Cases (`use-cases`)
-- Answers "what would I actually build with this?"
-- Four tabs, one per tool. Real SE scenarios, not feature abstractions.
-- If live skimming: pick the tool most relevant to your audience and show one card.
-- Call out the "emerging" scenarios — those are signals of where the SE workflow is heading.
-
-### Section 6 - Saleo (`saleo`)
-- Fastest path to demo personalization. Zero technical skill required.
-- The key habit: build a template library organized by vertical and persona. That's the thing that compounds.
-- If live skimming: highlight one before-call behavior and one in-call pivot.
-
-### Section 7 - MeshMesh (`meshmesh`)
-- Salesforce-native builds for Agentforce and platform proof.
-- Still in pilot — set expectations, then emphasize the access path.
-- If live skimming: show the access request steps and one high-impact use case.
-
-### Section 8 - Claude Code (`claude-code`)
-- Strongest for start-from-zero and multi-step builds.
-- The `/init` command is the differentiator — it reads your project and sets up context automatically.
-- If live skimming: show `/init` and one terminal interaction.
-
----
-
-## TIER 4: Keep Going (take-home, optional live skim)
-
-### Section 9 - Level Up (`level-up`)
-- Skills, MCP servers, custom commands, context files. Each one is a force multiplier.
-- Framing: "This is how you go from occasional wins to a repeatable system."
-- If live skimming: name each concept in one sentence and move on.
-
-### Section 10 - Cheat Sheet (`quick-reference`)
-- The pre-demo decision reference. One matrix, one decision flow.
-- Key behavior: run through the scenario matrix before each customer build cycle.
-- If time permits, show the decision flow once and move on.
+> "This is the evidence layer. If you need to make the case internally, the numbers are here."
+> "The Karpathy quote is worth reading on your own. The 90-minute field example — that's from an SE using these tools on a real deal."
+> "The last slide is about Agentforce activation. Customers who see it built live are the ones who actually move forward."
 
 ---
 
 ## Q&A - Objection Handling
 
 "I'm not technical enough for this."
-> "You know your customer better than any developer does. That's what makes the output actually useful. Start with Saleo — it doesn't require a single line of code. Build from there."
+> "You know the customer better than any developer does. That's what makes the output useful. Start with Saleo — zero code. Build from there."
 
 "I don't have time to learn four new tools."
 > "Don't learn four. Pick the one that matches your next deal and use it once this week. That's it. Everything else can wait."
 
 "What if the AI output is wrong?"
-> "It will be wrong sometimes. Review the diff, test it in a demo org, validate before you show a customer. Your judgment is still in the loop — it just runs a lot faster now."
+> "It will be. Sometimes. Review the diff, test it in a demo org, validate before you show a customer. Your judgment is still in the loop — it just runs faster now."
 
-"Is this safe and compliant?"
-> "Use the approved setup paths, keep privacy protections on, build and test in demo orgs. Same guardrails as always. The tools don't change the rules."
+"Is this safe and compliant? Can I use customer data?"
+> "Use the approved setup paths, keep privacy protections on. For now — publicly available info. Their website, 10-K, industry trends, your own discovery notes and project files. Customer data policies are still being finalized. But there's more than enough public context to get meaningful output."
 
 "Why not just use ChatGPT?"
 > "ChatGPT gives you text. These tools execute inside your actual project. That's the difference between a suggestion and something you can show a customer."
 
 "I'm worried this changes what SEs are valued for."
-> "It does. In the best way. The commodity layer — repetitive demos, generic prep, basic technical Q&A — compresses. The strategic layer rises: discovery quality, solution framing, trust, business judgment. You're more valuable, not less."
+> "It does. In the best way. The commodity layer — repetitive demos, generic prep, basic technical Q&A — compresses. The strategic layer rises. Discovery quality, solution framing, trust, business judgment. You're more valuable, not less."
 
 "I don't know where to even start."
-> "Cursor. Request the license today, open a project you're already working on, and ask it one question about the code. That first session is where it clicks."
+> "Cursor. Request the license today, open a project you're already working on, ask it one question about the code. That first session is where it clicks."
+
+"What's the difference between MeshMesh and Claude Code?"
+> "MeshMesh configures Salesforce natively — no code. It thinks in metadata, Flows, org structure. Claude Code writes code from your machine — full autonomy, builds from scratch and deploys. They're complementary. One configures, the other codes. One SE's stack: Claude Code writes the custom code, MeshMesh wires it into the org, Saleo personalizes the demo."
 
 ---
 
 ## Appendix A - Cursor Video Narration Guide (4 clips)
 
-Use these if video fails or if you want tighter narration during playback. Each clip maps to a slide in Section 3.
+Use these if the live demo fails. Each clip maps to a take-home video demo slide.
 
 Clip 1 - You walk into the room (`cursor-01-workspace.mp4`)
 - "Left side: files. Middle: code. Right side: AI. Cursor reads the whole project the moment you open the folder."
@@ -311,5 +343,7 @@ Clip 4 - You set it up so next time is faster (`cursor-04-pro-tips.mp4`)
 - Keep examples real and grounded in SE scenarios. No abstract AI hype.
 - Never imply AI replaces SE judgment. Say the opposite and mean it.
 - If someone pushes back hard, agree with the underlying concern and answer the real question.
-- End with one clear action: request a Cursor license and run one real use case this week.
-- The best moment in this presentation is the scenario slide. Give it the silence it deserves.
+- Data guardrail: use publicly available information. Don't promise customer data clearance.
+- End with tiered actions: Saleo for demo SEs, Cursor license for curious SEs, advanced session for builders.
+- The best moment in this presentation is the handoff. Give the observation framework and the inclusive line the delivery they deserve.
+- **Virtual rule: never read what's on screen.** The audience reads faster than you speak. Your job is to add — a story, a reason, a redirect. If the slide says it, you don't have to.

@@ -15,7 +15,7 @@ const toolAccents = {
   claude: '#066AFE',
 }
 
-export default function ToolOverviewSlide({ toolId, title, tagline, differentiator, examples, fullscreen }) {
+export default function ToolOverviewSlide({ toolId, title, tagline, differentiator, examples, seVoice, fullscreen }) {
   const Logo = logos[toolId]
   const accent = toolAccents[toolId] || 'var(--color-accent)'
 
@@ -39,6 +39,16 @@ export default function ToolOverviewSlide({ toolId, title, tagline, differentiat
           <p className="text-[14px] text-[var(--color-text-muted)] leading-relaxed">
             {differentiator}
           </p>
+        )}
+        {seVoice && (
+          <div className="mt-4 pt-4 border-t border-[var(--color-border)]">
+            <p className="text-[13px] text-[var(--color-text-muted)] italic leading-relaxed">
+              &ldquo;{seVoice.quote}&rdquo;
+            </p>
+            <p className="text-[11px] text-[var(--color-accent)] mt-1.5 font-medium">
+              — {seVoice.attribution}
+            </p>
+          </div>
         )}
       </div>
 

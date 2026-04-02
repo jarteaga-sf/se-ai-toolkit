@@ -1,51 +1,65 @@
 # The SE AI Toolkit
 
 ## Project Overview
-An interactive guide to AI tools for Salesforce SEs — covering Claude Code, Cursor, MeshMesh, and Saleo.
-Built as a static React site with Vite, Tailwind, and shadcn/ui.
-Designed for live virtual enablement presentations AND as a take-home reference.
+A fullscreen presentation deck and take-home reference for Salesforce SEs — covering Saleo, MeshMesh, Cursor, and Claude Code.
+Built as a static React site with Vite, Tailwind, and GSAP. Designed for live virtual enablement (keyboard-navigable slides) with a seamless handoff to a live Cursor demo, plus deep-dive reference content accessible after the session.
 
 ## Tech Stack
 - Vite + React (JSX, not TypeScript for simplicity)
 - Tailwind CSS v4 + tw-animate-css
-- shadcn/ui (installed: ScrollArea, Tabs, Tooltip, Collapsible, Badge, Separator)
+- GSAP for slide transitions, typewriter effects, and ambient animations
 - Lucide React for icons
-- Google Fonts: Inter (headings + body, variable weight 300-700) + IBM Plex Mono (code)
+- Salesforce Brand Kit: ITC Avant Garde Demi (display), Salesforce Sans (body)
 
 ## Design Rules
 - NO emojis. Ever.
 - Icons: Lucide only, used sparingly
-- Color palette: warm off-white bg (#FAFAF8), near-black text (#1A1A1A), slate accent (#64748B)
-- Max prose width: 780px
-- Spacing: generous. Think Notion published page.
+- Salesforce brand palette: Navy (#001E5B), Cloud Blue, Salesforce Blue (#0176D3), Electric (#066AFE)
+- Slides: dark gradient backgrounds for hook/statement/cinematic layouts, light for content slides
 - Terminal panels: dark bg (#1E1E1E), monospace, realistic formatting
-- All interactive elements from shadcn, styled to match the muted palette
 - Virtual presentation readability: text must be legible on screen share (min 15px body, 17px+ for slide content)
 
 ## Architecture
-- Single-page scroll app (no routing)
-- 4 tiers of content: The Big Picture → The Tools → See It in Action → Keep Going
-- Content lives in `src/content/` as structured JS objects (big-picture.js, tools.js, action.js)
-- Components in `src/components/` are pure presentational
-- Scroll behavior: IntersectionObserver for section fade-in + sidebar active state
+- Fullscreen presentation deck (no routing, no scroll)
+- `PresentationShell` renders `PresentationDeck` + `DockNav` + `ExploreDrawer` + `AnimatedBackground`
+- Arrow keys navigate slides. `E` opens the Explore drawer for take-home content.
+- Content lives in `src/content/` as structured JS objects:
+  - `big-picture.js` — The Why (hook, stats, thesis) + The Tools (legacy data) + Go Deeper (take-home proof points)
+  - `tools.js` — Saleo, MeshMesh, Cursor, Claude Code deep-dives + Use Cases
+  - `action.js` — Level Up (Skills, MCP, Commands, Context Files) + Cheat Sheet
+  - `slides.js` — The unified slide manifest that composes everything into a linear deck
 
-### Section structure (9 sections across 4 tiers)
-1. **The Big Picture** (2 sections, slides-only): The Shift, The Tools
-2. **The Tools** (4 sections, tabbed, each with Getting Started tab): Saleo, MeshMesh, Cursor, Claude Code
-3. **See It in Action** (2 sections): Live Demo, The Full Pipeline
-4. **Keep Going** (1 section): Cheat Sheet
+### Slide manifest structure (slides.js)
 
-### Key components
-- `SlideCarousel` -- click-through slides for the Big Picture tier (presentation mode). Slide layouts: quote, comparison, statement, iconBullets, spectrum, toolCards, scenarios, takeaway
-- `Section` -- card wrapper with fade-in. Supports `compact` (tier label only, no title), `hideDivider`, `first` props
-- `TierDivider` -- labeled horizontal rule between tier groups
-- `TabbedToolSection` -- tab container for tool deep-dives (Overview, Getting Started, Workflows, etc.)
-- `HabitCards` -- 2x2 icon card grid (used in Claude Code Workflows tab)
-- `SpectrumBar` -- interactive AI coding spectrum with always-visible staggered labels
-- `GifShowcase` -- video placeholder with step number, gradient circle, dotted "coming soon" tag
-- `TerminalPanel` -- dark terminal mockup with typed commands and Claude responses
-- `ValueCards` -- 3-col icon cards. `ToolCards` -- responsive tool cards (2-col mobile, 4-col desktop) with logos, single role badge, setup level indicator, and SE proof points
-- `Hero` -- main hero with animated gradient divider between subtitle and tool logos
+Live presentation (~12 min of slides + live Cursor demo):
+1. **The Why** (5 slides) — SE-pain hook, 80% stat, Describing→Proving thesis, 63% non-dev reassurance
+2. **The Toolkit** (8 slides) — ToolCards landscape, 4 toolOverviews (Saleo→MeshMesh→Claude Code→Cursor last), SE proof points, principles, takeaway
+3. **Cursor → Pre-handoff** (3 slides) — Scenario, setup steps, observation framework → HANDOFF to demoing SE
+4. **Cursor → Post-demo** (3 slides) — Habit cards, what's next, close/CTA with narrative callback
+
+Take-home (audience navigates via the link):
+5. **Go Deeper** (6 slides) — Karpathy/Vibe Coding, proof stats, Agentforce urgency
+6. **Deep Dives** — Use Cases, Saleo, MeshMesh, Cursor Demos, Claude Code walkthroughs
+7. **Keep Going** — Level Up (Skills, MCP, Commands, Context Files), Cheat Sheet
+
+### Component organization
+- `src/components/core/` — PresentationShell, PresentationDeck, DockNav, ExploreDrawer, AnimatedBackground
+- `src/components/slides/` — One component per slide layout (24 layouts + index registry)
+- `src/components/shared/` — Reusable: TerminalPanel, HabitCards, ToolCards, FeatureCards, StepFlow, DecisionFlow, QuickReference, TabbedToolSection, TierDivider
+- `src/components/illustrations/` — ToolLogos (SVG), SlideVisuals (mini before/after), ConceptIllustrations (VibeCoding, Agent, Funnel)
+
+### Key slide layouts
+- `title` — Blue gradient, Salesforce branding, badge row
+- `cinematic` — Large white text on dark gradient, word-by-word GSAP entrance
+- `bigStat` — Animated count-up number with source citation
+- `comparison` — Before/after cards with animated connector
+- `toolOverview` — Split layout: tool identity (logo, tagline, differentiator, optional seVoice quote) + checkmark examples
+- `toolCards` — 4-column grid with mini UI visuals and role badges
+- `iconBullets` — Grid of cards with icons or tool logos
+- `habitCardsSlide` — 2x2 card grid (used for habits, observation framework, use cases)
+- `videoDemoSlide` — 16:9 video/GIF player with step label and caption
+- `takeaway` — Accent left bar with bold text
+- `tierTransition` — Section interstitial on dark gradient
 
 ## Coding Conventions
 - Functional components with hooks
