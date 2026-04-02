@@ -74,12 +74,17 @@
   animation-delay: 30ms;
 }
 
-/* Bento grid cell staggered entrance */
-.bento-cell-1 { animation: slide-fade-in 0.35s ease-out both; animation-delay: 30ms; }
-.bento-cell-2 { animation: slide-fade-in 0.35s ease-out both; animation-delay: 120ms; }
-.bento-cell-3 { animation: slide-fade-in 0.35s ease-out both; animation-delay: 200ms; }
-.bento-cell-4 { animation: slide-fade-in 0.35s ease-out both; animation-delay: 280ms; }
-.bento-cell-5 { animation: slide-fade-in 0.35s ease-out both; animation-delay: 350ms; }
+/* Bento grid cell staggered entrance — translate only, parent slide-enter handles opacity */
+@keyframes bento-cell-in {
+  from { transform: translateY(10px); }
+  to   { transform: translateY(0); }
+}
+
+.bento-cell-1 { animation: bento-cell-in 0.3s ease-out both; animation-delay: 60ms; }
+.bento-cell-2 { animation: bento-cell-in 0.3s ease-out both; animation-delay: 130ms; }
+.bento-cell-3 { animation: bento-cell-in 0.3s ease-out both; animation-delay: 200ms; }
+.bento-cell-4 { animation: bento-cell-in 0.3s ease-out both; animation-delay: 270ms; }
+.bento-cell-5 { animation: bento-cell-in 0.3s ease-out both; animation-delay: 340ms; }
 
 @layer base {
   html {
