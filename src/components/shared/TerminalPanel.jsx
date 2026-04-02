@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef, useCallback } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { Copy, Check, ChevronDown } from 'lucide-react'
 
 function TypewriterText({ text, active }) {
@@ -132,12 +132,18 @@ export default function TerminalPanel({ title, steps, expandable = false, fullsc
     if (hasIntersected && !animatedRef.current) {
       animatedRef.current = true
       let count = 0
-      const interval = setInterval(() => {
+      let timer = null
+      const tick = () => {
         count++
         setVisibleLines(count)
-        if (count >= steps.length) clearInterval(interval)
-      }, steps[count]?.delay || 80)
-      return () => clearInterval(interval)
+        if (count < steps.length) {
+          timer = setTimeout(tick, steps[count]?.delay || 80)
+        }
+      }
+      timer = setTimeout(tick, steps[count]?.delay || 80)
+      return () => {
+        if (timer) clearTimeout(timer)
+      }
     }
   }, [hasIntersected, steps])
 

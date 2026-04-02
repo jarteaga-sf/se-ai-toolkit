@@ -37,16 +37,21 @@ export default function HabitCards({ cards, fullscreen = false }) {
   useEffect(() => {
     const el = gridRef.current
     if (!el) return
-    const items = el.querySelectorAll('.habit-card')
-    gsap.set(items, { y: 24, opacity: 0 })
-    gsap.to(items, {
-      y: 0,
-      opacity: 1,
-      duration: 0.5,
-      stagger: 0.08,
-      ease: 'power2.out',
-      delay: 0.15,
-    })
+
+    const ctx = gsap.context(() => {
+      const items = el.querySelectorAll('.habit-card')
+      gsap.set(items, { y: 24, opacity: 0 })
+      gsap.to(items, {
+        y: 0,
+        opacity: 1,
+        duration: 0.5,
+        stagger: 0.08,
+        ease: 'power2.out',
+        delay: 0.15,
+      })
+    }, el)
+
+    return () => ctx.revert()
   }, [cards])
 
   return (

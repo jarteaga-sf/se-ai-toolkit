@@ -40,13 +40,18 @@ export default function DockNav({
   }, [])
 
   useEffect(() => {
+    let showTimer = null
     if (current === 0 || current === total - 1) {
-      setVisible(true)
       clearTimeout(hideTimer.current)
     } else {
-      resetHideTimer()
+      showTimer = setTimeout(() => setVisible(true), 0)
+      clearTimeout(hideTimer.current)
+      hideTimer.current = setTimeout(() => setVisible(false), 3000)
     }
-  }, [current, total, resetHideTimer])
+    return () => {
+      if (showTimer) clearTimeout(showTimer)
+    }
+  }, [current, total])
 
   useEffect(() => {
     const handleMouse = (e) => {
@@ -77,11 +82,6 @@ export default function DockNav({
     return current >= start + section.slides.length
   }
 
-  const isSectionUpcoming = (section) => {
-    const start = sectionStartMap[section.id]
-    return start !== undefined && current < start
-  }
-
   // Group sections by tier
   const tiers = []
   let currentTier = null
@@ -104,6 +104,8 @@ export default function DockNav({
   }
 
   const activeSectionId = getActiveSection()
+  const forceVisible = current === 0 || current === total - 1
+  const dockVisible = forceVisible || visible
   const activeSectionTitle = sections.find((s) => s.id === activeSectionId)?.title
 
   // Next section after active
@@ -120,7 +122,7 @@ export default function DockNav({
   return (
     <div
       className={`fixed bottom-4 left-1/2 -translate-x-1/2 z-50 transition-all duration-500 ${
-        visible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4 pointer-events-none'
+        dockVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4 pointer-events-none'
       }`}
     >
       <div className={`flex items-center gap-3 px-4 py-3 rounded-2xl border shadow-lg backdrop-blur-xl ${
@@ -145,8 +147,6 @@ export default function DockNav({
             const tierName = tierDisplayNames[tierGroup.tier] || tierGroup.tier
             const tierIsActive = tierGroup.sections.some((s) => s.id === activeSectionId)
             const tierIsCompleted = tierGroup.sections.every((s) => isSectionCompleted(s))
-            const tierIsUpcoming = tierGroup.sections.every((s) => isSectionUpcoming(s))
-
             return (
               <div key={tIdx} className="flex items-center gap-0.5">
                 {tIdx > 0 && (

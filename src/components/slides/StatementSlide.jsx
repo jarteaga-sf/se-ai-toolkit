@@ -1,31 +1,35 @@
 import { useEffect, useRef } from 'react'
 import gsap from 'gsap'
 
-export default function StatementSlide({ statement, supporting, fullscreen, isDarkBg }) {
+export default function StatementSlide({ statement, supporting, isDarkBg }) {
   const containerRef = useRef(null)
 
   useEffect(() => {
     const el = containerRef.current
     if (!el) return
 
-    const words = el.querySelectorAll('.stmt-word')
-    const supportEl = el.querySelector('.stmt-supporting')
+    const ctx = gsap.context(() => {
+      const words = el.querySelectorAll('.stmt-word')
+      const supportEl = el.querySelector('.stmt-supporting')
 
-    gsap.set(words, { opacity: 0, y: 8 })
-    gsap.to(words, {
-      opacity: 1,
-      y: 0,
-      duration: 0.4,
-      stagger: 0.07,
-      ease: 'power2.out',
-      delay: 0.2,
-    })
+      gsap.set(words, { opacity: 0, y: 8 })
+      gsap.to(words, {
+        opacity: 1,
+        y: 0,
+        duration: 0.4,
+        stagger: 0.07,
+        ease: 'power2.out',
+        delay: 0.2,
+      })
 
-    if (supportEl) {
-      const supportDelay = 0.2 + words.length * 0.07 + 0.2
-      gsap.set(supportEl, { opacity: 0 })
-      gsap.to(supportEl, { opacity: 1, duration: 0.5, delay: supportDelay })
-    }
+      if (supportEl) {
+        const supportDelay = 0.2 + words.length * 0.07 + 0.2
+        gsap.set(supportEl, { opacity: 0 })
+        gsap.to(supportEl, { opacity: 1, duration: 0.5, delay: supportDelay })
+      }
+    }, el)
+
+    return () => ctx.revert()
   }, [statement])
 
   const statementWords = statement.split(' ')

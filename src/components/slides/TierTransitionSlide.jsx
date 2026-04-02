@@ -9,35 +9,39 @@ const logos = {
   meshmesh: MeshMeshLogo,
 }
 
-export default function TierTransitionSlide({ label, supporting, logo, showSectionLabel = true, fullscreen }) {
+export default function TierTransitionSlide({ label, supporting, logo, showSectionLabel = true }) {
   const Logo = logo ? logos[logo] : null
   const labelRef = useRef(null)
   const titleRef = useRef(null)
   const supportRef = useRef(null)
 
   useEffect(() => {
-    const tl = gsap.timeline({ delay: 0.15 })
+    const ctx = gsap.context(() => {
+      const tl = gsap.timeline({ delay: 0.15 })
 
-    if (labelRef.current) {
-      tl.fromTo(labelRef.current,
-        { opacity: 0, y: 12 },
-        { opacity: 1, y: 0, duration: 0.5, ease: 'power2.out' }
-      )
-    }
-    if (titleRef.current) {
-      tl.fromTo(titleRef.current,
-        { opacity: 0, y: 25 },
-        { opacity: 1, y: 0, duration: 0.6, ease: 'power2.out' },
-        '-=0.1'
-      )
-    }
-    if (supportRef.current) {
-      tl.fromTo(supportRef.current,
-        { opacity: 0 },
-        { opacity: 1, duration: 0.5, ease: 'power1.out' },
-        '-=0.1'
-      )
-    }
+      if (labelRef.current) {
+        tl.fromTo(labelRef.current,
+          { opacity: 0, y: 12 },
+          { opacity: 1, y: 0, duration: 0.5, ease: 'power2.out' }
+        )
+      }
+      if (titleRef.current) {
+        tl.fromTo(titleRef.current,
+          { opacity: 0, y: 25 },
+          { opacity: 1, y: 0, duration: 0.6, ease: 'power2.out' },
+          '-=0.1'
+        )
+      }
+      if (supportRef.current) {
+        tl.fromTo(supportRef.current,
+          { opacity: 0 },
+          { opacity: 1, duration: 0.5, ease: 'power1.out' },
+          '-=0.1'
+        )
+      }
+    })
+
+    return () => ctx.revert()
   }, [label])
 
   return (

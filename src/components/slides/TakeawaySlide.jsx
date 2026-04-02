@@ -15,19 +15,23 @@ function parseBold(text) {
   })
 }
 
-export default function TakeawaySlide({ text, fullscreen }) {
+export default function TakeawaySlide({ text }) {
   const barRef = useRef(null)
   const textRef = useRef(null)
 
   useEffect(() => {
-    if (barRef.current) {
-      gsap.set(barRef.current, { scaleY: 0, transformOrigin: 'top' })
-      gsap.to(barRef.current, { scaleY: 1, duration: 0.45, ease: 'power2.out', delay: 0.2 })
-    }
-    if (textRef.current) {
-      gsap.set(textRef.current, { opacity: 0 })
-      gsap.to(textRef.current, { opacity: 1, duration: 0.5, delay: 0.5 })
-    }
+    const ctx = gsap.context(() => {
+      if (barRef.current) {
+        gsap.set(barRef.current, { scaleY: 0, transformOrigin: 'top' })
+        gsap.to(barRef.current, { scaleY: 1, duration: 0.45, ease: 'power2.out', delay: 0.2 })
+      }
+      if (textRef.current) {
+        gsap.set(textRef.current, { opacity: 0 })
+        gsap.to(textRef.current, { opacity: 1, duration: 0.5, delay: 0.5 })
+      }
+    })
+
+    return () => ctx.revert()
   }, [text])
 
   return (

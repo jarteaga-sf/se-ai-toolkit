@@ -6,7 +6,7 @@ const illustrationMap = {
   funnel: FunnelIllustration,
 }
 
-export default function IllustratedConceptSlide({ title, subtitle, message, illustration, fullscreen }) {
+export default function IllustratedConceptSlide({ title, subtitle, message, illustration }) {
   const Illustration = illustrationMap[illustration]
 
   return (

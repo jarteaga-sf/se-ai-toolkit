@@ -23,23 +23,28 @@ function parseBold(text) {
   })
 }
 
-export default function ToolIntroSlide({ toolId, title, subtitle, leadParagraph, fullscreen }) {
+export default function ToolIntroSlide({ toolId, title, subtitle, leadParagraph }) {
   const Logo = logos[toolId]
   const containerRef = useRef(null)
 
   useEffect(() => {
     const el = containerRef.current
     if (!el) return
-    const items = el.querySelectorAll('.tool-intro-item')
-    gsap.set(items, { opacity: 0, y: 20 })
-    gsap.to(items, {
-      opacity: 1,
-      y: 0,
-      duration: 0.5,
-      stagger: 0.12,
-      ease: 'power2.out',
-      delay: 0.15,
-    })
+
+    const ctx = gsap.context(() => {
+      const items = el.querySelectorAll('.tool-intro-item')
+      gsap.set(items, { opacity: 0, y: 20 })
+      gsap.to(items, {
+        opacity: 1,
+        y: 0,
+        duration: 0.5,
+        stagger: 0.12,
+        ease: 'power2.out',
+        delay: 0.15,
+      })
+    }, el)
+
+    return () => ctx.revert()
   }, [toolId])
 
   return (

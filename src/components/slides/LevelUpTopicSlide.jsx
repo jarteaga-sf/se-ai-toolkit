@@ -10,7 +10,7 @@ function parseBold(text) {
   })
 }
 
-export default function LevelUpTopicSlide({ title, prose, cards, takeaway, fullscreen }) {
+export default function LevelUpTopicSlide({ title, prose, cards, takeaway }) {
   return (
     <div className="max-w-[860px] mx-auto px-8 w-full">
       <h2 className="text-[32px] font-bold text-[var(--color-heading)] tracking-[-0.02em] text-center mb-6">

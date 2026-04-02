@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from 'react'
-import { ArrowRight, ArrowDown, MessageSquare, Bot, Wrench, CheckCircle, Zap, BookOpen, Users, Layers } from 'lucide-react'
+import { ArrowRight, MessageSquare, Bot, Wrench, CheckCircle, Zap } from 'lucide-react'
 import gsap from 'gsap'
 
 /**
@@ -101,21 +101,25 @@ function RotatingPrompts() {
   const promptRef = useRef(null)
 
   useEffect(() => {
+    const promptEl = promptRef.current
+    if (!promptEl) return undefined
+
     const interval = setInterval(() => {
-      if (promptRef.current) {
-        gsap.to(promptRef.current, {
-          opacity: 0, y: -8, duration: 0.4,
-          onComplete: () => {
-            setCurrentPrompt(p => (p + 1) % prompts.length)
-            gsap.fromTo(promptRef.current,
-              { opacity: 0, y: 8 },
-              { opacity: 1, y: 0, duration: 0.4 }
-            )
-          }
-        })
-      }
+      gsap.to(promptEl, {
+        opacity: 0, y: -8, duration: 0.4,
+        onComplete: () => {
+          setCurrentPrompt(p => (p + 1) % prompts.length)
+          gsap.fromTo(promptEl,
+            { opacity: 0, y: 8 },
+            { opacity: 1, y: 0, duration: 0.4 }
+          )
+        }
+      })
     }, 3500)
-    return () => clearInterval(interval)
+    return () => {
+      clearInterval(interval)
+      gsap.killTweensOf(promptEl)
+    }
   }, [])
 
   return (

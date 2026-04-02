@@ -1,4 +1,4 @@
-export default function TitleSlide({ title, accent, subtitle, badges, fullscreen }) {
+export default function TitleSlide({ title, accent, subtitle, badges }) {
   return (
     <div className="flex flex-col items-center justify-center text-center max-w-[960px] mx-auto px-8">
       {/* Logo + divider */}

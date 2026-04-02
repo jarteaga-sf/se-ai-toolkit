@@ -8,7 +8,7 @@ const logos = {
   meshmesh: MeshMeshLogo,
 }
 
-export default function HabitCardsSlideComponent({ toolId, title, cards, fullscreen }) {
+export default function HabitCardsSlideComponent({ toolId, title, cards }) {
   const Logo = logos[toolId]
 
   return (

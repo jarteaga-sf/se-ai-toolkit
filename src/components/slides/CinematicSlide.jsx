@@ -1,23 +1,27 @@
 import { useEffect, useRef } from 'react'
 import gsap from 'gsap'
 
-export default function CinematicSlide({ statement, fullscreen }) {
+export default function CinematicSlide({ statement }) {
   const containerRef = useRef(null)
 
   useEffect(() => {
     const el = containerRef.current
     if (!el) return
 
-    const words = el.querySelectorAll('.cinematic-word')
-    gsap.set(words, { opacity: 0, y: 10 })
-    gsap.to(words, {
-      opacity: 1,
-      y: 0,
-      duration: 0.45,
-      stagger: 0.08,
-      ease: 'power2.out',
-      delay: 0.2,
-    })
+    const ctx = gsap.context(() => {
+      const words = el.querySelectorAll('.cinematic-word')
+      gsap.set(words, { opacity: 0, y: 10 })
+      gsap.to(words, {
+        opacity: 1,
+        y: 0,
+        duration: 0.45,
+        stagger: 0.08,
+        ease: 'power2.out',
+        delay: 0.2,
+      })
+    }, el)
+
+    return () => ctx.revert()
   }, [statement])
 
   const statementWords = statement.split(' ')

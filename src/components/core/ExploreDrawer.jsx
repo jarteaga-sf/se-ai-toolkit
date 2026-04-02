@@ -130,48 +130,90 @@ function QuickRefExploreContent({ data }) {
 export default function ExploreDrawer({ content, onClose }) {
   const drawerRef = useRef(null)
   const backdropRef = useRef(null)
+  const closeButtonRef = useRef(null)
+  const prevFocusedRef = useRef(null)
+  const headingId = 'explore-drawer-title'
 
   useEffect(() => {
-    // Pre-hide and animate in
-    if (backdropRef.current) {
-      gsap.set(backdropRef.current, { opacity: 0 })
-      gsap.to(backdropRef.current,
-        { opacity: 1, duration: 0.3, ease: 'power2.out' }
-      )
-    }
-    if (drawerRef.current) {
-      gsap.set(drawerRef.current, { x: '100%' })
-      gsap.to(drawerRef.current,
-        { x: '0%', duration: 0.4, ease: 'power3.out' }
-      )
+    prevFocusedRef.current = document.activeElement
+
+    const ctx = gsap.context(() => {
+      // Pre-hide and animate in
+      if (backdropRef.current) {
+        gsap.set(backdropRef.current, { opacity: 0 })
+        gsap.to(backdropRef.current,
+          { opacity: 1, duration: 0.3, ease: 'power2.out' }
+        )
+      }
+      if (drawerRef.current) {
+        gsap.set(drawerRef.current, { x: '100%' })
+        gsap.to(drawerRef.current,
+          { x: '0%', duration: 0.4, ease: 'power3.out' }
+        )
+      }
+    }, drawerRef)
+
+    // Give keyboard users a deterministic initial focus target.
+    closeButtonRef.current?.focus()
+
+    return () => {
+      ctx.revert()
+      if (prevFocusedRef.current instanceof HTMLElement) {
+        prevFocusedRef.current.focus()
+      }
     }
   }, [])
 
+  useEffect(() => {
+    const panel = drawerRef.current
+    if (!panel) return
+
+    const getFocusable = () => panel.querySelectorAll(
+      'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+    )
+
+    const onKeyDown = (e) => {
+      if (e.key !== 'Tab') return
+      const focusable = getFocusable()
+      if (!focusable.length) return
+
+      const first = focusable[0]
+      const last = focusable[focusable.length - 1]
+      const active = document.activeElement
+
+      if (e.shiftKey) {
+        if (active === first || !panel.contains(active)) {
+          e.preventDefault()
+          last.focus()
+        }
+      } else if (active === last || !panel.contains(active)) {
+        e.preventDefault()
+        first.focus()
+      }
+    }
+
+    panel.addEventListener('keydown', onKeyDown)
+    return () => panel.removeEventListener('keydown', onKeyDown)
+  }, [])
+
   const handleClose = () => {
-    // Animate out then call onClose
+    // Pre-hide and animate in
     if (backdropRef.current) {
       gsap.to(backdropRef.current, { opacity: 0, duration: 0.25 })
     }
     if (drawerRef.current) {
-      gsap.to(drawerRef.current, {
-        x: '100%',
-        duration: 0.3,
-        ease: 'power2.in',
-        onComplete: onClose,
-      })
+      gsap.to(drawerRef.current,
+        {
+          x: '100%',
+          duration: 0.3,
+          ease: 'power2.in',
+          onComplete: onClose,
+        }
+      )
     } else {
       onClose()
     }
   }
-
-  // Escape key
-  useEffect(() => {
-    const handler = (e) => {
-      if (e.key === 'Escape') handleClose()
-    }
-    window.addEventListener('keydown', handler)
-    return () => window.removeEventListener('keydown', handler)
-  }, [])
 
   return (
     <div className="fixed inset-0 z-[60]">
@@ -185,14 +227,19 @@ export default function ExploreDrawer({ content, onClose }) {
       {/* Drawer panel */}
       <div
         ref={drawerRef}
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby={headingId}
+        tabIndex={-1}
         className="absolute right-0 top-0 h-full w-[75vw] max-w-[800px] bg-[var(--color-bg-white)] shadow-2xl flex flex-col"
       >
         {/* Header */}
         <div className="flex items-center justify-between px-6 py-4 border-b border-[var(--color-border)]/50">
-          <h2 className="text-[20px] font-bold text-[var(--color-heading)]">
+          <h2 id={headingId} className="text-[20px] font-bold text-[var(--color-heading)]">
             {content.data.title || 'Explore'}
           </h2>
           <button
+            ref={closeButtonRef}
             onClick={handleClose}
             className="p-2 rounded-lg hover:bg-[var(--color-surface)] transition-colors cursor-pointer"
             aria-label="Close"

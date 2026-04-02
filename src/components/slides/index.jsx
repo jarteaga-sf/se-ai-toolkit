@@ -3,20 +3,16 @@ import StatementSlide from './StatementSlide'
 import BigStatSlide from './BigStatSlide'
 import CinematicSlide from './CinematicSlide'
 import ToolOverviewSlide from './ToolOverviewSlide'
-import VideoDemoSlide from './VideoDemoSlide'
 import QuoteSlide from './QuoteSlide'
 import ComparisonSlide from './ComparisonSlide'
 import IconBulletsSlide from './IconBulletsSlide'
-import StatCalloutSlide from './StatCalloutSlide'
 import TakeawaySlide from './TakeawaySlide'
 import IllustratedConceptSlide from './IllustratedConceptSlide'
-import SpectrumSplitSlide from './SpectrumSplitSlide'
 import TierTransitionSlide from './TierTransitionSlide'
 import ToolIntroSlide from './ToolIntroSlide'
 import ToolContentSlide from './ToolContentSlide'
 import ToolGettingStartedSlide from './ToolGettingStartedSlide'
 import HabitCardsSlideComponent from './HabitCardsSlide'
-import UseCaseCardsSlide from './UseCaseCardsSlide'
 import LevelUpTopicSlide from './LevelUpTopicSlide'
 import CheatSheetSlide from './CheatSheetSlide'
 import DecisionFlowSlide from './DecisionFlowSlide'
@@ -29,20 +25,16 @@ const layoutComponents = {
   bigStat: BigStatSlide,
   cinematic: CinematicSlide,
   toolOverview: ToolOverviewSlide,
-  videoDemoSlide: VideoDemoSlide,
   quote: QuoteSlide,
   comparison: ComparisonSlide,
   iconBullets: IconBulletsSlide,
-  statCallout: StatCalloutSlide,
   takeaway: TakeawaySlide,
   illustratedConcept: IllustratedConceptSlide,
-  spectrumSplit: SpectrumSplitSlide,
   tierTransition: TierTransitionSlide,
   toolIntro: ToolIntroSlide,
   toolContent: ToolContentSlide,
   toolGettingStarted: ToolGettingStartedSlide,
   habitCardsSlide: HabitCardsSlideComponent,
-  useCaseCards: UseCaseCardsSlide,
   levelUpTopic: LevelUpTopicSlide,
   cheatSheetMatrix: CheatSheetSlide,
   decisionFlowSlide: DecisionFlowSlide,

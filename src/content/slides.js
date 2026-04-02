@@ -13,7 +13,7 @@
  *   Keep Going        — Level Up (Skills, MCP, Commands, Context Files), Cheat Sheet
  */
 
-import { theWhy, theTools, startHere } from './big-picture'
+import { theWhy, startHere } from './big-picture'
 import { claudeCode, cursor, saleo, meshmesh, playbooks } from './tools'
 import { levelUp, quickReference } from './action'
 
@@ -120,23 +120,8 @@ const toolOverviewSlides = [
 
 const cursorGS = cursor.tabs[2].content
 
-// Pre-handoff: single handoff cinematic — merges "start with one" + "now what" into the bridge
-const cursorPreHandoffSlides = [
-  {
-    layout: 'cinematic',
-    statement: 'Start with Cursor. Open a project. Ask it one question.',
-  },
-]
-
-// Post-demo: getting started essentials + CTA
+// Post-demo: CTA only — getting started content lives in Take-Home Tool Guides
 const cursorPostDemoSlides = [
-  {
-    layout: 'toolGettingStarted',
-    toolId: 'cursor',
-    title: 'Getting started with Cursor',
-    prose: ['A project in Cursor is just a folder on your computer. Open the folder — Cursor reads everything in it.'],
-    stepFlow: cursorGS.stepFlow,
-  },
   {
     layout: 'takeaway',
     text: 'The next time you open Cursor — **you\'ll know the first move.**',
@@ -146,6 +131,13 @@ const cursorPostDemoSlides = [
 // Cursor workflow walkthroughs — replace the incomplete video demo slides.
 // Three scenarios: Ask mode → Plan+Agent mode → rules file setup.
 const cursorWorkflowSlides = [
+  {
+    layout: 'toolGettingStarted',
+    toolId: 'cursor',
+    title: 'Getting started with Cursor',
+    prose: ['A project in Cursor is just a folder on your computer. Open the folder — Cursor reads everything in it.'],
+    stepFlow: cursorGS.stepFlow,
+  },
   {
     layout: 'toolContent',
     toolId: 'cursor',

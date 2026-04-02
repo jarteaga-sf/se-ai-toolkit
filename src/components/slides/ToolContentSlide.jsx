@@ -20,7 +20,7 @@ function parseBold(text) {
   })
 }
 
-export default function ToolContentSlide({ toolId, title, prose, quote, terminal, features, stepFlow, fullscreen }) {
+export default function ToolContentSlide({ toolId, title, prose, quote, terminal, features, stepFlow }) {
   const Logo = logos[toolId]
 
   return (

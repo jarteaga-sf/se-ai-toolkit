@@ -17,38 +17,42 @@ const logoMap = {
   claude: ClaudeLogo,
 }
 
-export default function IconBulletsSlide({ title, bullets, fullscreen }) {
+export default function IconBulletsSlide({ title, bullets }) {
   const cols = bullets.length === 4 ? 'grid-cols-2 sm:grid-cols-4' : 'grid-cols-3'
   const gridRef = useRef(null)
 
   useEffect(() => {
     if (!gridRef.current) return
 
-    // Subtle floating animation on icon containers (looping — keep)
-    const icons = gridRef.current.querySelectorAll('.icon-float')
-    icons.forEach((icon, i) => {
-      gsap.to(icon, {
-        y: -4,
-        duration: 1.8 + i * 0.3,
-        ease: 'sine.inOut',
-        yoyo: true,
-        repeat: -1,
-        delay: i * 0.2,
+    const ctx = gsap.context(() => {
+      // Subtle floating animation on icon containers (looping — keep)
+      const icons = gridRef.current.querySelectorAll('.icon-float')
+      icons.forEach((icon, i) => {
+        gsap.to(icon, {
+          y: -4,
+          duration: 1.8 + i * 0.3,
+          ease: 'sine.inOut',
+          yoyo: true,
+          repeat: -1,
+          delay: i * 0.2,
+        })
       })
-    })
 
-    // Subtle glow pulse on icon backgrounds (looping — keep)
-    const iconBgs = gridRef.current.querySelectorAll('.icon-bg-pulse')
-    iconBgs.forEach((bg, i) => {
-      gsap.to(bg, {
-        boxShadow: '0 0 16px rgba(0,176,255,0.15)',
-        duration: 2,
-        ease: 'sine.inOut',
-        yoyo: true,
-        repeat: -1,
-        delay: i * 0.4,
+      // Subtle glow pulse on icon backgrounds (looping — keep)
+      const iconBgs = gridRef.current.querySelectorAll('.icon-bg-pulse')
+      iconBgs.forEach((bg, i) => {
+        gsap.to(bg, {
+          boxShadow: '0 0 16px rgba(0,176,255,0.15)',
+          duration: 2,
+          ease: 'sine.inOut',
+          yoyo: true,
+          repeat: -1,
+          delay: i * 0.4,
+        })
       })
-    })
+    }, gridRef)
+
+    return () => ctx.revert()
   }, [])
 
   return (

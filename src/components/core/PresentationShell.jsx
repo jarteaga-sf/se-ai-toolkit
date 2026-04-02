@@ -32,15 +32,36 @@ export default function PresentationShell({ sections }) {
     }
   }, [slideInfo.exploreContent])
 
-  // Listen for E key to open explore drawer
+  // Centralized keyboard handling to avoid conflicting global listeners.
   useEffect(() => {
+    const isEditableTarget = (target) => {
+      if (!target || !(target instanceof HTMLElement)) return false
+      if (target.isContentEditable) return true
+      const tag = target.tagName
+      return tag === 'INPUT' || tag === 'TEXTAREA' || tag === 'SELECT'
+    }
+
     const handler = (e) => {
+      if (isEditableTarget(e.target)) return
+
+      if (!drawerOpen && (e.key === 'ArrowRight' || e.key === 'ArrowDown')) {
+        e.preventDefault()
+        navRef.current?.next()
+        return
+      }
+      if (!drawerOpen && (e.key === 'ArrowLeft' || e.key === 'ArrowUp')) {
+        e.preventDefault()
+        navRef.current?.prev()
+        return
+      }
       if (e.key === 'e' || e.key === 'E') {
         if (slideInfo.exploreContent && !drawerOpen) {
+          e.preventDefault()
           setDrawerOpen(true)
         }
       }
       if (e.key === 'Escape' && drawerOpen) {
+        e.preventDefault()
         setDrawerOpen(false)
       }
     }
@@ -48,8 +69,7 @@ export default function PresentationShell({ sections }) {
     return () => window.removeEventListener('keydown', handler)
   }, [slideInfo.exploreContent, drawerOpen])
 
-  const isDarkBg = slideInfo.tier === 'transition' ||
-    (slideInfo.sectionId === 'vibe-coding' || slideInfo.sectionId === 'why-ses-care')
+  const isDarkBg = slideInfo.tier === 'transition'
 
   return (
     <>

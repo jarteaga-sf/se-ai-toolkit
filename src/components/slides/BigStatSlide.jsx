@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import gsap from 'gsap'
 
-export default function BigStatSlide({ value, label, source, fullscreen }) {
+export default function BigStatSlide({ value, label, source }) {
   const [displayValue, setDisplayValue] = useState(value)
 
   useEffect(() => {
@@ -18,9 +18,8 @@ export default function BigStatSlide({ value, label, source, fullscreen }) {
       const decimalPlaces = decimalPart ? decimalPart.length : 0
       const hasComma = numStr.includes(',')
 
-      setDisplayValue(prefix + '0' + suffix)
       const obj = { val: 0 }
-      gsap.to(obj, {
+      const tween = gsap.to(obj, {
         val: targetNum,
         duration: 1.2,
         ease: 'power2.out',
@@ -36,8 +35,10 @@ export default function BigStatSlide({ value, label, source, fullscreen }) {
           setDisplayValue(prefix + formatted + suffix)
         },
       })
+      return () => tween.kill()
     } else {
-      setDisplayValue(value)
+      const timer = setTimeout(() => setDisplayValue(value), 0)
+      return () => clearTimeout(timer)
     }
   }, [value])
 

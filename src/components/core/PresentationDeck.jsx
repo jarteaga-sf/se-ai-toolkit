@@ -1,10 +1,10 @@
-import { useState, useEffect, useCallback, useRef } from 'react'
+import { useState, useEffect, useCallback, useRef, useMemo } from 'react'
 import { createSlideRenderers } from '../slides'
 
 const fullscreenRenderers = createSlideRenderers(true)
 
 export default function PresentationDeck({ sections, onSlideChange, onNavReady }) {
-  const allSlides = sections.flatMap((section, sIdx) =>
+  const allSlides = useMemo(() => sections.flatMap((section, sIdx) =>
     section.slides.map((slide) => ({
       slide,
       sectionLabel: section.tierLabel,
@@ -14,19 +14,19 @@ export default function PresentationDeck({ sections, onSlideChange, onNavReady }
       tier: section.tier,
       exploreContent: section.exploreContent,
     }))
-  )
+  ), [sections])
 
-  const sectionStartMap = useRef({})
-  if (Object.keys(sectionStartMap.current).length === 0) {
+  const sectionStartMap = useMemo(() => {
+    const map = {}
     let idx = 0
     sections.forEach((section) => {
-      sectionStartMap.current[section.id] = idx
+      map[section.id] = idx
       idx += section.slides.length
     })
-  }
+    return map
+  }, [sections])
 
   const [current, setCurrent] = useState(0)
-  const [scale, setScale] = useState(1)
   const stageRef = useRef(null)
   const contentRef = useRef(null)
   const prevSlide = useRef(0)
@@ -40,9 +40,9 @@ export default function PresentationDeck({ sections, onSlideChange, onNavReady }
   const goTo = useCallback((i) => setCurrent(i), [])
 
   const goToSection = useCallback((sectionId) => {
-    const idx = sectionStartMap.current[sectionId]
+    const idx = sectionStartMap[sectionId]
     if (idx !== undefined) setCurrent(idx)
-  }, [])
+  }, [sectionStartMap])
 
   // Expose nav functions to parent via onNavReady
   useEffect(() => {
@@ -64,23 +64,7 @@ export default function PresentationDeck({ sections, onSlideChange, onNavReady }
         exploreContent: item.exploreContent,
       })
     }
-  }, [current])
-
-  // Keyboard navigation
-  useEffect(() => {
-    const handler = (e) => {
-      if (e.key === 'ArrowRight' || e.key === 'ArrowDown') {
-        e.preventDefault()
-        next()
-      }
-      if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
-        e.preventDefault()
-        prev()
-      }
-    }
-    window.addEventListener('keydown', handler)
-    return () => window.removeEventListener('keydown', handler)
-  }, [next, prev])
+  }, [current, allSlides, onSlideChange])
 
   // Track previous slide for direction
   useEffect(() => {
@@ -106,7 +90,6 @@ export default function PresentationDeck({ sections, onSlideChange, onNavReady }
       const clamped = Math.max(0.4, s)
       content.style.transform = `scale(${clamped})`
       content.style.opacity = ''
-      setScale(clamped)
     }
 
     const observer = new ResizeObserver(recalc)
@@ -127,16 +110,13 @@ export default function PresentationDeck({ sections, onSlideChange, onNavReady }
     if (layout === 'cinematic') return 'bg-gradient-to-br from-[#001E5B] via-[#022AC0] to-[#066AFE]'
     if (layout === 'takeaway') return 'bg-[var(--color-takeaway-bg)]'
     if (layout === 'bigStat') return 'bg-[var(--color-bg-white)]'
-    if (layout === 'videoDemoSlide') return 'bg-[var(--color-bg-white)]'
-    if (layout === 'illustratedConcept' || layout === 'statCallout') return 'bg-[var(--color-bg-white)]'
-    if (layout === 'spectrumSplit') return 'bg-[var(--color-bg-white)]'
+    if (layout === 'illustratedConcept') return 'bg-[var(--color-bg-white)]'
     // New layouts
     if (layout === 'tierTransition') return 'bg-gradient-to-br from-[#001E5B] via-[#022AC0] to-[#066AFE]'
     if (layout === 'toolIntro') return 'bg-[var(--color-bg-white)]'
     if (layout === 'toolContent') return 'bg-[var(--color-bg)]'
     if (layout === 'toolGettingStarted') return 'bg-[var(--color-bg)]'
     if (layout === 'habitCardsSlide') return 'bg-[var(--color-bg)]'
-    if (layout === 'useCaseCards') return 'bg-[var(--color-bg)]'
     if (layout === 'levelUpTopic') return 'bg-[var(--color-bg)]'
     if (layout === 'cheatSheetMatrix') return 'bg-[var(--color-bg-white)]'
     if (layout === 'decisionFlowSlide') return 'bg-[var(--color-bg-white)]'

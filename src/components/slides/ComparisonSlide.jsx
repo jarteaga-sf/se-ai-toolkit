@@ -3,7 +3,7 @@ import { PenLine, Wand2, ArrowRight } from 'lucide-react'
 import * as LucideIcons from 'lucide-react'
 import gsap from 'gsap'
 
-export default function ComparisonSlide({ left, right, connector, fullscreen }) {
+export default function ComparisonSlide({ left, right }) {
   const LeftIcon = LucideIcons[left.icon] || PenLine
   const RightIcon = LucideIcons[right.icon] || Wand2
   const containerRef = useRef(null)
@@ -12,17 +12,21 @@ export default function ComparisonSlide({ left, right, connector, fullscreen }) 
     const el = containerRef.current
     if (!el) return
 
-    const leftEl = el.querySelector('.comp-left')
-    const connEl = el.querySelector('.comp-connector')
-    const rightEl = el.querySelector('.comp-right')
+    const ctx = gsap.context(() => {
+      const leftEl = el.querySelector('.comp-left')
+      const connEl = el.querySelector('.comp-connector')
+      const rightEl = el.querySelector('.comp-right')
 
-    gsap.set(leftEl, { x: -40, opacity: 0 })
-    gsap.set(connEl, { scale: 0, opacity: 0 })
-    gsap.set(rightEl, { x: 40, opacity: 0 })
+      gsap.set(leftEl, { x: -40, opacity: 0 })
+      gsap.set(connEl, { scale: 0, opacity: 0 })
+      gsap.set(rightEl, { x: 40, opacity: 0 })
 
-    gsap.to(leftEl, { x: 0, opacity: 1, duration: 0.5, ease: 'power2.out', delay: 0.2 })
-    gsap.to(rightEl, { x: 0, opacity: 1, duration: 0.5, ease: 'power2.out', delay: 0.35 })
-    gsap.to(connEl, { scale: 1, opacity: 1, duration: 0.35, ease: 'back.out(1.5)', delay: 0.5 })
+      gsap.to(leftEl, { x: 0, opacity: 1, duration: 0.5, ease: 'power2.out', delay: 0.2 })
+      gsap.to(rightEl, { x: 0, opacity: 1, duration: 0.5, ease: 'power2.out', delay: 0.35 })
+      gsap.to(connEl, { scale: 1, opacity: 1, duration: 0.35, ease: 'back.out(1.5)', delay: 0.5 })
+    }, el)
+
+    return () => ctx.revert()
   }, [left, right])
 
   return (

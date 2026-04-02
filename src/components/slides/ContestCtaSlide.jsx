@@ -8,7 +8,7 @@ function parseBold(text) {
   })
 }
 
-export default function ContestCtaSlide({ contest, takeaway, fullscreen }) {
+export default function ContestCtaSlide({ contest, takeaway }) {
   return (
     <div className="max-w-[700px] mx-auto px-8 w-full">
       {/* Contest card */}

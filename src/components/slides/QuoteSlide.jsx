@@ -7,21 +7,24 @@ function TypewriterQuote({ text, onDone }) {
   useEffect(() => {
     setDisplayed('')
     setDone(false)
+    let intervalId = null
     const delay = setTimeout(() => {
       let i = 0
-      const interval = setInterval(() => {
+      intervalId = setInterval(() => {
         i++
         setDisplayed(text.slice(0, i))
         if (i >= text.length) {
-          clearInterval(interval)
+          clearInterval(intervalId)
           setDone(true)
           if (onDone) onDone()
         }
       }, 22)
-      return () => clearInterval(interval)
     }, 300)
-    return () => clearTimeout(delay)
-  }, [text])
+    return () => {
+      clearTimeout(delay)
+      if (intervalId) clearInterval(intervalId)
+    }
+  }, [text, onDone])
 
   return (
     <>
@@ -33,13 +36,7 @@ function TypewriterQuote({ text, onDone }) {
   )
 }
 
-export default function QuoteSlide({ quote, attribution, context, fullscreen }) {
-  const [attributionVisible, setAttributionVisible] = useState(false)
-
-  useEffect(() => {
-    setAttributionVisible(false)
-  }, [quote])
-
+export default function QuoteSlide({ quote, attribution, context }) {
   return (
     <div className="flex flex-col items-center justify-center text-center max-w-[min(900px,80vw)] mx-auto px-8">
       {context && (
@@ -52,15 +49,11 @@ export default function QuoteSlide({ quote, attribution, context, fullscreen }) 
           &ldquo;
         </span>
         <p className="text-[clamp(22px,3.5vw,38px)] leading-[1.35] font-bold text-[var(--color-heading)] tracking-[-0.02em]">
-          <TypewriterQuote text={quote} onDone={() => setAttributionVisible(true)} />
+          <TypewriterQuote text={quote} />
         </p>
       </blockquote>
       {attribution && (
-        <p
-          className={`mt-8 text-[clamp(13px,1.5vw,17px)] text-[var(--color-accent)] font-bold transition-opacity duration-700 ${
-            attributionVisible ? 'opacity-100' : 'opacity-0'
-          }`}
-        >
+        <p className="mt-8 text-[clamp(13px,1.5vw,17px)] text-[var(--color-accent)] font-bold">
           &mdash; {attribution}
         </p>
       )}
