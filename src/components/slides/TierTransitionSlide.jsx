@@ -1,7 +1,16 @@
 import { useEffect, useRef } from 'react'
 import gsap from 'gsap'
+import { ClaudeLogo, CursorLogo, SaleoLogo, MeshMeshLogo } from '../illustrations/ToolLogos'
 
-export default function TierTransitionSlide({ label, supporting, fullscreen }) {
+const logos = {
+  claude: ClaudeLogo,
+  cursor: CursorLogo,
+  saleo: SaleoLogo,
+  meshmesh: MeshMeshLogo,
+}
+
+export default function TierTransitionSlide({ label, supporting, logo, showSectionLabel = true, fullscreen }) {
+  const Logo = logo ? logos[logo] : null
   const labelRef = useRef(null)
   const titleRef = useRef(null)
   const supportRef = useRef(null)
@@ -33,12 +42,19 @@ export default function TierTransitionSlide({ label, supporting, fullscreen }) {
 
   return (
     <div className="flex flex-col items-center justify-center text-center max-w-[900px] mx-auto px-8">
-      <p
-        ref={labelRef}
-        className="text-[15px] font-bold uppercase tracking-[0.15em] text-[var(--color-cloud-light)] mb-5"
-      >
-        Next Section
-      </p>
+      {Logo && (
+        <div className="mb-6 opacity-90">
+          <Logo size={56} />
+        </div>
+      )}
+      {showSectionLabel && (
+        <p
+          ref={labelRef}
+          className="text-[15px] font-bold uppercase tracking-[0.15em] text-[var(--color-cloud-light)] mb-5"
+        >
+          Next Section
+        </p>
+      )}
       <h2
         ref={titleRef}
         className="text-[clamp(28px,4.5vw,56px)] font-bold text-white tracking-[-0.03em] mb-5"

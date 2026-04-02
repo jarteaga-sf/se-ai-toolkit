@@ -9,10 +9,10 @@ Presenting URL: `https://jarteaga-sf.github.io/se-ai-toolkit/`
 ## Session Meta
 
 Session format: 45 minutes total
-- 3-4 min: opening context (before slide progression)
-- 10-12 min: Slides — The Why + The Toolkit + Cursor bridge
-- 15-18 min: Live Cursor demo (other SE presents)
-- 10-15 min: Close slides + Q&A
+- 1 min: opening context (before slide progression)
+- 12-14 min: Slides — The Why (4 slides) + The Toolkit (6 slides) + Handoff (1 slide)
+- 15 min: Live Cursor demo (other SE presents)
+- 5-10 min: Close slides (2 slides) + Q&A
 
 Audience profile
 - Sharp, busy professionals running too many deals at once.
@@ -42,7 +42,7 @@ Opening frame (before Slide 1)
 Four beats. ~45 seconds total before you hit the first slide.
 
 **Beat 1 — Self-ID + credibility**
-> "Hi everyone, I'm Jonathan — a Lead SE in CBS Mid-Market. I've been using some of these tools for a few months now, and I actually built the site we're looking at to walk through this presentation"
+> "Hi everyone, I'm Jonathan — a Lead SE in CBS Mid-Market. I've been using some of these tools for a few months now, and I actually built this site to walk through this presentation"
 
 **Beat 2 — Read the room**
 > "Now before we get into it... some of us are already tinkering with AI tools — maybe you've been using Cursor, maybe you've only used Slackbot or Gemini. Others haven't explored any yet and that's okay. My goal is for us to walk away with a clear sense of what these newer tools actually do, and how to get started"
@@ -82,117 +82,71 @@ Say:
 
 > Transition: "And we don't have to be developers to make it."
 
-#### Slide 5 (`bigStat`) - 63%
-
-Say:
-> "Sixty-three percent of the landscape. Product managers. Founders. Consultants. SEs. Most people building with AI right now aren't writing code — they're describing what they need but they're describing it well."
-
 ---
 
-### Section 2 - The Toolkit (`the-toolkit`) — 8 slides
+### Section 2 - The Toolkit (`the-toolkit`) — 6 slides
 
 #### Slide 1 (`toolCards`) - Four tools side by side
-Use this as landscape orientation. Point to each column briefly. Then fire the chat pulse — it's the only engagement moment in this section and it resets attention before the 4 individual tool slides.
+Use this as landscape orientation. Each card now has an SE quote at the bottom — let the audience read them, don't narrate them. Then fire the chat pulse.
 
 Say:
-> "Before we go through each one — we don't need all four. That's actually part of what these pilots are for: figuring out which tools deliver the most value for SEs and where the overlap is. Two of them sharpen the demo. Two of them change how we work across the entire deal cycle. By the end of this section it should be clear how SEs are using each."
+> "Before we go through each one — we don't need all four. That's actually part of what these pilots are for: figuring out which tools deliver the most value for SEs and where the overlap is. Two of them require zero code — you describe what you need and they handle it. Two of them work with your code and project files. Left side is the lowest barrier to entry. Right side is the highest ceiling. Cursor is the one you can act on today — the others have more limited access right now, but all four are worth knowing. Today is about finding your first move, not committing to any particular one."
 >
-> *(chat pulse — ~8 seconds)* "Quick pulse — drop in the chat which of these you've heard of or already tried. Curious where this group is."
+> *(chat pulse — ~8 seconds)* "Drop in the chat which of these you've heard of or already tried. Curious where this group is."
 >
 > *(glance at chat, acknowledge one or two, move on regardless)* "Let's start with the fastest win."
 
 #### Slide 2 (`toolOverview`) - Saleo
-The seVoice quote on screen shows a real SE swapping in data mid-call — reference it briefly, don't restate it.
+The GIF on the right shows the tool in action — let it play, don't describe what's on screen. Your job is to add the context the GIF can't show.
 
 Say:
-> "Saleo is the fastest win in this group. It personalizes what the prospect sees without touching a real record. The quote at the bottom is exactly what this feels like in practice — 30 seconds, mid-call, completely different demo. Already in every Golden Demo, so if you have access, you have this."
+> "Saleo personalizes what the prospect sees without touching a real record. What you're seeing on the right is the Data Creation Agent — it generates industry-specific demo data from a prompt, no manual entry. 30 seconds, mid-call, completely different demo. If you're already in Golden Demos, you have this. If not, there's a request path — but access is more limited right now."
 
 > Transition: "Next — building on Salesforce natively."
 
 #### Slide 3 (`toolOverview`) - MeshMesh
-The seVoice shows a pilot user building Agentforce without touching metadata — let that land, then add context.
+No GIF yet — placeholder is showing. Describe what we'd see in the visual while it's still coming.
 
 Say:
-> "MeshMesh is for Salesforce-native configuration — no code. It already knows the platform: metadata, Flows, Agentforce, Permission Sets. You describe what you need, it builds it. The quote at the bottom is from someone in the pilot — that's the kind of output we're talking about. It's not GA yet, but worth knowing the access path."
+> "MeshMesh is for Salesforce-native configuration — no code at all. It already knows the platform: metadata, Flows, Agentforce, Permission Sets. You describe what you need, it builds it. And it's not just for demos — it configures across Sales Cloud, Service Cloud, Data Cloud, Agentforce. Full org setup in a conversation. Closed pilot right now, but worth knowing the access path."
 
 > Transition: "And when we need to build something from scratch..."
 
 NOTE on MeshMesh vs Claude Code: If someone asks, the clean separation is:
-- MeshMesh **configures** Salesforce natively. No code. Thinks in metadata.
-- Claude Code **writes code** from your machine. Full autonomy. Builds and deploys.
-- They're complementary layers, not competitors. One configures, the other codes.
+- MeshMesh **configures Salesforce** natively — metadata, flows, agents, permissions. No code. Thinks in platform terms. Use it for org setup and Agentforce configuration.
+- Claude Code **writes code** from your terminal — Apex, LWC, full deployments. Autonomous. Thinks in files and codebases. Use it for custom code and complex builds.
+- They're different layers, not competitors. MeshMesh is platform work. Claude Code is code work. One SE's stack: Claude Code writes the custom code, MeshMesh wires it into the org.
 
 #### Slide 4 (`toolOverview`) - Claude Code
-The seVoice shows a Principal SE using it for discovery-to-deck in minutes — let it land, then add the guardrail.
+The GIF shows Claude Code running autonomously in a terminal — let it play, then add the SE context.
 
 Say:
-> "Claude Code is the most powerful tool in this group. It reads the project, plans the approach, writes the code, runs it, and checks its own work. The quote on screen is a good example — discovery notes and a 10-K in, architecture readback out in under 5 minutes. That's the ceiling."
+> "Claude Code is the autonomous builder. You describe the goal — an RFP response, an Agentforce agent, a full codebase migration — and it builds the entire solution. Multi-file, multi-step, start to finish. What you're seeing on the right is exactly that: it reads the project, plans the approach, writes the code, runs it, and checks its own work."
 >
-> "One guardrail worth keeping: don't build anything you can't explain to the customer. The tool is fast — your judgment is still what makes it useful."
+> "One guardrail worth keeping: don't build anything you can't explain to the customer. The tool is fast — your judgment is still what makes it useful. Closed pilot right now — access is limited, but a deep-dive session is coming."
 
 > Transition: "And the one we can start using today."
 
 #### Slide 5 (`toolOverview`) - Cursor
-Last tool before the demo — bridge to the live show. The seVoice quote shows the 70/30 deal-cycle story; let it sit, then set up the handoff.
+The GIF shows Cursor in the editor — let it play, then bridge to the live demo.
 
 Say:
-> "Cursor. This is the one we can request today. Three modes — ask, plan, build. It reads the whole project and gives you context-aware output. The quote at the bottom is exactly how one SE uses it — not just for builds, but for the entire deal cycle. We're about to see what that actually looks like."
+> "Cursor. This is the one we can request today. Three modes — ask, plan, build. It reads the whole project and gives you context-aware output. And what surprises most people: 70% of what SEs do in Cursor isn't code at all — it's discovery notes, RFP responses, solution design docs. The AI reads the whole project, code or not. We're about to see exactly that, live."
 
-> Transition: "But first — here's how the tools come together."
-
-#### Slide 6 (`iconBullets`) - The Stack in Action
-Walk left to right. Each tool has one job in the sequence — don't over-explain any of them.
-
-Say:
-> "Here's how these tools look when they're working together. Claude Code writes the solution — the code, the docs, the agent logic. MeshMesh wires it into the Salesforce org — metadata, flows, permissions, no Apex required. Saleo puts the prospect's data on top — their company, their pipeline, their industry."
->
-> "Three tools. One customer-ready demo. And none of it required a developer."
-
-> Transition: "How do we actually get there?"
-
-#### Slide 7 (`iconBullets`) - What makes these tools work
-
-Say:
-> "Three things. One — context. The more specific we are about the industry, the business model, the deal — the better the output. Use what's publicly available: their website, 10-K filings, industry trends, our own discovery notes."
->
-> "Two — our judgment. AI is fast. We know the room. That combination is what makes these tools actually useful."
->
-> "Three — make it ours. Review everything. Adapt it. The tool gives us a first draft in minutes — we make it customer-ready."
-
-> Transition: "So that's how we get there. Now — where do we start?"
-
-#### Slide 8 (`takeaway`) - Start with one.
-The slide says it. The mantra hits once — here, where it belongs.
-
-Say:
-> "That's the whole thing. One tool. One real output. One customer interaction. Then repeat."
-
-> Transition: "Let's start right now."
+> Transition: "How do we actually get results like that?"
 
 ---
 
-### Section 3 - Cursor Getting Started (`cursor-getting-started`) — 3 slides (pre-handoff)
+### Section 3 - Handoff (`live-demo`) — 1 slide
 
-#### Slide 1 (`cinematic`) - Now what?
-
-Say:
-> "We get the license. We open Cursor. And a lot of people stall right here. Not because it's hard — because nobody showed them the first move. So that's what we're doing."
-
-#### Slide 2 (`toolGettingStarted`) - License → Install → Connect
+#### Slide 6 — "Start with Cursor. Open a project. Ask it one question."
+Cursor logo on dark gradient. This slide stays on screen for the entire live demo — don't advance until Amelia is done.
 
 Say:
-> "Three steps. Request the license via the Software Catalog for DET — the link is pinned in SE Enablement Slack. Install Cursor, connect to a demo org. You can be working in this by end of day."
+> "That's the whole toolkit. The pattern is the same for all of them: specific context in, your judgment applied, customer-ready output. And the one you can act on right now is Cursor. A project is just a folder on your computer. Open it, ask it one question. Everything follows from there."
 
-> Transition: "Before [other SE name] takes over — here's what to watch for."
-
-#### Slide 3 (`habitCardsSlide`) - What to watch for
-Walk the four cards. This is the observation framework for the live demo.
-
-Say:
-> "Four things. Watch it autocomplete — it suggests code before you type it. Watch the three modes — ask, plan, and agent. Watch the @ trick — that's how it pulls in files and docs. And watch the review step — every change is shown before it's committed."
-
-**Handoff script:**
-> "Even if you've never opened a code editor — watch these four things. You don't need to understand the code. You need to see what the AI does with it. This is the part that makes it click. [Name], take it away."
+**Handoff:**
+> "Amelia, take it away."
 
 ---
 
@@ -228,36 +182,21 @@ The other SE takes over the screen entirely. This is a talk track guide, not sli
 
 ---
 
-### Section 4 - Cursor Close (`cursor-close`) — 3 slides (post-demo)
+### Section 4 - Cursor Close (`cursor-close`) — 2 slides (post-demo)
 
-Presenter returns to the slide deck.
+You may not get the screen share back after the demo. These talk tracks work verbally even if the slides aren't visible.
 
-#### Slide 1 (`habitCardsSlide`) - Four habits that make the difference
+#### Slide 7 (`toolGettingStarted`) - Getting started with Cursor
 
-Say:
-> "We just saw all of these. Four habits. They sound small — they're not."
->
-> Walk them quick:
-> - "Tab — let the autocomplete lead. Accept and keep moving."
-> - "Agent mode — describe what you need, review what comes back."
-> - "Context — point it at the right files. Better input, better output."
-> - "Review before accepting — this is still our name on it."
->
-> "And one guardrail from an SE who builds with these every day: 'Keep it simple, powerful, and not too flashy — because if you build 5 custom LWCs and the customer wants them all, the partner has to actually deliver them.'"
-
-> Transition: "This is where it starts. Here's where it goes."
-
-#### Slide 2 (`iconBullets`) - What's coming next
+If you have the screen: point to the steps. If not, say this verbally — it lands either way.
 
 Say:
-> "Each tool gets its own deep-dive — we'll actually build something. Dates are in the SE Enablement Slack. And the site we're looking at right now has the full walkthroughs, use cases, cheat sheet, decision flow — all of it. Bookmark it."
+> "Real quick before questions — a project in Cursor is just a folder on your computer. Open any folder you're already working on. Cursor reads everything in it automatically. From there: three steps. Request the license via the Software Catalog for DET — the link is in SE Enablement Slack. Install Cursor. Open a folder. That's it. You can be working in this by end of day."
 
-> Transition: "One thing before questions."
-
-#### Slide 3 (`takeaway`) - The next time you open Cursor — you'll know the first move.
+#### Slide 8 (`takeaway`) - The next time you open Cursor — you'll know the first move.
 
 Say:
-> "If you run demos — request Saleo access this week. It's already in Golden Demos. If you're curious about Cursor — request the license today. Open a project. Ask it one question. That's it. If you want to go deeper — there's a session for that, we'll share the dates."
+> "The one you can act on today is Cursor. Request the license, open a project, ask it one question. If you're already in Golden Demos, Saleo is there too. For MeshMesh and Claude Code — deep-dive sessions are coming, we'll share the dates in SE Enablement Slack."
 >
 > "The next time you open Cursor — you'll know the first move."
 
@@ -280,10 +219,10 @@ If skimming live (2 minutes max):
 ## Q&A - Objection Handling
 
 "I'm not technical enough for this."
-> "We know the customer better than any developer does. That's what makes the output useful. Start with Saleo — zero code. Build from there."
+> "We know the customer better than any developer does. That's what makes the output useful. Start with Cursor — request the license today, ask it one question. Zero code to get started."
 
 "I don't have time to learn four new tools."
-> "Don't learn four. Pick the one that matches your next deal and use it once this week. That's it. Everything else can wait."
+> "Don't try all four at once. Start with Cursor — it's the one you can access today. Use it once this week. Everything else can wait."
 
 "What if the AI output is wrong?"
 > "It will be. Sometimes. Review the diff, test it in a demo org, validate before you show a customer. Our judgment is still in the loop — it just runs faster now."
@@ -335,6 +274,6 @@ Clip 4 - You set it up so next time is faster (`cursor-04-pro-tips.mp4`)
 - Never imply AI replaces SE judgment. Say the opposite and mean it.
 - If someone pushes back hard, agree with the underlying concern and answer the real question.
 - Data guardrail: use publicly available information. Don't promise customer data clearance.
-- End with tiered actions: Saleo for demo SEs, Cursor license for curious SEs, advanced session for builders.
+- End with tiered actions: Cursor license for anyone ready to start today; Saleo for SEs already in Golden Demos; MeshMesh and Claude Code deep-dives for builders — coming soon. Never imply free choice across all four — leadership is still determining the final tool set.
 - The best moment in this presentation is the handoff. Give the observation framework and the inclusive line the delivery they deserve.
 - **Virtual rule: never read what's on screen.** The audience reads faster than you speak. Your job is to add — a story, a reason, a redirect. If the slide says it, you don't have to.

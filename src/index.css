@@ -81,10 +81,11 @@
 }
 
 .bento-cell-1 { animation: bento-cell-in 0.3s ease-out both; animation-delay: 60ms; }
-.bento-cell-2 { animation: bento-cell-in 0.3s ease-out both; animation-delay: 130ms; }
-.bento-cell-3 { animation: bento-cell-in 0.3s ease-out both; animation-delay: 200ms; }
-.bento-cell-4 { animation: bento-cell-in 0.3s ease-out both; animation-delay: 270ms; }
-.bento-cell-5 { animation: bento-cell-in 0.3s ease-out both; animation-delay: 340ms; }
+.bento-cell-2 { animation: bento-cell-in 0.3s ease-out both; animation-delay: 110ms; }
+.bento-cell-3 { animation: bento-cell-in 0.3s ease-out both; animation-delay: 160ms; }
+.bento-cell-4 { animation: bento-cell-in 0.3s ease-out both; animation-delay: 210ms; }
+.bento-cell-5 { animation: bento-cell-in 0.3s ease-out both; animation-delay: 260ms; }
+.bento-cell-6 { animation: bento-cell-in 0.3s ease-out both; animation-delay: 310ms; }
 
 @layer base {
   html {

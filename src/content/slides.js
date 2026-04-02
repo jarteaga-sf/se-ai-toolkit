@@ -22,35 +22,43 @@ import { levelUp, quickReference } from './action'
 const toolCardsData = [
   {
     name: 'Saleo',
-    tagline: 'Their data. Your demo. No code.',
-    bestFor: 'Personalize any demo in minutes. Zero code. Your org stays clean.',
+    tagline: 'Their data. Your demo. Zero risk.',
     role: 'Demo Personalization',
-    setup: 'easy',
+    group: 'nocode',
+    groupLabel: 'No Code Required',
     logo: 'saleo',
+    quote: 'Used it on a retail call — swapped in their ops data mid-demo. Under a minute. Completely different.',
+    attribution: 'Account SE',
   },
   {
     name: 'MeshMesh',
     tagline: 'Salesforce-native. No translation required.',
-    bestFor: 'Configure Salesforce-native solutions — Agentforce, flows, custom objects — without writing code. In pilot.',
-    role: 'Native Configurator',
-    setup: 'moderate',
+    role: 'Salesforce Configurator',
+    group: 'nocode',
+    groupLabel: 'No Code Required',
     logo: 'meshmesh',
+    quote: 'Described the Agentforce agent I needed. It built the topics, actions, and flows. No metadata files.',
+    attribution: 'Account SE',
   },
   {
     name: 'Cursor',
-    tagline: 'One editor for the whole deal cycle.',
-    bestFor: 'Discovery notes, RFx responses, solution design, demo builds — one AI editor for the entire deal.',
+    tagline: 'One editor. The whole deal cycle.',
     role: 'AI Editor',
-    setup: 'moderate',
+    group: 'code',
+    groupLabel: 'Code-Aware',
     logo: 'cursor',
+    quote: 'Discovery notes, RFx responses, solution design — all in one project. 70% docs, 30% code.',
+    attribution: 'Principal SE',
   },
   {
     name: 'Claude Code',
-    tagline: 'You describe. It builds.',
-    bestFor: 'Builds from scratch: architecture docs, presentation decks, full agent deployments. Describe the goal, it handles the steps.',
+    tagline: 'You direct. It executes end to end.',
     role: 'Autonomous Builder',
-    setup: 'advanced',
+    group: 'code',
+    groupLabel: 'Code-Aware',
     logo: 'claude',
+    quote: 'Pointed it at their public filings and our solution brief. Architecture readback out in under 5 minutes.',
+    attribution: 'Principal SE',
   },
 ]
 
@@ -63,60 +71,48 @@ const toolOverviewSlides = [
     toolId: 'saleo',
     title: 'Saleo',
     tagline: 'Their data. Your demo. Zero risk.',
+    visual: 'https://saleo.io/wp-content/uploads/2025/03/Demo-Creation-Agent-with-Forter.gif',
     examples: [
       'Swap in prospect data mid-call. 30 seconds.',
       'One industry template. Reuse it all quarter.',
-      "VP view to rep view. One click, no tab switch.",
+      'AI generates industry-specific demo data from a prompt.',
     ],
-    seVoice: {
-      quote: 'I used it on a retail call last week — swapped in their ops data in under a minute. Completely different demo.',
-      attribution: 'SE, Retail vertical',
-    },
   },
   {
     layout: 'toolOverview',
     toolId: 'meshmesh',
     title: 'MeshMesh',
-    tagline: 'Salesforce-native. No translation required. (In Pilot)',
+    tagline: 'Salesforce-native. No translation required.',
+    visual: '/se-ai-toolkit/meshmeshGIF.mp4',
     examples: [
       'Describe the workflow. It builds the org.',
-      'Wire Agentforce topics and actions. No Apex.',
-      'Auto-generated test suites with every build.',
+      'Agentforce agents: topics, actions, and flows. Minutes, not weeks.',
+      'Sales Cloud, Service Cloud, Data Cloud. One conversation.',
     ],
-    seVoice: {
-      quote: 'Described the Agentforce workflow I needed. It built the topics, actions, and wired the flows — without me touching a single metadata file.',
-      attribution: 'SE, pilot user',
-    },
   },
   {
     layout: 'toolOverview',
     toolId: 'claude',
     title: 'Claude Code',
-    tagline: 'You describe. It builds.',
+    tagline: 'You direct. It executes end to end.',
+    visual: 'https://miro.medium.com/v2/resize:fit:1400/1*D4ae84VqwIoVx7VDWvYTxw.gif',
     examples: [
       'RFP in. Technical responses out. Ready to send.',
       'Describe the agent. It builds, tests, and deploys.',
-      'Presentation deck: 2 minutes, not 2 hours.',
+      'Full codebase refactor. Multi-file. Autonomous.',
     ],
-    seVoice: {
-      quote: 'Gave it our discovery notes and the customer\'s 10-K. It drafted the full architecture readback in under 5 minutes. I spent the rest of the time making it mine.',
-      attribution: 'Principal SE',
-    },
   },
   {
     layout: 'toolOverview',
     toolId: 'cursor',
     title: 'Cursor',
-    tagline: 'One editor for the whole deal cycle.',
+    tagline: 'One editor. The whole deal cycle.',
+    visual: '/se-ai-toolkit/gifs/CursorBigPicture.gif',
     examples: [
-      'Discovery to solution design to build. One project.',
+      'Discovery notes, RFPs, solution design. Not just code.',
       'Discovery notes in. Architecture readback out.',
       'Live change mid-call. Describe, review, accept. Done.',
     ],
-    seVoice: {
-      quote: 'I run the whole deal cycle in one Cursor project — discovery notes, RFx responses, solution design, the actual build. 70% docs, 30% code.',
-      attribution: 'Principal SE',
-    },
   },
 ]
 
@@ -124,49 +120,22 @@ const toolOverviewSlides = [
 
 const cursorGS = cursor.tabs[2].content
 
-// Pre-handoff: scenario → setup → observation framework for the live demo
+// Pre-handoff: single handoff cinematic — merges "start with one" + "now what" into the bridge
 const cursorPreHandoffSlides = [
   {
     layout: 'cinematic',
-    statement: 'You just got your Cursor license. You open it for the first time. Now what?',
-  },
-  {
-    layout: 'toolGettingStarted',
-    toolId: 'cursor',
-    title: 'Cursor',
-    prose: [],
-    stepFlow: cursorGS.stepFlow,
-  },
-  {
-    layout: 'habitCardsSlide',
-    toolId: 'cursor',
-    title: 'What to watch for',
-    cards: [
-      { icon: 'Eye', title: 'Watch it autocomplete', description: 'It suggests code before you type it. Just press Tab.' },
-      { icon: 'Layers', title: 'Watch the three modes', description: 'Ask to understand. Plan to design. Agent to build.' },
-      { icon: 'AtSign', title: 'Watch the @ trick', description: 'It pulls in files and docs without copy-pasting. That\'s what separates this from ChatGPT.' },
-      { icon: 'Shield', title: 'Watch the review step', description: 'Every change is shown before it\'s committed. Nothing happens without your approval.' },
-    ],
+    statement: 'Start with Cursor. Open a project. Ask it one question.',
   },
 ]
 
-// Post-demo: habits (now they land), what's next, close/CTA
+// Post-demo: getting started essentials + CTA
 const cursorPostDemoSlides = [
   {
-    layout: 'habitCardsSlide',
+    layout: 'toolGettingStarted',
     toolId: 'cursor',
-    title: 'Four habits that make the difference',
-    cards: cursorGS.habitCards,
-  },
-  {
-    layout: 'iconBullets',
-    title: "What's coming next",
-    bullets: [
-      { logo: 'saleo', title: 'Saleo', description: 'Full onboarding walkthrough.' },
-      { logo: 'meshmesh', title: 'MeshMesh (Pilot)', description: 'Access + deep-dive session.' },
-      { logo: 'cursor', title: 'Cursor', description: 'Hands-on workshop.' },
-      { logo: 'claude', title: 'Claude Code', description: 'Advanced session.' },
-    ],
+    title: 'Getting started with Cursor',
+    prose: ['A project in Cursor is just a folder on your computer. Open the folder — Cursor reads everything in it.'],
+    stepFlow: cursorGS.stepFlow,
   },
   {
     layout: 'takeaway',
@@ -354,18 +323,12 @@ export const slideManifest = [
       theWhy.slides[0], // Title (updated subtitle: "From prep to proof — faster.")
       theWhy.slides[2], // Cinematic: "You prepped for three hours..."
       theWhy.slides[3], // BigStat: 80% (Gartner, 2024)
-      // Describing → Proving — the core thesis slide (inlined from former goDeeper)
+      // Describing → Proving — the core thesis slide
       {
         layout: 'comparison',
         left: { icon: 'PenLine', label: 'Describing the Product', description: 'Slide decks. Canned demos. Two days of prep.' },
         right: { icon: 'Wand2', label: 'Proving the Product', description: 'Built for them. Before the call. Ready when they are.' },
         connector: '\u2192',
-      },
-      {
-        layout: 'bigStat',
-        value: '63%',
-        label: 'of people using AI coding tools today are not developers',
-        source: 'State of Vibe Coding, 2026',
       },
     ],
     exploreContent: null,
@@ -384,48 +347,24 @@ export const slideManifest = [
       { layout: 'toolCards', cards: toolCardsData },
       // Tool overviews — Saleo, MeshMesh, Claude Code, Cursor (last = bridge to demo)
       ...toolOverviewSlides,
-      // The stack in action — combined workflow story
-      {
-        layout: 'iconBullets',
-        title: 'The Stack in Action',
-        bullets: [
-          { logo: 'claude', title: 'Claude Code writes it', description: 'RFP responses, agent builds, presentation decks — describe the goal, it handles the steps.' },
-          { logo: 'meshmesh', title: 'MeshMesh configures it', description: 'Wires the Salesforce metadata, flows, and Agentforce setup — no code required.' },
-          { logo: 'saleo', title: 'Saleo personalizes it', description: 'Their data in the demo. Their company, their pipeline, their use case.' },
-        ],
-      },
-      // Principles — grounded with examples. Bullet 1 includes data guardrail.
-      {
-        layout: 'iconBullets',
-        title: 'What makes these tools work',
-        bullets: [
-          { icon: 'FileText', title: 'Start with context', description: 'The more specific you are about the industry, the business model, and the deal — the better. Use what\u2019s publicly available.' },
-          { icon: 'User', title: 'You know the deal', description: 'AI is fast. You know the room. Your judgment is the thing AI can\u2019t replace — it just runs faster now.' },
-          { icon: 'TrendingUp', title: 'Make it yours', description: 'Review everything. Adapt the output. The tool gives you a first draft in minutes — you make it customer-ready.' },
-        ],
-      },
-      {
-        layout: 'takeaway',
-        text: '**Start with one.** Build something real. Show a customer.',
-      },
     ],
     exploreContent: null,
   },
 
-  // ── LIVE: Cursor → Pre-handoff (3 slides) ───────────────────────────
-  // Scenario → setup → observation framework → HANDOFF to demoing SE
+  // ── LIVE DEMO ────────────────────────────────────────────────────────
+  // Sits on screen during the demo. Advance past it to reach the close slides.
   {
-    id: 'cursor-getting-started',
-    tier: 'big-picture',
-    tierLabel: 'The Big Picture',
-    title: 'Cursor \u2192',
-    icon: 'cursor',
-    slides: cursorPreHandoffSlides,
-    exploreContent: { type: 'tool', data: cursor },
+    id: 'live-demo',
+    tier: 'transition',
+    tierLabel: null,
+    title: 'Live Demo',
+    icon: null,
+    slides: [{ layout: 'tierTransition', label: 'Start with Cursor.', supporting: 'Open a project. Ask it one question.', logo: 'cursor', showSectionLabel: false }],
+    exploreContent: null,
   },
 
-  // ── LIVE: Cursor → Post-demo (3 slides) ─────────────────────────────
-  // Presenter returns after live demo: habits, what's next, close/CTA
+  // ── LIVE: Cursor → Post-demo ─────────────────────────────────────────
+  // Presenter returns after live demo: getting started + CTA
   {
     id: 'cursor-close',
     tier: 'big-picture',
@@ -436,16 +375,27 @@ export const slideManifest = [
     exploreContent: null,
   },
 
+  // ── TAKE-HOME INTRO ──────────────────────────────────────────────────
+  // Signals the end of the live session and the start of self-guided content.
+  {
+    id: 'session-end',
+    tier: 'transition',
+    tierLabel: null,
+    title: 'Take It Home',
+    icon: null,
+    slides: [{ layout: 'tierTransition', label: 'Take It Home', supporting: 'Everything below is yours to explore at your own pace.' }],
+    exploreContent: null,
+  },
+
   // ── TAKE-HOME: Start Here (4 slides) ─────────────────────────────────
-  // First stop after the live session. Purpose: bridge from "interested"
-  // to "doing it." Pick a starting point + learn to prompt well.
+  // First stop after the live session.
   {
     id: 'start-here-transition',
     tier: 'transition',
     tierLabel: null,
     title: 'Start Here',
     icon: null,
-    slides: [{ layout: 'tierTransition', label: 'Start Here', supporting: 'Pick your tool, learn to prompt well, and get your first win.' }],
+    slides: [{ layout: 'tierTransition', label: 'Start Here', supporting: 'Find your first move, learn to prompt well, and get your first win.' }],
     exploreContent: null,
   },
   {
