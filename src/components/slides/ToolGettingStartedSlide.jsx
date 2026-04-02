@@ -19,8 +19,9 @@ function parseBold(text) {
   })
 }
 
-export default function ToolGettingStartedSlide({ toolId, title, prose, stepFlow, terminal, stepFlowSecondary, fullscreen }) {
+export default function ToolGettingStartedSlide({ toolId, title, prose, stepFlow, terminal, stepFlowSecondary }) {
   const Logo = logos[toolId]
+  const heading = /getting started/i.test(title) ? title : `Getting Started with ${title}`
 
   return (
     <div className="max-w-[800px] mx-auto px-8 w-full">
@@ -28,7 +29,7 @@ export default function ToolGettingStartedSlide({ toolId, title, prose, stepFlow
       <div className="flex items-center gap-3 mb-6">
         {Logo && <Logo size={28} />}
         <h2 className="text-[28px] font-bold text-[var(--color-heading)] tracking-[-0.02em]">
-          Getting Started with {title}
+          {heading}
         </h2>
       </div>
 

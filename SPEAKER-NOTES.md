@@ -10,9 +10,9 @@ Presenting URL: `https://jarteaga-sf.github.io/se-ai-toolkit/`
 
 Session format: 45 minutes total
 - 1 min: opening context (before slide progression)
-- 12-14 min: Slides — The Why (4 slides) + The Toolkit (6 slides) + Handoff (1 slide)
+- 12-14 min: Slides — The Why (4 slides) + The Toolkit (5 slides) + Handoff (1 slide)
 - 15 min: Live Cursor demo (other SE presents)
-- 5-10 min: Close slides (2 slides) + Q&A
+- 5-10 min: Close slide (1 slide) + Q&A
 
 Audience profile
 - Sharp, busy professionals running too many deals at once.
@@ -36,7 +36,7 @@ Room setup checklist
 - Deck loaded in presentation mode.
 - Other SE ready with Cursor open and a demo project loaded.
 - Notifications muted. Chat monitored for questions.
-- Backup: if the live demo fails, use Appendix A narration guide to walk through the video demos verbally.
+- Backup: if the live demo fails, use Appendix A narration guide to walk through the Cursor workflow moments verbally.
 
 Opening frame (before Slide 1)
 Four beats. ~45 seconds total before you hit the first slide.
@@ -54,7 +54,7 @@ Four beats. ~45 seconds total before you hit the first slide.
 
 ## TIER 1: Big Picture (live presentation)
 
-### Section 1 - The Why (`the-why`) — 5 slides
+### Section 1 - The Why (`the-why`) — 4 slides
 
 #### Slide 1 (`title`) - The SE AI Toolkit
 Goal: Land the mission. No fanfare. Let the slide breathe — they're reading it.
@@ -84,13 +84,13 @@ Say:
 
 ---
 
-### Section 2 - The Toolkit (`the-toolkit`) — 6 slides
+### Section 2 - The Toolkit (`the-toolkit`) — 5 slides
 
 #### Slide 1 (`toolCards`) - Four tools side by side
 Use this as landscape orientation. Each card now has an SE quote at the bottom — let the audience read them, don't narrate them. Then fire the chat pulse.
 
 Say:
-> "Before we go through each one — we don't need all four. That's actually part of what these pilots are for: figuring out which tools deliver the most value for SEs and where the overlap is. Two of them require zero code — you describe what you need and they handle it. Two of them work with your code and project files. Left side is the lowest barrier to entry. Right side is the highest ceiling. Cursor is the one you can act on today — the others have more limited access right now, but all four are worth knowing. Today is about finding your first move, not committing to any particular one."
+> "Before we go through each one — we don't need all four. That's actually part of what these pilots are for: figuring out which tools deliver the most value for SEs and where the overlap is. Two of them require zero code — you describe what you need and they handle it. Two of them work with your code and project files. Left side is the lowest barrier to entry. Right side is the highest ceiling. Access varies today across these tools, and we'll share the paths at the end. Today is about finding your first move, not committing to any particular one."
 >
 > *(chat pulse — ~8 seconds)* "Drop in the chat which of these you've heard of or already tried. Curious where this group is."
 >
@@ -105,10 +105,10 @@ Say:
 > Transition: "Next — building on Salesforce natively."
 
 #### Slide 3 (`toolOverview`) - MeshMesh
-No GIF yet — placeholder is showing. Describe what we'd see in the visual while it's still coming.
+The visual is now live. Let it play, then narrate where this fits.
 
 Say:
-> "MeshMesh is for Salesforce-native configuration — no code at all. It already knows the platform: metadata, Flows, Agentforce, Permission Sets. You describe what you need, it builds it. And it's not just for demos — it configures across Sales Cloud, Service Cloud, Data Cloud, Agentforce. Full org setup in a conversation. Closed pilot right now, but worth knowing the access path."
+> "MeshMesh is for Salesforce-native configuration — no code at all. It already knows the platform: metadata, Flows, Agentforce, Permission Sets. You describe what you need, it builds it. And it's not just for demos — it configures across Sales Cloud, Service Cloud, Data Cloud, Agentforce. Full org setup in a conversation."
 
 > Transition: "And when we need to build something from scratch..."
 
@@ -182,21 +182,16 @@ The other SE takes over the screen entirely. This is a talk track guide, not sli
 
 ---
 
-### Section 4 - Cursor Close (`cursor-close`) — 2 slides (post-demo)
+### Section 4 - Cursor Close (`cursor-close`) — 1 slide (post-demo)
 
-You may not get the screen share back after the demo. These talk tracks work verbally even if the slides aren't visible.
+You may not get the screen share back. This talk track works verbally even if the slide isn't visible.
 
-#### Slide 7 (`toolGettingStarted`) - Getting started with Cursor
-
-If you have the screen: point to the steps. If not, say this verbally — it lands either way.
+#### Slide 7 (`takeaway`) - The next time you open Cursor — you'll know the first move.
 
 Say:
-> "Real quick before questions — a project in Cursor is just a folder on your computer. Open any folder you're already working on. Cursor reads everything in it automatically. From there: three steps. Request the license via the Software Catalog for DET — the link is in SE Enablement Slack. Install Cursor. Open a folder. That's it. You can be working in this by end of day."
-
-#### Slide 8 (`takeaway`) - The next time you open Cursor — you'll know the first move.
-
-Say:
-> "The one you can act on today is Cursor. Request the license, open a project, ask it one question. If you're already in Golden Demos, Saleo is there too. For MeshMesh and Claude Code — deep-dive sessions are coming, we'll share the dates in SE Enablement Slack."
+> "The one you can act on today is Cursor. Request the license via SE Enablement Slack, open a folder you're already working on, ask it one question. If you're already in Golden Demos, Saleo is there too. For MeshMesh and Claude Code — deep-dive sessions are coming, we'll share the dates."
+>
+> "Everything else — getting started steps, workflows, cheat sheets — is in the site we shared. Bookmark it."
 >
 > "The next time you open Cursor — you'll know the first move."
 
@@ -205,24 +200,27 @@ Q&A transition:
 
 ---
 
-## TIER 2: Go Deeper (take-home)
+## TIER 2: Take-home (self-guided)
 
-### Section 5 - Proof Points (`go-deeper`)
+### Take-home map (current IA)
+- Start Here (`start-here`) — first moves and prompting habits.
+- Playbooks (`playbooks`) — task-based guides by scenario.
+- Tool Guides (`saleo`, `cursor-workflows`, `meshmesh`, `claude-code`) — deep dives by tool.
+- Keep Going (`level-up`, `quick-reference`) — advanced concepts + cheat sheet.
 
 If skimming live (2 minutes max):
-> "This is the evidence layer. If you need to make the case internally, the numbers are here."
-> "The Karpathy quote is worth reading on your own. The 90-minute field example — that's from an SE using these tools on a real deal."
-> "The last slide is about Agentforce activation. Customers who see it built live are the ones who actually move forward."
+> "Everything after the live segment is organized for self-service. Start Here gives you first moves, Playbooks maps to real SE tasks, Tool Guides gives full workflows, and Keep Going is your cheat sheet and deeper skills."
+> "If you're sending one follow-up link, send this deck and point people to Start Here first."
 
 ---
 
 ## Q&A - Objection Handling
 
 "I'm not technical enough for this."
-> "We know the customer better than any developer does. That's what makes the output useful. Start with Cursor — request the license today, ask it one question. Zero code to get started."
+> "We know the customer better than any developer does. That's what makes the output useful. Zero code to start — use Ask mode on a project you already have."
 
 "I don't have time to learn four new tools."
-> "Don't try all four at once. Start with Cursor — it's the one you can access today. Use it once this week. Everything else can wait."
+> "Don't try all four at once. Pick one first move this week: open one project and run one Ask prompt. Everything else can wait."
 
 "What if the AI output is wrong?"
 > "It will be. Sometimes. Review the diff, test it in a demo org, validate before you show a customer. Our judgment is still in the loop — it just runs faster now."
@@ -237,32 +235,32 @@ If skimming live (2 minutes max):
 > "It does. In the best way. The commodity layer — repetitive demos, generic prep, basic technical Q&A — compresses. The strategic layer rises. Discovery quality, solution framing, trust, business judgment. We're more valuable, not less."
 
 "I don't know where to even start."
-> "Cursor. Request the license today, open a project you're already working on, ask it one question about the code. That first session is where it clicks."
+> "Open a project you're already working on and run one Ask prompt. That first session is where it clicks."
 
 "What's the difference between MeshMesh and Claude Code?"
 > "MeshMesh configures Salesforce natively — no code. It thinks in metadata, Flows, org structure. Claude Code writes code from your machine — full autonomy, builds from scratch and deploys. They're complementary. One configures, the other codes. One SE's stack: Claude Code writes the custom code, MeshMesh wires it into the org, Saleo personalizes the demo."
 
 ---
 
-## Appendix A - Cursor Video Narration Guide (4 clips)
+## Appendix A - Cursor Fallback Narration Guide (4 moments)
 
-Use these if the live demo fails. Each clip maps to a take-home video demo slide.
+Use these if the live demo fails. These map to the current Cursor workflow story in the deck (not video clips).
 
-Clip 1 - You walk into the room (`cursor-01-workspace.mp4`)
+Moment 1 - You walk into the room
 - "Left side: files. Middle: code. Right side: AI. Cursor reads the whole project the moment you open the folder."
 - "You didn't write this code. That's fine. You're about to understand it in thirty seconds."
 
-Clip 2 - You figure out what you have, then build (`cursor-02-chat-context.mp4`)
+Moment 2 - You figure out what you have, then build
 - "Ask mode. One question about code you've never seen. Plain English answer back."
-- "Agent mode. Describe the component the prospect needs. Watch the files get created."
+- "Plan mode first. Then Agent mode to execute."
 - "The diff is the checkpoint. Every change is visible before anything gets accepted."
 
-Clip 3 - You make it Salesforce-ready (`cursor-03-salesforce.mp4`)
-- "Org Browser. Objects, classes, metadata — in the sidebar. No switching tabs."
-- "Cmd+K. Select the code. Describe the change. Review the diff. Accept. Done."
+Moment 3 - You make it project-ready
 - "@Codebase. One question, instant answer about a project you didn't build."
+- "@Docs/@Web when you need current syntax or source-backed guidance."
+- "Keep the loop tight: ask, review, accept."
 
-Clip 4 - You set it up so next time is faster (`cursor-04-pro-tips.mp4`)
+Moment 4 - You set it up so next time is faster
 - "The rules file. Set Apex standards and SLDS requirements once. Every response follows them automatically."
 - "Conversation memory. Yesterday's context carries over. You pick up exactly where you left off."
 
