@@ -74,6 +74,13 @@
   animation-delay: 30ms;
 }
 
+/* Bento grid cell staggered entrance */
+.bento-cell-1 { animation: slide-fade-in 0.35s ease-out both; animation-delay: 30ms; }
+.bento-cell-2 { animation: slide-fade-in 0.35s ease-out both; animation-delay: 120ms; }
+.bento-cell-3 { animation: slide-fade-in 0.35s ease-out both; animation-delay: 200ms; }
+.bento-cell-4 { animation: slide-fade-in 0.35s ease-out both; animation-delay: 280ms; }
+.bento-cell-5 { animation: slide-fade-in 0.35s ease-out both; animation-delay: 350ms; }
+
 @layer base {
   html {
     -webkit-font-smoothing: antialiased;

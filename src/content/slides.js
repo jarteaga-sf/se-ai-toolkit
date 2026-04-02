@@ -32,7 +32,7 @@ const toolCardsData = [
     name: 'MeshMesh',
     tagline: 'Salesforce-native. No translation required.',
     bestFor: 'Configure Salesforce-native solutions — Agentforce, flows, custom objects — without writing code. In pilot.',
-    role: 'Native Configurator — In Pilot',
+    role: 'Native Configurator',
     setup: 'moderate',
     logo: 'meshmesh',
   },
@@ -63,15 +63,14 @@ const toolOverviewSlides = [
     toolId: 'saleo',
     title: 'Saleo',
     tagline: 'Their data. Your demo. Zero risk.',
-    differentiator: 'Personalizes what the prospect sees without changing a single real record.',
     examples: [
-      "Swap in a prospect's company name, revenue, and pipeline stages — mid-call, in 30 seconds.",
-      'Build one healthcare template. Reuse it for every healthcare prospect this quarter.',
-      "Switch from the VP's pipeline view to the rep's task list without leaving the demo.",
+      'Swap in prospect data mid-call. 30 seconds.',
+      'One industry template. Reuse it all quarter.',
+      "VP view to rep view. One click, no tab switch.",
     ],
     seVoice: {
-      quote: 'Now baked into all Golden Demos. ~1,000 SEs worldwide have it out of the box.',
-      attribution: 'Distinguished SE',
+      quote: 'I used it on a retail call last week — swapped in their ops data in under a minute. Completely different demo.',
+      attribution: 'SE, Retail vertical',
     },
   },
   {
@@ -79,15 +78,14 @@ const toolOverviewSlides = [
     toolId: 'meshmesh',
     title: 'MeshMesh',
     tagline: 'Salesforce-native. No translation required. (In Pilot)',
-    differentiator: 'Configures Salesforce directly — metadata, Flows, Agentforce, Permission Sets. No code. No translation layer. It already knows the platform.',
     examples: [
-      'Configure a demo org for a specific industry — describe the workflow, it builds the objects, flows, and automation.',
-      'Wire Agentforce topics and actions into your existing org structure — without writing Apex.',
-      'Generate test suites alongside every build so you can prove it works before the customer sees it.',
+      'Describe the workflow. It builds the org.',
+      'Wire Agentforce topics and actions. No Apex.',
+      'Auto-generated test suites with every build.',
     ],
     seVoice: {
-      quote: 'The Salesforce-native specialist. You don\'t waste time explaining what metadata or Permission Sets are to a general-purpose AI.',
-      attribution: 'Distinguished SE',
+      quote: 'Described the Agentforce workflow I needed. It built the topics, actions, and wired the flows — without me touching a single metadata file.',
+      attribution: 'SE, pilot user',
     },
   },
   {
@@ -95,15 +93,14 @@ const toolOverviewSlides = [
     toolId: 'claude',
     title: 'Claude Code',
     tagline: 'You describe. It builds.',
-    differentiator: 'Reads your project, plans the approach, writes the code, runs it, and checks its own work.',
     examples: [
-      'Give it an RFP. Get technical responses mapped to Salesforce capabilities — ready to send.',
-      'Describe an Agentforce agent end-to-end. It builds it, tests it, and deploys it.',
-      'Generate a customer-ready presentation deck in 2 minutes instead of 2 hours.',
+      'RFP in. Technical responses out. Ready to send.',
+      'Describe the agent. It builds, tests, and deploys.',
+      'Presentation deck: 2 minutes, not 2 hours.',
     ],
     seVoice: {
-      quote: 'I don\'t vibe code anything I can\'t explain to customers.',
-      attribution: 'Senior Account SE',
+      quote: 'Gave it our discovery notes and the customer\'s 10-K. It drafted the full architecture readback in under 5 minutes. I spent the rest of the time making it mine.',
+      attribution: 'Principal SE',
     },
   },
   {
@@ -111,18 +108,21 @@ const toolOverviewSlides = [
     toolId: 'cursor',
     title: 'Cursor',
     tagline: 'One editor for the whole deal cycle.',
-    differentiator: 'Reads your whole project, understands the context, and gives you three modes: ask questions, plan changes, or let it build. You stay in control.',
     examples: [
-      'One SE runs the entire deal cycle in Cursor — discovery notes, RFx responses, solution design docs. 70% docs, 30% builds.',
-      'After discovery, synthesize findings into a phased architecture readback — output transitions directly into Salesforce-branded decks.',
-      'Prospect asks for a live change mid-call. Describe it, review the diff, accept. Done.',
+      'Discovery to solution design to build. One project.',
+      'Discovery notes in. Architecture readback out.',
+      'Live change mid-call. Describe, review, accept. Done.',
     ],
+    seVoice: {
+      quote: 'I run the whole deal cycle in one Cursor project — discovery notes, RFx responses, solution design, the actual build. 70% docs, 30% code.',
+      attribution: 'Principal SE',
+    },
   },
 ]
 
 // ── Cursor getting started slides ─────────────────────────────────────────
 
-const cursorGS = cursor.tabs[1].content
+const cursorGS = cursor.tabs[2].content
 
 // Pre-handoff: scenario → setup → observation framework for the live demo
 const cursorPreHandoffSlides = [
@@ -384,14 +384,14 @@ export const slideManifest = [
       { layout: 'toolCards', cards: toolCardsData },
       // Tool overviews — Saleo, MeshMesh, Claude Code, Cursor (last = bridge to demo)
       ...toolOverviewSlides,
-      // SE proof points — real stories replace generic stats
+      // The stack in action — combined workflow story
       {
         layout: 'iconBullets',
-        title: 'SEs are already using these',
+        title: 'The Stack in Action',
         bullets: [
-          { icon: 'Zap', title: 'New SE, two months in', description: 'Reskinned an entire SDO in one session. 53 products. 709 opportunities. Full Agentforce agent.' },
-          { icon: 'FileText', title: 'Full deal cycle in one editor', description: 'A Principal SE anchors every deal in one Cursor project — discovery, RFx, solution design. 70% docs, 30% builds.' },
-          { icon: 'Layers', title: 'The recommended stack', description: 'Claude Code writes it. MeshMesh configures it. Saleo personalizes it.' },
+          { logo: 'claude', title: 'Claude Code writes it', description: 'RFP responses, agent builds, presentation decks — describe the goal, it handles the steps.' },
+          { logo: 'meshmesh', title: 'MeshMesh configures it', description: 'Wires the Salesforce metadata, flows, and Agentforce setup — no code required.' },
+          { logo: 'saleo', title: 'Saleo personalizes it', description: 'Their data in the demo. Their company, their pipeline, their use case.' },
         ],
       },
       // Principles — grounded with examples. Bullet 1 includes data guardrail.

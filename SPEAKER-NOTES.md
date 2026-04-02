@@ -42,20 +42,13 @@ Opening frame (before Slide 1)
 Four beats. ~45 seconds total before you hit the first slide.
 
 **Beat 1 — Self-ID + credibility**
-> "I'm Jonathan — Lead SE in CBS Mid-Market. I've been using these tools for about a year now, and I actually built the site you're going to see today with them. So this is coming from someone who's in it, not just presenting about it."
+> "Hi everyone, I'm Jonathan — a Lead SE in CBS Mid-Market. I've been using some of these tools for a few months now, and I actually built the site we're looking at to walk through this presentation"
 
 **Beat 2 — Read the room**
-> "Quick level-set before we get into it. Some of you are already tinkering with AI tools — maybe you've been in Cursor, maybe you've seen the Slack posts. Some of you haven't touched any of this yet. Both are totally fine. This session is designed for all of it."
+> "Now before we get into it... some of us are already tinkering with AI tools — maybe you've been using Cursor, maybe you've only used Slackbot or Gemini. Others haven't explored any yet and that's okay. My goal is for us to walk away with a clear sense of what these newer tools actually do, and how to get started"
 
 **Beat 3 — Set expectations**
-> "Here's how this goes. About 10 minutes of context — what's changing and the four tools. Then Amelia is going to show you Cursor live and how to get started. And we'll leave some time for Q&A at the end."
-
-**Beat 4 — Into the hook**
-> "So — the reason this matters. By the time the prospect is in the room with you — they've already decided. Or close to it. They've done the research. They've compared the options. They're not there to learn what Salesforce does. They're there for you to prove it works for them."
->
-> "And you're running — what — 12 deals? Three demos this week. An RFP due Friday. A discovery call you haven't prepped for. The volume is the real problem."
->
-> "That's what this is. Four tools that help with all of it. And one of them you can start using today."
+> "So here's how this will go. About 10 minutes of context — what's changing and the four main tools we are piloting. Then Amelia is going to give you a quick tour of Cursor. And we'll leave some time for Q&A at the end."
 
 ---
 
@@ -69,34 +62,30 @@ Goal: Land the mission. No fanfare. Let the slide breathe — they're reading it
 *(advance to Slide 1, pause 2 seconds)*
 > "Let's get into it."
 
-#### Slide 2 (`cinematic`) - You prepped for three hours. They showed up with their minds nearly made.
-Pause 3-4 seconds before speaking. Let the statement sit. Don't re-list the tasks — you already named them in the opening.
+#### Slide 2 (`cinematic`)
 
-Say:
-> "That's not a one-off. That's Tuesday. We've all been there. The part that wears on you isn't any single deal — it's that they all need something different and they all need it now."
+> "We've all felt this. It's rarely one deal that burns us out — it's that every customer wants something different at the same time. Twelve deals, three demos, an RFP due Friday, a discovery call we haven't even prepped for. All those hours add up fast. The real pain isn't just the volume — it's having no time left to actually think or work out the best approach."
 
 #### Slide 3 (`bigStat`) - 80%
 Pause after the number loads. The label explains itself — don't repeat it.
 
 Say:
-> "Eighty percent." *(pause)* "They're not coming to you for information. They're coming to see if you can prove it."
+> "Eighty percent." *(pause)* "Customers are no longer coming to us just for information. They're coming to see if we can prove it."
 
-> Transition: "So — what do you show up with?"
+> Transition: "So — what do we show up with?"
 
 #### Slide 4 (`comparison`) - Describing the Product → Proving the Product
 Point at the left, then speak only the right. Don't read both sides.
 
 Say:
-> "You can see the old model on the left — we've all lived it. The new model is on the right. Proof built for this customer — before the call even starts. That's the gap we're closing."
+> "Left side is the prep we all know — a deck that could be for any company, a demo org with nothing to do with their industry or their business model. The prospect can tell immediately. And on the right side is where we're headed: proof built around their use case, their workflows, their problems — ready before we even join the call. That's not just better prep. That's a completely different conversation."
 
-> Transition: "And you don't have to be a developer to make it."
+> Transition: "And we don't have to be developers to make it."
 
 #### Slide 5 (`bigStat`) - 63%
 
 Say:
-> "Sixty-three percent. Product managers. Founders. Consultants. SEs. Most people building with AI right now aren't writing code — they're describing what they need. That's what we're going to show you."
-
-> Transition: "Four tools make this possible. Let me show you the landscape."
+> "Sixty-three percent of the landscape. Product managers. Founders. Consultants. SEs. Most people building with AI right now aren't writing code — they're describing what they need but they're describing it well."
 
 ---
 
@@ -106,26 +95,27 @@ Say:
 Use this as landscape orientation. Point to each column briefly. Then fire the chat pulse — it's the only engagement moment in this section and it resets attention before the 4 individual tool slides.
 
 Say:
-> "None of them are just for demos. SEs are using them for RFPs, discovery prep, architecture docs, presentation decks — everything on your plate."
+> "Before we go through each one — we don't need all four. That's actually part of what these pilots are for: figuring out which tools deliver the most value for SEs and where the overlap is. Two of them sharpen the demo. Two of them change how we work across the entire deal cycle. By the end of this section it should be clear how SEs are using each."
 >
-> *(chat pulse — ~8 seconds)* "Quick pulse — drop in the chat if you've used any of these. Even if it's just Saleo. I'm curious where this group is."
+> *(chat pulse — ~8 seconds)* "Quick pulse — drop in the chat which of these you've heard of or already tried. Curious where this group is."
 >
-> *(glance at chat, acknowledge one or two if they come, move on regardless)* "Starting with the fastest win."
+> *(glance at chat, acknowledge one or two, move on regardless)* "Let's start with the fastest win."
 
 #### Slide 2 (`toolOverview`) - Saleo
-The seVoice quote on screen already says it's in Golden Demos — reference it, don't restate it.
+The seVoice quote on screen shows a real SE swapping in data mid-call — reference it briefly, don't restate it.
 
 Say:
-> "Saleo is the fastest win. Prospect's data in the demo, no org risk. If you're prepping for a call tomorrow — this is where you start. The quote at the bottom says it all."
+> "Saleo is the fastest win in this group. It personalizes what the prospect sees without touching a real record. The quote at the bottom is exactly what this feels like in practice — 30 seconds, mid-call, completely different demo. Already in every Golden Demo, so if you have access, you have this."
 
 > Transition: "Next — building on Salesforce natively."
 
 #### Slide 3 (`toolOverview`) - MeshMesh
+The seVoice shows a pilot user building Agentforce without touching metadata — let that land, then add context.
 
 Say:
-> "MeshMesh configures Salesforce directly. It already understands metadata, Flows, Agentforce, Permission Sets — you don't waste time explaining what those are. You describe what you need, it builds it. It's in pilot right now — worth knowing the access path so you're ready."
+> "MeshMesh is for Salesforce-native configuration — no code. It already knows the platform: metadata, Flows, Agentforce, Permission Sets. You describe what you need, it builds it. The quote at the bottom is from someone in the pilot — that's the kind of output we're talking about. It's not GA yet, but worth knowing the access path."
 
-> Transition: "And when you need to build something from scratch..."
+> Transition: "And when we need to build something from scratch..."
 
 NOTE on MeshMesh vs Claude Code: If someone asks, the clean separation is:
 - MeshMesh **configures** Salesforce natively. No code. Thinks in metadata.
@@ -133,42 +123,43 @@ NOTE on MeshMesh vs Claude Code: If someone asks, the clean separation is:
 - They're complementary layers, not competitors. One configures, the other codes.
 
 #### Slide 4 (`toolOverview`) - Claude Code
+The seVoice shows a Principal SE using it for discovery-to-deck in minutes — let it land, then add the guardrail.
 
 Say:
-> "Claude Code is for the builders. RFP responses, architecture docs, full agent builds, presentation decks — describe the goal, it handles everything. It's the most powerful tool here — and the most advanced. We'll go deeper in a future session."
+> "Claude Code is the most powerful tool in this group. It reads the project, plans the approach, writes the code, runs it, and checks its own work. The quote on screen is a good example — discovery notes and a 10-K in, architecture readback out in under 5 minutes. That's the ceiling."
 >
-> "One SE's rule: 'I don't vibe code anything I can't explain to customers.' Good guardrail for all of us."
+> "One guardrail worth keeping: don't build anything you can't explain to the customer. The tool is fast — your judgment is still what makes it useful."
 
-> Transition: "And the one you can start using today."
+> Transition: "And the one we can start using today."
 
 #### Slide 5 (`toolOverview`) - Cursor
-Last tool before the demo — bridge to the live show. Save the 70/30 deal-cycle story for the proof slide where it has its own card.
+Last tool before the demo — bridge to the live show. The seVoice quote shows the 70/30 deal-cycle story; let it sit, then set up the handoff.
 
 Say:
-> "Cursor. This is the one you can request today. Three modes — ask, plan, build. It reads your whole project and gives you context-aware output. We'll show you what that actually looks like live in a few minutes."
+> "Cursor. This is the one we can request today. Three modes — ask, plan, build. It reads the whole project and gives you context-aware output. The quote at the bottom is exactly how one SE uses it — not just for builds, but for the entire deal cycle. We're about to see what that actually looks like."
 
-> Transition: "And here's the proof."
+> Transition: "But first — here's how the tools come together."
 
-#### Slide 6 (`iconBullets`) - SEs are already using these
-Pick ONE story to expand on — they'll read the other two. In a virtual setting, going deep on one beats going shallow on three.
+#### Slide 6 (`iconBullets`) - The Stack in Action
+Walk left to right. Each tool has one job in the sequence — don't over-explain any of them.
 
 Say:
-> "I want to land on the first one. A brand-new SE — two months into the job — reskinned an entire SDO in one session. 53 products. 709 opportunities. Full Agentforce agent. That's not a senior builder. That's someone who just started."
+> "Here's how these tools look when they're working together. Claude Code writes the solution — the code, the docs, the agent logic. MeshMesh wires it into the Salesforce org — metadata, flows, permissions, no Apex required. Saleo puts the prospect's data on top — their company, their pipeline, their industry."
 >
-> *(gesture)* "The other two are worth reading — a Principal SE using Cursor for the entire deal cycle, and a Distinguished SE's recommended stack across all three building tools."
+> "Three tools. One customer-ready demo. And none of it required a developer."
 
-> Transition: "How do you get results like that?"
+> Transition: "How do we actually get there?"
 
 #### Slide 7 (`iconBullets`) - What makes these tools work
 
 Say:
-> "Three things. One — context. The more specific you are about the industry, the business model, the deal — the better the output. Use what's publicly available: their website, 10-K filings, industry trends, your own discovery notes."
+> "Three things. One — context. The more specific we are about the industry, the business model, the deal — the better the output. Use what's publicly available: their website, 10-K filings, industry trends, our own discovery notes."
 >
-> "Two — your judgment. AI is fast. You know the room. That combination is what makes these tools actually useful."
+> "Two — our judgment. AI is fast. We know the room. That combination is what makes these tools actually useful."
 >
-> "Three — make it yours. Review everything. Adapt it. The tool gives you a first draft in minutes — you make it customer-ready."
+> "Three — make it ours. Review everything. Adapt it. The tool gives us a first draft in minutes — we make it customer-ready."
 
-> Transition: "So that's how you get there. Now — where do you start?"
+> Transition: "So that's how we get there. Now — where do we start?"
 
 #### Slide 8 (`takeaway`) - Start with one.
 The slide says it. The mantra hits once — here, where it belongs.
@@ -185,12 +176,12 @@ Say:
 #### Slide 1 (`cinematic`) - Now what?
 
 Say:
-> "You got the license. You open Cursor. And a lot of people stall right here. Not because it's hard — because nobody showed them the first move. So that's what we're doing."
+> "We get the license. We open Cursor. And a lot of people stall right here. Not because it's hard — because nobody showed them the first move. So that's what we're doing."
 
 #### Slide 2 (`toolGettingStarted`) - License → Install → Connect
 
 Say:
-> "Three steps. Request the license in SE Enablement Slack, install Cursor, connect to a demo org. You can be working in this by end of day."
+> "Three steps. Request the license via the Software Catalog for DET — the link is pinned in SE Enablement Slack. Install Cursor, connect to a demo org. You can be working in this by end of day."
 
 > Transition: "Before [other SE name] takes over — here's what to watch for."
 
@@ -244,13 +235,13 @@ Presenter returns to the slide deck.
 #### Slide 1 (`habitCardsSlide`) - Four habits that make the difference
 
 Say:
-> "You just saw all of these. Four habits. They sound small — they're not."
+> "We just saw all of these. Four habits. They sound small — they're not."
 >
 > Walk them quick:
 > - "Tab — let the autocomplete lead. Accept and keep moving."
 > - "Agent mode — describe what you need, review what comes back."
 > - "Context — point it at the right files. Better input, better output."
-> - "Review before accepting — this is still your name on it."
+> - "Review before accepting — this is still our name on it."
 >
 > "And one guardrail from an SE who builds with these every day: 'Keep it simple, powerful, and not too flashy — because if you build 5 custom LWCs and the customer wants them all, the partner has to actually deliver them.'"
 
@@ -259,7 +250,7 @@ Say:
 #### Slide 2 (`iconBullets`) - What's coming next
 
 Say:
-> "Each tool gets its own deep-dive — you'll actually build something. Dates are in the SE Enablement Slack. And the site you're looking at right now has the full walkthroughs, use cases, cheat sheet, decision flow — all of it. Bookmark it."
+> "Each tool gets its own deep-dive — we'll actually build something. Dates are in the SE Enablement Slack. And the site we're looking at right now has the full walkthroughs, use cases, cheat sheet, decision flow — all of it. Bookmark it."
 
 > Transition: "One thing before questions."
 
@@ -289,13 +280,13 @@ If skimming live (2 minutes max):
 ## Q&A - Objection Handling
 
 "I'm not technical enough for this."
-> "You know the customer better than any developer does. That's what makes the output useful. Start with Saleo — zero code. Build from there."
+> "We know the customer better than any developer does. That's what makes the output useful. Start with Saleo — zero code. Build from there."
 
 "I don't have time to learn four new tools."
 > "Don't learn four. Pick the one that matches your next deal and use it once this week. That's it. Everything else can wait."
 
 "What if the AI output is wrong?"
-> "It will be. Sometimes. Review the diff, test it in a demo org, validate before you show a customer. Your judgment is still in the loop — it just runs faster now."
+> "It will be. Sometimes. Review the diff, test it in a demo org, validate before you show a customer. Our judgment is still in the loop — it just runs faster now."
 
 "Is this safe and compliant? Can I use customer data?"
 > "Use the approved setup paths, keep privacy protections on. For now — publicly available info. Their website, 10-K, industry trends, your own discovery notes and project files. Customer data policies are still being finalized. But there's more than enough public context to get meaningful output."
@@ -304,7 +295,7 @@ If skimming live (2 minutes max):
 > "ChatGPT gives you text. These tools execute inside your actual project. That's the difference between a suggestion and something you can show a customer."
 
 "I'm worried this changes what SEs are valued for."
-> "It does. In the best way. The commodity layer — repetitive demos, generic prep, basic technical Q&A — compresses. The strategic layer rises. Discovery quality, solution framing, trust, business judgment. You're more valuable, not less."
+> "It does. In the best way. The commodity layer — repetitive demos, generic prep, basic technical Q&A — compresses. The strategic layer rises. Discovery quality, solution framing, trust, business judgment. We're more valuable, not less."
 
 "I don't know where to even start."
 > "Cursor. Request the license today, open a project you're already working on, ask it one question about the code. That first session is where it clicks."

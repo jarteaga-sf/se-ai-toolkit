@@ -1,5 +1,6 @@
 import { CheckCircle } from 'lucide-react'
 import { ClaudeLogo, CursorLogo, SaleoLogo, MeshMeshLogo } from '../illustrations/ToolLogos'
+import SlackMessage from '../shared/SlackMessage'
 
 const logos = {
   claude: ClaudeLogo,
@@ -15,68 +16,67 @@ const toolAccents = {
   claude: '#066AFE',
 }
 
-export default function ToolOverviewSlide({ toolId, title, tagline, differentiator, examples, seVoice, fullscreen }) {
+const cellBase = 'rounded-2xl bg-white shadow-[0_1px_4px_rgba(0,0,0,0.07)] border border-[#E8E8E8]/80 overflow-hidden'
+
+export default function ToolOverviewSlide({ toolId, title, tagline, examples, seVoice }) {
   const Logo = logos[toolId]
   const accent = toolAccents[toolId] || 'var(--color-accent)'
 
   return (
-    <div className="flex items-center gap-12 max-w-[900px] mx-auto px-8">
-
-      {/* Left — identity */}
-      <div className="flex-shrink-0 w-[300px]">
-        {Logo && (
-          <div className="mb-5">
-            <Logo size={52} />
-          </div>
-        )}
-        <h2 className="text-[38px] font-bold text-[var(--color-heading)] tracking-[-0.02em] leading-[1.1] mb-3">
+    <div
+      className="grid gap-3 w-[820px]"
+      style={{
+        gridTemplateColumns: '1fr 1fr',
+        gridTemplateRows: 'repeat(3, 110px)',
+      }}
+    >
+      {/* Identity cell — spans rows 1-2 */}
+      <div
+        className={`${cellBase} bento-cell-1 flex flex-col justify-center px-7`}
+        style={{
+          gridRow: '1 / 3',
+          borderTop: `3px solid ${accent}`,
+        }}
+      >
+        {Logo && <Logo size={40} className="mb-3" />}
+        <h2 className="text-[32px] font-bold text-[var(--color-heading)] tracking-[-0.02em] leading-[1.1] mb-2">
           {title}
         </h2>
-        <p className="text-[15px] font-semibold mb-4" style={{ color: accent }}>
+        <p className="text-[14px] font-semibold" style={{ color: accent }}>
           {tagline}
         </p>
-        {differentiator && (
-          <p className="text-[14px] text-[var(--color-text-muted)] leading-relaxed">
-            {differentiator}
-          </p>
-        )}
-        {seVoice && (
-          <div className="mt-4 pt-4 border-t border-[var(--color-border)]">
-            <p className="text-[13px] text-[var(--color-text-muted)] italic leading-relaxed">
-              &ldquo;{seVoice.quote}&rdquo;
-            </p>
-            <p className="text-[11px] text-[var(--color-accent)] mt-1.5 font-medium">
-              — {seVoice.attribution}
-            </p>
-          </div>
-        )}
       </div>
 
-      {/* Divider */}
-      <div className="w-px self-stretch bg-[var(--color-border)] opacity-60" />
+      {/* Use case 1 */}
+      <div className={`${cellBase} bento-cell-2 flex items-center px-5 gap-3`}>
+        <CheckCircle size={18} className="flex-shrink-0" style={{ color: accent }} />
+        <p className="text-[15px] text-[var(--color-text)] leading-snug">{examples[0]}</p>
+      </div>
 
-      {/* Right — examples */}
-      <div className="flex-1">
-        <p
-          className="text-[10px] font-bold uppercase tracking-[0.14em] mb-5"
-          style={{ color: accent }}
+      {/* Use case 2 */}
+      <div className={`${cellBase} bento-cell-3 flex items-center px-5 gap-3`}>
+        <CheckCircle size={18} className="flex-shrink-0" style={{ color: accent }} />
+        <p className="text-[15px] text-[var(--color-text)] leading-snug">{examples[1]}</p>
+      </div>
+
+      {/* Slack message cell — row 3, col 1 */}
+      {seVoice && (
+        <div
+          className={`${cellBase} bento-cell-5`}
+          style={{ borderLeft: `3px solid ${accent}` }}
         >
-          What you can do
-        </p>
-        <div className="flex flex-col gap-5">
-          {examples.map((ex, i) => (
-            <div key={i} className="flex items-start gap-3">
-              <CheckCircle
-                size={16}
-                className="flex-shrink-0 mt-0.5"
-                style={{ color: accent }}
-              />
-              <p className="text-[16px] text-[var(--color-text)] leading-snug">
-                {ex}
-              </p>
-            </div>
-          ))}
+          <SlackMessage
+            quote={seVoice.quote}
+            attribution={seVoice.attribution}
+            accent={accent}
+          />
         </div>
+      )}
+
+      {/* Use case 3 */}
+      <div className={`${cellBase} bento-cell-4 flex items-center px-5 gap-3`}>
+        <CheckCircle size={18} className="flex-shrink-0" style={{ color: accent }} />
+        <p className="text-[15px] text-[var(--color-text)] leading-snug">{examples[2]}</p>
       </div>
     </div>
   )
